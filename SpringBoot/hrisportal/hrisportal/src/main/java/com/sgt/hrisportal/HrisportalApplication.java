@@ -12,3 +12,19 @@ public class HrisportalApplication {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

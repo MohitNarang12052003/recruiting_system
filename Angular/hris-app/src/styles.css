@@ -1,0 +1,62 @@
+/* You can add global styles to this file, and also import other style files */
+.main-page{
+    
+    background-image: url(../src/assets/Images/Gemini_Generated_Image.jpg);
+    background-size: cover;
+    /* height:100vh; */
+    background-repeat: repeat-y;
+    z-index: 0;
+    
+}
+
+.inside{
+    background: rgba(0, 0, 0, 0.595);
+    background-size: cover;
+    /* height: 100vh; */
+    background-repeat: repeat-y;
+      display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.text{
+    z-index: 2;
+    color: white;
+    text-align: center;
+}
+
+.footer{
+    height: 50vh;
+    background-color: #7c7a7a;
+  }
+  
+  .content{
+    /* width: 20vw; */
+    text-align: center;
+    color: #fff;
+    padding: 10px;
+    margin: 20px;
+  }
+
+  .content p{
+    
+    text-align: start;
+  }
+
+  
+.icons i{
+    padding: 10px;
+    margin: 10px;
+  }
+
+  .field div{
+    margin: 1em;
+    width:21vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+   
+
+  }

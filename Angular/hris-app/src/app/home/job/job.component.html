@@ -1,0 +1,38 @@
+<div class="d-flex flex-column justify-content-center align-items-center m-4">
+  <h1>Apply For Jobs</h1>
+  <div class="row justify-content-center">
+    <div class="col-3 d-flex justify-content-center" *ngFor="let job of jobs">
+      <div class="card m-2" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title">{{ job.job_title }}</h5>
+          <p class="card-text">{{ job.job_description }}</p>
+          <h6><i class="fa-regular fa-clock"></i> {{ job.employment_type }}</h6>
+          <h6><i class="fa-solid fa-location-dot"></i> {{ job.location }}</h6>
+          <h6>
+            <i class="fa-solid fa-building-user"></i> {{ job.department_name }}
+          </h6>
+          <button
+            type="button"
+            class="btn btn-primary"
+            [routerLink]="['/jobDetail']"
+            [queryParams]="{
+              id: job.j_id,
+              title: job.job_title,
+              description: job.job_description,
+              activeYN: job.active_yn,
+              department_name:job.department_name,
+              minimum_qualifications:job.minimum_qualifications,
+	employment_type:job.employment_type,
+	key_role:job.key_role,
+	location:job.location,
+	date_posted:job.date_posted,
+	skills:job.skills,
+            }"
+          >
+            View More
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

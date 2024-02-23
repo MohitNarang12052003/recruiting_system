@@ -1,0 +1,85 @@
+<div class="main-page">
+  <div class="inside">
+    <form
+      class="bg-light text-dark d-flex flex-column p-4 field justify-content-between align-items-center m-4"
+      style="width: 35vw"
+      [formGroup]="createForm"
+    >
+      <div class="text d-flex flex-column text-dark" *ngIf="!isDone">
+        <h1>Register</h1>
+        <div>
+          <label for="">Name</label>
+          <input type="text" formControlName="full_name" />
+        </div>
+        <div>
+          <label for="">Username</label>
+          <input type="text" formControlName="username" />
+        </div>
+        <div>
+          <label for="">Email</label>
+          <input type="text" formControlName="email" />
+        </div>
+        <div>
+          <label for="">Phone No.:</label>
+          <input type="text" formControlName="phone" />
+        </div>
+        <div>
+          <label for="">Password:</label>
+          <input type="password" formControlName="password" />
+        </div>
+        <div>
+          <label for="">Confirm Password</label>
+          <input type="password" formControlName="cpassword" />
+        </div>
+        <button
+          type="button"
+          class="btn btn-dark w-25 align-self-center"
+          (click)="add()"
+        >
+          Next
+        </button>
+      </div>
+      <div class="text d-flex flex-column text-dark" *ngIf="isDone">
+        <h1>Register</h1>
+        <div>
+          <label for="">Resume</label>
+          <input
+            class="form-control form-control-sm"
+            type="file"
+            style="border-color: black"
+            accept="file/pdf"
+            (change)="read($event)"
+          />
+        </div>
+        <br />
+        <div>
+          <label for="">Date of Birth</label>
+          <input type="date" formControlName="dob" />
+        </div>
+        <br />
+        <div>
+          <label for="">Do you have any Work Experience(Y/N)</label>
+          <input type="text" formControlName="work_exp" />
+        </div>
+        <br />
+        <div>
+          <label for="">Current CTC(in LPA):</label>
+          <input type="number" formControlName="curr_ctc" />
+        </div>
+        <br />
+        <div>
+          <label for="">Expected CTC(in LPA):</label>
+          <input type="number" formControlName="exp_ctc" />
+        </div>
+        <br />
+        <button
+          type="button"
+          class="btn btn-dark w-25 align-self-center"
+          (click)="submit()"
+        >
+          Next
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

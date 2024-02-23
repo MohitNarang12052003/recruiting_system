@@ -1,0 +1,77 @@
+<h1>Add an Job</h1>
+<form
+  class="bg-light text-dark d-flex flex-column p-4 field justify-content-between align-items-center m-4"
+  [formGroup]="createForm"
+>
+  <div>
+    <label for="">Title</label>
+    <input type="text" formControlName="jobTitle" />
+  </div>
+  <div>
+    <label for="">Employment Type</label>
+    <select
+      class="form-select"
+      style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
+      #type
+      (change)="onSelected(type.value)"
+    >
+      <option value="" selected></option>
+      <option value="Full-time">Full-time</option>
+      <option value="Part-time">Part-time</option>
+      <option value="Internship">Internship</option>
+      <option value="self-employed">self-employed</option>
+      <option value="Freelance">Freelance</option>
+      <option value="Trainee">Trainee</option>
+    </select>
+  </div>
+  <div>
+    <label for="">Minimum Qualifications:</label>
+    <input type="text" formControlName="minQualification" />
+  </div>
+
+  <div>
+    <label for="">Describe</label>
+    <input type="text" formControlName="jobDescription" />
+    <!-- <Textarea rows="2" cols="15" formControlName="desc"></Textarea> -->
+  </div>
+
+  <div>
+    <label for="">Key Role</label>
+    <input type="text" formControlName="keyRole" />
+    <!-- <Textarea rows="2" cols="15" formControlName="desc"></Textarea> -->
+  </div>
+
+  <div>
+    <label for="">Location</label>
+    <input type="text" formControlName="location" />
+    <!-- <Textarea rows="2" cols="15" formControlName="desc"></Textarea> -->
+  </div>
+
+  <div>
+    <label for="">Department Name</label>
+    <input type="text" formControlName="departmentName" />
+    <!-- <Textarea rows="2" cols="15" formControlName="desc"></Textarea> -->
+  </div>
+  <div>
+    <label for="">Skills</label>
+    <input type="text" formControlName="skills" placeholder="java,python,..." />
+    <!-- <Textarea rows="2" cols="15" formControlName="desc"></Textarea> -->
+  </div>
+  <div>
+    <button
+      type="button"
+      class="btn btn-dark w-25 align-self-center me-3"
+      [routerLink]="['/HR']"
+    >
+      Back
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-dark w-25 align-self-center me-3"
+      (click)="submit()"
+    >
+      Submit
+    </button>
+  </div>
+</form>

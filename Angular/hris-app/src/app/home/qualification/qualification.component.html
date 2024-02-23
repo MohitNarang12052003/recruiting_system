@@ -1,0 +1,60 @@
+<div class="main-page">
+  <div class="inside">
+    <div class="text">
+      <form
+        class="bg-light text-dark d-flex flex-column p-4 field justify-content-between align-items-center"
+        style="height: 80vh; width: 35vw"
+        [formGroup]="createForm"
+      >
+        <h1>Register</h1>
+        <h4>Qualification:</h4>
+        <!-- <div >
+              <h3>Qualification:</h3>
+           </div> -->
+        <div>
+          <label for="">School:</label>
+          <input type="text" formControlName="institute" />
+        </div>
+        <div>
+          <label for="">Degree:</label>
+          <input type="text" formControlName="deg" />
+        </div>
+        <div>
+          <label for="">Start Year:</label>
+          <input type="number" formControlName="admission_yr" />
+        </div>
+        <div>
+          <label for="">End Year:</label>
+          <input type="number" formControlName="completion_yr" />
+        </div>
+        <div>
+          <label for="">Grade:</label>
+          <input type="number" formControlName="gpa" />
+        </div>
+        <div>
+          <button
+            type="button"
+            class="btn btn-dark w-25 align-self-center"
+            [routerLink]="['/register']"
+          >
+            Back
+          </button>
+          <button
+            type="button"
+            class="btn btn-dark w-25 align-self-center"
+            (click)="add()"
+          >
+            Add
+          </button>
+          <button
+            type="button"
+            class="btn btn-dark w-25 align-self-center"
+            (click)="submit(1)"
+          >
+            Next
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

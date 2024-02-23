@@ -1,0 +1,115 @@
+<div class="main-page">
+  <div class="inside">
+    <div class="text">
+      <form
+        class="bg-light text-dark d-flex flex-column p-4 field justify-content-between align-items-center"
+        style="height: 80vh; width: 35vw"
+        [formGroup]="createForm"
+      >
+        <h1>Register</h1>
+        <!-- <div >
+              <label for="" style=" margin-right: 10%;">Resume</label>
+              <input class="form-control form-control-sm " type="file" style="border-color: black;">
+           </div> -->
+        <div>
+          <label for="">Gender</label>
+          <div class="form-check" style="margin-top: 0; margin-bottom: 0">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="flexRadioDefault"
+              id="flexRadioDefault1"
+              (change)="onChange($event)"
+            />
+            <label class="form-check-label" for="flexRadioDefault1">
+              Male
+            </label>
+          </div>
+          <div class="form-check" style="margin-top: 0; margin-bottom: 0">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="flexRadioDefault"
+              id="flexRadioDefault2"
+              (change)="onChange($event)"
+            />
+            <label class="form-check-label" for="flexRadioDefault2">
+              Female
+            </label>
+          </div>
+          <div class="form-check" style="margin-top: 0; margin-bottom: 0">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="flexRadioDefault"
+              id="flexRadioDefault1"
+              (change)="onChange($event)"
+            />
+            <label class="form-check-label" for="flexRadioDefault1">
+              Other
+            </label>
+          </div>
+        </div>
+        <div>
+          <label for="">Nationality</label>
+          <input type="text" formControlName="nationality" />
+        </div>
+        <div>
+          <label for="">Address:</label>
+          <textarea
+            name=""
+            id=""
+            cols="22"
+            rows="2"
+            formControlName="address"
+          ></textarea>
+        </div>
+        <div class="m-1">
+          <div class="form-floating m-0 p-1">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="421003"
+              formControlName="pincode"
+            />
+            <label for="floatingInput">Pincode</label>
+          </div>
+          <div class="form-floating m-0 p-1">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Maharashtra"
+              formControlName="state"
+            />
+            <label for="floatingInput">State</label>
+          </div>
+
+          <div class="form-floating m-0 p-1">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Ulhasnagar"
+              formControlName="city"
+            />
+            <label for="floatingInput">City</label>
+          </div>
+        </div>
+        <div>
+          <label for="">Marital Status</label>
+          <input type="text" formControlName="marital_status" />
+        </div>
+        <div>
+          <button type="button" class="btn btn-dark w-25 align-self-center" [routerLink]="['/Experience']">
+            Back
+          </button>
+          <button type="button" class="btn btn-dark w-25 align-self-center" (click)="submit()">
+            Next
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

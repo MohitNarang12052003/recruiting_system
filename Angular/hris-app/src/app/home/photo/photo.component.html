@@ -1,0 +1,27 @@
+<div class="main-page">
+  <div class="inside">
+    <div
+      class="text d-flex flex-column justify-content-center align-items-center m-4"
+      style="width: 90vw"
+    >
+      <div
+        class="bg-light text-dark d-flex flex-column p-4 field justify-content-between align-items-center"
+        style="width: 35vw"
+      >
+        <h1>Photo</h1>
+        <p>
+          Upload an photo of yourself , which will help recruiters to recruit
+          you
+        </p>
+
+        <div [innerHtml]="msg" *ngIf="msg" style="color: red"></div>
+
+        <div><img [src]="url" *ngIf="url" /></div>
+        <p>
+          <input type="file" (change)="selectFile($event)" />
+        </p>
+        <button  type="button" class="btn btn-dark" (click)="submitPhoto()" *ngIf="submit">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

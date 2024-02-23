@@ -1,0 +1,15 @@
+<div class="f">
+  <h1>{{ title }}</h1>
+  <p>Posted at:{{date_posted  | date : "longDate"}}</p>
+  <p><b>Description:</b>{{ description }}</p>
+  <p><b>Department:</b>{{ department_name }}</p>
+  <p><b>Minimum Qualifications:</b>{{ minimum_qualifications }}</p>
+  <p><b>Employment Type:</b>{{ employment_type }}</p>
+  <p><b>Location</b>{{ location }}</p>
+  <p><b>KeyRole:</b>{{ key_role }}</p>
+  <p><b>Skills</b>{{ skills }}</p>
+
+  <button type="button" class="btn btn-dark m-4 w-25" (click)="submit()">
+    Apply
+  </button>
+</div>

@@ -27,44 +27,47 @@ INSERT INTO hrisportal.department (department_name) VALUES ('Marketing and Sales
 -- Inserting a record for a user with a sample resume into the hrisportal.users table
 INSERT INTO hrisportal.users (username, email, password, full_name, date_of_birth, phone_number, work_experience, resume, expected_ctc, current_ctc)
 VALUES (
-    'jane_smith', 
-    'jane.smith@email.com', 
-    'strongpassword456', 
+    'jayaa', 
+    'jayaa@email.com', 
+	HASHBYTES('SHA2_256','HASH'), 
     'Jane Smith', 
     '1985-08-22', 
-    '+9876543210', 
+    '9876543210', 
     10, -- 10 years of work experience
-    0x5468697320697320612073656D706C6520726573756D65, -- Hexadecimal representation of "This is a sample resume"
+	'RESUME', -- Hexadecimal representation of "This is a sample resume"
     120000, -- Expected CTC
     100000  -- Current CTC
 );
-
-
+select * from hrisportal.users
 
 -- Inserting a record for an employee into the hrisportal.employee table
-INSERT INTO hrisportal.employee (employee_id, user_id, job_title, salary, department, email, password, date_of_joining, date_of_departure, active_yn)
+INSERT INTO hrisportal.employee (user_id, job_title, salary, department, email, password,date_of_joining,date_of_departure)
 VALUES (
-    101, -- Replace with a unique employee_id
-   001,  -- Assuming user_id 101 exists in hrisportal.users table
+
+   19,  -- Assuming user_id 101 exists in hrisportal.users table
     'Software Engineer',
     80000,
     'Technology and Innovation',
     'employee1@fintechcompany.com',
-    'securepassword123',
+    HASHBYTES('SHA2_256',N'123'),
     '2024-01-01',
-    NULL, -- Assuming the employee has not yet departed
-    1     -- 1 for active, 0 for inactive
-);
+	'2024-01-01'
 
+);
+DELETE FROM hrisportal.employee
+
+select  HASHBYTES('SHA2_256','securepassword123')
+
+select * from hrisportal.hr
 
 INSERT INTO hrisportal.hr (employee_id, email, password, active_yn)
 VALUES (
-    101, -- Assuming employee_id 101 exists in hrisportal.employee table
+    6,
     'hr_rep@fintechcompany.com', 
-    'securepassword123', 
+     HASHBYTES('SHA2_256', N'securepassword123'), 
     'Y'
 );
-
+DELETE FROM hrisportal.hr
 -- Inserting job vacancies for a fintech company into the hrisportal.job_vacancy table
 INSERT INTO hrisportal.job_vacancy (
     job_title, 
@@ -87,7 +90,7 @@ INSERT INTO hrisportal.job_vacancy (
     1, 
     '2024-01-13', 
     'Y', 
-    1
+    5
 );
 
 INSERT INTO hrisportal.job_vacancy (
@@ -111,7 +114,7 @@ INSERT INTO hrisportal.job_vacancy (
     2, 
     '2024-01-14', 
     'Y', 
-    1
+    5
 );
 
 -- Inserting additional job vacancies for a fintech company into the hrisportal.job_vacancy table
@@ -136,7 +139,21 @@ INSERT INTO hrisportal.job_vacancy (
     8, 
     '2024-01-15', 
     'Y', 
-    1
+    5
+);
+
+INSERT INTO hrisportal.job_vacancy (job_title, job_description, minimum_qualifications, employment_type, key_role, location, department_id, date_posted, active_yn, hr_id)
+VALUES (
+    'Marketing Specialist',
+    'Join our marketing team and contribute to our company success...',
+    'Bachelor degree in Marketing or related field...',
+    'Part-Time',
+    'Plan and execute marketing campaigns...',
+    'City, Country',
+    2, -- Assuming department_id 2 exists in hrisportal.department
+    GETDATE(),
+    'Y',
+    5 -- Assuming hr_id 2 exists in hrisportal.hr
 );
 
 INSERT INTO hrisportal.job_vacancy (
@@ -160,7 +177,7 @@ INSERT INTO hrisportal.job_vacancy (
     6, 
     '2024-01-16', 
     'Y', 
-    1
+    5
 );
 
 -- Add more job vacancy records as needed...
@@ -173,13 +190,40 @@ select * from hrisportal.skill;
 select * from hrisportal.department;
 
 select * from hrisportal.job_vacancy;
+INSERT INTO hrisportal.job_vacancy (job_title, job_description, minimum_qualifications, employment_type, key_role, location, department_id, date_posted, active_yn, hr_id)
+VALUES (
+    'Customer Success Manager',
+    'Ensure our clients are satisfied and help them achieve success with our products...',
+    'Bachelor degree in Business or related field...',
+    'Full-Time',
+    'Build and maintain relationships with clients...',
+    'City, Country',
+    5, -- Assuming department_id 5 exists in hrisportal.department
+    GETDATE(),
+    'Y',
+    5 -- Assuming hr_id 5 exists in hrisportal.hr
+);
 
+INSERT INTO hrisportal.job_vacancy (job_title, job_description, minimum_qualifications, employment_type, key_role, location, department_id, date_posted, active_yn, hr_id)
+VALUES (
+    'Blockchain Developer',
+    'Join our blockchain development team and work on cutting-edge distributed ledger technology...',
+    'Bachelor degree in Computer Science or related field...',
+    'Full-Time',
+    'Design and implement blockchain solutions...',
+    'City, Country',
+    7, -- Assuming department_id 7 exists in hrisportal.department
+    GETDATE(),
+    'Y',
+    5 -- Assuming hr_id 7 exists in hrisportal.hr
+);
 
 insert into hrisportal.job_skill values(5,1);
 insert into hrisportal.job_skill values(5,1);
 insert into hrisportal.job_skill values(6,2);
 insert into hrisportal.job_skill values(6,2);
-insert into hrisportal.job_skill values(3,3);
-insert into hrisportal.job_skill values(3,3);
-insert into hrisportal.job_skill values(4,4);
-insert into hrisportal.job_skill values(4,4);
+insert into hrisportal.job_skill values(7,3);
+insert into hrisportal.job_skill values(7,3);
+insert into hrisportal.job_skill values(11,4);
+insert into hrisportal.job_skill values(11,4);
+
