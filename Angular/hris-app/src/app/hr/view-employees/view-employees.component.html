@@ -1,0 +1,33 @@
+<!-- <p>view-employees works!</p> -->
+
+<div class="m-4">
+    <h1>Employees:</h1>
+    <br />
+    <table class="thead">
+      <tr class="row" style="width: 90vw">
+        <th class="col-1">Sr. no.</th>
+        <th class="col-1">Job title</th>
+        <th class="col-1">Salary</th>
+        <th class="col-1">Department</th>
+        <th class="col-1">Email</th>
+        <th class="col-2">Date of joining</th>
+        <th class="col-2">Date of Departure</th>
+        <th class="col-1">Active </th>
+      </tr>
+  
+      <tr *ngFor="let emp of employees; index as i" class="row">
+        <td class="col-1">{{ i + 1 }}</td>
+        <td class="col-1">{{emp.job_title }}</td>
+        <td class="col-1">{{emp.salary}}</td>
+        <td class="col-1  ">{{ emp.department }}</td>
+        <td class="col-1" style="word-wrap: break-word;">{{ emp.email }}</td>
+        <td class="col-2">{{ emp.date_of_joining| date:"longDate" }}</td>
+        <td class="col-2">{{ emp.date_of_departure | date : "longDate" }}</td>
+        <td class="col-1">{{ emp.active_yn }}</td>
+        <td class="col-2">
+          <button type="button" class="btn btn-success">View</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  

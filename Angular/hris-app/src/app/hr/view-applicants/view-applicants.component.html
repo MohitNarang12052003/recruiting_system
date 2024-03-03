@@ -1,8 +1,9 @@
-<!-- <p>view-applicants works!</p> -->
-<div class="m-4">
+<div >
+  <!-- <p>view-applicants works!</p> -->
+<div class="m-4" >
   <h1>Applications:</h1>
   <br />
-  <table class="thed">
+  <table class="thead">
     <tr class="row" style="width: 90vw">
       <th class="col-1">Sr. no.</th>
       <th class="col-2">Applicant Name</th>
@@ -14,17 +15,21 @@
       <th class="col-2">Profile</th>
     </tr>
 
-    <tr *ngFor="let app of applications; index as i" class="row">
-      <td class="col-1">{{ i + 1 }}</td>
-      <td class="col-2">{{ app.full_name }}</td>
-      <td class="col-2">{{ app.job_title }}</td>
-      <td class="col-1">{{ app.round_1 }}</td>
-      <td class="col-1">{{ app.round_2 }}</td>
-      <td class="col-1">{{ app.round_3 }}</td>
-      <td class="col-2">{{ app.applied_at | date : "longDate" }}</td>
-      <td class="col-2">
-        <button type="button" class="btn btn-success">View</button>
-      </td>
-    </tr>
+    <div *ngIf="success">
+      <tr  *ngFor="let app of applications; index as i" class="row">
+        <td class="col-1">{{ i + 1 }}</td>
+        <td class="col-2">{{ app.full_name }}</td>
+        <td class="col-2">{{ app.job_title }}</td>
+        <td class="col-1">{{ app.round_1 }}</td>
+        <td class="col-1">{{ app.round_2 }}</td>
+        <td class="col-1">{{ app.round_3 }}</td>
+        <td class="col-2">{{ app.applied_at | date : "longDate" }}</td>
+        <td class="col-2">
+          <button type="button" class="btn btn-success" [routerLink]="['/SingleApplicantDetails',app.applicant_id]">View</button>
+        </td>
+      </tr>
+    </div>
   </table>
+</div>
+
 </div>

@@ -1,0 +1,72 @@
+<!-- <p>single-applicant works!</p> -->
+
+<div class="container" *ngIf="applicantDetails" (submit)="submit()">
+    <div class="h1">Applicant Details</div>
+    <br />
+
+    <div class="row">
+        <div class="col-4">
+            <h5>Applicant Name:</h5>
+        </div>
+        <div class="col-4">
+            <h5>{{applicantDetails.username}}</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-4">
+            <h5>Vacancy Name:</h5>
+        </div>
+        <div class="col-4">
+            <h5>{{applicantDetails.job_title}}</h5>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-4">
+            <h5>Applied At:</h5>
+        </div>
+        <div class="col-4">
+            <h5>{{applicantDetails.applied_at | date:'longDate'}}</h5>
+        </div>
+    </div>
+    <br>
+
+    <form action="" [formGroup]="applicantForm">
+        <div class="row">
+            <label class="col-2" for=""><h5>Round-1</h5></label>
+            <input class="col-3" type="number" formControlName="round_1"  [(ngModel)]='this.applicantDetails.round_1' />
+        </div>
+        <br>
+
+        <div class="row">
+            <label class="col-2" for=""><h5>Round-2</h5></label>
+            <input class="col-3" type="number" formControlName="round_2" [(ngModel)]='this.applicantDetails.round_2' />
+        </div>
+        <br>
+        <div class="row">
+            <label class="col-2" for=""><h5>Round-3</h5></label>
+            <input class="col-3" type="number" formControlName="round_3" [(ngModel)]='this.applicantDetails.round_3'/>
+        </div>
+        <br>
+        <div class="row">
+            <label class="col-2" for=""><h5>Document Verification</h5></label>
+            <input class="col-3" type="number" formControlName="doc_verification" [(ngModel)]='this.applicantDetails.doc_verification'/>
+        </div>
+        <br>
+        <div class="row">
+            <label class="col-2" for=""><h5>Offer Letter</h5></label>
+            <input class="col-3" type="number" formControlName="offer_letter" [(ngModel)]='this.applicantDetails.offer_letter'/>
+        </div>
+        <br>
+
+        <button type="submit">Update</button>
+        <br>
+        
+    </form>
+    
+
+
+</div>
+

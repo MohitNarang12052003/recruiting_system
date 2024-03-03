@@ -13,7 +13,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div
-      class="collapse navbar-collapse flex justify-content-between"
+      class="collapse navbar-collapse flex justify-content-between add-remove"
       id="navbarNavAltMarkup"
     >
       <div class="navbar-nav">
@@ -22,11 +22,16 @@
         <a class="nav-link">About</a>
         <a class="nav-link">Contact</a>
       </div>
-      <div class="navbar-nav">
+      <div class="navbar-nav " *ngIf="!isLoggedIn()">
         <button class="btn btn-outline-dark me-3" [routerLink]="['/register']">
           Signup
         </button>
         <button class="btn btn-outline-dark" [routerLink]="['/login']">Login</button>
+      </div>
+      <div class="navbar-nav logout" *ngIf="isLoggedIn()">
+        <button class="btn btn-outline-dark me-3" (click)="logOut()" [routerLink]="['/login']">
+          Logout
+        </button>
       </div>
     </div>
   </div>

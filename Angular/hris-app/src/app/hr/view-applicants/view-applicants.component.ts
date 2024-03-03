@@ -10,6 +10,7 @@ import { HrService } from '../hr.service';
 })
 export class ViewApplicantsComponent implements OnInit {
   applications!:any[];
+  success!:boolean;
 
   constructor(private hrService:HrService,private router:Router){
 
@@ -17,7 +18,13 @@ export class ViewApplicantsComponent implements OnInit {
 
   ngOnInit(): void {
   this.hrService.viewApplications().subscribe((data)=>{
-    this.applications=data;
+    console.log(data);
+      if(data["status"]!=="unsuccessful"){
+        this.success=true;
+      }
+     
+      this.applications=data;
+    
   })
   }
 

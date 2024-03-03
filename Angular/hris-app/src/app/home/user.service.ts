@@ -10,51 +10,51 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   insertUser(data: any): Observable<string> {
-    return this.http.post<string>('http://localhost:8082/api/user', data);
+    return this.http.post<string>('http://localhost:8080/api/user', data);
   }
 
   insertQualification(data: any): Observable<any> {
     return this.http.post<any>(
-      'http://localhost:8082/api/qualifications',
+      'http://localhost:8080/api/qualifications',
       data
     );
   }
 
   insertJobHistory(data: any): Observable<any> {
-    return this.http.post<any>('http://localhost:8082/api/jobHistory', data);
+    return this.http.post<any>('http://localhost:8080/api/jobHistory', data);
   }
 
   insertadditionalInfo(data: any): Observable<any> {
     return this.http.post<any>(
-      'http://localhost:8082/api/additionalInfo',
+      'http://localhost:8080/api/additionalInfo',
       data
     );
   }
 
   insertPhoto(data: any): Observable<any> {
-    return this.http.post<any>('http://localhost:8082/api/photo', data);
+    return this.http.post<any>('http://localhost:8080/api/photo', data);
   }
 
   loginUser(data: any): Observable<any> {
-    return this.http.post<any>('http://localhost:8082/api/login', data);
+    return this.http.post<any>('http://localhost:8080/api/login', data);
   }
 
   uploadFile(file: any, name: string): Observable<any> {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('name', name);
-    return this.http.post('http://localhost:8082/api/uploadFile', formData);
+    return this.http.post('http://localhost:8080/api/uploadFile', formData);
   }
 
   insertApplication(data: any): Observable<any> {
-    return this.http.post('http://localhost:8082/api/applyJobs', data);
+    return this.http.post('http://localhost:8080/api/applyJobs', data,{withCredentials:true});
   }
 
   insertJobs(data: any): Observable<any> {
-    return this.http.post('http://localhost:8082/api/insertJobs', data);
+    return this.http.post('http://localhost:8080/api/insertJobs', data,{withCredentials:true});
   }
 
   fetchJobs(): Observable<Job[]> {
-    return this.http.get<Job[]>('http://localhost:8082/api/jobs');
+    return this.http.get<Job[]>('http://localhost:8080/api/jobs');
   }
 }

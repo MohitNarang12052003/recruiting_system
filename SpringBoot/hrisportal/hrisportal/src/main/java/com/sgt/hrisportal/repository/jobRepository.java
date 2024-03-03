@@ -35,4 +35,26 @@ public class jobRepository {
     public List<Map<String,Object>> viewApplications(){
         return jdbcTemplate.queryForList("EXEC hrisportal.sp_view_applications");
     }
+
+    public List<Map<String,Object>> viewEmployees(){
+        return jdbcTemplate.queryForList("EXEC hrisportal.sp_view_employees");
+    }
+
+    public List<Map<String,Object>> viewVacancies(){
+        return jdbcTemplate.queryForList("EXEC hrisportal.sp_view_vacancies");
+    }
+
+    public Map<String,Object> viewSingleApplicant(int id){
+        return jdbcTemplate.queryForMap("EXEC  hrisportal.sp_single_applicant ?",id);
+    }
+
+    public int updateApplication(int id,int round_1,int round_2,int round_3,int offer_letter,int doc_verification){
+        return jdbcTemplate.update("EXEC hrisportal.sp_update_applicant ?,?,?,?,?,?",id,round_1,round_2,round_3,doc_verification,offer_letter);
+    }
+
+    public Map<String, Object> validateToken(int userid, String token){
+        return jdbcTemplate.queryForMap("EXEC hrisportal.sp_validate_token ?,?",token,userid);
+    }
+
+
 }

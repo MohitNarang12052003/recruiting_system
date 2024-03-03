@@ -1,6 +1,8 @@
 package com.sgt.hrisportal.service;
 
 import com.sgt.hrisportal.repository.userRepository;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +15,72 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
 public class userService {
     @Autowired
     userRepository userRepository;
+
+    public boolean isValidToken(HttpServletRequest httpServletRequest){
+        System.out.println("Here");
+        Cookie[] cookies=httpServletRequest.getCookies();
+        for(Cookie c:cookies){
+            System.out.println(c.getName());
+        }
+
+        Map<String,String> cookieMap =getCookiesAsHashMap(cookies);
+
+        if(cookieMap.containsKey("userid")){
+            Map<String,Object> result=userRepository.validateToken(Integer.parseInt(cookieMap.get("userid")),cookieMap.get("token"));
+            Integer validYN=(Integer) result.get("validYN");
+            return validYN == -1;
+        }
+
+        if(cookieMap.containsKey("employee_id")){
+            Map<String,Object> result= userRepository.validateToken(Integer.parseInt(cookieMap.get("employee_id")),cookieMap.get("token"));
+            Integer validYN=(Integer) result.get("validYN");
+            return validYN == 0;
+        }
+
+        if(cookieMap.containsKey("hr_id")){
+            Map<String,Object> result= userRepository.validateToken(Integer.parseInt(cookieMap.get("hr_id")),cookieMap.get("token"));
+            Integer validYN=(Integer) result.get("validYN");
+            return validYN == 1;
+        }
+
+
+        return false;
+    }
+
+    private Map<String,String> getCookiesAsHashMap(Cookie[] cookies){
+        Map<String,String> cookieMap = new HashMap<>();
+        for(Cookie c : cookies){
+            cookieMap.put(c.getName(),c.getValue());
+
+        }
+
+        return cookieMap;
+    }
+
+    public List<Map<String,Object>> unsuccessfulList(){
+        Map<String,Object> map=new HashMap<>();
+        List<Map<String,Object>> list=new ArrayList<>();
+        map.put("status","unsuccessful");
+        list.add(map);
+
+        return list;
+    }
+    public Map<String,Object> unsuccessfulMap(){
+        Map<String,Object> map=new HashMap<>();
+        map.put("status","unsuccessful");
+
+        return map;
+    }
+
 
     public ResponseEntity<Map<String, Object>> insertUser(Map<String, Object> body) {
         String fullname = (String) body.get("full_name");
@@ -152,6 +214,18 @@ public class userService {
         return userRepository.login(email, pwd);
 
 
+
+    }
+
+    public Map<String ,Object> getCount(HttpServletRequest httpServletRequest){
+        boolean isValid=isValidToken(httpServletRequest);
+        if(isValid){
+            return userRepository.getCount();
+        }
+
+        Map<String,Object> map=unsuccessfulMap();
+
+        return map;
 
     }
 

@@ -11,6 +11,7 @@ public class HrisportalApplication {
 		System.out.println("Hello");
 	}
 
+
 }
 
 

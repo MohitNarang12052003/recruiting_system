@@ -17,9 +17,14 @@ export class AddJobComponent {
   ) {}
 
   selectedType = '';
+  deptSelectedType='';
 
   onSelected(value: string): void {
     this.selectedType = value;
+  }
+
+  onDeptSelected(value: string): void {
+    this.deptSelectedType = value;
   }
 
   createForm = new FormGroup({
@@ -36,6 +41,7 @@ export class AddJobComponent {
 
   submit() {
     this.createForm.get('employmentType')?.setValue(this.selectedType);
+    this.createForm.get('departmentName')?.setValue(this.deptSelectedType);
     this.createForm
       .get('hrid')
       ?.setValue(parseInt(this.cookieService.get('hr_id')));

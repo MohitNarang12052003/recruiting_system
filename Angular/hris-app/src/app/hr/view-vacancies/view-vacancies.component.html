@@ -1,0 +1,40 @@
+<!-- <p>view-vacancies works!</p> -->
+
+<div class="m-4">
+    <h1>Vacancies:</h1>
+    <br />
+    <table class="thead">
+      <tr class="row" >
+        <th class="col-1" style="word-wrap: break-word;">Sr. no.</th>
+        <th class="col-1" style="word-wrap: break-word;">Job Title</th>
+        <th class="col-1" style="word-wrap: break-word;">Job Description</th>
+        <th class="col-1" style="word-wrap: break-word;">Minimum Qualifications</th>
+        <th class="col-1" style="word-wrap: break-word;">EmpType</th>
+        <th class="col-1" style="word-wrap: break-word;">Key Role</th>
+        <th class="col-1" style="word-wrap: break-word;">Location</th>
+        <th class="col-1" style="word-wrap: break-word;">Department</th>
+        <th class="col-1" style="word-wrap: break-word;"> Date Posted</th>
+        <th class="col-1" style="word-wrap: break-word;">Active</th>
+        <th class="col-2">HR</th>
+
+      </tr>
+  
+      <tr *ngFor="let vac of vacancies; index as i" class="row">
+        <td class="col-1" style="word-wrap: break-word;">{{ i + 1 }}</td>
+        <td class="col-1" style="word-wrap: break-word;">{{ vac.job_title }}</td>
+        <td class="col-1" style="word-wrap: break-word;">{{ vac.job_description }}</td>
+        <td class="col-1" style="word-wrap: break-word;">{{ vac.minimum_qualifications }}</td>
+        <td class="col-1" style="word-wrap: break-word;">{{ vac.employment_type }}</td>
+        <td class="col-1" style="word-wrap: break-word;">{{ vac.key_role }}</td>
+        <td class="col-1" style="word-wrap: break-word;">{{ vac.location }}</td>
+        <td class="col-1" style="word-wrap: break-word;">{{ vac.department_name }}</td>
+        <td class="col-1" style="word-wrap: break-word;">{{ vac.date_posted | date : "longDate" }}</td>
+        <td class="col-1" style="word-wrap: break-word;">{{ vac.active_yn }}</td>
+        <td class="col-1" style="word-wrap: break-word;">{{ vac.full_name  }}</td>
+        <td class="col-1" style="word-wrap: break-word;">
+          <button type="button" class="btn btn-success">View</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  

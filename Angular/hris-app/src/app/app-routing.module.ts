@@ -13,6 +13,9 @@ import { HrhomeComponent } from './hr/hrhome/hrhome.component';
 import { SinglejobComponent } from './home/singlejob/singlejob.component';
 import { AddJobComponent } from './hr/add-job/add-job.component';
 import { ViewApplicantsComponent } from './hr/view-applicants/view-applicants.component';
+import { ViewEmployeesComponent } from './hr/view-employees/view-employees.component';
+import { ViewVacanciesComponent } from './hr/view-vacancies/view-vacancies.component';
+import { SingleApplicantComponent } from './hr/single-applicant/single-applicant.component';
 
 
 
@@ -64,6 +67,18 @@ const routes: Routes = [
   {
     path:'',
     component:HeroComponent
+  },
+  {
+    path:'ViewEmployees',
+    component:ViewEmployeesComponent
+  },
+  {
+    path:'ViewVacancies',
+    component:ViewVacanciesComponent
+  },
+  {
+    path:'SingleApplicantDetails/:id',
+    component:SingleApplicantComponent
   }
 ];
 

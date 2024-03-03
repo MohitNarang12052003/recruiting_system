@@ -49,8 +49,24 @@
 
   <div>
     <label for="">Department Name</label>
-    <input type="text" formControlName="departmentName" />
-    <!-- <Textarea rows="2" cols="15" formControlName="desc"></Textarea> -->
+    <select
+      class="form-select"
+      style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
+      #type
+      (change)="onDeptSelected(type.value)"
+    >
+      <option value="" selected></option>
+      <option value="Technology And Innovation">Technology And Innovation</option>
+      <option value="Data Science And Analytics">Data Science And Analytics</option>
+      <option value="Risk Management">Risk Management</option>
+      <option value="Compliance And Regulatory Affairs">Compliance And Regulatory Affairs</option>
+      <option value="Financial Operations">Financial Operations</option>
+      <option value="Product Development">Product Development</option>
+      <option value="Cybersecurity">Cybersecurity</option>
+      <option value="Finance And Accounting">Finance And Accounting</option>
+      <option value="Customer Support">Customer Support</option>
+      <option value="Marketing And Sales">Marketing And Sales</option>
+    </select>
   </div>
   <div>
     <label for="">Skills</label>

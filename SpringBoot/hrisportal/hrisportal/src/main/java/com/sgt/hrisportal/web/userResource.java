@@ -1,6 +1,8 @@
 package com.sgt.hrisportal.web;
 import com.sgt.hrisportal.service.userService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,7 +11,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins="http://localhost:4200",allowCredentials = "true")
 public class userResource {
     @Autowired
     userService userService;
@@ -52,6 +54,11 @@ public class userResource {
     @PostMapping("/uploadFile")
     public void UploadFile(@RequestParam("file") MultipartFile file,@RequestParam("name") String name){
         userService.uploadFile(file,name);
+    }
+
+    @GetMapping("/count")
+    public Map<String,Object> getCount(HttpServletRequest httpServletRequest){
+        return userService.getCount(httpServletRequest);
     }
 
 }

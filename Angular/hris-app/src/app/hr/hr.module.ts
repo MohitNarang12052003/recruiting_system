@@ -7,6 +7,9 @@ import { NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { ViewEmployeesComponent } from './view-employees/view-employees.component';
+import { ViewVacanciesComponent } from './view-vacancies/view-vacancies.component';
+import { SingleApplicantComponent } from './single-applicant/single-applicant.component';
 
 
 
@@ -14,7 +17,10 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     HrhomeComponent,
     AddJobComponent,
-    ViewApplicantsComponent
+    ViewApplicantsComponent,
+    ViewEmployeesComponent,
+    ViewVacanciesComponent,
+    SingleApplicantComponent
   ],
   imports: [
     CommonModule,

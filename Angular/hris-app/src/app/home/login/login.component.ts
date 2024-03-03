@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
     private cookieService: CookieService
   ) {}
   ngOnInit(): void {
-    this.cookieService.deleteAll();
+    // this.cookieService.deleteAll();
   }
 
   createForm = new FormGroup({
@@ -26,11 +26,13 @@ export class LoginComponent implements OnInit {
 
   submit() {
     this.userService.loginUser(this.createForm.value).subscribe((data) => {
-      console.log(data);
-      this.cookieService.set('userid', data['user_id']);
+      console.log("here"+data);
+      this.cookieService.set('email', data['email']);
+      this.cookieService.set('token', data['token']);
+      this.cookieService.set('time_to_expire', data['time_to_expire']);
       // this.cookieService.set('role', data['role']);
       // this.cookieService.set('username', data['username']);
-      console.log(this.cookieService.getAll());
+      // console.log("here"+this.cookieService.getAll());
       if (data['role'] == -1) {
         this.cookieService.set('userid', data['user_id']);
         this.router.navigate(['']);

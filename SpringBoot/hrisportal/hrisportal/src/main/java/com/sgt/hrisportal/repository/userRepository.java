@@ -35,7 +35,13 @@ public class userRepository {
         return jdbcTemplate.queryForMap("EXEC hrisportal.sp_login ?,?",email,password);
     }
 
+    public Map<String,Object> getCount(){
+        return jdbcTemplate.queryForMap("EXEC hrisportal.sp_get_count");
+    }
 
+    public Map<String, Object> validateToken(int userid, String token){
+        return jdbcTemplate.queryForMap("EXEC hrisportal.sp_validate_token ?,?",token,userid);
+    }
 
 }
 
