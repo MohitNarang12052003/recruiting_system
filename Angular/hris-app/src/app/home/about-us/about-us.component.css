@@ -1,0 +1,139 @@
+
+
+.about-us-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.about-us-left-content {
+  width: 50%;
+}
+.about-us-right-content {
+  width: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -10%;
+}
+
+.laptop-image {
+  width: 100%;
+}
+.about-us-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+.about-us-heading-wrapper {
+  position: relative;
+  margin-bottom: 45px;
+  &::after {
+    content: "";
+    position: absolute;
+    background-color: var(--color-primary);
+    width: 70px;
+    height: 6px;
+    bottom: -14px;
+    z-index: 1;
+  }
+}
+.about-us-heading {
+  line-height: 1.125em;
+  color: var(--color-primary);
+}
+.about-us-title {
+  width: 80%;
+  font-size: 2.625em;
+  font-weight: 700;
+  line-height: 1.28em;
+  margin-top: 15px;
+}
+.about-us-lower-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 35px 25px;
+  margin-bottom: 45px;
+}
+.about-us-content {
+  width: calc(50% - 25px);
+}
+.content-head {
+  margin-top: 7px;
+  font-weight: 600;
+  line-height: 1.8em;
+}
+.content-paragraph {
+  font-size: 0.875em;
+  line-height: 1.8em;
+  color: var(--color-dark-tint);
+}
+.tournament-vector {
+  width: 30px;
+  height: 30px;
+}
+
+@media only screen and (max-width: 1500px) {
+}
+
+@media only screen and (max-width: 992px) {
+
+  .about-us-left-content {
+    width: 100%;
+  }
+  .about-us-right-content {
+    position: relative;
+    bottom: -152px;
+    top: 0%;
+    transform: translateY(-50%);
+    right: -22%;
+  }
+  .about-us-wrapper {
+    display: flex;
+    flex-direction: column-reverse;
+    &::after {
+      bottom: -30px;
+    }
+  }
+
+  .about-us-title {
+    width: 80%;
+    margin-bottom: 70px;
+  }
+  .about-us-content {
+    width: 48%;
+  }
+}
+@media only screen and (max-width: 768px) {
+}
+
+@media only screen and (max-width: 600px) {
+   Outer Containers
+
+  .about-us-right-content {
+    bottom: -70px;
+  }
+
+  .about-us-heading-wrapper {
+    &::after {
+      bottom: -64px;
+    }
+  }
+  .about-us-title {
+    width: 100%;
+    margin-bottom: 80px;
+  }
+   Lower Content
+  .about-us-lower-content {
+    flex-direction: column;
+    gap: 20px 25px;
+    margin-bottom: 45px;
+  }
+  .about-us-content {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 350px){
+}

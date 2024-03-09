@@ -16,6 +16,9 @@ import { ViewApplicantsComponent } from './hr/view-applicants/view-applicants.co
 import { ViewEmployeesComponent } from './hr/view-employees/view-employees.component';
 import { ViewVacanciesComponent } from './hr/view-vacancies/view-vacancies.component';
 import { SingleApplicantComponent } from './hr/single-applicant/single-applicant.component';
+import { AboutUsComponent } from './home/about-us/about-us.component';
+import { UserLoginPageComponent } from './home/user-login-page/user-login-page.component';
+import { UploadSuccessComponent } from './home/upload-success/upload-success.component';
 
 
 
@@ -41,7 +44,7 @@ const routes: Routes = [
     component:GeneralComponent
   },
   {
-    path:'Photo',  
+    path:'Photo',
     component:PhotoComponent
   },
   {
@@ -79,6 +82,18 @@ const routes: Routes = [
   {
     path:'SingleApplicantDetails/:id',
     component:SingleApplicantComponent
+  },
+  {
+    path:'about',
+    component:AboutUsComponent
+  },
+  {
+    path:'user-login',
+    component:UserLoginPageComponent
+  },
+  {
+    path:'upload-success',
+    component:UploadSuccessComponent
   }
 ];
 

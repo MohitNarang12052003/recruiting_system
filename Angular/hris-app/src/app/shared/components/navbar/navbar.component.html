@@ -19,7 +19,7 @@
       <div class="navbar-nav">
         <a class="nav-link active">Home</a>
         <a class="nav-link">Jobs</a>
-        <a class="nav-link">About</a>
+        <a class="nav-link" [routerLink]="['/about']">About</a>
         <a class="nav-link">Contact</a>
       </div>
       <div class="navbar-nav " *ngIf="!isLoggedIn()">

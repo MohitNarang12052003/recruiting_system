@@ -12,6 +12,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { PhotoComponent } from './photo/photo.component';
 import { JobComponent } from './job/job.component';
 import { SinglejobComponent } from './singlejob/singlejob.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { UserLoginPageComponent } from './user-login-page/user-login-page.component';
+import { UploadSuccessComponent } from './upload-success/upload-success.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,9 @@ import { SinglejobComponent } from './singlejob/singlejob.component';
     PhotoComponent,
     JobComponent,
     SinglejobComponent,
+    AboutUsComponent,
+    UserLoginPageComponent,
+    UploadSuccessComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +39,8 @@ import { SinglejobComponent } from './singlejob/singlejob.component';
     HttpClientModule,
   ],
 
-  exports: [PhotoComponent],
+  exports: [
+    PhotoComponent,
+    AboutUsComponent],
 })
 export class HomeModule {}
