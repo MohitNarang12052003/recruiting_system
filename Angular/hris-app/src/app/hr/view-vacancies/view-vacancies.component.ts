@@ -15,9 +15,31 @@ export class ViewVacanciesComponent {
   }
 
   ngOnInit(): void {
-  this.hrService.viewVacancies().subscribe((data)=>{
-    this.vacancies=data;
-  })
+  this.getData();
+
+  }
+
+
+  toggleVacancy(j_id : number):void{
+    
+    this.hrService.toggleVacancy(j_id).subscribe({
+      next:(data)=>{
+        console.log(data)
+        this.getData();
+      },
+      error:(error)=>{
+        console.log("error ",error)
+      }
+    })
+  }
+
+
+  getData():void{
+    this.hrService.viewVacancies().subscribe((data)=>{
+      console.log(data)
+      
+      this.vacancies=data;
+    })
   }
 
 

@@ -56,5 +56,13 @@ public class jobRepository {
         return jdbcTemplate.queryForMap("EXEC hrisportal.sp_validate_token ?,?",token,userid);
     }
 
+    public Map<String,Object> viewSingleEmployee(int id){
+        return jdbcTemplate.queryForMap("EXEC  hrisportal.sp_view_single_employee ?",id);
+    }
+
+    public int toggleVacancy(int id){
+        System.out.println(5);
+        return jdbcTemplate.update("EXEC hrisportal.sp_toggle_vacancy ?",id);
+    }
 
 }

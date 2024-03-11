@@ -9,10 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class jobService {
@@ -23,9 +20,8 @@ public class jobService {
     public boolean isValidToken(HttpServletRequest httpServletRequest){
         System.out.println("Here");
         Cookie[] cookies=httpServletRequest.getCookies();
-        for(Cookie c:cookies){
-            System.out.println(c.getName());
-        }
+
+        if(cookies==null)   return false;
 
         Map<String,String> cookieMap =getCookiesAsHashMap(cookies);
 
@@ -44,6 +40,7 @@ public class jobService {
         if(cookieMap.containsKey("hr_id")){
             Map<String,Object> result= jobRepository.validateToken(Integer.parseInt(cookieMap.get("hr_id")),cookieMap.get("token"));
             Integer validYN=(Integer) result.get("validYN");
+            System.out.println("checking validYN "+validYN);
             return validYN == 1;
         }
 
@@ -61,20 +58,6 @@ public class jobService {
         return cookieMap;
     }
 
-    public List<Map<String,Object>> unsuccessfulList(){
-        Map<String,Object> map=new HashMap<>();
-        List<Map<String,Object>> list=new ArrayList<>();
-        map.put("status","unsuccessful");
-        list.add(map);
-
-        return list;
-    }
-    public Map<String,Object> unsuccessfulMap(){
-        Map<String,Object> map=new HashMap<>();
-        map.put("status","unsuccessful");
-
-        return map;
-    }
 
     public List<Map<String,Object>> fetchJobs(){
             return jobRepository.fetchJobs();
@@ -122,52 +105,45 @@ public class jobService {
 
         return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(Map.of("status", "failed"));
     }
-    public List<Map<String,Object>> viewApplications(HttpServletRequest httpServletRequest){
+    public ResponseEntity<List<Map<String,Object>>> viewApplications(HttpServletRequest httpServletRequest){
 
         boolean isValid=isValidToken(httpServletRequest);
         if(isValid){
-            return jobRepository.viewApplications();
+            return ResponseEntity.ok(jobRepository.viewApplications());
         }
 
-        List<Map<String,Object>> list=unsuccessfulList();
 
-        return list;
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyList());
     }
 
 
-    public List<Map<String,Object>> viewEmployees(HttpServletRequest httpServletRequest){
+    public ResponseEntity<List<Map<String,Object>>> viewEmployees(HttpServletRequest httpServletRequest){
         boolean isValid=isValidToken(httpServletRequest);
         if(isValid){
-            return jobRepository.viewEmployees();
+            return ResponseEntity.ok(jobRepository.viewEmployees());
         }
 
-        List<Map<String,Object>> list=unsuccessfulList();
-
-        return list;
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyList());
 
     }
 
-    public List<Map<String,Object>> viewVacancies(HttpServletRequest httpServletRequest){
+    public ResponseEntity<List<Map<String,Object>>> viewVacancies(HttpServletRequest httpServletRequest){
         boolean isValid=isValidToken(httpServletRequest);
         if(isValid){
-            return jobRepository.viewVacancies();
+            return ResponseEntity.ok(jobRepository.viewVacancies());
         }
 
-        List<Map<String,Object>> list=unsuccessfulList();
-
-        return list;
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyList());
 
     }
 
-    public Map<String,Object> viewSingleApplicant(int id,HttpServletRequest httpServletRequest){
+    public ResponseEntity<Map<String,Object>> viewSingleApplicant(int id,HttpServletRequest httpServletRequest){
         boolean isValid=isValidToken(httpServletRequest);
         if(isValid){
-            return jobRepository.viewSingleApplicant(id);
+            return ResponseEntity.ok(jobRepository.viewSingleApplicant(id));
         }
 
-        Map<String,Object> map=unsuccessfulMap();
-
-        return map;
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyMap());
 
     }
 
@@ -191,5 +167,35 @@ public class jobService {
 
 
     }
+
+    public ResponseEntity<Map<String,Object>> viewSingleEmployee(int id,HttpServletRequest httpServletRequest){
+        boolean isValid=isValidToken(httpServletRequest);
+        if(isValid){
+            return ResponseEntity.ok(jobRepository.viewSingleEmployee(id));
+        }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyMap());
+
+    }
+
+    public ResponseEntity<Map<String ,Object>> toggleVacancy(int id, HttpServletRequest httpServletRequest){
+        boolean isValid=isValidToken(httpServletRequest);
+        System.out.println(2);
+        if(isValid){
+            System.out.println(3);
+            int insertedRows = jobRepository.toggleVacancy(id);
+            System.out.println(insertedRows+" 4");
+
+            if (insertedRows > 0) {
+                return ResponseEntity.ok(Map.of("status", "Successful"));
+            }
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(Map.of("status", "failed"));
+
+
+    }
+
+
 
 }

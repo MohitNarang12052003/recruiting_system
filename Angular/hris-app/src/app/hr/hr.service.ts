@@ -31,7 +31,16 @@ export class HrService {
       return this.http.get<any>(`http://localhost:8080/api/viewSingleApplicant/${id}`,{withCredentials:true});
   }
 
+  getSingleEmployee(id:any):Observable<any>{
+    console.log("here "+typeof(id));
+    return this.http.get<any>(`http://localhost:8080/api/viewSingleEmployee/${id}`,{withCredentials:true});
+}
+
   updateApplication(id:any,body:any):Observable<any>{
     return this.http.post<any>(`http://localhost:8080/api/updateApplication/${id}`,body,{withCredentials:true});
+  }
+
+  toggleVacancy(id:number):Observable<any>{
+    return this.http.post<any>(`http://localhost:8080/api/toggleVacancy/${id}`,{},{withCredentials:true});
   }
 }

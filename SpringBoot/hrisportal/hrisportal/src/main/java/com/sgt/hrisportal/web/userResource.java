@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -57,8 +58,18 @@ public class userResource {
     }
 
     @GetMapping("/count")
-    public Map<String,Object> getCount(HttpServletRequest httpServletRequest){
+    public ResponseEntity<Map<String, Object>> getCount(HttpServletRequest httpServletRequest){
         return userService.getCount(httpServletRequest);
+    }
+
+    @GetMapping("/singleUserDetails")
+    public ResponseEntity<Map<String,Object>> getUserDetails(HttpServletRequest httpServletRequest){
+        return userService.getUserDetails(httpServletRequest);
+    }
+
+    @GetMapping("/userApplicationDetails")
+    public ResponseEntity<List<Map<String,Object>>> userApplicationDetails(HttpServletRequest httpServletRequest){
+        return userService.userApplicationDetails(httpServletRequest);
     }
 
 }

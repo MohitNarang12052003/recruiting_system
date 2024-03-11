@@ -9,11 +9,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { EmployeeModule } from './employee/employee.module';
 import { HrModule } from './hr/hr.module';
+import { UserModule } from './user/user.module';
 
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, SharedModule, AppRoutingModule, HomeModule,  EmployeeModule, HrModule,NgbModule],
+  imports: [BrowserModule, SharedModule, AppRoutingModule, HomeModule,  EmployeeModule, HrModule,NgbModule,UserModule],
   providers: [],
   bootstrap: [AppComponent],
 })

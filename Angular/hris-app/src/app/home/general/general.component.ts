@@ -26,6 +26,7 @@ export class GeneralComponent {
     marital_status: new FormControl(),
   });
   onChange(e:any) {
+    console.log(e.target.value)
     this.createForm.get("gender")?.setValue(e.target.value) ;
  }
   submit() {

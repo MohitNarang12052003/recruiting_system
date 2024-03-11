@@ -16,6 +16,12 @@ import { ViewApplicantsComponent } from './hr/view-applicants/view-applicants.co
 import { ViewEmployeesComponent } from './hr/view-employees/view-employees.component';
 import { ViewVacanciesComponent } from './hr/view-vacancies/view-vacancies.component';
 import { SingleApplicantComponent } from './hr/single-applicant/single-applicant.component';
+import { EmployeeGuardService } from './employee/employee-guard.service';
+import { HRGuardService } from './hr/hrguard.service';
+import { UnauthorizedComponent } from './shared/components/unauthorized/unauthorized.component';
+import { SingleEmployeeComponent } from './hr/single-employee/single-employee.component';
+import { HomepageComponent } from './user/homepage/homepage.component';
+import { UserGuardService } from './user/user-guard.service';
 
 
 
@@ -46,11 +52,14 @@ const routes: Routes = [
   },
   {
     path:'Employee',
-    component:HomeComponent
+    component:HomeComponent,
+    canActivate:[EmployeeGuardService]
+    
   },
   {
     path:'HR',
-    component:HrhomeComponent
+    component:HrhomeComponent,
+    canActivate:[HRGuardService]
   },
   {
     path:'jobDetail',
@@ -58,27 +67,46 @@ const routes: Routes = [
   },
   {
     path:'PostJob',
-    component:AddJobComponent
+    component:AddJobComponent,
+    canActivate:[HRGuardService]
   },
   {
     path:'ViewApplications',
-    component:ViewApplicantsComponent
+    component:ViewApplicantsComponent,
+    canActivate:[HRGuardService]
   },
   {
     path:'',
     component:HeroComponent
   },
   {
+    path:'home',
+    component:HomepageComponent,
+    canActivate:[UserGuardService]
+  },
+  {
     path:'ViewEmployees',
-    component:ViewEmployeesComponent
+    component:ViewEmployeesComponent,
+    canActivate:[HRGuardService]
   },
   {
     path:'ViewVacancies',
-    component:ViewVacanciesComponent
+    component:ViewVacanciesComponent,
+    canActivate:[HRGuardService]
   },
   {
     path:'SingleApplicantDetails/:id',
-    component:SingleApplicantComponent
+    component:SingleApplicantComponent,
+    canActivate:[HRGuardService]
+  },
+  {
+    path:'SingleEmployeeDetails/:id',
+    component:SingleEmployeeComponent,
+    canActivate:[HRGuardService]
+  },
+  {
+    path:'unauthorized',
+    component:UnauthorizedComponent
   }
 ];
 

@@ -15,7 +15,7 @@
       <th class="col-2">Profile</th>
     </tr>
 
-    <div *ngIf="success">
+    <div>
       <tr  *ngFor="let app of applications; index as i" class="row">
         <td class="col-1">{{ i + 1 }}</td>
         <td class="col-2">{{ app.full_name }}</td>

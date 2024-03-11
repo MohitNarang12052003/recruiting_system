@@ -35,29 +35,40 @@ public class jobResource {
     }
 
     @GetMapping("/viewApplications")
-    public List<Map<String,Object>> viewApplications(HttpServletRequest httpServletRequest){
+    public ResponseEntity<List<Map<String, Object>>> viewApplications(HttpServletRequest httpServletRequest){
         return jobService.viewApplications(httpServletRequest);
     }
 
     @GetMapping("/viewEmployees")
-    public List<Map<String,Object>> viewEmployees(HttpServletRequest httpServletRequest){
+    public ResponseEntity<List<Map<String, Object>>> viewEmployees(HttpServletRequest httpServletRequest){
         return jobService.viewEmployees(httpServletRequest);
     }
 
     @GetMapping("/viewVacancies")
-    public List<Map<String,Object>> viewVacancies(HttpServletRequest httpServletRequest){
+    public ResponseEntity<List<Map<String, Object>>> viewVacancies(HttpServletRequest httpServletRequest){
 
         return jobService.viewVacancies(httpServletRequest);
     }
 
     @GetMapping("/viewSingleApplicant/{id}")
-    public Map<String,Object> viewSingleApplicant(@PathVariable int id,HttpServletRequest httpServletRequest){
+    public ResponseEntity<Map<String, Object>> viewSingleApplicant(@PathVariable int id, HttpServletRequest httpServletRequest){
         return jobService.viewSingleApplicant(id,httpServletRequest);
     }
 
     @PostMapping("/updateApplication/{id}")
     public ResponseEntity<Map<String ,Object>> updateApplication(@PathVariable int id,@RequestBody Map<String,Object> body,HttpServletRequest httpServletRequest){
         return jobService.updateApplication(id,body,httpServletRequest);
+    }
+
+    @GetMapping("/viewSingleEmployee/{id}")
+    public ResponseEntity<Map<String, Object>> viewSingleEmployee(@PathVariable int id, HttpServletRequest httpServletRequest){
+        return jobService.viewSingleEmployee(id,httpServletRequest);
+    }
+
+    @PostMapping("/toggleVacancy/{id}")
+    public ResponseEntity<Map<String, Object>> toggleVacancy(@PathVariable int id,HttpServletRequest httpServletRequest){
+        System.out.println(1);
+        return jobService.toggleVacancy(id,httpServletRequest);
     }
 
 }

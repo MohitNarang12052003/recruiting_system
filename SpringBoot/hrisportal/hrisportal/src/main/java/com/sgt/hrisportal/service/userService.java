@@ -15,10 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class userService {
@@ -217,16 +214,41 @@ public class userService {
 
     }
 
-    public Map<String ,Object> getCount(HttpServletRequest httpServletRequest){
+    public ResponseEntity<Map<String ,Object>> getCount(HttpServletRequest httpServletRequest){
         boolean isValid=isValidToken(httpServletRequest);
         if(isValid){
-            return userRepository.getCount();
+            return ResponseEntity.ok(userRepository.getCount());
         }
 
-        Map<String,Object> map=unsuccessfulMap();
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.EMPTY_MAP);
 
-        return map;
+    }
 
+
+    public ResponseEntity<Map<String,Object>> getUserDetails(HttpServletRequest httpServletRequest){
+        boolean isValid=isValidToken(httpServletRequest);
+        if(isValid){
+            Cookie[] cookies=httpServletRequest.getCookies();
+            Map<String,String> map=getCookiesAsHashMap(cookies);
+
+
+            return ResponseEntity.ok(userRepository.getUserDetails(Integer.parseInt(map.get("userid"))));
+        }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyMap());
+    }
+
+    public ResponseEntity<List<Map<String,Object>>> userApplicationDetails(HttpServletRequest httpServletRequest){
+        boolean isValid=isValidToken(httpServletRequest);
+        if(isValid){
+            Cookie[] cookies=httpServletRequest.getCookies();
+            Map<String,String> map=getCookiesAsHashMap(cookies);
+
+
+            return ResponseEntity.ok(userRepository.userApplicationDetails(Integer.parseInt(map.get("userid"))));
+        }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyList());
     }
 
 

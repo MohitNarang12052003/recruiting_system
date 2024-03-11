@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ViewEmployeesComponent } from './view-employees/view-employees.component';
 import { ViewVacanciesComponent } from './view-vacancies/view-vacancies.component';
 import { SingleApplicantComponent } from './single-applicant/single-applicant.component';
+import { SingleEmployeeComponent } from './single-employee/single-employee.component';
 
 
 
@@ -20,7 +21,8 @@ import { SingleApplicantComponent } from './single-applicant/single-applicant.co
     ViewApplicantsComponent,
     ViewEmployeesComponent,
     ViewVacanciesComponent,
-    SingleApplicantComponent
+    SingleApplicantComponent,
+    SingleEmployeeComponent
   ],
   imports: [
     CommonModule,

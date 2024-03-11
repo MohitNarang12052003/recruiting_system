@@ -1,0 +1,153 @@
+<p>homepage works!</p>
+
+<div class="container" *ngIf="userDetails" >
+    <div class="h1">User Details</div>
+    <br />
+
+    <div class="row">
+        <div class="col-4">
+            <h5>User Name:</h5>
+        </div>
+        <div class="col-4">
+            <h5>{{userDetails.username}}</h5>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-4">
+            <h5>Email</h5>
+        </div>
+        <div class="col-4">
+            <h5>{{userDetails.email}}</h5>
+        </div>    
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-4">
+            <h5>Gender:</h5>
+        </div>
+        <div class="col-4">
+            <h5>{{userDetails.gender}}</h5>
+        </div>    
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-4">
+            <h5>City:</h5>
+        </div>
+        <div class="col-4">
+            <h5>{{userDetails.city}}</h5>
+        </div>    
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-4">
+            <h5>Resume:</h5>
+        </div>
+        <div class="col-4">
+            <h5>{{userDetails.resume}}</h5>
+        </div>    
+    </div>
+    <br>
+
+
+    <div class="row">
+        <div class="col-4">
+            <h5>Current CTC:</h5>
+        </div>
+        <div class="col-4">
+            <h5>{{userDetails.current_ctc}}</h5>
+        </div>    
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-4">
+            <h5>Expected CTC:</h5>
+        </div>
+        <div class="col-4">
+            <h5>{{userDetails.expected_ctc}}</h5>
+        </div>    
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-4">
+            <h5>Work Experience:</h5>
+        </div>
+        <div class="col-4">
+            <h5>{{userDetails.work_experience}}</h5>
+        </div>
+    </div>
+    <br>
+    
+
+
+    <div *ngIf="usersApplicationDetails">
+        <div *ngFor="let appDetails of usersApplicationDetails">
+            <div class="row">
+                <div class="col-4">
+                    <h5>Job Title:</h5>
+                </div>
+                <div class="col-4">
+                    <h5>{{appDetails.job_title}}</h5>
+                </div>    
+            </div>
+            <br>
+            
+        
+            <div class="row">
+                <div class="col-4">
+                    <h5>Applied At:</h5>
+                </div>
+                <div class="col-4">
+                    <h5>{{appDetails.applied_at | date:'longDate'}}</h5>
+                </div>    
+            </div>
+            <br>
+
+            
+          
+        
+                <div class="row">
+                   <h5 class="col-3">Round-1</h5>
+                    <h5 class="col-3" type="number">{{appDetails.round_1}}</h5>
+                </div>
+                <br>
+                <div class="row">
+                    <h5 class="col-3">Round-2</h5>
+                     <h5 class="col-3" type="number">{{appDetails.round_2}}</h5>
+                 </div>
+                 <br>
+                 <div class="row">
+                    <h5 class="col-3">Round-3</h5>
+                     <h5 class="col-3" type="number">{{appDetails.round_3}}</h5>
+                 </div>
+                 <br>
+                 <div class="row">
+                    <h5 class="col-3">Document Verification</h5>
+                     <h5 class="col-3" type="number">{{appDetails.doc_verification}}</h5>
+                 </div>
+                 <br>
+                 <div class="row">
+                    <h5 class="col-3">Offer Letter</h5>
+                     <h5 class="col-3" type="number">{{appDetails.offer_letter}}</h5>
+                 </div>
+                 <br>
+        </div>
+    </div>
+   
+    
+
+        <br>
+        
+    
+
+
+</div>
+
+
+
+<button type="button" [routerLink]="['/']">View Applications</button>
+<br>

@@ -12,4 +12,6 @@ import { HomeComponent } from './home/home.component';
     CommonModule
   ]
 })
-export class EmployeeModule { }
+export class EmployeeModule {
+  
+ }

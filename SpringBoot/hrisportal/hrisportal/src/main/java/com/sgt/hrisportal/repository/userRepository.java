@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -41,6 +42,14 @@ public class userRepository {
 
     public Map<String, Object> validateToken(int userid, String token){
         return jdbcTemplate.queryForMap("EXEC hrisportal.sp_validate_token ?,?",token,userid);
+    }
+
+    public Map<String,Object> getUserDetails(int id){
+        return jdbcTemplate.queryForMap("EXEC [hrisportal].[sp_user_details] ?",id);
+    }
+
+    public List<Map<String,Object>> userApplicationDetails(int id){
+        return jdbcTemplate.queryForList("EXEC [hrisportal].sp_user_applications_detail ?",id);
     }
 
 }

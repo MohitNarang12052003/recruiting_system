@@ -32,7 +32,8 @@
         <td class="col-1" style="word-wrap: break-word;">{{ vac.active_yn }}</td>
         <td class="col-1" style="word-wrap: break-word;">{{ vac.full_name  }}</td>
         <td class="col-1" style="word-wrap: break-word;">
-          <button type="button" class="btn btn-success">View</button>
+          <button type="button" *ngIf="vac.active_yn=='Y'" (click)="toggleVacancy(vac.j_id)" class="btn btn-success">Remove</button>
+          <button type="button" *ngIf="vac.active_yn=='N'" (click)="toggleVacancy(vac.j_id)" class="btn btn-success">Add</button>
         </td>
       </tr>
     </table>
