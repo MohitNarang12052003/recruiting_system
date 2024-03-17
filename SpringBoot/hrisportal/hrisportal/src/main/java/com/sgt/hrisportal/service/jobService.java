@@ -2,17 +2,25 @@ package com.sgt.hrisportal.service;
 
 
 import com.sgt.hrisportal.repository.jobRepository;
+import com.sgt.hrisportal.utils.AppConstants;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
 public class jobService {
+
+    @Autowired
+    JavaMailSender javaMailSender;
 
     @Autowired
     jobRepository jobRepository;
@@ -195,6 +203,133 @@ public class jobService {
 
 
     }
+
+    public ResponseEntity<Map<String,Object>> sendRoundMail(Map<String,Object> body,HttpServletRequest httpServletRequest){
+        boolean isValid=isValidToken(httpServletRequest);
+        if(isValid){
+            String email=(String) body.get("email");
+            String username=(String) body.get("uname");
+            int rnumber=(int) body.get("number");
+            String date=(String) body.get("date");
+            String place=(String) body.get("place");
+            String time=(String) body.get("time");
+
+            MimeMessage mimeMessage= javaMailSender.createMimeMessage();
+            MimeMessageHelper mimeMessageHelper=new MimeMessageHelper(mimeMessage);
+
+            try{
+                mimeMessageHelper.setSubject("Interview Round for JPMC");
+                mimeMessageHelper.setTo(email);
+                mimeMessageHelper.setText(
+                        "Dear "+username+
+                                "<div>You have round "+rnumber+" interview scheduled on "+date+
+                                " at "+place+" . Please be present by "+time
+
+                        ,true);
+
+
+
+            }
+            catch (MessagingException e){
+                System.out.println("error"+e);
+                throw new RuntimeException(e);
+            }
+
+            javaMailSender.send(mimeMessage);
+            return ResponseEntity.ok(Collections.emptyMap());
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyMap());
+    }
+
+
+    public ResponseEntity<Map<String,Object>> sendDocumentMail(Map<String,Object> body,HttpServletRequest httpServletRequest){
+        boolean isValid=isValidToken(httpServletRequest);
+        if(isValid){
+            String email=(String) body.get("email");
+            String username=(String) body.get("username");
+
+
+            String login=AppConstants.LOGIN_URL;
+            String link= AppConstants.DOCUMENT_URL;
+            MimeMessage mimeMessage= javaMailSender.createMimeMessage();
+            MimeMessageHelper mimeMessageHelper=new MimeMessageHelper(mimeMessage);
+
+            try{
+                mimeMessageHelper.setSubject("Upload Documents");
+                mimeMessageHelper.setTo(email);
+                mimeMessageHelper.setText(
+                        "Dear "+username+
+                                "<div> You have to upload Original Documents within seven days.</div>" +
+                                "<div> To upload documents, follow the following steps- </div><div> 1. Login to our website</div>- "+login+
+                                "<div>2. Visit the following link- </div>"+link
+
+                        ,true);
+
+
+
+            }
+            catch (MessagingException e){
+                System.out.println("error"+e);
+                throw new RuntimeException(e);
+            }
+
+            javaMailSender.send(mimeMessage);
+            return ResponseEntity.ok(Collections.emptyMap());
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyMap());
+    }
+
+
+    public ResponseEntity<Map<String,Object>> sendEmployeeMail(Map<String,Object> body,HttpServletRequest httpServletRequest){
+        boolean isValid=isValidToken(httpServletRequest);
+        if(isValid){
+            int user_id=(int) body.get("userid");
+            String job_title=(String) body.get("job_title");
+            String salary=(String) body.get("salary");
+            String department=(String) body.get("department");
+            String new_email=(String) body.get("nemail");
+            String password=(String) body.get("password");
+            String date_of_joining=(String) body.get("date_of_joining");
+            String old_email=(String) body.get("oemail");
+
+
+
+            String login=AppConstants.LOGIN_URL;
+            MimeMessage mimeMessage= javaMailSender.createMimeMessage();
+            MimeMessageHelper mimeMessageHelper=new MimeMessageHelper(mimeMessage);
+
+            try{
+                mimeMessageHelper.setSubject("New Login Credentials");
+                mimeMessageHelper.setTo(old_email);
+                mimeMessageHelper.setText(
+                                "<div> Welcome to the team. Congratulations on becoming a part of our family. Your login credentails are attached below- </div>" +
+                                "<div> Email- </div>"+new_email+
+                                "<div> Password- </div>"+password+"<div>Donot share credentials with anyone.</div>"
+
+                        ,true);
+
+
+
+            }
+            catch (MessagingException e){
+                System.out.println("error"+e);
+                throw new RuntimeException(e);
+            }
+
+
+            javaMailSender.send(mimeMessage);
+
+            int insertedRows = jobRepository.sendEmployeeMail(user_id,job_title,salary,department,new_email,password,date_of_joining);
+
+            if (insertedRows > 0) {
+                return ResponseEntity.ok(Map.of("status", "Successful"));
+            }
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyMap());
+    }
+
+
+
 
 
 

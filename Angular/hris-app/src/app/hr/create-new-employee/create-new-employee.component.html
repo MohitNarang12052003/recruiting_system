@@ -1,0 +1,49 @@
+<p>create-new-employee works!</p>
+
+<form class="form-group" [formGroup]="newEmployeeForm" (submit)="submit()">
+    <div class="form-control">
+        <label for="email">Employee New Email</label>
+        <input type="email" name="email" id="email" formControlName="nemail">
+    </div>
+    <div class="form-control">
+        <label for="password">Employee New password</label>
+        <input type="text" name="password" id="password" formControlName="password">
+    </div>
+    <div class="form-control">
+        <label for="job_title">Employee Job Title</label>
+        <input type="text" name="job_title" id="job_title" formControlName="job_title">
+    </div>
+    <div class="form-control">
+        <label for="salary">Employee salary</label>
+        <input type="text" name="salary" id="salary" formControlName="salary">
+    </div>
+    <div>
+        <label for="">Department Name</label>
+        <select
+          class="form-select"
+          style="width: 25vw; border-color: rgba(0, 0, 0, 0.503)"
+          #type
+          (change)="onDeptSelected(type.value)"
+        >
+          <option value="" selected></option>
+          <option value="Technology And Innovation">Technology And Innovation</option>
+          <option value="Data Science And Analytics">Data Science And Analytics</option>
+          <option value="Risk Management">Risk Management</option>
+          <option value="Compliance And Regulatory Affairs">Compliance And Regulatory Affairs</option>
+          <option value="Financial Operations">Financial Operations</option>
+          <option value="Product Development">Product Development</option>
+          <option value="Cybersecurity">Cybersecurity</option>
+          <option value="Finance And Accounting">Finance And Accounting</option>
+          <option value="Customer Support">Customer Support</option>
+          <option value="Marketing And Sales">Marketing And Sales</option>
+        </select>
+      </div>
+    <div class="form-control">
+        <label for="date_of_joining">Employee Date Of Joining</label>
+        <input type="date" name="date_of_joining" id="date_of_joining" formControlName="date_of_joining">
+    </div>
+
+
+    <button type="submit">Send Mail</button>
+    
+</form>

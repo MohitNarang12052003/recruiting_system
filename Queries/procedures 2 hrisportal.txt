@@ -184,16 +184,15 @@ END
 
 
 
-
-CREATE OR ALTER PROCEDURE hrisportal.sp_validate_token
+CREATE OR ALTER     PROCEDURE [hrisportal].[sp_validate_token]
 @token VARCHAR(MAX),
-@id INT
+@id INT 
 AS
 BEGIN
 	DECLARE @count int=0,@ecount int=0,@hcount int =0
-	select @count=count(*) from hrisportal.users where token=@token and user_id=@id
-	select @ecount=count(*) from hrisportal.employee where token=@token and employee_id=@id
-	select @hcount=count(*) from hrisportal.hr where token=@token and hr_id=@id
+	select @count=count(*) from hrisportal.users where token=@token and user_id=@id and time_to_expire>GETDATE()
+	select @ecount=count(*) from hrisportal.employee where token=@token and employee_id=@id and time_to_expire>GETDATE()
+	select @hcount=count(*) from hrisportal.hr where token=@token and hr_id=@id and time_to_expire>GETDATE()
 	IF @count = 1 and @ecount=0 and @hcount=0
 	BEGIN
 		select -1 as ValidYN
@@ -208,6 +207,9 @@ BEGIN
 	END
 	ELSE
 	BEGIN
+		print @count
+		print @ecount
+		print @hcount
 		SELECT -2 as ValidYN
 	END
 END
@@ -265,3 +267,172 @@ GO
 
 EXEC hrisportal.sp_user_applications_detail 8
 
+
+
+
+ALTER TABLE hrisportal.users
+ADD fp_token VARCHAR(MAX)
+
+ALTER TABLE hrisportal.users
+ADD fp_time_to_expire DATETIME
+
+ALTER TABLE hrisportal.employee
+ADD fp_token VARCHAR(MAX)
+
+ALTER TABLE hrisportal.employee
+ADD fp_time_to_expire DATETIME
+
+ALTER TABLE hrisportal.hr
+ADD fp_token VARCHAR(MAX)
+
+ALTER TABLE hrisportal.hr
+ADD fp_time_to_expire DATETIME
+
+
+
+CREATE OR ALTER   PROCEDURE [hrisportal].[sp_verify_email]  
+@email VARCHAR(MAX)
+AS
+BEGIN 
+	DECLARE @count INT
+	SELECT @count=count(-1) 
+	FROM hrisportal.users
+	WHERE email=@email
+	AND active_yn=1
+
+	SELECT @count=count(0) 
+	FROM hrisportal.employee
+	WHERE email=@email
+	AND active_yn=1
+
+	SELECT @count=count(1) 
+	FROM hrisportal.hr
+	WHERE email=@email
+	AND active_yn=1
+
+
+	SELECT @count AS validYN
+
+END
+
+
+
+
+
+CREATE OR ALTER   PROCEDURE [hrisportal].[sp_generate_fp_token]
+@email VARCHAR(MAX),
+@role int
+AS
+BEGIN 
+	DECLARE @token VARCHAR(MAX)
+	DECLARE @time_to_expire DATETIME
+	SELECT @token =NEWID(),
+	@time_to_expire = DATEADD(mi,15,GETDATE())
+
+	IF @role=-1
+	UPDATE hrisportal.users
+	SET fp_token=@token,
+	fp_time_to_expire=@time_to_expire
+	WHERE email=@email
+
+	ELSE IF @role=0
+	UPDATE hrisportal.employee
+	SET fp_token=@token,
+	fp_time_to_expire=@time_to_expire
+	WHERE email=@email
+
+	ELSE IF @role=1
+	UPDATE hrisportal.hr
+	SET fp_token=@token,
+	fp_time_to_expire=@time_to_expire
+	WHERE email=@email
+
+
+
+	SELECT @token AS fp_token
+END
+
+GO
+
+
+
+
+
+
+
+
+
+
+CREATE OR ALTER PROCEDURE hrisportal.sp_create_employee
+@user_id INT,
+@job_title VARCHAR(100),
+@salary VARCHAR(100),
+@deparment VARCHAR(100),
+@email VARCHAR(100),
+@pwd VARCHAR(100),
+@date_of_joining DATE
+AS
+BEGIN
+	DECLARE @hashed_pwd VARBINARY(MAX)
+	SELECT @hashed_pwd =HASHBYTES('SHA2_256',@pwd)
+
+	INSERT INTO hrisportal.employee(user_id,job_title,salary,department,email,password,date_of_joining)
+	VALUES(@user_id,@job_title,@salary,@deparment,@email,@hashed_pwd,@date_of_joining)
+
+END
+
+
+
+
+
+CREATE OR ALTER PROCEDURE hrisportal.sp_get_qualifications_of_user
+@user_id INT
+AS
+BEGIN
+	SELECT * 
+	FROM hrisportal.qualifications
+	WHERE user_id=@user_id
+END
+
+
+
+
+
+CREATE OR ALTER PROCEDURE hrisportal.sp_get_job_history_of_user
+@user_id INT
+AS
+BEGIN
+	SELECT * 
+	FROM hrisportal.jobHistory
+	WHERE user_id=@user_id
+END
+
+
+
+
+
+CREATE OR ALTER PROCEDURE hrisportal.sp_change_pwd
+@email NVARCHAR(MAX),
+@old_pwd NVARCHAR(100),
+@new_pwd NVARCHAR(100)
+AS
+BEGIN
+	DECLARE @old VARBINARY(MAX),
+			@new VARBINARY(MAX)
+	SELECT @old=HASHBYTES('SHA2_256',@old_pwd)
+	SELECT @new=HASHBYTES('SHA2_256',@new_pwd)
+
+	UPDATE hrisportal.users
+	SET password=@new
+	WHERE email=@email AND password=@old
+
+	UPDATE hrisportal.employee
+	SET password=@new
+	WHERE email=@email AND password=@old
+
+	UPDATE hrisportal.hr
+	SET password=@new
+	WHERE email=@email AND password=@old
+
+
+END

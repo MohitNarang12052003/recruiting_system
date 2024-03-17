@@ -28,9 +28,17 @@
           />
         </div>
 
-        <button type="button" class="btn btn-dark w-25 align-self-center" (click)="submit()">
-          Submit
-        </button>
+        <div class="row">
+          <div class="col-6">
+            <button type="button" class="btn btn-dark w-35 align-self-center" [routerLink]="['/forgot-pwd']" >Forgot Password</button>
+      
+        </div>
+          <div class="col-4">
+            <button type="button" class="btn btn-dark w-35 align-self-center" (click)="submit()">
+              Submit
+            </button>
+          </div>
+        </div>
       </form>
     </div>
   </div>

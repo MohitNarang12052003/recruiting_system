@@ -71,4 +71,22 @@ public class jobResource {
         return jobService.toggleVacancy(id,httpServletRequest);
     }
 
+    @PostMapping("/sendRoundMail")
+    public ResponseEntity<Map<String,Object>> sendRoundMail(@RequestBody Map<String,Object> body,HttpServletRequest httpServletRequest){
+        return jobService.sendRoundMail(body,httpServletRequest);
+    }
+
+    @PostMapping("/sendDocumentMail")
+    public ResponseEntity<Map<String,Object>> sendDocumentMail(@RequestBody Map<String,Object> body,HttpServletRequest httpServletRequest){
+        System.out.println("map");
+        System.out.println(body.size()+" "+body.get("email"));
+        return jobService.sendDocumentMail(body,httpServletRequest);
+    }
+
+    @PostMapping("/sendEmployeeMail")
+    public ResponseEntity<Map<String,Object>> sendEmployeeMail(@RequestBody Map<String,Object> body,HttpServletRequest httpServletRequest){
+        return jobService.sendEmployeeMail(body,httpServletRequest);
+    }
+
+
 }

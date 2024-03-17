@@ -13,6 +13,9 @@ export class SingleApplicantComponent implements OnInit{
   id!:number | null ;
   applicantDetails:any;
   applicantForm!:FormGroup;
+  degreesData!:any;
+  userId!:any;
+  jobHistoryData!:any;
 
  generateForm(){
   this.applicantForm=new FormGroup({
@@ -56,6 +59,8 @@ getSingleApplicant(){
   this.hrService.getSingleApplicant(this.id).subscribe((val)=>{
     console.log(val);
     this.applicantDetails=val;
+    this.getAllQualificationsOfApplicant();
+    this.getJobHistoryOfApplicant();
   })
 }
 
@@ -66,6 +71,58 @@ submit(){
 
   })
 }
+
+
+sendDocumentMail():void{
+
+  let myMap: { [key: string]: any }={};
+  myMap["email"]=this.applicantDetails.email;
+  myMap["username"]=this.applicantDetails.username;
+
+  this.hrService.sendDocumentMail(myMap).subscribe({
+    next:(data)=>{
+      console.log(data);
+    },
+    error:(e)=>{
+      console.log("error",e);
+    }
+  })
+}
+
+
+getAllQualificationsOfApplicant(){
+  this.userId=this.applicantDetails.user_id;
+
+  this.hrService.getQualificationsOfUser(this.userId).subscribe({
+    next:(data)=>{
+      this.degreesData=data;
+      console.log(data);
+    },
+    error:(e)=>{
+      console.log("error ",e);
+    }
+  })
+}
+
+
+getJobHistoryOfApplicant(){
+  this.userId=this.applicantDetails.user_id;
+
+  this.hrService.getJobHistoryOfUser(this.userId).subscribe({
+    next:(data)=>{
+      this.jobHistoryData=data;
+      console.log(data);
+    },
+    error:(e)=>{
+      console.log("error ",e);
+    }
+  })
+}
+
+
+
+
+
 
 
 

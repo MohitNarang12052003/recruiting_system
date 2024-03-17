@@ -52,5 +52,26 @@ public class userRepository {
         return jdbcTemplate.queryForList("EXEC [hrisportal].sp_user_applications_detail ?",id);
     }
 
+    public Map<String ,Object> verifyMail(String email){
+        return jdbcTemplate.queryForMap("EXEC [hrisportal].sp_verify_email ?",email);
+    }
+
+    public Map<String ,Object> generateFPToken(String email,int role){
+        return jdbcTemplate.queryForMap("EXEC [hrisportal].sp_generate_fp_token ?,?",email,role);
+    }
+
+    public List<Map<String,Object>> getQualificationsOfUser(int id){
+        return jdbcTemplate.queryForList("EXEC hrisportal.sp_get_qualifications_of_user ?",id);
+    }
+
+    public List<Map<String,Object>> getJobHistoryOfUser(int id){
+        return jdbcTemplate.queryForList("EXEC hrisportal.sp_get_job_history_of_user ?",id);
+    }
+
+    public int changePwd(String email,String old_pwd,String new_pwd){
+        return jdbcTemplate.update("EXEC hrisportal.sp_change_pwd ?,?,?",email,old_pwd,new_pwd);
+    }
+
+
 }
 

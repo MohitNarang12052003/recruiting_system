@@ -121,7 +121,138 @@
     </div>
     <br>
     
+    <div class="qualifications" *ngIf="degreesData">
+        <h1>Qualifications-</h1>
+        <br>
+
+        <div class="loop" *ngFor="let degree of degreesData;let i=index">
+            <div><h5>{{i+1}} :-</h5></div>
+            <div class="row">
+                <div class="col-4">
+                    <h5>Degree Name:</h5>
+                </div>
+                <div class="col-4">
+                    <h5>{{degree.degree_name}}</h5>
+                </div>    
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-4">
+                    <h5>Institute institute name:</h5>
+                </div>
+                <div class="col-4">
+                    <h5>{{degree.institute_name}}</h5>
+                </div>    
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-4">
+                    <h5>Degree admission year:</h5>
+                </div>
+                <div class="col-4">
+                    <h5>{{degree.admission_year}}</h5>
+                </div>    
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-4">
+                    <h5>Degree completion year:</h5>
+                </div>
+                <div class="col-4">
+                    <h5>{{degree.completion_year}}</h5>
+                </div>    
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-4">
+                    <h5>Degree GPA:</h5>
+                </div>
+                <div class="col-4">
+                    <h5>{{degree.GPA}}</h5>
+                </div>    
+            </div>
+
+            
+        </div>
+        <br>
+        
+    </div>
     
+
+    <div class="jobHistory" *ngIf="jobHistoryData">
+        <h1>Job History-</h1>
+        <br>
+
+        <div class="loop" *ngFor="let job of jobHistoryData;let i=index">
+            <div><h5>{{i+1}} :-</h5></div>
+            <div class="row">
+                <div class="col-4">
+                    <h5>Job company name:</h5>
+                </div>
+                <div class="col-4">
+                    <h5>{{job.company_name}}</h5>
+                </div>    
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-4">
+                    <h5>Job Title:</h5>
+                </div>
+                <div class="col-4">
+                    <h5>{{job.job_title}}</h5>
+                </div>    
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-4">
+                    <h5>Job Start year:</h5>
+                </div>
+                <div class="col-4">
+                    <h5>{{job.from_year}}</h5>
+                </div>    
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-4">
+                    <h5>Job completion year:</h5>
+                </div>
+                <div class="col-4">
+                    <h5>{{job.to_year}}</h5>
+                </div>    
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-4">
+                    <h5>Job description:</h5>
+                </div>
+                <div class="col-4">
+                    <h5>{{job.description}}</h5>
+                </div>    
+            </div>
+
+            
+        </div>
+        <br>
+        
+    </div>
+
+
 
 
 </div>

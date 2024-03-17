@@ -61,8 +61,11 @@ public class jobRepository {
     }
 
     public int toggleVacancy(int id){
-        System.out.println(5);
         return jdbcTemplate.update("EXEC hrisportal.sp_toggle_vacancy ?",id);
+    }
+
+    public int sendEmployeeMail(int user_id,String job_title,String salary,String department,String new_email,String password,String date_of_joining){
+        return jdbcTemplate.update("EXEC hrisportal.sp_create_employee ?,?,?,?,?,?,?",user_id,job_title,salary,department,new_email,password,date_of_joining);
     }
 
 }
