@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { UserService } from '../user.service';
+
+import { UsersService } from '../users.service';
+
 
 @Component({
   selector: 'app-forgot-pwd',
@@ -12,7 +14,7 @@ ForgotPwdForm!:FormGroup;
 email!:string;
 sent!:boolean;
 
-constructor(private userService:UserService){}
+constructor(private userService:UsersService){}
 ngOnInit(){
   this.forgotPwdForm()
 }
@@ -27,11 +29,11 @@ forgotPwdForm(){
 submit(){
   this.email=this.ForgotPwdForm.get('email')?.value;
   this.userService.sendMail(this.email).subscribe({
-    next:(data)=>{
+    next:(data: any)=>{
       console.log(data);
       this.sent=true;
     },
-    error:(e)=>{
+    error:(e:any)=>{
       console.log("error",e);
     }
   })

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './emp_home/home.component';
 import { AttendanceComponent } from './attendance/attendance.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { HolidaysComponent } from './holidays/holidays.component';
@@ -8,8 +8,7 @@ import { AnnouncementsComponent } from './announcements/announcements.component'
 import { LeavesComponent } from './leaves/leaves.component';
 import { SkillsComponent } from './skills/skills.component';
 import { GoalsComponent } from './goals/goals.component';
-
-
+import { ChartComponent } from './chart/chart.component';
 
 @NgModule({
   declarations: [
@@ -20,12 +19,9 @@ import { GoalsComponent } from './goals/goals.component';
     AnnouncementsComponent,
     LeavesComponent,
     SkillsComponent,
-    GoalsComponent
+    GoalsComponent,
+    ChartComponent,
   ],
-  imports: [
-    CommonModule
-  ]
+  imports: [CommonModule],
 })
-export class EmployeeModule {
-  
- }
+export class EmployeeModule {}
