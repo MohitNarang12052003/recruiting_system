@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { UserService } from '../user.service';
+import { UsersService } from '../users.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 
@@ -15,7 +15,7 @@ export class PhotoComponent {
   msg = '';
   submit = 0;
   constructor(
-    private userService: UserService,
+    private userService: UsersService,
     private cookieService: CookieService,
     private router: Router
   ) {}
@@ -58,7 +58,7 @@ export class PhotoComponent {
     this.createForm
       .get('uid')
       ?.setValue(parseInt(this.cookieService.get('user_id')));
-    this.userService.uploadFile(this.imageUrl, "photo").subscribe((data) => {
+    this.userService.uploadFile(this.imageUrl, 'photo').subscribe((data) => {
       console.log(data + ' inside photo');
       this.userService.insertPhoto(this.createForm.value).subscribe((data) => {
         console.log('inside login');

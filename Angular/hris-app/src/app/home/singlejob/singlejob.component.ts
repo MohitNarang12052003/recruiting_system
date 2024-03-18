@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { UserService } from '../user.service';
+import { UsersService } from '../users.service';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -24,7 +24,7 @@ export class SinglejobComponent implements OnInit {
   constructor(
     private cookieService: CookieService,
     private router: ActivatedRoute,
-    private userService: UserService,
+    private userService: UsersService,
     private erouter: Router
   ) {}
   ngOnInit(): void {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserService } from '../user.service';
+import { UsersService } from '../users.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
@@ -14,7 +14,7 @@ export class RegisterComponent {
   imageUrl: any;
 
   constructor(
-    private userService: UserService,
+    private userService: UsersService,
     private router: Router,
     private cookieService: CookieService
   ) {}
@@ -59,13 +59,13 @@ export class RegisterComponent {
         //   this.createForm.get('email'),
         //   this.createForm.get('password')
         // );
-        const em=this.createForm.get('email')?.value
-        const pw=this.createForm.get("password")?.value
-        if(em!==null && pw!==null){
-          this.cookieService.set("email",em.toString());
-          this.cookieService.set("pwd",pw.toString())
+        const em = this.createForm.get('email')?.value;
+        const pw = this.createForm.get('password')?.value;
+        if (em !== null && pw !== null) {
+          this.cookieService.set('email', em.toString());
+          this.cookieService.set('pwd', pw.toString());
         }
-       
+
         this.router.navigate(['Qualification']);
       });
     });

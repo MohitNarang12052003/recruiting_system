@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { UserService } from '../user.service';
+import { UsersService } from '../users.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -13,7 +13,7 @@ export class GeneralComponent {
   constructor(
     private router: Router,
     private cookieService: CookieService,
-    private userService: UserService
+    private userService: UsersService
   ) {}
   createForm = new FormGroup({
     uid: new FormControl(),
@@ -25,12 +25,14 @@ export class GeneralComponent {
     pincode: new FormControl(),
     marital_status: new FormControl(),
   });
-  onChange(e:any) {
-    console.log(e.target.value)
-    this.createForm.get("gender")?.setValue(e.target.value) ;
- }
+  onChange(e: any) {
+    console.log(e.target.value);
+    this.createForm.get('gender')?.setValue(e.target.value);
+  }
   submit() {
-    this.createForm.get("uid")?.setValue(parseInt(this.cookieService.get("user_id")))
+    this.createForm
+      .get('uid')
+      ?.setValue(parseInt(this.cookieService.get('user_id')));
     this.userService
       .insertadditionalInfo(this.createForm.value)
       .subscribe((data) => {

@@ -46,7 +46,7 @@ export class AddJobComponent {
       .get('hrid')
       ?.setValue(parseInt(this.cookieService.get('hr_id')));
 
-      console.log(this.createForm.value)
+    console.log(this.createForm.value)
     this.hrService.postJob(this.createForm.value).subscribe((data) => {
       alert(
         'Successfully Posted ' + this.createForm.get("jobTitle")?.value + ' Vacancy'

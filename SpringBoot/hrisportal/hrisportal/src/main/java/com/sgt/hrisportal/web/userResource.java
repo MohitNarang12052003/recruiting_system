@@ -12,7 +12,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins="http://localhost:4200",allowCredentials = "true")
+@CrossOrigin(origins={"http://localhost:4200"},allowCredentials = "true")
 public class userResource {
     @Autowired
     userService userService;

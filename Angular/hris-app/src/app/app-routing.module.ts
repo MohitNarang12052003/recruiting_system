@@ -75,10 +75,7 @@ const routes: Routes = [
     component:ViewApplicantsComponent,
     canActivate:[HRGuardService]
   },
-  {
-    path:'',
-    component:HeroComponent
-  },
+  
   {
     path:'home',
     component:HomepageComponent,
@@ -107,6 +104,10 @@ const routes: Routes = [
   {
     path:'unauthorized',
     component:UnauthorizedComponent
+  },
+  {
+    path:'',
+    component:HeroComponent
   }
 ];
 

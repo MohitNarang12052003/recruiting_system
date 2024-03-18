@@ -1,25 +1,26 @@
 .navbar {
-    background-color: #398989;
-  }
-  
+  background-color: #398989;
+}
+
 .navbar-nav .nav-link:hover {
-    color: #0b4a4a; 
-     
-  }
-  
-  .navbar-nav .btn:hover {
-    color: #fff; 
-    background-color: #0b4a4a; 
-   
-  }
-  .navbar-nav .nav-link {
-    font-size: 20px;
-  }
-  
-  
-  .navbar-brand {
-    font-family: 'Arial', sans-serif;
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-  }
+  /* color: #0b4a4a; */
+}
+
+.navbar-nav .btn:hover {
+  color: #fff;
+  /* background-color: #0b4a4a; */
+}
+.navbar-nav .nav-link {
+  font-size: 20px;
+}
+
+.navbar-brand {
+  font-family: "Arial", sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+a:hover {
+  text-decoration: underline;
+}

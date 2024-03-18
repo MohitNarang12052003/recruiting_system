@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { UserService } from '../user.service';
+import {  UsersService } from '../users.service';
 import { CookieOptions, CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { APP_CONSTANTS } from 'src/app/shared/constants/app.constants';
@@ -12,7 +12,7 @@ import { APP_CONSTANTS } from 'src/app/shared/constants/app.constants';
 })
 export class LoginComponent implements OnInit {
   constructor(
-    private userService: UserService,
+    private userService: UsersService,
     private router: Router,
     private cookieService: CookieService
   ) {}
@@ -27,11 +27,11 @@ export class LoginComponent implements OnInit {
 
   submit() {
     this.userService.loginUser(this.createForm.value).subscribe((data) => {
-      console.log("here");
+      console.log('here');
       this.cookieService.set('email', data['email']);
       this.cookieService.set('token', data['token']);
       this.cookieService.set('time_to_expire', data['time_to_expire']);
-      this.cookieService.set('role',data['role']);
+      this.cookieService.set('role', data['role']);
       // this.cookieService.set('role', data['role']);
       // this.cookieService.set('username', data['username']);
       // console.log("here"+this.cookieService.getAll());
