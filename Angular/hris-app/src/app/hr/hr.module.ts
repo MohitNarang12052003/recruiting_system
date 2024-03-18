@@ -11,6 +11,8 @@ import { ViewEmployeesComponent } from './view-employees/view-employees.componen
 import { ViewVacanciesComponent } from './view-vacancies/view-vacancies.component';
 import { SingleApplicantComponent } from './single-applicant/single-applicant.component';
 import { SingleEmployeeComponent } from './single-employee/single-employee.component';
+import { NextRoundEmailComponent } from './next-round-email/next-round-email.component';
+import { CreateNewEmployeeComponent } from './create-new-employee/create-new-employee.component';
 
 
 
@@ -22,7 +24,9 @@ import { SingleEmployeeComponent } from './single-employee/single-employee.compo
     ViewEmployeesComponent,
     ViewVacanciesComponent,
     SingleApplicantComponent,
-    SingleEmployeeComponent
+    SingleEmployeeComponent,
+    NextRoundEmailComponent,
+    CreateNewEmployeeComponent
   ],
   imports: [
     CommonModule,

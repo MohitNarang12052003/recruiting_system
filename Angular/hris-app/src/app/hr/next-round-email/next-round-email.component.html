@@ -1,0 +1,21 @@
+<p>next-round-email works!</p>
+<form [formGroup]="nextRoundForm" (submit)="submit()">
+    <div class="round-number">
+        <label for="round-number">Round Number</label>
+        <input type="number" formControlName=number>
+    </div>
+    <div class="round-date">
+        <label for="round-date">Round Date</label >
+        <input type="date" formControlName=date>
+    </div>
+    <div class="round-place">
+        <label for="round-place">Round Place</label>
+        <input type="text" formControlName=place>
+    </div>
+    <div class="round-time">
+        <label for="round-time">Round time</label >
+        <input type="time" formControlName=time>
+    </div>
+
+    <button type="submit">Send Mail</button>
+</form>

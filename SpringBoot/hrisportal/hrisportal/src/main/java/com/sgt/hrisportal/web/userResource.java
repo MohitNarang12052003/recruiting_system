@@ -72,5 +72,29 @@ public class userResource {
         return userService.userApplicationDetails(httpServletRequest);
     }
 
+    @PostMapping("/sendMail")
+    public ResponseEntity<Map<String,Object>> validateAndSendMail(@RequestBody String email){
+        return userService.validateAndSendMail(email);
+    }
+
+    @GetMapping("/getQualificationsOfUser/{id}")
+    public ResponseEntity<List<Map<String ,Object>>> getQualificationsOfUser(@PathVariable int id,HttpServletRequest httpServletRequest){
+        return userService.getQualificationsOfUser(id,httpServletRequest);
+    }
+
+    @GetMapping("/getJobHistoryOfUser/{id}")
+    public ResponseEntity<List<Map<String ,Object>>> getJobHistoryOfUser(@PathVariable int id,HttpServletRequest httpServletRequest){
+        return userService.getJobHistoryOfUser(id,httpServletRequest);
+    }
+
+
+    @PostMapping("/changePwd")
+    public ResponseEntity<Map<String,Object>> changePwd(@RequestBody Map<String,Object> body,HttpServletRequest httpServletRequest){
+        return userService.changePwd(body,httpServletRequest);
+    }
+
+
+
+
 }
 

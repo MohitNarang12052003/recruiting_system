@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   createForm = new FormGroup({
     email: new FormControl(),
     pwd: new FormControl(),
+    forgot_pwd:new FormControl(),
   });
 
   submit() {

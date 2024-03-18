@@ -22,6 +22,11 @@ import { UnauthorizedComponent } from './shared/components/unauthorized/unauthor
 import { SingleEmployeeComponent } from './hr/single-employee/single-employee.component';
 import { HomepageComponent } from './user/homepage/homepage.component';
 import { UserGuardService } from './user/user-guard.service';
+import { ForgotPwdComponent } from './home/forgot-pwd/forgot-pwd.component';
+import { NextRoundEmailComponent } from './hr/next-round-email/next-round-email.component';
+import { OriginalDocumentsComponent } from './home/original-documents/original-documents.component';
+import { CreateNewEmployeeComponent } from './hr/create-new-employee/create-new-employee.component';
+import { ChangePwdComponent } from './shared/components/change-pwd/change-pwd.component';
 
 
 
@@ -82,6 +87,10 @@ const routes: Routes = [
     canActivate:[UserGuardService]
   },
   {
+    path:'forgot-pwd',
+    component:ForgotPwdComponent
+  },
+  {
     path:'ViewEmployees',
     component:ViewEmployeesComponent,
     canActivate:[HRGuardService]
@@ -104,6 +113,24 @@ const routes: Routes = [
   {
     path:'unauthorized',
     component:UnauthorizedComponent
+  },
+  {
+    path:'next-round-email/:id',
+    component:NextRoundEmailComponent,
+    canActivate:[HRGuardService]
+  },
+  {
+    path:'original-documents',
+    component:OriginalDocumentsComponent,
+  },
+  {
+    path:'create-new-employee/:id',
+    component:CreateNewEmployeeComponent,
+    canActivate:[HRGuardService]
+  },
+  {
+    path:'change-pwd',
+    component:ChangePwdComponent
   },
   {
     path:'',

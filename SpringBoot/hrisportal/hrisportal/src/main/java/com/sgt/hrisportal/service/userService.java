@@ -1,11 +1,16 @@
 package com.sgt.hrisportal.service;
 
 import com.sgt.hrisportal.repository.userRepository;
+import com.sgt.hrisportal.utils.AppConstants;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +24,9 @@ import java.util.*;
 
 @Service
 public class userService {
+    @Autowired
+    JavaMailSender javaMailSender;
+
     @Autowired
     userRepository userRepository;
 
@@ -63,20 +71,6 @@ public class userService {
         return cookieMap;
     }
 
-    public List<Map<String,Object>> unsuccessfulList(){
-        Map<String,Object> map=new HashMap<>();
-        List<Map<String,Object>> list=new ArrayList<>();
-        map.put("status","unsuccessful");
-        list.add(map);
-
-        return list;
-    }
-    public Map<String,Object> unsuccessfulMap(){
-        Map<String,Object> map=new HashMap<>();
-        map.put("status","unsuccessful");
-
-        return map;
-    }
 
 
     public ResponseEntity<Map<String, Object>> insertUser(Map<String, Object> body) {
@@ -251,7 +245,102 @@ public class userService {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyList());
     }
 
+    public ResponseEntity<Map<String,Object>> validateAndSendMail(String email){
+            int isValidEmail=verifyEmail(email);
 
+            if(isValidEmail!=-2){
+                String token=generateFPToken(email,isValidEmail);
+
+                String link=generateLink(token);
+
+                sendMail(link,email);
+
+                return ResponseEntity.ok(Collections.emptyMap());
+            }
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(Collections.emptyMap());
+        }
+
+
+
+    public void sendMail(String link,String email){
+        MimeMessage mimeMessage= javaMailSender.createMimeMessage();
+        MimeMessageHelper mimeMessageHelper=new MimeMessageHelper(mimeMessage);
+
+        try{
+            mimeMessageHelper.setSubject("Reset Password");
+            mimeMessageHelper.setTo(email);
+            mimeMessageHelper.setText(
+                    "<h3>Reset Password Link </h3>"+link
+                    ,true);
+
+        }
+        catch (MessagingException e){
+            throw new RuntimeException(e);
+        }
+
+        javaMailSender.send(mimeMessage);
+    }
+
+
+
+    public int verifyEmail(String email){
+        Map<String,Object> result=userRepository.verifyMail(email);
+        return (int) result.get("validYN");
+    }
+
+    public String generateFPToken(String email,int role){
+        Map<String,Object> result=userRepository.generateFPToken(email,role);
+        String fp_roken=(String) result.get("fp_token");
+
+        return fp_roken;
+    }
+
+    public String generateLink(String token){
+        return AppConstants.RESET_URL+token;
+    }
+
+    public ResponseEntity<List<Map<String ,Object>>> getQualificationsOfUser(int id,HttpServletRequest httpServletRequest){
+        boolean isValid=isValidToken(httpServletRequest);
+        if(isValid){
+            return ResponseEntity.ok(userRepository.getQualificationsOfUser(id));
+        }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyList());
+
+    }
+    public ResponseEntity<List<Map<String ,Object>>> getJobHistoryOfUser(int id,HttpServletRequest httpServletRequest){
+        boolean isValid=isValidToken(httpServletRequest);
+        if(isValid){
+            return ResponseEntity.ok(userRepository.getJobHistoryOfUser(id));
+        }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyList());
+
+    }
+
+
+    public ResponseEntity<Map<String,Object>> changePwd(Map<String,Object> body,HttpServletRequest httpServletRequest){
+        boolean isValid=isValidToken(httpServletRequest);
+        if(isValid){
+            Map<String,String> cookieMap=getCookiesAsHashMap(httpServletRequest.getCookies());
+            String email=cookieMap.get("email");
+            String old_pwd=(String) body.get("old_pwd");
+            String new_pwd=(String) body.get("new_pwd");
+
+            int insertedRows = userRepository.changePwd(email,old_pwd,new_pwd);
+
+            if (insertedRows > 0) {
+                return ResponseEntity.ok(Map.of("status", "Successful"));
+
+            }
+
+
+
+
+        }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyMap());
+    }
 
 
 }

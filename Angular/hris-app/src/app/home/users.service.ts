@@ -61,4 +61,8 @@ export class UsersService {
   fetchJobs(): Observable<Job[]> {
     return this.http.get<Job[]>('http://localhost:8081/api/jobs');
   }
+
+  sendMail(email:string):Observable<any>{
+    return this.http.post(`http://localhost:8080/api/sendMail`,email);
+  }
 }

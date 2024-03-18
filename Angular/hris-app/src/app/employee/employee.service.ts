@@ -12,4 +12,15 @@ export class EmployeeService {
   getDetails(id:any):Observable<any>{
     return this.http.get(`http://localhost:8080/api/viewSingleEmployee/${id}`,{withCredentials:true})
   }
+
+  getQualificationsOfUser(id:any):Observable<any>{
+    return this.http.get<any>(`http://localhost:8080/api/getQualificationsOfUser/${id}`,{withCredentials:true});
+
+  }
+
+
+  getJobHistoryOfUser(id:any):Observable<any>{
+    return this.http.get<any>(`http://localhost:8080/api/getJobHistoryOfUser/${id}`,{withCredentials:true});
+
+  }
 }

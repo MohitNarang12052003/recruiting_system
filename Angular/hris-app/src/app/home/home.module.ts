@@ -12,6 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { PhotoComponent } from './photo/photo.component';
 import { JobComponent } from './job/job.component';
 import { SinglejobComponent } from './singlejob/singlejob.component';
+import { ForgotPwdComponent } from './forgot-pwd/forgot-pwd.component';
+import { OriginalDocumentsComponent } from './original-documents/original-documents.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { SinglejobComponent } from './singlejob/singlejob.component';
     PhotoComponent,
     JobComponent,
     SinglejobComponent,
+    ForgotPwdComponent,
+    OriginalDocumentsComponent,
   ],
   imports: [
     CommonModule,

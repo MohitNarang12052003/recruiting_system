@@ -10,6 +10,10 @@ import { EmployeeService } from '../employee.service';
 export class HomeComponent implements OnInit{
   employeeId!:string;
   employeeData!:any;
+  degreesData!:any;
+  userId!:any;
+  jobHistoryData!:any;
+  
 
   constructor(private cookieService:CookieService,private employeeService:EmployeeService){}
   ngOnInit(){
@@ -21,11 +25,43 @@ export class HomeComponent implements OnInit{
     this.employeeService.getDetails(this.employeeId).subscribe({
       next:(data)=>{
         this.employeeData=data
+        this.getAllQualificationsOfEmployee();
+        this.getJobHistoryOfEmployee();
       },
       error:(error)=>{
         console.log("error ",error)
       }
     })
   }
+
+  getAllQualificationsOfEmployee(){
+    this.userId=this.employeeData.user_id;
+
+    this.employeeService.getQualificationsOfUser(this.userId).subscribe({
+      next:(data)=>{
+        this.degreesData=data;
+        console.log(data);
+      },
+      error:(e)=>{
+        console.log("error ",e);
+      }
+    })
+  }
+
+
+  getJobHistoryOfEmployee(){
+    this.userId=this.employeeData.user_id;
+
+    this.employeeService.getJobHistoryOfUser(this.userId).subscribe({
+      next:(data)=>{
+        this.jobHistoryData=data;
+        console.log(data);
+      },
+      error:(e)=>{
+        console.log("error ",e);
+      }
+    })
+  }
+  
 
 }
