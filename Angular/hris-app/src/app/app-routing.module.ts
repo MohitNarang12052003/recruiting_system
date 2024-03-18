@@ -27,6 +27,7 @@ import { NextRoundEmailComponent } from './hr/next-round-email/next-round-email.
 import { OriginalDocumentsComponent } from './home/original-documents/original-documents.component';
 import { CreateNewEmployeeComponent } from './hr/create-new-employee/create-new-employee.component';
 import { ChangePwdComponent } from './shared/components/change-pwd/change-pwd.component';
+import { AddAnnouncementComponent } from './hr/add-announcement/add-announcement.component';
 
 
 
@@ -131,6 +132,10 @@ const routes: Routes = [
   {
     path:'change-pwd',
     component:ChangePwdComponent
+  },
+  {
+    path:'AddAnnouncement',
+    component:AddAnnouncementComponent
   },
   {
     path:'',

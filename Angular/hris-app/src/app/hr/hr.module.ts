@@ -13,6 +13,7 @@ import { SingleApplicantComponent } from './single-applicant/single-applicant.co
 import { SingleEmployeeComponent } from './single-employee/single-employee.component';
 import { NextRoundEmailComponent } from './next-round-email/next-round-email.component';
 import { CreateNewEmployeeComponent } from './create-new-employee/create-new-employee.component';
+import { AddAnnouncementComponent } from './add-announcement/add-announcement.component';
 
 
 
@@ -26,7 +27,8 @@ import { CreateNewEmployeeComponent } from './create-new-employee/create-new-emp
     SingleApplicantComponent,
     SingleEmployeeComponent,
     NextRoundEmailComponent,
-    CreateNewEmployeeComponent
+    CreateNewEmployeeComponent,
+    AddAnnouncementComponent
   ],
   imports: [
     CommonModule,
