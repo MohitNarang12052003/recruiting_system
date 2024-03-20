@@ -30,6 +30,10 @@ public class AttendanceService {
 //        }
 //        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("status","Cannot Mark Attendance"));
     }
+    public List<Map<String, Object>> getNationalHolidays(Map<String, Object> body) {
+        int month = Integer.parseInt((String)body.get("month"));
+        return attendanceRepository.getNationalHolidays(month);
+    }
 
 
 

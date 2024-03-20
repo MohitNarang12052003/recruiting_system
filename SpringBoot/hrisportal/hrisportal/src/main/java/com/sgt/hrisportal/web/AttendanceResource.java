@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -21,5 +22,11 @@ public class AttendanceResource {
     public Map<String, Object> markAttendance() {
         return attendanceService.markAttendance();
     }
+
+    @PostMapping("/getHolidays")
+    public List<Map<String, Object>> getNationalHolidays(@RequestBody Map<String, Object> body) {
+        return attendanceService.getNationalHolidays(body);
     }
+}
+
 

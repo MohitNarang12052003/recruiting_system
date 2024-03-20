@@ -18,4 +18,8 @@ public class AttendanceRepository {
         return jdbcTemplate.queryForMap("EXEC sp_insert_datetime");
     }
 
+    public List<Map<String, Object>> getNationalHolidays(int month) {
+        return jdbcTemplate.queryForList("EXEC sp_fetch_nationalHolidays ?",  month);
+    }
+
 }
