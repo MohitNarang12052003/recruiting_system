@@ -19,6 +19,7 @@ import { SingleApplicantComponent } from './hr/single-applicant/single-applicant
 import { AboutUsComponent } from './home/about-us/about-us.component';
 import { UserLoginPageComponent } from './home/user-login-page/user-login-page.component';
 import { UploadSuccessComponent } from './home/upload-success/upload-success.component';
+import { AttendanceComponent } from './employee/attendance/attendance.component';
 
 
 
@@ -94,6 +95,10 @@ const routes: Routes = [
   {
     path:'upload-success',
     component:UploadSuccessComponent
+  },
+  {
+    path:'attendance',
+    component:AttendanceComponent
   }
 ];
 

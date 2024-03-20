@@ -1,0 +1,16 @@
+
+<body>
+  <h1>Timesheet</h1>
+
+<div class="timesheet">
+    <div class="timesheet__label">Employee Name:</div>
+    <p class="timesheet__value">Muhammad Irsyad</p>
+    <div class="timesheet__label">Employee ID:</div>
+    <p class="timesheet__value">2011688469</p>
+  <div *ngIf="data" class="timesheet__value">{{data.clockin}}</div>
+  <div *ngIf="data" class="timesheet__value">{{data.clockout}}</div>
+  <div class="timesheet__value"></div> </div>
+  <button (click)="submit()">ClockIn</button>
+  <div></div>
+  <button (click)="submit()">ClockOut</button>
+</body>

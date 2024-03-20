@@ -1,0 +1,18 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+.timesheet {
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.timesheet__label {
+  font-weight: bold;
+}
+
+.timesheet__value {
+  flex-grow: 1; /* Allow values to expand and fill space */
+}
