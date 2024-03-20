@@ -20,6 +20,7 @@ import { AboutUsComponent } from './home/about-us/about-us.component';
 import { UserLoginPageComponent } from './home/user-login-page/user-login-page.component';
 import { UploadSuccessComponent } from './home/upload-success/upload-success.component';
 import { AttendanceComponent } from './employee/attendance/attendance.component';
+import { NationalHolidaysComponent } from './home/national-holidays/national-holidays.component';
 
 
 
@@ -99,6 +100,10 @@ const routes: Routes = [
   {
     path:'attendance',
     component:AttendanceComponent
+  },
+  {
+    path:'nationalHolidays',
+    component:NationalHolidaysComponent
   }
 ];
 

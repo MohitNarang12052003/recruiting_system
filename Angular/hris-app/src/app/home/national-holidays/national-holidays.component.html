@@ -1,0 +1,16 @@
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Occasion</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let holidays of nationalHolidays">
+      <td>{{holidays.date}}</td>
+      <td>{{holidays.occasion}}</td>
+      <td>{{holidays.description}}</td>
+    </tr>
+  </tbody>
+</table>

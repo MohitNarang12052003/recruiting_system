@@ -15,6 +15,7 @@ import { SinglejobComponent } from './singlejob/singlejob.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { UserLoginPageComponent } from './user-login-page/user-login-page.component';
 import { UploadSuccessComponent } from './upload-success/upload-success.component';
+import { NationalHolidaysComponent } from './national-holidays/national-holidays.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { UploadSuccessComponent } from './upload-success/upload-success.componen
     AboutUsComponent,
     UserLoginPageComponent,
     UploadSuccessComponent,
+    NationalHolidaysComponent,
   ],
   imports: [
     CommonModule,
@@ -41,6 +43,7 @@ import { UploadSuccessComponent } from './upload-success/upload-success.componen
 
   exports: [
     PhotoComponent,
-    AboutUsComponent],
+    AboutUsComponent,
+    NationalHolidaysComponent],
 })
 export class HomeModule {}
