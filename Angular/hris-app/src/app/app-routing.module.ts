@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { RouterModule,Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { HeroComponent } from './home/hero/hero.component';
 import { RegisterComponent } from './home/register/register.component';
 import { LoginComponent } from './home/login/login.component';
@@ -8,7 +8,7 @@ import { QualificationComponent } from './home/qualification/qualification.compo
 import { ExperienceComponent } from './home/experience/experience.component';
 import { GeneralComponent } from './home/general/general.component';
 import { PhotoComponent } from './home/photo/photo.component';
-import { HomeComponent } from './employee/home/home.component';
+import { HomeComponent } from './employee/emp_home/home.component';
 import { HrhomeComponent } from './hr/hrhome/hrhome.component';
 import { SinglejobComponent } from './home/singlejob/singlejob.component';
 import { AddJobComponent } from './hr/add-job/add-job.component';
@@ -27,120 +27,121 @@ import { NextRoundEmailComponent } from './hr/next-round-email/next-round-email.
 import { OriginalDocumentsComponent } from './home/original-documents/original-documents.component';
 import { CreateNewEmployeeComponent } from './hr/create-new-employee/create-new-employee.component';
 import { ChangePwdComponent } from './shared/components/change-pwd/change-pwd.component';
-
-
+import { AddAnnouncementComponent } from './hr/add-announcement/add-announcement.component';
 
 const routes: Routes = [
   {
-    path:'login',
-    component:LoginComponent
+    path: 'login',
+    component: LoginComponent,
   },
   {
-    path:'register',
-    component:RegisterComponent
+    path: 'register',
+    component: RegisterComponent,
   },
   {
-    path:'Qualification',
-    component:QualificationComponent
+    path: 'Qualification',
+    component: QualificationComponent,
   },
   {
-    path:'Experience',
-    component:ExperienceComponent
+    path: 'Experience',
+    component: ExperienceComponent,
   },
   {
-    path:'General',
-    component:GeneralComponent
+    path: 'General',
+    component: GeneralComponent,
   },
   {
-    path:'Photo',  
-    component:PhotoComponent
+    path: 'Photo',
+    component: PhotoComponent,
   },
   {
-    path:'Employee',
-    component:HomeComponent,
-    canActivate:[EmployeeGuardService]
-    
+    path: 'Employee',
+    component: HomeComponent,
+    canActivate: [EmployeeGuardService],
   },
   {
-    path:'HR',
-    component:HrhomeComponent,
-    canActivate:[HRGuardService]
+    path: 'HR',
+    component: HrhomeComponent,
+    canActivate: [HRGuardService],
   },
   {
-    path:'jobDetail',
-    component:SinglejobComponent
+    path: 'jobDetail',
+    component: SinglejobComponent,
   },
   {
-    path:'PostJob',
-    component:AddJobComponent,
-    canActivate:[HRGuardService]
+    path: 'PostJob',
+    component: AddJobComponent,
+    canActivate: [HRGuardService],
   },
   {
-    path:'ViewApplications',
-    component:ViewApplicantsComponent,
-    canActivate:[HRGuardService]
+    path: 'ViewApplications',
+    component: ViewApplicantsComponent,
+    canActivate: [HRGuardService],
+  },
+
+  {
+    path: 'home',
+    component: HomepageComponent,
+    canActivate: [UserGuardService],
   },
   {
-    path:'',
-    component:HeroComponent
+    path: 'forgot-pwd',
+    component: ForgotPwdComponent,
   },
   {
-    path:'home',
-    component:HomepageComponent,
-    canActivate:[UserGuardService]
+    path: 'ViewEmployees',
+    component: ViewEmployeesComponent,
+    canActivate: [HRGuardService],
   },
   {
-    path:'forgot-pwd',
-    component:ForgotPwdComponent
+    path: 'ViewVacancies',
+    component: ViewVacanciesComponent,
+    canActivate: [HRGuardService],
   },
   {
-    path:'ViewEmployees',
-    component:ViewEmployeesComponent,
-    canActivate:[HRGuardService]
+    path: 'SingleApplicantDetails/:id',
+    component: SingleApplicantComponent,
+    canActivate: [HRGuardService],
   },
   {
-    path:'ViewVacancies',
-    component:ViewVacanciesComponent,
-    canActivate:[HRGuardService]
+    path: 'SingleEmployeeDetails/:id',
+    component: SingleEmployeeComponent,
+    canActivate: [HRGuardService],
   },
   {
-    path:'SingleApplicantDetails/:id',
-    component:SingleApplicantComponent,
-    canActivate:[HRGuardService]
+    path: 'unauthorized',
+    component: UnauthorizedComponent,
   },
   {
-    path:'SingleEmployeeDetails/:id',
-    component:SingleEmployeeComponent,
-    canActivate:[HRGuardService]
+    path: 'next-round-email/:id',
+    component: NextRoundEmailComponent,
+    canActivate: [HRGuardService],
   },
   {
-    path:'unauthorized',
-    component:UnauthorizedComponent
+    path: 'original-documents',
+    component: OriginalDocumentsComponent,
   },
   {
-    path:'next-round-email/:id',
-    component:NextRoundEmailComponent,
-    canActivate:[HRGuardService]
+    path: 'create-new-employee/:id',
+    component: CreateNewEmployeeComponent,
+    canActivate: [HRGuardService],
   },
   {
-    path:'original-documents',
-    component:OriginalDocumentsComponent,
+    path: 'change-pwd',
+    component: ChangePwdComponent,
   },
   {
-    path:'create-new-employee/:id',
-    component:CreateNewEmployeeComponent,
-    canActivate:[HRGuardService]
+    path: 'AddAnnouncement',
+    component: AddAnnouncementComponent,
   },
   {
-    path:'change-pwd',
-    component:ChangePwdComponent
-  }
+    path: '',
+    component: HeroComponent,
+  },
 ];
-
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

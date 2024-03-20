@@ -129,3 +129,6 @@ END
 EXEC hrisportal.sp_login 'pk@g.com','1234567890'
 
 EXEC hrisportal.sp_login 'jay@email.com' ,'hash'
+
+
+select * from dbo.users
