@@ -28,6 +28,7 @@ import { OriginalDocumentsComponent } from './home/original-documents/original-d
 import { CreateNewEmployeeComponent } from './hr/create-new-employee/create-new-employee.component';
 import { ChangePwdComponent } from './shared/components/change-pwd/change-pwd.component';
 import { AddAnnouncementComponent } from './hr/add-announcement/add-announcement.component';
+import { AttendanceComponent } from './employee/attendance/attendance.component';
 
 const routes: Routes = [
   {
@@ -138,6 +139,10 @@ const routes: Routes = [
     path: '',
     component: HeroComponent,
   },
+  {
+    path: 'attendance',
+    component: AttendanceComponent
+  }
 ];
 
 @NgModule({
