@@ -63,6 +63,6 @@ export class UsersService {
   }
 
   sendMail(email:string):Observable<any>{
-    return this.http.post(`http://localhost:8080/api/sendMail`,{email});
+    return this.http.post(`http://localhost:8081/api/sendMail`,{email});
   }
 }

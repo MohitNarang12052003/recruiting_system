@@ -6,7 +6,8 @@ import { UserService } from '../user.service';
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.css']
+  styleUrls: ['./homepage.component.css'],
+  
 })
 export class HomepageComponent implements OnInit{
   userId!:string;
@@ -19,6 +20,7 @@ export class HomepageComponent implements OnInit{
   ngOnInit(): void {  
     // this.getUserId();
     this.getDetails();
+    console.log(this.usersApplicationDetails)
    }
 
   // getUserId(){

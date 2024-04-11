@@ -8,7 +8,8 @@
 
 .navbar-nav .btn:hover {
   color: #fff;
-  /* background-color: #0b4a4a; */
+  /* background-color: #398989; */
+  background-color: blue;
 }
 .navbar-nav .nav-link {
   font-size: 20px;

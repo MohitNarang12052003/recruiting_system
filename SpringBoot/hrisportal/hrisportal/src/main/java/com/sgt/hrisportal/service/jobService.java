@@ -158,11 +158,12 @@ public class jobService {
     public ResponseEntity<Map<String ,Object>> updateApplication(int id, Map<String,Object> body,HttpServletRequest httpServletRequest){
         boolean isValid=isValidToken(httpServletRequest);
         if(isValid){
-            int round_1=(int) body.get("round_1");
-            int round_2=(int) body.get("round_2");
-            int round_3=(int) body.get("round_3");
-            int offer_letter=(int) body.get("offer_letter");
-            int doc_verification=(int) body.get("doc_verification");
+
+            String round_1=(String) body.get("round_1");
+            String round_2=(String) body.get("round_2");
+            String round_3=(String) body.get("round_3");
+            String offer_letter=(String) body.get("offer_letter");
+            String doc_verification=(String) body.get("doc_verification");
 
             int insertedRows = jobRepository.updateApplication(id,round_1,round_2,round_3,offer_letter,doc_verification);
 
@@ -329,8 +330,116 @@ public class jobService {
     }
 
 
+    public ResponseEntity<List<Map<String ,Object>>> getSkills(HttpServletRequest httpServletRequest){
+        boolean isValid=isValidToken(httpServletRequest);
+        if(isValid){
+            Map<String ,String> cookieMap=getCookiesAsHashMap(httpServletRequest.getCookies());
+
+            int id= Integer.parseInt(cookieMap.get("employee_id"));
+
+            return ResponseEntity.ok(jobRepository.getSkills(id));
+
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyList());
+
+    }
 
 
+    public ResponseEntity<Map<String,Object>> addSkill(String skillName,HttpServletRequest httpServletRequest){
+        boolean isValid=isValidToken(httpServletRequest);
+        if(isValid){
+            Map<String,String> cookieMap=getCookiesAsHashMap(httpServletRequest.getCookies());
+            int id=Integer.parseInt(cookieMap.get("employee_id"));
+
+            int insertedRows = jobRepository.addSkill(skillName,id);
+
+            if (insertedRows > 0) {
+                return ResponseEntity.ok(Map.of("status", "Successful"));
+            }
+
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyMap());
+    }
+
+    public ResponseEntity<List<Map<String ,Object>>> fetchGoals(HttpServletRequest httpServletRequest){
+        boolean isValid=isValidToken(httpServletRequest);
+        if(isValid){
+            Map<String ,String> cookieMap=getCookiesAsHashMap(httpServletRequest.getCookies());
+
+            int id= Integer.parseInt(cookieMap.get("employee_id"));
+
+            return ResponseEntity.ok(jobRepository.fetchGoals(id));
+
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyList());
+
+    }
+
+
+
+    public ResponseEntity<Map<String,Object>> addGoal(Map<String,Object> body,HttpServletRequest httpServletRequest){
+        boolean isValid=isValidToken(httpServletRequest);
+        if(isValid){
+            Map<String,String> cookieMap=getCookiesAsHashMap(httpServletRequest.getCookies());
+            int id=Integer.parseInt(cookieMap.get("employee_id"));
+            String title=(String) body.get("goal_title");
+            String description=(String) body.get("goal_description");
+
+            int insertedRows = jobRepository.addGoal(title,description,id);
+
+            if (insertedRows > 0) {
+                return ResponseEntity.ok(Map.of("status", "Successful"));
+            }
+
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyMap());
+    }
+
+
+    public ResponseEntity<Map<String,Object>> deleteGoal(int id,HttpServletRequest httpServletRequest){
+        boolean isValid=isValidToken(httpServletRequest);
+        if(isValid){
+
+
+            int insertedRows = jobRepository.deleteGoal(id);
+
+            if (insertedRows > 0) {
+                return ResponseEntity.ok(Map.of("status", "Successful"));
+            }
+
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyMap());
+    }
+
+
+    public ResponseEntity<Map<String ,Object>> singleGoalData(int id,HttpServletRequest httpServletRequest){
+        boolean isValid=isValidToken(httpServletRequest);
+        if(isValid){
+
+            return ResponseEntity.ok(jobRepository.singleGoalData(id));
+
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyMap());
+
+    }
+
+
+    public ResponseEntity<Map<String,Object>> updateGoal(Map<String,Object> body,HttpServletRequest httpServletRequest){
+        boolean isValid=isValidToken(httpServletRequest);
+        if(isValid){
+            int id=(int) body.get("goal_id");
+            String title=(String) body.get("goal_title");
+            String description=(String) body.get("goal_description");
+
+            int insertedRows = jobRepository.updateGoal(id,title,description);
+
+            if (insertedRows > 0) {
+                return ResponseEntity.ok(Map.of("status", "Successful"));
+            }
+
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyMap());
+    }
 
 
 }

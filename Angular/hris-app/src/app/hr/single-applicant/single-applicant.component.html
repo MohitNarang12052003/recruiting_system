@@ -225,14 +225,81 @@
     </div>
 
 
-    <form action="" [formGroup]="applicantForm">
+    <form action="">
         <div class="row">
             <label class="col-2" for=""><h5>Round-1</h5></label>
-            <input class="col-3" type="number" formControlName="round_1"  [(ngModel)]='this.applicantDetails.round_1' />
+            <select class="col-3 form-select" 
+                    #types
+                    name="round_1"
+                    (change)="round1Value(types.value)"     
+                    [(ngModel)]="applicantDetails.round_1"
+            >
+                <option value="N/A">N/A</option>
+                <option value="Pass">Pass</option>
+                <option value="Fail">Fail</option>
+            </select>
+            <!-- <input class="col-3" type="number" formControlName="round_1"  [(ngModel)]='this.applicantDetails.round_1' /> -->
         </div>
         <br>
 
         <div class="row">
+            <label class="col-2" for=""><h5>Round-2</h5></label>
+            <select class="col-3 form-select" 
+                    #types
+                    name="round_2"
+                    (change)="round2Value(types.value)"   
+                    [(ngModel)]="applicantDetails.round_2"  
+                 
+            >
+                <option value="N/A">N/A</option>
+                <option value="Pass">Pass</option>
+                <option value="Fail">Fail</option>
+            </select>
+        </div>
+        <br>
+
+        <div class="row">
+            <label class="col-2" for=""><h5>Round-3</h5></label>
+            <select class="col-3 form-select" 
+                    #types
+                    name="round_3"
+                    (change)="round3Value(types.value)"   
+                    [(ngModel)]="applicantDetails.round_3"   
+            >
+                <option value="N/A" >N/A</option>
+                <option value="Pass">Pass</option>
+                <option value="Fail">Fail</option>
+            </select>
+        </div>
+        <br>
+
+        <div class="row">
+            <label class="col-2" for=""><h5>Document Verification</h5></label>
+            <select class="col-3 form-select" 
+                    #types
+                    (change)="docVerValue(types.value)"     
+            >
+                <option value="N/A" selected >N/A</option>
+                <option value="Pass">Pass</option>
+                <option value="Fail">Fail</option>
+            </select>
+        </div>
+        <br>
+
+        <div class="row">
+            <label class="col-2" for=""><h5>offer letter</h5></label>
+            <select class="col-3 form-select" 
+                    #types
+                    (change)="offerLetterValue(types.value)"     
+            >
+                <option value="N/A" selected >N/A</option>
+                <option value="Pass">Pass</option>
+                <option value="Fail">Fail</option>
+            </select>
+        </div>
+        <br>
+
+        <!-- <div class="row">
             <label class="col-2" for=""><h5>Round-2</h5></label>
             <input class="col-3" type="number" formControlName="round_2" [(ngModel)]='this.applicantDetails.round_2' />
         </div>
@@ -251,7 +318,7 @@
             <label class="col-2" for=""><h5>Offer Letter</h5></label>
             <input class="col-3" type="number" formControlName="offer_letter" [(ngModel)]='this.applicantDetails.offer_letter'/>
         </div>
-        <br>
+        <br> -->
 
         <button type="submit">Update</button>
         <br>

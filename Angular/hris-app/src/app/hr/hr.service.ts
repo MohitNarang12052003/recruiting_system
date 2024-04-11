@@ -46,25 +46,25 @@ export class HrService {
 
   sendRoundMail(body:any):Observable<any>{
     console.log("called");
-    return this.http.post<any>(`http://localhost:8080/api/sendRoundMail`,body,{withCredentials:true});
+    return this.http.post<any>(`http://localhost:8081/api/sendRoundMail`,body,{withCredentials:true});
   }
 
   sendDocumentMail(body:any):Observable<any>{
     console.log("val ",body["email"]);
-    return this.http.post<any>(`http://localhost:8080/api/sendDocumentMail`,body,{withCredentials:true});
+    return this.http.post<any>(`http://localhost:8081/api/sendDocumentMail`,body,{withCredentials:true});
   }
 
   sendEmployeeMail(body:any):Observable<any>{
-    return this.http.post<any>(`http://localhost:8080/api/sendEmployeeMail`,body,{withCredentials:true});
+    return this.http.post<any>(`http://localhost:8081/api/sendEmployeeMail`,body,{withCredentials:true});
   }
 
   getQualificationsOfUser(id:any):Observable<any>{
-    return this.http.get<any>(`http://localhost:8080/api/getQualificationsOfUser/${id}`,{withCredentials:true});
+    return this.http.get<any>(`http://localhost:8081/api/getQualificationsOfUser/${id}`,{withCredentials:true});
 
   }
 
   getJobHistoryOfUser(id:any):Observable<any>{
-    return this.http.get<any>(`http://localhost:8080/api/getJobHistoryOfUser/${id}`,{withCredentials:true});
+    return this.http.get<any>(`http://localhost:8081/api/getJobHistoryOfUser/${id}`,{withCredentials:true});
 
   }
 

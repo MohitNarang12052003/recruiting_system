@@ -10,7 +10,7 @@ export class SharedService {
   constructor(private http:HttpClient) { }
 
   changePwd(body:any):Observable<any>{
-     return this.http.post('http://localhost:8080/api/changePwd',body,{withCredentials:true});
+     return this.http.post('http://localhost:8081/api/changePwd',body,{withCredentials:true});
 
   }
 }

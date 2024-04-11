@@ -1,1 +1,40 @@
-<p>skills works!</p>
+<div class="container">
+    <div class="header row" >
+        <div class="heading col-8 fw-bold">
+            SKILLS:
+        </div>
+        <div class="add-skill col-4">
+            <ng-template #content let-modal>
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+                    <button type="button" class="btn-close"(click)="modal.dismiss('Cross click')"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="skillForm">
+                        <div class="m-3">
+                            <label for="input-group">New Skill</label>
+                            <div class="input-group">
+                                <input type="text" formControlName="skill">
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-outline-dark" (click)="modal.close()">Save</button>
+                </div>
+            </ng-template>
+            
+            <button class="btn  btn-outline-primary" (click)="open(content)">+</button>
+            
+            <hr />
+            
+        </div>
+    </div>
+
+    <div class="ctr row">
+        <div class="skill col-5"  *ngFor="let skill of skillsData">
+            {{skill.skill_name}}
+        </div>
+    </div>
+</div>
