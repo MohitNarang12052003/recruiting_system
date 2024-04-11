@@ -9,6 +9,7 @@ import { LeavesComponent } from './leaves/leaves.component';
 import { SkillsComponent } from './skills/skills.component';
 import { GoalsComponent } from './goals/goals.component';
 import { ChartComponent } from './chart/chart.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,11 @@ import { ChartComponent } from './chart/chart.component';
     SkillsComponent,
     GoalsComponent,
     ChartComponent,
-  ],
-  imports: [CommonModule],
+     ],
+  imports: [CommonModule,
+    FormsModule,
+    ReactiveFormsModule
+],
+
 })
 export class EmployeeModule {}
