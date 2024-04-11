@@ -5,9 +5,11 @@ import { RouterModule } from '@angular/router';
 
 
 
+
 @NgModule({
   declarations: [
-    HomepageComponent
+    HomepageComponent,
+   
   ],
   imports: [
     CommonModule,

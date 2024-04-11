@@ -14,6 +14,7 @@ import { JobComponent } from './job/job.component';
 import { SinglejobComponent } from './singlejob/singlejob.component';
 import { ForgotPwdComponent } from './forgot-pwd/forgot-pwd.component';
 import { OriginalDocumentsComponent } from './original-documents/original-documents.component';
+import { GetHiredComponent } from './get-hired/get-hired.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { OriginalDocumentsComponent } from './original-documents/original-docume
     SinglejobComponent,
     ForgotPwdComponent,
     OriginalDocumentsComponent,
+    GetHiredComponent,
   ],
   imports: [
     CommonModule,
