@@ -9,6 +9,7 @@ import { LeavesComponent } from './leaves/leaves.component';
 import { SkillsComponent } from './skills/skills.component';
 import { GoalsComponent } from './goals/goals.component';
 import { ChartComponent } from './chart/chart.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,8 +22,17 @@ import { ChartComponent } from './chart/chart.component';
     SkillsComponent,
     GoalsComponent,
     ChartComponent,
+<<<<<<< HEAD
   ],
   imports: [CommonModule],
   exports: [AttendanceComponent]
+=======
+     ],
+  imports: [CommonModule,
+    FormsModule,
+    ReactiveFormsModule
+],
+
+>>>>>>> 2a7e8d3ddb32ebc1dccc3446ad316fdd4a401668
 })
 export class EmployeeModule {}

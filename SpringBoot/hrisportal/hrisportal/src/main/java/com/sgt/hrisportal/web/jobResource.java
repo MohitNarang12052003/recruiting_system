@@ -88,5 +88,42 @@ public class jobResource {
         return jobService.sendEmployeeMail(body,httpServletRequest);
     }
 
+    @GetMapping("/getSkills")
+    public ResponseEntity<List<Map<String, Object>>> getSkills(HttpServletRequest httpServletRequest){
+        return jobService.getSkills(httpServletRequest);
+    }
+
+    @PostMapping("/addSkill")
+    public ResponseEntity<Map<String,Object>> addSkill(@RequestBody String body, HttpServletRequest httpServletRequest){
+        return  jobService.addSkill(body,httpServletRequest);
+    }
+
+    @GetMapping("/fetchGoals")
+    public ResponseEntity<List<Map<String, Object>>> fetchGoals(HttpServletRequest httpServletRequest){
+        return jobService.fetchGoals(httpServletRequest);
+    }
+
+
+    @PostMapping("/addGoal")
+    public ResponseEntity<Map<String,Object>> addGoal(@RequestBody Map<String,Object> body, HttpServletRequest httpServletRequest){
+        return  jobService.addGoal(body,httpServletRequest);
+    }
+
+    @PostMapping("/deleteGoal")
+    public ResponseEntity<Map<String,Object>> deleteGoal(@RequestBody int id, HttpServletRequest httpServletRequest){
+        return  jobService.deleteGoal(id,httpServletRequest);
+    }
+
+    @GetMapping("/singleGoalData/{id}")
+    public ResponseEntity<Map<String, Object>> singleGoalData(@PathVariable int id, HttpServletRequest httpServletRequest){
+        return jobService.singleGoalData(id,httpServletRequest);
+    }
+
+
+    @PostMapping("/updateGoal")
+    public ResponseEntity<Map<String,Object>> updateGoal(@RequestBody Map<String,Object> body, HttpServletRequest httpServletRequest){
+        return  jobService.updateGoal(body,httpServletRequest);
+    }
+
 
 }
