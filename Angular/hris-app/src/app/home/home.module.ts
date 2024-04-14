@@ -14,6 +14,8 @@ import { JobComponent } from './job/job.component';
 import { SinglejobComponent } from './singlejob/singlejob.component';
 import { ForgotPwdComponent } from './forgot-pwd/forgot-pwd.component';
 import { OriginalDocumentsComponent } from './original-documents/original-documents.component';
+import { NationalHolidaysComponent } from './national-holidays/national-holidays.component';
+import { NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -28,15 +30,18 @@ import { OriginalDocumentsComponent } from './original-documents/original-docume
     SinglejobComponent,
     ForgotPwdComponent,
     OriginalDocumentsComponent,
+    NationalHolidaysComponent,
   ],
   imports: [
     CommonModule,
+    NgbModule,
+    NgbDatepickerModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
   ],
 
-  exports: [PhotoComponent],
+  exports: [PhotoComponent,NationalHolidaysComponent],
 })
 export class HomeModule {}

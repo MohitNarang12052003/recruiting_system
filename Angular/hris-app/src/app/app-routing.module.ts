@@ -29,6 +29,8 @@ import { CreateNewEmployeeComponent } from './hr/create-new-employee/create-new-
 import { ChangePwdComponent } from './shared/components/change-pwd/change-pwd.component';
 import { AddAnnouncementComponent } from './hr/add-announcement/add-announcement.component';
 import { AttendanceComponent } from './employee/attendance/attendance.component';
+import { CalendarComponent } from './employee/calendar/calendar.component';
+import { NationalHolidaysComponent } from './home/national-holidays/national-holidays.component';
 
 const routes: Routes = [
   {
@@ -142,6 +144,15 @@ const routes: Routes = [
   {
     path: 'attendance',
     component: AttendanceComponent
+  }
+,
+  {
+    path: 'calendar',
+    component: CalendarComponent
+  },
+  {
+    path:'nationalHolidays',
+    component:NationalHolidaysComponent
   }
 ];
 

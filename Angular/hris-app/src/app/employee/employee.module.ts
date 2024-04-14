@@ -23,5 +23,6 @@ import { ChartComponent } from './chart/chart.component';
     ChartComponent,
   ],
   imports: [CommonModule],
+  exports: [AttendanceComponent]
 })
 export class EmployeeModule {}

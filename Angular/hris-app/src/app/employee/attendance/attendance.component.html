@@ -6,9 +6,14 @@
                 <p>Work Hours: 9:00 AM - 4:00 PM</p>
             </div>
         </div>
-        <div class="clock-actions">
-            <button class="clock-in">Clock In</button>
-            <button class="clock-out">Clock Out</button>
+        <div>
+          <div *ngIf="data" >{{data.clockin}}</div>
+          <div *ngIf="data" >{{data.clockout}}</div>
         </div>
+        <div class="clock-actions">
+          <button (click)="submit()" class="clock-in">Clock In</button>
+          <button (click)="submit()" class="clock-out">Clock Out</button>
+      </div>
     </div>
+
 

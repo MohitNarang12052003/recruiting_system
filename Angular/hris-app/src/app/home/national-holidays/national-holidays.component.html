@@ -1,0 +1,23 @@
+<div
+      class="col-3 d-flex flex-column justify-content-center align-items-center"
+      style="height: 50vh"
+    >
+      <p>Hello,See Calendar and see Holidays!!</p>
+      <ngb-datepicker [(ngModel)]="model" (navigate)="foo($event)" />
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Occasion</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let holidays of nationalHolidays">
+      <td>{{holidays.date}}</td>
+      <td>{{holidays.occasion}}</td>
+      <td>{{holidays.description}}</td>
+    </tr>
+  </tbody>
+</table>
