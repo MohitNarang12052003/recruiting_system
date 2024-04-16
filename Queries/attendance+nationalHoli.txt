@@ -62,3 +62,37 @@ ALTER TABLE hrisportal.[attendance]  WITH CHECK ADD FOREIGN KEY([employee_id])
 REFERENCES [hrisportal].[employee] ([employee_id])
 
 
+
+
+
+
+
+
+
+
+
+
+INSERT INTO hrisportal.nationalHolidays ([date], occasion, description)
+VALUES
+    ('2024-01-01', 'New Year''s Day', 'Celebrates the beginning of the Gregorian calendar year'),
+    ('2024-01-26', 'Republic Day', 'Celebrates the adoption of the Indian Constitution in 1950'),
+    ('2024-05-01', 'Labour Day', 'International Workers'' Day, also known as May Day'),
+    ('2024-08-15', 'Independence Day', 'Celebrates India''s independence from British rule in 1947'),
+    ('2024-10-02', 'Gandhi Jayanti', 'Birth anniversary of Mahatma Gandhi, the Father of the Nation'),
+    ('2024-10-08', 'Dussehra', 'Celebrates the victory of Lord Rama over the demon king Ravana'),
+    ('2024-10-27', 'Diwali', 'Festival of lights, celebrated by Hindus, Sikhs, Jains, and Buddhists'),
+    ('2024-12-25', 'Christmas Day', 'Celebrates the birth of Jesus Christ in Christian tradition'),
+    ('2024-02-21', 'Maha Shivaratri', 'Festival dedicated to Lord Shiva, observed by Hindus'),
+    ('2024-03-10', 'Holi', 'Festival of colors, celebrated to mark the arrival of spring'),
+    ('2024-04-02', 'Good Friday', 'Commemorates the crucifixion of Jesus Christ in Christian tradition'),
+    ('2024-04-14', 'Baisakhi', 'Harvest festival celebrated in Punjab and other parts of North India'),
+    ('2024-06-05', 'Eid al-Fitr', 'Islamic festival marking the end of Ramadan fasting month'),
+    ('2024-07-23', 'Guru Purnima', 'Celebrates and honors spiritual and academic teachers'),
+    ('2024-08-30', 'Janmashtami', 'Birth anniversary of Lord Krishna, celebrated by Hindus'),
+    ('2024-09-10', 'Muharram', 'Islamic New Year and mourning for the martyrdom of Husayn ibn Ali'),
+    ('2024-11-01', 'Guru Nanak Jayanti', 'Birth anniversary of Guru Nanak, founder of Sikhism'),
+    ('2024-12-31', 'New Year''s Eve', 'Celebrates the last day of the Gregorian calendar year');
+
+
+
+
