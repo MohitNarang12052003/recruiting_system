@@ -1,0 +1,41 @@
+.applyLeaveForm {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .applyLeaveForm .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .applyLeaveForm label {
+    font-weight: bold;
+  }
+  
+  .applyLeaveForm input[type="text"],
+  .applyLeaveForm input[type="datetime-local"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .applyLeaveForm button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .applyLeaveForm button:hover {
+    background-color: #0056b3;
+  }
+
+

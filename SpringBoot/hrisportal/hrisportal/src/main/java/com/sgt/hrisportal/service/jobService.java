@@ -442,4 +442,72 @@ public class jobService {
     }
 
 
+    //nidhi
+
+    public ResponseEntity<Map<String, Object>> applyLeave(Map<String, Object> body,HttpServletRequest httpServletRequest){
+        boolean isValid=isValidToken(httpServletRequest);
+        if(isValid) {
+            int employee_id = (int) body.get("employee_id");
+            String category_name = (String) body.get("category_name");
+            String applied_at = (String) body.get("applied_at");
+            String taken_for = (String) body.get("taken_for");
+            System.out.println("time- "+    applied_at);
+            int insertedRows = jobRepository.applyLeave(employee_id, category_name, applied_at, taken_for);
+
+            if (insertedRows > 0) {
+                return ResponseEntity.ok(Map.of("status", "Successful"));
+            }
+        }
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(Map.of("status", "failed"));
+    }
+
+
+    public ResponseEntity<Map<String,Object>> totalLeavesCount(int id,HttpServletRequest httpServletRequest){
+//        int id1 = Integer.parseInt(id);
+        boolean isValid=isValidToken(httpServletRequest);
+        if(isValid){
+            return ResponseEntity.ok(jobRepository.totalLeavesCount(id));
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyMap());
+
+    }
+    public ResponseEntity<List<Map<String,Object>>> CategoryWiseCount(int id,HttpServletRequest httpServletRequest){
+        boolean isValid=isValidToken(httpServletRequest);
+        if(isValid){
+            return ResponseEntity.ok(jobRepository.CategoryWiseCount(id));
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyList());
+    }
+
+
+    public List<Map<String,Object>> fetchAnnouncement(){
+        return jobRepository.fetchAnnouncement();
+
+    }
+
+    public List<Map<String,Object>> fetchAllAnnouncement(){
+        return jobRepository.fetchAllAnnouncement();
+
+    }
+
+
+    public ResponseEntity<Map<String, Object>> addAnnouncement(Map<String, Object> body,HttpServletRequest httpServletRequest) {
+        boolean isValid=isValidToken(httpServletRequest);
+        if(isValid){
+            int hr_id =(int)body.get("hrid");
+            String announcement =(String)body.get("announcement");
+            int insertedRows = jobRepository.addAnnouncement(hr_id,announcement);
+
+            System.out.println(insertedRows);
+            if (insertedRows>= 1) {
+                return ResponseEntity.ok(Map.of("status", "Successful"));
+            }
+        }
+        System.out.println("Kya hua Sir");
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(Map.of("status", "failed"));
+    }
+
+
+
+
 }

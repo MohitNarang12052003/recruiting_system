@@ -1,349 +1,311 @@
 <!-- <p>single-applicant works!</p> -->
 
 <div class="container" *ngIf="applicantDetails" (submit)="submit()">
-    <div class="h1">Applicant Details</div>
-    <br />
 
-    <div class="row">
-        <div class="col-4">
-            <h5>Applicant Name:</h5>
-        </div>
-        <div class="col-4">
-            <h5>{{applicantDetails.username}}</h5>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-4">
-            <h5>Vacancy Name:</h5>
-        </div>
-        <div class="col-4">
-            <h5>{{applicantDetails.job_title}}</h5>
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-4">
-            <h5>Applied At:</h5>
-        </div>
-        <div class="col-4">
-            <h5>{{applicantDetails.applied_at | date:'longDate'}}</h5>
-        </div>    
-    </div>
-    <br>
-
-    <div class="h1">More Details</div>
-    <br />
-
-    <div class="row">
-        <div class="col-4">
-            <h5>Email</h5>
-        </div>
-        <div class="col-4">
-            <h5>{{applicantDetails.email}}</h5>
-        </div>    
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-4">
-            <h5>Gender:</h5>
-        </div>
-        <div class="col-4">
-            <h5>{{applicantDetails.gender}}</h5>
-        </div>    
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-4">
-            <h5>City:</h5>
-        </div>
-        <div class="col-4">
-            <h5>{{applicantDetails.city}}</h5>
-        </div>    
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-4">
-            <h5>Current CTC:</h5>
-        </div>
-        <div class="col-4">
-            <h5>{{applicantDetails.current_ctc}}</h5>
-        </div>    
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-4">
-            <h5>Expected CTC:</h5>
-        </div>
-        <div class="col-4">
-            <h5>{{applicantDetails.expected_ctc}}</h5>
-        </div>    
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-4">
-            <h5>Resume:</h5>
-        </div>
-        <div class="col-4">
-            <h5>{{applicantDetails.resume}}</h5>
-        </div>    
-    </div>
-    <br>
-
-    <div class="qualifications" *ngIf="degreesData">
-        <h1>Qualifications-</h1>
-        <br>
-
-        <div class="loop" *ngFor="let degree of degreesData;let i=index">
-            <div><h5>{{i+1}} :-</h5></div>
-            <div class="row">
-                <div class="col-4">
-                    <h5>Degree Name:</h5>
+    <div>
+        <div class="frm ">
+            <form action="" [formGroup]="applicantForm">
+                <div class="row">
+                    <label class="col-5 text  " for=""><h5>Round-1</h5></label>        
+                    <input class="col-3" type="string" formControlName="round_1"  [(ngModel)]='this.applicantDetails.round_1' />
                 </div>
-                <div class="col-4">
-                    <h5>{{degree.degree_name}}</h5>
-                </div>    
-            </div>
-
-            <br>
-
-            <div class="row">
-                <div class="col-4">
-                    <h5>Institute institute name:</h5>
+                <br>        
+        
+                <div class="row" *ngIf="this.applicantDetails.round_1==='Pass'">
+                    <label class="col-5 text " for=""><h5>Round-2</h5></label>
+                    <input class="col-3" type="string" formControlName="round_2" [(ngModel)]='this.applicantDetails.round_2' />
                 </div>
-                <div class="col-4">
-                    <h5>{{degree.institute_name}}</h5>
-                </div>    
-            </div>
-
-            <br>
-
-            <div class="row">
-                <div class="col-4">
-                    <h5>Degree admission year:</h5>
+                <br>
+                <div class="row" *ngIf="this.applicantDetails.round_2==='Pass'">
+                    <label class="col-5 text " for=""><h5>Round-3</h5></label>
+                    <input class="col-3" type="string" formControlName="round_3" />
                 </div>
-                <div class="col-4">
-                    <h5>{{degree.admission_year}}</h5>
-                </div>    
-            </div>
-
-            <br>
-
-            <div class="row">
-                <div class="col-4">
-                    <h5>Degree completion year:</h5>
+                <br>
+                <div class="row" *ngIf="this.applicantDetails.round_3==='Pass'">
+                    <label class="col-5 text " for=""><h5>Document Verification</h5></label>
+                    <input class="col-3" type="string" formControlName="doc_verification" [(ngModel)]='this.applicantDetails.doc_verification'/>
                 </div>
-                <div class="col-4">
-                    <h5>{{degree.completion_year}}</h5>
-                </div>    
-            </div>
-
-            <br>
-
-            <div class="row">
-                <div class="col-4">
-                    <h5>Degree GPA:</h5>
+                <br>
+                <div class="row" *ngIf="this.applicantDetails.doc_verification==='Pass'">
+                    <label class="col-5  text  " for=""><h5>Offer Letter</h5></label>
+                    <input class="col-3" type="string" formControlName="offer_letter" [(ngModel)]='this.applicantDetails.offer_letter'/>
                 </div>
-                <div class="col-4">
-                    <h5>{{degree.GPA}}</h5>
-                </div>    
-            </div>
+                <br>
+        
+                <button  class="btn" type="submit">Update</button>
+                <br>
+                
+            </form>
 
+            <div class="mail-container">
+                <div *ngIf="this.applicantDetails.round_3!=='Pass'">
+                    <h5 class=" text-white text-center text">Details for next round date, place and time-</h5>
+                    <button class="btn" [routerLink]="['/next-round-email',id]">Next Round -></button>
+                </div>
             
-        </div>
-        <br>
-        <br>
-        
-    </div>
-
-
-    <div class="jobHistory" *ngIf="jobHistoryData">
-        <h1>Job History-</h1>
-        <br>
-
-        <div class="loop" *ngFor="let job of jobHistoryData;let i=index">
-            <div><h5>{{i+1}} :-</h5></div>
-            <div class="row">
-                <div class="col-4">
-                    <h5>Job company name:</h5>
+                <br>
+                
+                <div *ngIf="(this.applicantDetails.round_3==='Pass') && (this.applicantDetails.doc_verification!=='Pass')">
+                    <div class=" text-white text-center text"><h5>Email to request original document upload-</h5></div>
+                    <button class="btn title" (click)="sendDocumentMail()" >Document Email</button>
                 </div>
-                <div class="col-4">
-                    <h5>{{job.company_name}}</h5>
-                </div>    
-            </div>
-
-            <br>
-
-            <div class="row">
-                <div class="col-4">
-                    <h5>Job Title:</h5>
-                </div>
-                <div class="col-4">
-                    <h5>{{job.job_title}}</h5>
-                </div>    
-            </div>
-
-            <br>
-
-            <div class="row">
-                <div class="col-4">
-                    <h5>Job Start year:</h5>
-                </div>
-                <div class="col-4">
-                    <h5>{{job.from_year}}</h5>
-                </div>    
-            </div>
-
-            <br>
-
-            <div class="row">
-                <div class="col-4">
-                    <h5>Job completion year:</h5>
-                </div>
-                <div class="col-4">
-                    <h5>{{job.to_year}}</h5>
-                </div>    
-            </div>
-
-            <br>
-
-            <div class="row">
-                <div class="col-4">
-                    <h5>Job description:</h5>
-                </div>
-                <div class="col-4">
-                    <h5>{{job.description}}</h5>
-                </div>    
-            </div>
-
             
+                <br>
+            
+                <div *ngIf="(this.applicantDetails.doc_verification==='Pass' && (this.applicantDetails.offer_letter!=='Pass'))">
+                    <h5 class=" text-white text-center text">Email to check offer letter-</h5>
+                    <button  class="btn" >Offer letter Email</button>
+                </div>
+            
+                <br>
+            
+                <div *ngIf="(this.applicantDetails.offer_letter==='Pass')">
+                    <h5 class="text-center  text-white  text ">Write details of new Employee</h5>
+                    <button  class="btn" [routerLink]="['/create-new-employee',id]" >Details -> </button>
+                </div>
+                <br>  
+            </div>
         </div>
-        <br>
-        <br>
-        
-    </div>
-
-
-    <form action="">
-        <div class="row">
-            <label class="col-2" for=""><h5>Round-1</h5></label>
-            <select class="col-3 form-select" 
-                    #types
-                    name="round_1"
-                    (change)="round1Value(types.value)"     
-                    [(ngModel)]="applicantDetails.round_1"
-            >
-                <option value="N/A">N/A</option>
-                <option value="Pass">Pass</option>
-                <option value="Fail">Fail</option>
-            </select>
-            <!-- <input class="col-3" type="number" formControlName="round_1"  [(ngModel)]='this.applicantDetails.round_1' /> -->
-        </div>
-        <br>
-
-        <div class="row">
-            <label class="col-2" for=""><h5>Round-2</h5></label>
-            <select class="col-3 form-select" 
-                    #types
-                    name="round_2"
-                    (change)="round2Value(types.value)"   
-                    [(ngModel)]="applicantDetails.round_2"  
-                 
-            >
-                <option value="N/A">N/A</option>
-                <option value="Pass">Pass</option>
-                <option value="Fail">Fail</option>
-            </select>
-        </div>
-        <br>
-
-        <div class="row">
-            <label class="col-2" for=""><h5>Round-3</h5></label>
-            <select class="col-3 form-select" 
-                    #types
-                    name="round_3"
-                    (change)="round3Value(types.value)"   
-                    [(ngModel)]="applicantDetails.round_3"   
-            >
-                <option value="N/A" >N/A</option>
-                <option value="Pass">Pass</option>
-                <option value="Fail">Fail</option>
-            </select>
-        </div>
-        <br>
-
-        <div class="row">
-            <label class="col-2" for=""><h5>Document Verification</h5></label>
-            <select class="col-3 form-select" 
-                    #types
-                    (change)="docVerValue(types.value)"     
-            >
-                <option value="N/A" selected >N/A</option>
-                <option value="Pass">Pass</option>
-                <option value="Fail">Fail</option>
-            </select>
-        </div>
-        <br>
-
-        <div class="row">
-            <label class="col-2" for=""><h5>offer letter</h5></label>
-            <select class="col-3 form-select" 
-                    #types
-                    (change)="offerLetterValue(types.value)"     
-            >
-                <option value="N/A" selected >N/A</option>
-                <option value="Pass">Pass</option>
-                <option value="Fail">Fail</option>
-            </select>
-        </div>
-        <br>
-
-        <!-- <div class="row">
-            <label class="col-2" for=""><h5>Round-2</h5></label>
-            <input class="col-3" type="number" formControlName="round_2" [(ngModel)]='this.applicantDetails.round_2' />
-        </div>
-        <br>
-        <div class="row">
-            <label class="col-2" for=""><h5>Round-3</h5></label>
-            <input class="col-3" type="number" formControlName="round_3" [(ngModel)]='this.applicantDetails.round_3'/>
-        </div>
-        <br>
-        <div class="row">
-            <label class="col-2" for=""><h5>Document Verification</h5></label>
-            <input class="col-3" type="number" formControlName="doc_verification" [(ngModel)]='this.applicantDetails.doc_verification'/>
-        </div>
-        <br>
-        <div class="row">
-            <label class="col-2" for=""><h5>Offer Letter</h5></label>
-            <input class="col-3" type="number" formControlName="offer_letter" [(ngModel)]='this.applicantDetails.offer_letter'/>
-        </div>
-        <br> -->
-
-        <button type="submit">Update</button>
-        <br>
-        
-    </form>
-
-    <br>
-
-
-    <h5>Email to inform next round date, place and time-</h5>
-    <button [routerLink]="['/next-round-email',id]">Next Round Email</button>
-
-    <br>
     
-    <h5>Email to request original document upload-</h5>
-    <button (click)="sendDocumentMail()" >Document Email</button>
+        </div>
+    
+        <br>
 
-    <br>
 
-    <h5>Email to check offer letter-</h5>
-    <button >Offer letter Email</button>
 
-    <br>
+    <div class="row">
+        <div class="col-5 ctr">
+            <div class="h3 text-center m-3  text-white  text ">Applicant Details</div>
+            <br />
 
-    <h5>Send new Employee Email password</h5>
-    <button [routerLink]="['/create-new-employee',id]" >Send Mail </button>
+            <div class="row">
+                <div class="col-4 text ">
+                    <h5>Applicant Name:</h5>
+                </div>
+                <div class="col-4 ">
+                    <p>{{applicantDetails.username}}</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4 text ">
+                    <h5>Vacancy Name:</h5>
+                </div>
+                <div class="col-4 ">
+                    <p>{{applicantDetails.job_title}}</p>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-4 text ">
+                    <h5>Applied At:</h5>
+                </div>
+                <div class="col-4 ">
+                    <p>{{applicantDetails.applied_at | date:'longDate'}}</p>
+                </div>    
+            </div>
+            <br>
+        </div>
+
+        <div class="col-5 ctr">
+            <div class="h3 text-center m-3 text-white text  ">More Details</div>
+            <br />
+    
+            <div class="row">
+                <div class="col-4 text ">
+                    <h5>Email</h5>
+                </div>
+                <div class="col-4">
+                    {{applicantDetails.email}}
+                </div>    
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-4 text ">
+                    <h5>Gender:</h5>
+                </div>
+                <div class="col-4">
+                    {{applicantDetails.gender}}
+                </div>    
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-4 text ">
+                    <h5>City:</h5>
+                </div>
+                <div class="col-4">
+                    {{applicantDetails.city}}
+                </div>    
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-4 text ">
+                  <h5>  Current CTC:</h5>
+                </div>
+                <div class="col-4">
+                    {{applicantDetails.current_ctc}}
+                </div>    
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-4 text ">
+                    <h5>Expected CTC:</h5>
+                </div>
+                <div class="col-4">
+                    {{applicantDetails.expected_ctc}}
+                </div>    
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-4 text ">
+                    <h5>Resume:</h5>
+                </div>
+                <div class="col-4">
+                    {{applicantDetails.resume}}
+                </div>    
+            </div>
+            <br>
+        </div>
+
+        <div class="qualifications col-5 ctr" *ngIf="degreesDataBool">
+            <h3 class=" text-center m-3 text-white text ">Qualifications</h3>
+            <br>
+
+            <div class="loop" *ngFor="let degree of degreesData;let i=index">
+                <div class=" text-white "><h5>{{i+1}} :-</h5></div>
+                <div class="row">
+                    <div class="col-4 text ">
+                        <h5>Degree Name:</h5>
+                    </div>
+                    <div class="col-4 ">
+                        <p>{{degree.degree_name}}</p>
+                    </div>    
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <div class="col-4 text ">
+                        <h5>Institute institute name:</h5>
+                    </div>
+                    <div class="col-4 ">
+                        {{degree.institute_name}}
+                    </div>    
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <div class="col-4 text ">
+                        <h5>Degree admission year:</h5>
+                    </div>
+                    <div class="col-4 ">
+                        {{degree.admission_year}}
+                    </div>    
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <div class="col-4 text ">
+                        <h5>Degree completion year:</h5>
+                    </div>
+                    <div class="col-4 ">
+                        {{degree.completion_year}}
+                    </div>    
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <div class="col-4 text ">
+                        <h5>Degree GPA:</h5>
+                    </div>
+                    <div class="col-4 ">
+                        {{degree.GPA}}
+                    </div>    
+                </div>
+
+                <br>
+                <br>
+            </div>
+            <br>
+            <br>
+            
+        </div>
+
+
+        <div class="jobHistory col-5 ctr" *ngIf="jobHistoryDataBool">
+            <h3 class=" text-center m-3 text-white  text ">Job History-</h3>
+            <br>
+
+            <div class="loop" *ngFor="let job of jobHistoryData;let i=index">
+
+                <div><h5 class="m-3 text ">{{i+1}} :-</h5></div>
+                <div class="row">
+                    <div class="col-4 text ">
+                        <h5>Job company name:</h5>
+                    </div>
+                    <div class="col-4  ">
+                        {{job.company_name}}
+                    </div>    
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <div class="col-4 text ">
+                        <h5>Job Title:</h5>
+                    </div>
+                    <div class="col-4  ">
+                        {{job.job_title}}
+                    </div>    
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <div class="col-4 text ">
+                        <h5>Job Start year:</h5>
+                    </div>
+                    <div class="col-4  ">
+                        {{job.from_year}}
+                    </div>    
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <div class="col-4 text ">
+                        <h5>Job completion year:</h5>
+                    </div>
+                    <div class="col-4  ">
+                        {{job.to_year}}
+                    </div>    
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <div class="col-4 text ">
+                        <h5>Job description:</h5>
+                    </div>
+                    <div class="col-4  ">
+                        {{job.description}}
+                    </div>    
+                </div>
+
+                <br>
+                <br>
+            </div>
+            <br>
+            <br>
+            
+        </div>
+    </div>
+
+
+    
 </div>
 

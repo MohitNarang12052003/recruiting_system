@@ -93,6 +93,18 @@ public class userResource {
         return userService.changePwd(body,httpServletRequest);
     }
 
+    @PostMapping("validateFpToken")
+    public ResponseEntity<Map<String,Object>> validateFpToken(@RequestBody String token){
+        return userService.validateFpToken(token);
+    }
+
+
+    @PostMapping("resetPwd")
+    public ResponseEntity<Map<String,Object>> resetPwd(@RequestBody Map<String,Object> form){
+        return userService.resetPwd(form);
+    }
+
+
 
 
 

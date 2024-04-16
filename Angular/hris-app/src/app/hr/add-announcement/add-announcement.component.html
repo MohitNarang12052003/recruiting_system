@@ -1,1 +1,13 @@
-<p>add-announcement works!</p>
+<div class="container">
+    <h1>Add Announcement</h1>
+    <form class="announcement-form" [formGroup]="createForm">
+      <div class="form-group">
+        <label for="announcement">Announcement</label>
+        <textarea id="announcement" formControlName="announcement" rows="6"></textarea>
+      </div>
+      <div class="button-group">
+        <button type="button" class="btn btn-secondary" [routerLink]="['/HR']">Back</button>
+        <button type="button" class="btn btn-primary" (click)="submit()">Submit</button>
+      </div>
+    </form>
+  </div>

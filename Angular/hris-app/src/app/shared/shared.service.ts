@@ -13,4 +13,17 @@ export class SharedService {
      return this.http.post('http://localhost:8081/api/changePwd',body,{withCredentials:true});
 
   }
+
+  sendMail(email:string):Observable<any>{
+    return this.http.post(`http://localhost:8081/api/sendMail`,email);
+  }
+
+  validateFpToken(token:any):Observable<any>{
+    return this.http.post(`http://localhost:8081/api/validateFpToken`,token);
+  }
+
+  resetPwd(form:any):Observable<any>{
+    return this.http.post(`http://localhost:8081/api/resetPwd`,form);
+  }
+
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HrService } from '../hr.service';
+import { saveAs } from 'file-saver';
+
 
 @Component({
   selector: 'app-single-employee',
@@ -13,6 +15,8 @@ export class SingleEmployeeComponent implements OnInit{
   degreesData!:any;
   jobHistoryData!:any;
   userId!:any;
+  degreesDataBool!:boolean;
+  jobHistoryDataBool!:boolean;
   
 
   constructor(private route:ActivatedRoute,private hrService:HrService){}
@@ -39,6 +43,9 @@ export class SingleEmployeeComponent implements OnInit{
         this.employeeData=data
         this.getAllQualificationsOfEmployee();
         this.getJobHistoryOfEmployee();
+
+
+
       },
       error:(error)=>{
         console.log(error)
@@ -56,6 +63,9 @@ export class SingleEmployeeComponent implements OnInit{
     this.hrService.getQualificationsOfUser(this.userId).subscribe({
       next:(data)=>{
         this.degreesData=data;
+        if(data.length>0){
+          this.degreesDataBool=true;
+        }
         console.log(data);
       },
       error:(e)=>{
@@ -71,6 +81,9 @@ export class SingleEmployeeComponent implements OnInit{
     this.hrService.getJobHistoryOfUser(this.userId).subscribe({
       next:(data)=>{
         this.jobHistoryData=data;
+        if(data.length>0){
+          this.jobHistoryDataBool=true;
+        }
         console.log(data);
       },
       error:(e)=>{
@@ -78,6 +91,8 @@ export class SingleEmployeeComponent implements OnInit{
       }
     })
   }
+
+  
 
   
 }

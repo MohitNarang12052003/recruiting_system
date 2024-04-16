@@ -72,6 +72,13 @@ public class userRepository {
         return jdbcTemplate.update("EXEC hrisportal.sp_change_pwd ?,?,?",email,old_pwd,new_pwd);
     }
 
+    public Map<String ,Object> validateFpToken(String token){
+        return jdbcTemplate.queryForMap("EXEC hrisportal.sp_validate_fp_token ?",token);
+    }
+
+    public int resetPwd(String token,String password,int role){
+        return jdbcTemplate.update("EXEC hrisportal.sp_reset_pwd ?,?,?",token,password,role);
+    }
 
 }
 

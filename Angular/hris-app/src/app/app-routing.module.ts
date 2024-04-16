@@ -22,12 +22,14 @@ import { UnauthorizedComponent } from './shared/components/unauthorized/unauthor
 import { SingleEmployeeComponent } from './hr/single-employee/single-employee.component';
 import { HomepageComponent } from './user/homepage/homepage.component';
 import { UserGuardService } from './user/user-guard.service';
-import { ForgotPwdComponent } from './home/forgot-pwd/forgot-pwd.component';
 import { NextRoundEmailComponent } from './hr/next-round-email/next-round-email.component';
 import { OriginalDocumentsComponent } from './home/original-documents/original-documents.component';
 import { CreateNewEmployeeComponent } from './hr/create-new-employee/create-new-employee.component';
 import { ChangePwdComponent } from './shared/components/change-pwd/change-pwd.component';
 import { AddAnnouncementComponent } from './hr/add-announcement/add-announcement.component';
+import { ApplyLeavesComponent } from './employee/apply-leaves/apply-leaves.component';
+import { ForgotPwdComponent } from './shared/components/forgot-pwd/forgot-pwd.component';
+import { ResetPwdComponent } from './shared/components/reset-pwd/reset-pwd.component';
 
 const routes: Routes = [
   {
@@ -89,6 +91,10 @@ const routes: Routes = [
     component: ForgotPwdComponent,
   },
   {
+    path:'reset/:token',
+    component:ResetPwdComponent
+  },
+  {
     path: 'ViewEmployees',
     component: ViewEmployeesComponent,
     canActivate: [HRGuardService],
@@ -133,6 +139,10 @@ const routes: Routes = [
   {
     path: 'AddAnnouncement',
     component: AddAnnouncementComponent,
+  },
+  {
+    path: 'Apply-leave',
+    component: ApplyLeavesComponent,
   },
   {
     path: '',

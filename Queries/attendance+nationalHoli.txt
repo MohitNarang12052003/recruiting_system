@@ -1,0 +1,64 @@
+CREATE TABLE hrisportal.[nationalHolidays](
+	[date] [date] NULL,
+	[occasion] [varchar](100) NULL,
+	[description] [text] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+
+
+
+
+CREATE PROCEDURE hrisportal.[sp_fetch_nationalHolidays]
+@month int
+AS
+BEGIN
+SELECT * from nationalHolidays where MONTH(date) = @month
+END
+
+
+
+
+
+CREATE PROCEDURE hrisportal.[sp_insert_datetime]
+@employeeId int
+AS
+BEGIN
+DECLARE @todaydate date = GETDATE()
+DECLARE @count int
+SELECT @count = COUNT(1) from hrisportal.attendance 
+WHERE todaydate = @todaydate
+IF @count = 1
+BEGIN
+-- WE HAVE TO UPDATE CLOCK OUT KA TIME
+UPDATE attendance set clockout = GETDATE() WHERE todaydate = @todaydate
+END
+ELSE
+BEGIN
+	INSERT INTO attendance (todaydate, clockin, clockout, employee_id)values (
+	GETDATE(), GETDATE(), dateadd(HH, 7, getdate()),@employeeId);
+-- WE HAVE TO INSERT ROW OF +7 HOURS OF WHAT CLOCK IN TIME
+END
+SELECT todaydate, clockin, clockout FROM attendance WHERE todaydate = @todaydate
+END
+
+
+
+
+
+CREATE TABLE hrisportal.[attendance](
+	[todaydate] [date] NOT NULL,
+	[clockin] [datetime] NULL,
+	[clockout] [datetime] NULL,
+	[employee_id] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[todaydate] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE hrisportal.[attendance]  WITH CHECK ADD FOREIGN KEY([employee_id])
+REFERENCES [hrisportal].[employee] ([employee_id])
+
+

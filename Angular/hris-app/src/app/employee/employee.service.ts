@@ -52,4 +52,26 @@ export class EmployeeService {
   updateGoal(body:any):Observable<any>{
     return this.http.post<any>(`http://localhost:8081/api/updateGoal`,body,{withCredentials:true});
   }
+
+
+  //nidhi
+
+fetchAnnouncement():Observable<any>{
+  return this.http.get<any>(`http://localhost:8081/api/announcement`,{withCredentials:true});
+
 }
+getTotalLeavesCount(id:any):Observable<any>{
+  return this.http.get<any>(`http://localhost:8081/api/totalLeavesCount/${id}`,{withCredentials:true});
+
+}
+getCategoryWiseCount(id:number):Observable<any>{
+  return this.http.get<any>(`http://localhost:8081/api/CategoryWiseCount/${id}`,{withCredentials:true});
+}
+
+ApplyLeave(data: any): Observable<any> {
+  return this.http.post('http://localhost:8081/api/applyLeave',data,{withCredentials:true});
+}
+
+}
+
+

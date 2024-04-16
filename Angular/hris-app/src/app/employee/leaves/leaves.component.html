@@ -1,1 +1,12 @@
-<p>leaves works!</p>
+<div class="container mt-5">
+    <div class="card">
+        <h5>Total Leaves Distribution</h5>
+      <h2>{{totalLeaveCount}}/12</h2>
+      <div *ngFor="let cat of categoryLeaveCount">
+        <p class="text-black">{{ cat.category_name}}: {{cat.leave_count}}</p>
+      </div>
+      <div *ngIf="!moreLeaves"><button (click)="applyLeave()" id="btn" class="btn btn-primary">Apply New Leave</button></div>
+      <div><button *ngIf="moreLeaves" (click)="applyLeave()" disabled id="btn" class="btn btn-primary">Apply New Leave</button></div>
+      <br>
+    </div>
+  </div>

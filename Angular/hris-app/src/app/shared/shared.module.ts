@@ -7,6 +7,8 @@ import { UnauthorizedComponent } from './components/unauthorized/unauthorized.co
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { ChangePwdComponent } from './components/change-pwd/change-pwd.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ForgotPwdComponent } from './components/forgot-pwd/forgot-pwd.component';
+import { ResetPwdComponent } from './components/reset-pwd/reset-pwd.component';
 
 
 
@@ -17,6 +19,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     UnauthorizedComponent,
     ContactUsComponent,
     ChangePwdComponent,
+    ForgotPwdComponent,
+    ResetPwdComponent,
     
     
   ],

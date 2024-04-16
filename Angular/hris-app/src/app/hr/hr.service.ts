@@ -69,5 +69,14 @@ export class HrService {
   }
 
 
+  AddAnnouncement(data: any): Observable<any> {
+    return this.http.post('http://localhost:8081/api/addAnnouncement',data,{withCredentials:true});
+  }
+
+  fetchAllAnnouncement():Observable<any>{
+    return this.http.get<any>(`http://localhost:8081/api/allAnnouncement`,{withCredentials:true});
+
+  }
+
 
 }

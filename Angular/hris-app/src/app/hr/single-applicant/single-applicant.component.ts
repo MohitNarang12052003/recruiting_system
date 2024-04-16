@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HrService } from '../hr.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -16,20 +16,28 @@ export class SingleApplicantComponent implements OnInit{
   degreesData!:any;
   userId!:any;
   jobHistoryData!:any;
+  jobHistoryDataBool!:boolean;
+  degreesDataBool!:boolean;
 
-//  generateForm(){
-//   this.applicantForm=new FormGroup({
-//     round_1:new FormControl(),
-//     round_2:new FormControl(),
-//     round_3:new FormControl(),
-//     doc_verification:new FormControl(),
-//     offer_letter:new FormControl()
-//   })
 
-//   this.getId();
+
+
+
+  
+
+ generateForm(){
+  this.applicantForm=new FormGroup({
+    round_1:new FormControl(),
+    round_2:new FormControl(),
+    round_3:new FormControl(),
+    doc_verification:new FormControl(),
+    offer_letter:new FormControl()
+  })
+
+  this.getId();
 
  
-//  }
+ }
 
 
 
@@ -37,8 +45,8 @@ constructor(private hrService:HrService,private route:ActivatedRoute,private rou
 
 ngOnInit(){
 
-  this.getId();
-  // this.generateForm();
+  // this.getId();
+  this.generateForm();
   
 }
 
@@ -62,6 +70,7 @@ getId(){
       this.id = idString ? parseInt(idString, 10) : null;
 
       this.getSingleApplicant();
+      
 
      }
 
@@ -72,7 +81,6 @@ getId(){
   })
 }
 
-
 getSingleApplicant(){
   this.hrService.getSingleApplicant(this.id).subscribe((val)=>{
     console.log(val);
@@ -82,36 +90,36 @@ getSingleApplicant(){
     this.getJobHistoryOfApplicant();
   })
 }
-round1Val:any;
-round1Value(value:string){
-  console.log("r1",value)
-  this.round1Val=value;
-}
-round2Val:any;
-round2Value(value:string){
-  console.log("r2",value)
-  this.round2Val=value;
-}
-round3Val:any;
-round3Value(value:string){
-  console.log("r3",value)
-  this.round3Val=value;
-}
-docVerVal:any;
-docVerValue(value:string){
-  this.docVerVal=value;
-}
-offerLetterVal:any;
-offerLetterValue(value:string){
-  this.offerLetterVal=value;
-}
+// round1Val:any;
+// round1Value(value:string){
+//   console.log("r1",value)
+//   this.round1Val=value;
+// }
+// round2Val:any;
+// round2Value(value:string){
+//   console.log("r2",value)
+//   this.round2Val=value;
+// }
+// round3Val:any;
+// round3Value(value:string){
+//   console.log("r3",value)
+//   this.round3Val=value;
+// }
+// docVerVal:any;
+// docVerValue(value:string){
+//   this.docVerVal=value;
+// }
+// offerLetterVal:any;
+// offerLetterValue(value:string){
+//   this.offerLetterVal=value;
+// }
 
 submit(){
-  this.applicantForm.get("round_1")?.setValue(this.round1Val);
-  this.applicantForm.get("round_2")?.setValue(this.round2Val);
-  this.applicantForm.get("round_3")?.setValue(this.round3Val);
-  this.applicantForm.get("doc_verification")?.setValue(this.docVerVal);
-  this.applicantForm.get("offer_letter")?.setValue(this.offerLetterVal);
+  // this.applicantForm.get("round_1")?.setValue(this.round1Val);
+  // this.applicantForm.get("round_2")?.setValue(this.round2Val);
+  // this.applicantForm.get("round_3")?.setValue(this.round3Val);
+  // this.applicantForm.get("doc_verification")?.setValue(this.docVerVal);
+  // this.applicantForm.get("offer_letter")?.setValue(this.offerLetterVal);
 
   console.log("here",this.applicantForm.get("round_1")?.value)
 
@@ -145,6 +153,9 @@ getAllQualificationsOfApplicant(){
 
   this.hrService.getQualificationsOfUser(this.userId).subscribe({
     next:(data)=>{
+      if(data.length>0){
+        this.degreesDataBool=true;
+      }
       this.degreesData=data;
       console.log(data);
     },
@@ -160,8 +171,11 @@ getJobHistoryOfApplicant(){
 
   this.hrService.getJobHistoryOfUser(this.userId).subscribe({
     next:(data)=>{
+      if(data.length>0){
+        this.jobHistoryDataBool=true;
+      }
       this.jobHistoryData=data;
-      console.log(data);
+      console.log("jh",data);
     },
     error:(e)=>{
       console.log("error ",e);

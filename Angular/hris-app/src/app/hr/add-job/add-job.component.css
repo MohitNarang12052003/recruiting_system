@@ -1,0 +1,40 @@
+.title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(61, 174, 212);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.title>*{
+    text-align: center;
+    color: white;
+    
+}
+
+.container{
+    margin-left: 10%;
+}
+
+.btn:hover{
+    background-color: blue;
+    color: white;
+
+    
+}
+
+/* .btns{
+    display: flex;
+    justify-content:space-around;
+} */
+
+.btn{
+    background-color: aliceblue;
+    border-color: black;
+}
+
+
+.elem{
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
