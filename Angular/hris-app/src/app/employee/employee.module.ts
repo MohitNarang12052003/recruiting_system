@@ -10,7 +10,7 @@ import { SkillsComponent } from './skills/skills.component';
 import { GoalsComponent } from './goals/goals.component';
 import { ChartComponent } from './chart/chart.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarouselModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ApplyLeavesComponent } from './apply-leaves/apply-leaves.component';
 
 @NgModule({
@@ -29,7 +29,8 @@ import { ApplyLeavesComponent } from './apply-leaves/apply-leaves.component';
   imports: [CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbCarouselModule
+    NgbCarouselModule,
+    NgbModule
 ],
 
 })

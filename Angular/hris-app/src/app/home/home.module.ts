@@ -13,6 +13,8 @@ import { PhotoComponent } from './photo/photo.component';
 import { JobComponent } from './job/job.component';
 import { SinglejobComponent } from './singlejob/singlejob.component';
 import { OriginalDocumentsComponent } from './original-documents/original-documents.component';
+import { NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { GetHiredComponent } from './get-hired/get-hired.component';
 
 @NgModule({
   declarations: [
@@ -26,9 +28,12 @@ import { OriginalDocumentsComponent } from './original-documents/original-docume
     JobComponent,
     SinglejobComponent,
     OriginalDocumentsComponent,
+    GetHiredComponent,
   ],
   imports: [
     CommonModule,
+    NgbModule,
+    NgbDatepickerModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,

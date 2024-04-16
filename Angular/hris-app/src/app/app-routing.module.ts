@@ -30,6 +30,8 @@ import { AddAnnouncementComponent } from './hr/add-announcement/add-announcement
 import { ApplyLeavesComponent } from './employee/apply-leaves/apply-leaves.component';
 import { ForgotPwdComponent } from './shared/components/forgot-pwd/forgot-pwd.component';
 import { ResetPwdComponent } from './shared/components/reset-pwd/reset-pwd.component';
+import { AttendanceComponent } from './employee/attendance/attendance.component';
+import { CalendarComponent } from './employee/calendar/calendar.component';
 
 const routes: Routes = [
   {
@@ -147,7 +149,7 @@ const routes: Routes = [
   {
     path: '',
     component: HeroComponent,
-  },
+  }
 ];
 
 @NgModule({

@@ -6,9 +6,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
+
 @NgModule({
   declarations: [
-    HomepageComponent
+    HomepageComponent,
+   
   ],
   imports: [
     CommonModule,

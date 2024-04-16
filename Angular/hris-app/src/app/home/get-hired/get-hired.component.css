@@ -1,0 +1,7 @@
+.imgfly {
+  background-image: url("../../../assets/Images/plane.png");
+  background-position: center;
+  background-size: cover;
+  width: 98vw;
+  height: 60vh;
+}
