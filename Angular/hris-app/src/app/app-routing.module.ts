@@ -112,7 +112,7 @@ const routes: Routes = [
     canActivate: [HRGuardService],
   },
   {
-    path: 'SingleEmployeeDetails/:id',
+    path: 'SingleEmployeeDetails/:email',
     component: SingleEmployeeComponent,
     canActivate: [HRGuardService],
   },

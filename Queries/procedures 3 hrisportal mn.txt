@@ -94,3 +94,16 @@ BEGIN
 		AND fp_time_to_expire>GETDATE()
 	END
 END
+
+
+
+
+
+CREATE OR ALTER PROCEDURE hrisportal.sp_get_eid_from_email
+@email VARCHAR(100)
+AS
+BEGIN
+	SELECT employee_id
+	FROM hrisportal.employee
+	WHERE email=@email
+END

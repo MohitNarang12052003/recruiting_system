@@ -79,5 +79,9 @@ export class HrService {
 
   }
 
+  getEidFromEmail(email:string):Observable<any>{
+    return this.http.get(`http://localhost:8081/api/getEidFromEmail/${email}`,{withCredentials:true})
+  }
+
 
 }

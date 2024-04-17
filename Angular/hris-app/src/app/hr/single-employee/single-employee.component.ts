@@ -28,12 +28,27 @@ export class SingleEmployeeComponent implements OnInit{
 
   getEmployeeId(){
     this.route.params.subscribe(params => {
-      const employeeId = params['id'];
+      const employeeEmail = params['email'];
+      const employeeId=this.getEidFromEmailFn(employeeEmail);
       this.employeeId=employeeId
-      console.log(employeeId)
+      console.log("eid",employeeId)
     });
 
-    this.getEmployeeDetails();
+  
+  }
+
+  getEidFromEmailFn(email:string):any{
+    this.hrService.getEidFromEmail(email).subscribe({
+      next:(data)=>{
+        console.log("eid-",data)
+        this.employeeId=data["employee_id"]
+        this.getEmployeeDetails();
+      },
+      error:(e)=>{
+        console.log("Err",e)
+      }
+      
+    })
   }
 
   getEmployeeDetails(){

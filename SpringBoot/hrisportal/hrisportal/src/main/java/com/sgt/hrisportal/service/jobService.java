@@ -187,6 +187,15 @@ public class jobService {
 
     }
 
+    public ResponseEntity<Map<String,Object>> getEidFromEmail(String email,HttpServletRequest httpServletRequest){
+        boolean isValid=isValidToken(httpServletRequest);
+        if(isValid){
+            return ResponseEntity.ok(jobRepository.getEidFromEmail(email));
+        }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyMap());
+    }
+
     public ResponseEntity<Map<String ,Object>> toggleVacancy(int id, HttpServletRequest httpServletRequest){
         boolean isValid=isValidToken(httpServletRequest);
         System.out.println(2);

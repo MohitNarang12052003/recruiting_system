@@ -65,6 +65,11 @@ public class jobResource {
         return jobService.viewSingleEmployee(id,httpServletRequest);
     }
 
+    @GetMapping("/getEidFromEmail/{email}")
+    public ResponseEntity<Map<String,Object>> getEidFromEmail(@PathVariable String email,HttpServletRequest httpServletRequest){
+        return jobService.getEidFromEmail(email,httpServletRequest);
+    }
+
     @PostMapping("/toggleVacancy/{id}")
     public ResponseEntity<Map<String, Object>> toggleVacancy(@PathVariable int id,HttpServletRequest httpServletRequest){
         System.out.println(1);
