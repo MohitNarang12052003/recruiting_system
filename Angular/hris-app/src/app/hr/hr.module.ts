@@ -18,6 +18,7 @@ import { EmpDeptPiechartComponent } from './emp-dept-piechart/emp-dept-piechart.
 import { AgChartsAngular } from 'ag-charts-angular';
 import { OfferLetterDetailsComponent } from './offer-letter-details/offer-letter-details.component';
 import { HolidaysComponent } from './holidays/holidays.component';
+import { ViewDocumentsComponent } from './view-documents/view-documents.component';
 
 
 
@@ -35,7 +36,8 @@ import { HolidaysComponent } from './holidays/holidays.component';
     AddAnnouncementComponent,
     EmpDeptPiechartComponent,
     OfferLetterDetailsComponent,
-    HolidaysComponent
+    HolidaysComponent,
+    ViewDocumentsComponent
   ],
   imports: [
     CommonModule,

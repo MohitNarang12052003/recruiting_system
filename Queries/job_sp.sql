@@ -77,6 +77,16 @@ BEGIN
 	d.department_name,
 	t.skills,
 	j.active_yn
-	FROM hrisportal.job_vacancy j INNER JOIN hrisportal.department d ON j.department_id=d.department_id INNER JOIN #temptable t ON j.j_id=t.j_id WHERE active_yn='Y'
+	FROM hrisportal.job_vacancy j INNER JOIN hrisportal.department d ON j.department_id=d.department_id INNER JOIN #temptable t ON j.j_id=t.j_id WHERE active_yn='Y' ORDER BY j.date_posted DESC
 END
 EXEC hrisportal.sp_fetch_all_jobs
+
+
+CREATE OR ALTER PROCEDURE hrisportal.fetchDepts
+AS
+BEGIN
+	SELECT d.department_name as dept_name,count(1) as count from hrisportal.job_vacancy j INNER JOIN hrisportal.department d on d.department_id=j.department_id GROUP BY d.department_name
+
+END
+
+EXEC hrisportal.fetchDepts

@@ -32,7 +32,8 @@ import { ResetPwdComponent } from './components/reset-pwd/reset-pwd.component';
   ],
   exports:[
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    ContactUsComponent
   ]
 })
 export class SharedModule { }

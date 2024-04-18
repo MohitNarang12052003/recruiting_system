@@ -1,4 +1,4 @@
-<div class="main-page">
+<!-- <div class="main-page">
   <div class="inside">
     <div class="text">
       <form
@@ -7,11 +7,11 @@
         [formGroup]="createForm"
       >
         <h1>Register</h1>
-        <h4>Qualification:</h4>
+        <h4>Qualification:</h4> -->
         <!-- <div >
               <h3>Qualification:</h3>
            </div> -->
-        <div>
+        <!-- <div>
           <label for="">School:</label>
           <input type="text" formControlName="institute" />
         </div>
@@ -57,4 +57,86 @@
       </form>
     </div>
   </div>
+</div> -->
+
+<div class="row justify-content-between" style="width: 99.5vw; height: 70vh;">
+  <div class="col-3 m-0 p-0" style="">
+  <img src="../../../assets/Images/register.png" alt="" style="height: 70vh;width:100%;">
 </div>
+<div class="col-8 ">
+  
+  <form
+        class=" text-dark w-75  "
+        
+        [formGroup]="createForm"
+      >
+      <h1 style="margin-bottom: 1em;">Qualification</h1>
+      <!-- <p class="text-muted">Already have an Account? <span style="color: #1685f4;">Login</span></p> -->
+      <div class="row">
+        <div class="col-6">
+         
+
+          <div>
+            <label for="">School:</label>
+            <br>
+            <textarea name="" id="" cols="30" rows="20" formControlName="institute" style="height: 10vh;" ></textarea>
+            <!-- <input type="text" formControlName="institute" /> -->
+          </div>
+          <div>
+            <label for="">Degree:</label>
+            <br>
+            <textarea name="" id="" cols="30" rows="20" formControlName="deg" style="height: 10vh;" ></textarea>
+            <!-- <input type="text" formControlName="deg" /> -->
+          </div>
+          
+        </div>
+        <div class="col-6">
+          <div>
+            <label for="">Start Year:</label>
+            <input type="number" formControlName="admission_yr" />
+          </div>
+          <div>
+            <label for="">End Year:</label>
+            <input type="number" formControlName="completion_yr" />
+          </div>
+          <div>
+            <label for="">Grade:</label>
+            <br>
+            <input type="text" formControlName="gpa" />
+          </div>
+      </div>
+      
+      <div class="d-flex flex-row justify-content-between" style="margin-top: 1em;">
+        <button
+          type="button"
+          class="btn btn-primary w-25 text-center align-self-center"
+          [routerLink]="['/register']"
+        >
+          Back
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary w-25 text-center align-self-center"
+          (click)="add()"
+        >
+          Add
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary w-25 text-center align-self-center"
+          (click)="submit(1)"
+        >
+          Next
+        </button>
+      </div>
+</div>
+</form>
+     
+      
+        <!-- <div class=" d-flex flex-column justify-content-center"> -->
+          
+     
+</div>
+
+</div>
+

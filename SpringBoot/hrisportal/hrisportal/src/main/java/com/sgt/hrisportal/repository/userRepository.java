@@ -16,7 +16,7 @@ public class userRepository {
         return jdbcTemplate.update("EXEC  hrisportal.sp_insert_user ?,?,?,?,?,?,?,?,?,?",username,email,password,fullname,dob,phone,workexp,resume,exp_ctc,curr_ctc);
     }
 
-    public int insertQualification(int uid,String deg, String institute,int admission_yr,int completion_yr,float gpa){
+    public int insertQualification(int uid,String deg, String institute,int admission_yr,int completion_yr,double gpa){
         return jdbcTemplate.update("EXEC hrisportal.sp_insert_qualifications ?,?,?,?,?,?",uid,deg,institute,admission_yr,completion_yr,gpa);
     }
 
@@ -80,5 +80,17 @@ public class userRepository {
         return jdbcTemplate.update("EXEC hrisportal.sp_reset_pwd ?,?,?",token,password,role);
     }
 
+    public Map<String, Object> getExtension(int userid,String folder){
+        return jdbcTemplate.queryForMap("EXEC hrisportal.sp_get_fileName ?,?",userid,folder);
+    }
+    public List<Map<String, Object>> fetchDepts() {
+        return jdbcTemplate.queryForList("EXEC hrisportal.fetchDepts");
+    }
+
+    public int insertDocuments(String aadhar, String pan, String voter, String ifsc_code, String name_of_acc_holder, String passport_no, String esign, int user_id, String account_no) {
+    return jdbcTemplate.update("EXEC hrisportal.sp_insert_documents ?,?,?,?,?,?,?,?,?",user_id,aadhar,pan,voter,account_no,ifsc_code,
+             passport_no,name_of_acc_holder, esign);
+
+    }
 }
 

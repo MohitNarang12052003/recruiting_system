@@ -1,0 +1,17 @@
+label{
+    font-size: 15px;
+}
+input,textarea{
+    margin-bottom: 2em;
+    width: 20vw;
+    height: 5vh;
+    border-style: solid;
+  border-image-source: linear-gradient(to bottom right, blue, skyblue);
+  border-width: 3pt;
+  border-image-slice: 1;
+  outline: none;
+}
+
+button{
+    margin-bottom: 2em;
+}

@@ -12,6 +12,7 @@ import { HrModule } from './hr/hr.module';
 import { UserModule } from './user/user.module';
 
 
+
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, SharedModule, AppRoutingModule, HomeModule,  EmployeeModule, HrModule,NgbModule,UserModule],

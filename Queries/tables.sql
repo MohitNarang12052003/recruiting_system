@@ -92,19 +92,20 @@ CREATE TABLE hrisportal.employee
 
 	CREATE TABLE hrisportal.documents
 	(
-		document_id INT PRIMARY KEY,
+		document_id INT PRIMARY KEY IDENTITY(1,1),
 		user_id INT FOREIGN KEY REFERENCES hrisportal.users(user_id),
-		aadhar_card NVARCHAR(MAX),
-		pancard NVARCHAR(MAX),
-		voter_card NVARCHAR(MAX),
+		aadhar NVARCHAR(MAX),
+		pan NVARCHAR(MAX),
+		voter NVARCHAR(MAX),
 		account_no INT UNIQUE,
-		ifsc_code INT UNIQUE,
-		passport_no INT UNIQUE,
+		ifsc_code  NVARCHAR(MAX),
+		passport_no  NVARCHAR(MAX),
 		name_of_acc_holder VARCHAR(100),
-		photo NVARCHAR(MAX),
-		updated_resume NVARCHAR(MAX),
 		esign NVARCHAR(MAX)
 	)
+	INSERT INTO hrisportal.documents (document_id, user_id, aadhar, pan, voter, account_no, ifsc_code, passport_no, name_of_acc_holder, esign)
+VALUES
+    (1, 48, 'AADHAR123456789.pdf', 'PANABCDE1234F.pdf', 'VOTERABC123.pdf', 1234567890, 123456, 987654321, 'John Doe', 'esign_document');
 
 
 CREATE TABLE hrisportal.hr(

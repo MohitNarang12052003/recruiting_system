@@ -227,3 +227,61 @@ END
 
 GO
 
+
+
+
+CREATE OR ALTER       PROCEDURE [hrisportal].[sp_single_applicant]
+@app_id INT
+AS
+BEGIN
+SELECT a.applicant_id,
+	a.user_id,
+	a.j_id,
+	a.applied_at,
+	round_1,
+	round_2,
+	round_3,
+	doc_verification,
+	offer_letter,
+	u.*,
+	j.job_title,
+	i.*
+FROM hrisportal.applicants AS a
+INNER JOIN hrisportal.users AS u
+ON a.user_id=u.user_id
+INNER JOIN hrisportal.job_vacancy AS j
+ON j.j_id=a.j_id
+INNER JOIN hrisportal.additional_info AS i
+ON i.user_id=u.user_id
+WHERE a.applicant_id=@app_id
+END
+GO
+
+
+
+
+
+
+
+
+CREATE OR ALTER   PROCEDURE [hrisportal].[sp_update_applicant]
+@applicant_id VARCHAR(100),
+@round_1 VARCHAR(100),
+@round_2 VARCHAR(100),
+@round_3 VARCHAR(100),
+@doc_verification VARCHAR(100),
+@offer_letter VARCHAR(100)
+AS
+BEGIN
+UPDATE hrisportal.applicants
+SET round_1=@round_1,
+	round_2=@round_2,
+	round_3=@round_3,
+	doc_verification=@doc_verification,
+	offer_letter=@offer_letter
+WHERE applicant_id=@applicant_id
+END
+GO
+
+
+

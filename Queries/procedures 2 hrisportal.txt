@@ -254,7 +254,7 @@ CREATE OR ALTER   PROCEDURE [hrisportal].[sp_user_applications_detail]
 @user_id INT
 AS
 BEGIN
-SELECT a.*,j.job_title
+SELECT a.*,j.*
 FROM hrisportal.applicants AS a
 INNER JOIN job_vacancy AS j
 ON a.j_id = j.j_id

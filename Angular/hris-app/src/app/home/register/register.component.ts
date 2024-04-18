@@ -12,7 +12,17 @@ import { CookieService } from 'ngx-cookie-service';
 export class RegisterComponent {
   isDone: number = 0;
   imageUrl: any;
+  submitBtn=false;
 
+  hide = true;
+  hide1=true;
+
+  toggleVisibility(): void {
+    this.hide = !this.hide;
+  }
+  toggleVisibility1():void{
+    this.hide1 = !this.hide1;
+  }
   constructor(
     private userService: UsersService,
     private router: Router,
@@ -48,7 +58,7 @@ export class RegisterComponent {
 
     // });
 
-    this.userService.uploadFile(this.imageUrl, 'resume').subscribe((data) => {
+    // this.userService.uploadFile(this.imageUrl, 'resume',this.createForm.get("usern")?.value).subscribe((data) => {
       this.userService.insertUser(this.createForm.value).subscribe((data) => {
         console.log(data);
 
@@ -64,11 +74,19 @@ export class RegisterComponent {
         if (em !== null && pw !== null) {
           this.cookieService.set('email', em.toString());
           this.cookieService.set('pwd', pw.toString());
+          
         }
+        this.userService.loginUser({'email':em,'pwd':pw}).subscribe((data)=>{
+          console.log(data);
+          this.cookieService.set('user_id',data.user_id.toString());
+          this.userService.uploadFile(this.imageUrl, 'resume',this.cookieService.get("user_id")).subscribe((data) =>{
+            this.router.navigate(['Qualification']);
+          });
+        });
 
-        this.router.navigate(['Qualification']);
+        
       });
-    });
+    // });
   }
 
   // login(email: any, pwd: any) {
