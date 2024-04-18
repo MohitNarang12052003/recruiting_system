@@ -1,0 +1,26 @@
+<div style="margin-top: 3em;">
+    <h1 class="text-center">
+        <b><span style="color: #1685f4;">Countless Career Options</span> Are Waiting </b>
+    </h1>
+    <h1 class="text-center ">
+        <b>For You To Explore</b>
+    </h1>
+</div>
+
+<div class="row "  style="margin-top: 1.5em; margin-left:0.5em  ;width: 98vw; ">
+<button  class="btn col-3"  *ngFor="let dept of departments">
+    <div class="card d-flex flex-row justify-content-center align-items-center" >
+        <div class="card-body">
+            <h5 class="card-title">{{dept.dept_name}}</h5>
+            <h6 class="card-subtitle ">{{dept.count}} job openings</h6>
+        </div>
+    </div>
+</button>
+
+
+</div>
+<div class="text-center d-flex flex-column justify-content-center align-items-center" style="margin-top: 1.5em;">
+    <button type="button" class="btn btn-primary">View All</button>
+</div>
+
+

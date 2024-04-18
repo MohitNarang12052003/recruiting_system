@@ -1,4 +1,4 @@
-<div class="main-page">
+<!-- <div class="main-page">
   <div class="inside">
     <div class="text">
       <form
@@ -6,16 +6,16 @@
         style="height: 80vh; width: 35vw"
         [formGroup]="createForm"
       >
-        <h1>Register</h1>
+        <h1>Register</h1> -->
         <!-- <div>
           <label for="">Work Experience:</label>
           <input type="number" formControlName="wexp" />
         </div> -->
-        <h4 class="text-start">Job History</h4>
+        <!-- <h4 class="text-start">Job History</h4>
         <div>
           <label for="">Title</label>
           <input type="text" formControlName="jtitle" />
-        </div>
+        </div> -->
         <!-- <div>
           <label for="">Employment Type</label>
           <select
@@ -32,7 +32,7 @@
             <option value="Trainee">Trainee</option>
           </select>
         </div> -->
-        <div>
+        <!-- <div>
           <label for="">Company:</label>
           <input type="text" formControlName="cname" />
         </div>
@@ -46,9 +46,9 @@
         </div>
         <div>
           <label for="">Describe</label>
-          <input type="text" formControlName="desc">
+          <input type="text" formControlName="desc"> -->
           <!-- <Textarea rows="2" cols="15" formControlName="desc"></Textarea> -->
-        </div>
+        <!-- </div>
         <div class="p-0 m-0 justify-content-start">
           <input
             class="form-check-input"
@@ -92,4 +92,106 @@
       </form>
     </div>
   </div>
+</div> -->
+<div class="row justify-content-between" style="width: 99.5vw; height: 70vh;">
+  <div class="col-3 m-0 p-0" style="">
+  <img src="../../../assets/Images/register.png" alt="" style="height: 70vh;width:100%;">
 </div>
+<div class="col-8 ">
+  
+  <form
+        class=" text-dark w-75  "
+        
+        [formGroup]="createForm"
+      >
+      <h1 style="margin-bottom: 1em;">Job History</h1>
+      <!-- <p class="text-muted">Already have an Account? <span style="color: #1685f4;">Login</span></p> -->
+      
+       <div class="row">
+        <div class="col-6">
+         
+
+          <div>
+            <label for="">Title</label>
+            <br>
+            <!-- <input type="text" formControlName="jtitle" /> -->
+            <textarea name="" id="" cols="30" rows="20" formControlName="jtitle" style="height: 10vh;" ></textarea>
+          </div>
+          <div>
+            <label for="">Company:</label>
+            <!-- <input type="text" formControlName="cname" /> -->
+            <textarea name="" id="" cols="30" rows="20" formControlName="cname" style="height: 10vh;" ></textarea>
+
+          </div>
+          
+            
+        </div>
+        <div class="col-6">
+          <div>
+            <label for="">Start year:</label>
+            <input type="number" formControlName="fyear" />
+          </div>
+          <div class="m-0">
+            <label for="">End year:</label>
+            <input type="number" formControlName="tyear" />
+          </div>
+          <div>
+            <label for="">Describe</label>
+            <input type="text" formControlName="desc">
+            </div>
+        </div>
+       </div>
+        <div class="d-flex flex-row justify-content-center">
+          <input
+          class="m-0 p-0" style="width: 10%;"
+            type="checkbox"
+            value=""
+            id="flexCheckDefault"
+          />
+          <label class="form-check-label" for="flexCheckDefault">
+            I am currently working in this role
+          </label>
+        </div>
+      
+      <div class="d-flex flex-row justify-content-between" style="margin-top: 1em;">
+        <button
+          type="button"
+          class="btn btn-primary  text-center align-self-center"
+          [routerLink]="['/Qualification']"
+        >
+          Back
+        </button>
+        <button
+        type="button"
+        class="btn btn-primary text-center align-self-center"
+        (click)="add()"
+      >
+        Add
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary  text-center align-self-center"
+        (click)="submit(1)"
+      >
+        Next
+      </button>
+      <button
+        type="button"
+        class="btn btn-danger  align-self-center me-3"
+        [routerLink]="['/General']"
+      >
+        SKIP
+      </button>
+      </div>
+    </form>
+</div>
+
+     
+      
+        <!-- <div class=" d-flex flex-column justify-content-center"> -->
+          
+     
+
+
+</div>
+

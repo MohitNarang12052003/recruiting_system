@@ -12,7 +12,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins={"http://localhost:4200"},allowCredentials = "true")
+@CrossOrigin(origins={"http://localhost:4200","http://localhost:63145"},allowCredentials = "true")
 public class jobResource {
 
     @Autowired
@@ -51,7 +51,8 @@ public class jobResource {
     }
 
     @GetMapping("/viewSingleApplicant/{id}")
-    public ResponseEntity<Map<String, Object>> viewSingleApplicant(@PathVariable int id, HttpServletRequest httpServletRequest){
+    public ResponseEntity<Map<String, Object>> viewSingleApplicant(@PathVariable("id") int id,
+            HttpServletRequest httpServletRequest){
         return jobService.viewSingleApplicant(id,httpServletRequest);
     }
 
@@ -115,7 +116,8 @@ public class jobResource {
     }
 
     @GetMapping("/singleGoalData/{id}")
-    public ResponseEntity<Map<String, Object>> singleGoalData(@PathVariable int id, HttpServletRequest httpServletRequest){
+    public ResponseEntity<Map<String, Object>> singleGoalData(@PathVariable("id") String id,
+            HttpServletRequest httpServletRequest){
         return jobService.singleGoalData(id,httpServletRequest);
     }
 

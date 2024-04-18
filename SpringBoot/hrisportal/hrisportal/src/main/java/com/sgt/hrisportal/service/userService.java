@@ -21,6 +21,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.*;
+import java.util.regex.Pattern;
 
 @Service
 public class userService {
@@ -39,8 +40,9 @@ public class userService {
 
         Map<String,String> cookieMap =getCookiesAsHashMap(cookies);
 
-        if(cookieMap.containsKey("userid")){
-            Map<String,Object> result=userRepository.validateToken(Integer.parseInt(cookieMap.get("userid")),cookieMap.get("token"));
+        if(cookieMap.containsKey("user_id")){
+            Map<String,Object> result=userRepository.validateToken(Integer.parseInt(cookieMap.get("user_id")),
+                    cookieMap.get("token"));
             Integer validYN=(Integer) result.get("validYN");
             return validYN == -1;
         }
@@ -107,7 +109,7 @@ public class userService {
         String institute = (String) body.get("institute");
         int admission_yr = (int) body.get("admission_yr");
         int completion_yr = (int) body.get("completion_yr");
-        float gpa = (int) body.get("gpa");
+        double gpa = Double.parseDouble((String) body.get("gpa"));
 
         int insertedRows = userRepository.insertQualification(uid, deg, institute, admission_yr, completion_yr, gpa);
 
@@ -166,7 +168,7 @@ public class userService {
 
 
     public ResponseEntity<Map<String, Object>> insertPhoto(Map<String, Object> body) {
-        int uid = (int) body.get("uid");
+        int uid = Integer.parseInt((String)body.get("uid")) ;
         String photo = (String) body.get("photo");
 
         int insertedRows = userRepository.insertPhoto(uid, photo);
@@ -181,7 +183,7 @@ public class userService {
 
     }
 
-    public void uploadFile(MultipartFile data,String name) {
+    public void uploadFile(MultipartFile data,String name,int id) {
         System.out.println(name);
         Path path = Paths.get(name);
         try {
@@ -189,9 +191,15 @@ public class userService {
                 Files.createDirectory(path);
             }
             String fileName = StringUtils.cleanPath(data.getOriginalFilename());
-            Path finalPath = path.resolve(fileName);
-            ///uploads/harsh_cha
+            System.out.println(fileName);
+            String[] extension=fileName.split(Pattern.quote("."));
+            for(int i=0;i<extension.length;i++){
+                System.out.println(extension[i]);
+            }
+            Path finalPath = path.resolve(id+"."+extension[1]);
+
             InputStream inputStream = data.getInputStream();
+            System.out.println(inputStream);
             Files.copy(inputStream, finalPath, StandardCopyOption.REPLACE_EXISTING);
 
         } catch (Exception e) {
@@ -226,7 +234,7 @@ public class userService {
             Map<String,String> map=getCookiesAsHashMap(cookies);
 
 
-            return ResponseEntity.ok(userRepository.getUserDetails(Integer.parseInt(map.get("userid"))));
+            return ResponseEntity.ok(userRepository.getUserDetails(Integer.parseInt(map.get("user_id"))));
         }
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyMap());
@@ -239,7 +247,7 @@ public class userService {
             Map<String,String> map=getCookiesAsHashMap(cookies);
 
 
-            return ResponseEntity.ok(userRepository.userApplicationDetails(Integer.parseInt(map.get("userid"))));
+            return ResponseEntity.ok(userRepository.userApplicationDetails(Integer.parseInt(map.get("user_id"))));
         }
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyList());
@@ -343,4 +351,62 @@ public class userService {
     }
 
 
+    public List<Map<String, Object>> fetchDepts() {
+        return userRepository.fetchDepts();
+    }
+
+    public void sendAnything(Map<String,Object> body) {
+        MimeMessage mimeMessage =javaMailSender.createMimeMessage();
+        MimeMessageHelper mimeMessageHelper=new MimeMessageHelper(mimeMessage);
+        String email=(String)body.get("email");
+        String text=(String)body.get("anything");
+//        String sender=(String)body.get("emailSender");
+        String sender="kinjala.ahuja199@gmail.com";
+
+        try {
+            mimeMessageHelper.setSubject("Contact Us Queries - HRIS");
+            mimeMessageHelper.setTo(sender);
+            mimeMessageHelper.setText(text);
+//            mimeMessageHelper.setFrom(sender); // Set the from address
+            mimeMessageHelper.setReplyTo(email);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+
+        javaMailSender.send(mimeMessage);
+
+    }
+
+    public String getExtension(int userid,String folder){
+        Map<String,Object> body=userRepository.getExtension(userid,folder);
+        System.out.println(body);
+        String fileName=(String)body.get("document");
+        String[] extension=fileName.split(Pattern.quote("."));
+        return extension[1];
+    }
+
+    public ResponseEntity<Map<String, Object>> insertDocuments(Map<String, Object> body) {
+        String aadhar=(String)body.get("aadhar");
+        String pan=(String)body.get("pan");
+        String voter=(String)body.get("voter");
+        String ifsc_code=(String)body.get("ifsc_code");
+        String account_no=(String)body.get("account_no");
+        String passport_no=(String)body.get("passport_no");
+        String name_of_acc_holder=(String)body.get("name_of_acc_holder");
+        String esign=(String)body.get("esign");
+        int user_id=(int) body.get("user_id");
+
+        int insertedRows = userRepository.insertDocuments(aadhar,pan,voter,ifsc_code,name_of_acc_holder,passport_no,
+                esign,user_id,account_no);
+
+        if (insertedRows > 0) {
+            return ResponseEntity.ok(Map.of("status", "Successful"));
+
+        }
+
+
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyMap());
+
+    }
 }

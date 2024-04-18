@@ -1,0 +1,11 @@
+.card:hover {
+    color: white;
+    background-color: #1685f4;
+   
+}
+
+.card{
+    border-style: solid; border-color: #1685f4; color: #1685f4;
+    text-align: center;
+    height: 8em;
+}

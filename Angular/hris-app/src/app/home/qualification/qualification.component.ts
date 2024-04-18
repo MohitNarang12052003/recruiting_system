@@ -28,19 +28,19 @@ export class QualificationComponent {
 
   add(): void {
     this.submit(0);
-    this.createForm.reset();
+    
   }
 
-  loginForm = new FormGroup({
-    email: new FormControl(this.cookieService.get('email')),
-    pwd: new FormControl(this.cookieService.get('pwd')),
-  });
+  // loginForm = new FormGroup({
+  //   email: new FormControl(this.cookieService.get('email')),
+  //   pwd: new FormControl(this.cookieService.get('pwd')),
+  // });
 
   submit(done: number): void {
-    this.userService.loginUser(this.loginForm.value).subscribe((data) => {
-      console.log(data);
-      this.cookieService.set('user_id', data.user_id);
-    });
+    // this.userService.loginUser(this.loginForm.value).subscribe((data) => {
+    //   console.log(data);
+    //   this.cookieService.set('user_id', data.user_id);
+    // });
     this.createForm
       .get('uid')
       ?.setValue(parseInt(this.cookieService.get('user_id')));
@@ -48,6 +48,7 @@ export class QualificationComponent {
       .insertQualification(this.createForm.value)
       .subscribe((data) => {
         if (done == 1) this.router.navigate(['Experience']);
+        this.createForm.reset();
       });
   }
 }

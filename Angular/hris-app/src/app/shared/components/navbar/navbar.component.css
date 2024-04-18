@@ -2,7 +2,7 @@
   background-color: #398989;
 }
 
-.navbar-nav .nav-link:hover {
+.navbar-nav .nav-link:hover:not(.active) {
   /* color: #0b4a4a; */
 }
 
@@ -24,4 +24,7 @@
 
 a:hover {
   text-decoration: underline;
+}
+.active {
+
 }

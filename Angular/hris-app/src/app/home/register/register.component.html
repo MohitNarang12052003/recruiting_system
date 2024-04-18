@@ -1,4 +1,4 @@
-<div class="main-page">
+<!-- <div class="main-page">
   <div class="inside">
     <form
       class="bg-light text-dark d-flex flex-column p-4 field justify-content-between align-items-center m-4"
@@ -82,4 +82,151 @@
       </div>
     </form>
   </div>
+</div> -->
+<div class="row justify-content-between" style="width: 99.5vw; height: 70vh;">
+  <div class="col-3 m-0 p-0" style="">
+  <img src="../../../assets/Images/register.png" alt="" style="height: 70vh;width:100%;">
+</div>
+<div class="col-8 ">
+  
+  <form
+        class=" text-dark w-75  "
+        
+        [formGroup]="createForm"
+      >
+      <h1 >Get's Started</h1>
+      <p class="text-muted">Already have an Account? <span style="color: #1685f4;">Login</span></p>
+      <div class="row">
+        <div class="col-6" *ngIf="!isDone">
+         
+
+          <div>
+            <label for="">*Name</label>
+            <br>
+            <input type="text" formControlName="full_name" required/>
+          </div>
+          <div>
+            <label for="">*Username</label>
+            <br>
+            <input type="text" formControlName="username" required />
+          </div>
+          <div>
+            <label for="">*Email</label>
+            <br>
+            <input type="text" formControlName="email" required />
+          </div>
+        </div>
+        <div class="col-6" *ngIf="!isDone">
+          <div>
+            <label for="">*Phone No.:</label>
+            <br>
+            <input type="text" formControlName="phone" required/>
+          </div>
+          <div>
+            <label for="exampleInputPassword1">*Password:</label>
+            <br>
+            <div class="row" style="width: 100%;">
+              <input
+              [type]="hide ? 'password' : 'text'"
+              class="form-control col  align-self-center"
+              id="exampleInputPassword1"
+              formControlName="password"
+              
+              style="margin-left: 0.75em; "
+            />
+            <button (click)="toggleVisibility()" class="col-2 btn btn-primary">
+              <i class="fa" [ngClass]="{'fa-eye': hide, 'fa-eye-slash': !hide}"></i>
+            </button>
+            </div>
+          </div>
+          <div>
+            <label for="exampleInputPassword2">*Confirm Password</label>
+            <br>
+            <div class="row" style="width: 100%;">
+              <input
+              [type]="hide1 ? 'password' : 'text'"
+              class="form-control col align-self-center"
+              id="exampleInputPassword2"
+              formControlName="cpassword"
+              
+              style="margin-left: 0.75em; "
+            />
+            <button (click)="toggleVisibility1()" class="col-2 btn btn-primary">
+              <i class="fa" [ngClass]="{'fa-eye': hide1, 'fa-eye-slash': !hide1}"></i>
+            </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-col justify-content-center"  *ngIf="!isDone">
+        <button
+      type="button"
+      class="btn btn-primary w-25 text-center align-self-center"
+      (click)="add()"
+    >
+      Next
+    </button>
+      </div>
+
+      <div class="row">
+        <div class="col-6" *ngIf="isDone">
+          <div>
+            <label for="">*Resume</label>
+            <input
+              class="form-control form-control-sm"
+              type="file"
+              style="border-color: black"
+              accept="file/pdf"
+              (change)="read($event)"
+              required
+            />
+          </div>
+          <br />
+          <div>
+            <label for="">*Date of Birth</label>
+            <input type="date" formControlName="dob" required />
+          </div>
+          <br />
+          <div>
+            <label for="">*Do you have any Work Experience(Y/N)</label>
+            <input type="text" formControlName="work_exp" required />
+          </div>
+          <br />
+         
+        </div>
+        <div class="col-6" *ngIf="isDone">
+          <div>
+            <label for="">*Current CTC(in LPA):</label>
+            <input type="number" formControlName="curr_ctc" required />
+          </div>
+          <br />
+          <div>
+            <label for="">*Expected CTC(in LPA):</label>
+            <input type="number" formControlName="exp_ctc" required />
+          </div>
+          <br>
+          <div style="display: flex; flex-direction: row; justify-content: center;align-items: center;height: 3vh;margin-top: 1.5em;">
+            <input  type="checkbox" class="m-0 p-0" style="width: 10%;" [checked]="submitBtn"
+            (change)="submitBtn = !submitBtn">
+            <label style="width: 100%;">
+             <span style="color: #1685f4; ">I accept terms and conditions</span>
+          </label>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-col justify-content-center"  *ngIf="submitBtn">
+        <button
+      type="button"
+      class="btn btn-primary w-25 text-center align-self-center"
+      (click)="submit()"
+    >
+      Next
+    </button>
+      </div>
+      
+        <!-- <div class=" d-flex flex-column justify-content-center"> -->
+          
+      </form>
+</div>
+
 </div>

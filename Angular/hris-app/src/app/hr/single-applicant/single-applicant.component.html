@@ -320,7 +320,7 @@
         </div>
         <br> -->
 
-        <button type="submit">Update</button>
+        <button type="submit" (click)="submit()">Update</button>
         <br>
         
     </form>
@@ -345,5 +345,7 @@
 
     <h5>Send new Employee Email password</h5>
     <button [routerLink]="['/create-new-employee',id]" >Send Mail </button>
+
+    <button type="button" class="btn btn-primary" [routerLink]="['/viewDocuments',applicantDetails.user_id]" >View Documents{{applicantDetails.user_id}}</button>
 </div>
 

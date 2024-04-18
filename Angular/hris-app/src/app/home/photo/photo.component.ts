@@ -22,6 +22,7 @@ export class PhotoComponent {
   createForm = new FormGroup({
     uid: new FormControl(),
     photo: new FormControl(),
+    username:new FormControl()
   });
   selectFile(event: any) {
     //Angular 11, for stricter type
@@ -49,7 +50,7 @@ export class PhotoComponent {
 
     this.imageUrl = event.target.files[0];
     console.log(event.target.files);
-    this.createForm.patchValue({
+    this.createForm.patchValue({  
       photo: event.target.files[0].name,
     });
   }
@@ -57,8 +58,13 @@ export class PhotoComponent {
   submitPhoto() {
     this.createForm
       .get('uid')
-      ?.setValue(parseInt(this.cookieService.get('user_id')));
-    this.userService.uploadFile(this.imageUrl, 'photo').subscribe((data) => {
+      ?.setValue(this.cookieService.get('user_id'));
+
+      this.createForm
+      .get('username')
+      ?.setValue(this.cookieService.get('username'));
+      console.log(this.createForm.get('username')?.value);
+    this.userService.uploadFile(this.imageUrl, 'photo',this.createForm.get('uid')?.value).subscribe((data) => {
       console.log(data + ' inside photo');
       this.userService.insertPhoto(this.createForm.value).subscribe((data) => {
         console.log('inside login');

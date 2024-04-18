@@ -49,14 +49,14 @@ export class SinglejobComponent implements OnInit {
   });
 
   submit() {
-    const usid = this.cookieService.get('userid');
+    const usid = this.cookieService.get('user_id');
     console.log(usid);
     if (usid == '') {
       this.erouter.navigate(['/login']);
     } else {
       this.createForm
         .get('userid')
-        ?.setValue(parseInt(this.cookieService.get('userid')));
+        ?.setValue(parseInt(this.cookieService.get('user_id')));
 
       this.createForm.get('j_id')?.setValue(parseInt(this.id));
 

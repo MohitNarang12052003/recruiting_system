@@ -1,0 +1,22 @@
+<p>view-documents works!</p>
+
+<div class="row">
+    <div class="col-4">
+        <table>
+            <tr>
+                <th>Sr no.</th>
+                <th>Document</th>
+                <th></th>
+            </tr>
+            <tr *ngFor="let spec of specify;let i=index">
+                <td>{{i+1}}</td>
+                <td>{{spec}}</td>
+                <td><button class="btn btn-primary" type="button" (click)="fetchPdf(spec)">View</button></td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-4">
+        <iframe [src]="safePdfSrc" frameborder="0"></iframe>
+    </div>
+
+</div>

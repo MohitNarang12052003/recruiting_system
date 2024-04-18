@@ -7,12 +7,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins={"http://localhost:4200"},allowCredentials = "true")
+@CrossOrigin(origins={"http://localhost:4200","http://localhost:63145"},allowCredentials = "true")
 public class userResource {
     @Autowired
     userService userService;
@@ -53,8 +56,9 @@ public class userResource {
 
 
     @PostMapping("/uploadFile")
-    public void UploadFile(@RequestParam("file") MultipartFile file,@RequestParam("name") String name){
-        userService.uploadFile(file,name);
+    public void UploadFile(@RequestParam("file") MultipartFile file,@RequestParam("name") String name,
+                           @RequestParam("userid") int userid){
+        userService.uploadFile(file,name,userid);
     }
 
 
@@ -80,12 +84,14 @@ public class userResource {
     }
 
     @GetMapping("/getQualificationsOfUser/{id}")
-    public ResponseEntity<List<Map<String ,Object>>> getQualificationsOfUser(@PathVariable int id,HttpServletRequest httpServletRequest){
+    public ResponseEntity<List<Map<String ,Object>>> getQualificationsOfUser(@PathVariable("id") int id,
+            HttpServletRequest httpServletRequest){
         return userService.getQualificationsOfUser(id,httpServletRequest);
     }
 
     @GetMapping("/getJobHistoryOfUser/{id}")
-    public ResponseEntity<List<Map<String ,Object>>> getJobHistoryOfUser(@PathVariable int id,HttpServletRequest httpServletRequest){
+    public ResponseEntity<List<Map<String ,Object>>> getJobHistoryOfUser(@PathVariable("id") int id,
+            HttpServletRequest httpServletRequest){
         return userService.getJobHistoryOfUser(id,httpServletRequest);
     }
 
@@ -95,7 +101,30 @@ public class userResource {
         return userService.changePwd(body,httpServletRequest);
     }
 
+    @GetMapping("/depts")
+    public List<Map<String,Object>> fetchDepts(){
+            return userService.fetchDepts();
+    }
 
+
+    @PostMapping("/sendAnything")
+    public void sendAnything(@RequestBody Map<String,Object> body){
+        userService.sendAnything(body);
+    }
+
+    @GetMapping("/GetFiles/{userid}/{folder}")
+    public byte[] getFiles(@PathVariable("userid") String userid,@PathVariable("folder") String folder) throws IOException{
+        int user_id=Integer.parseInt(userid);
+        String extension=userService.getExtension(user_id,folder);
+        String fileName=userid+"."+extension;
+
+        return Files.readAllBytes(Paths.get(folder+"/"+fileName));
+    }
+
+    @PostMapping("/insertDocuments")
+    public ResponseEntity<Map<String, Object>> insertDocuments(@RequestBody Map<String,Object> body){
+        return userService.insertDocuments(body);
+    }
 
 
 }

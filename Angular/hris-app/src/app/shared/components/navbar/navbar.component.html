@@ -21,7 +21,7 @@
       id="navbarNavAltMarkup"
     >
       <div class="navbar-nav">
-        <a class="nav-link" href="">Home</a>
+        <a class="nav-link active" href="" >Home</a>
         <a class="nav-link" href="">Jobs</a>
         <a class="nav-link" href="">About</a>
         <a class="nav-link" href="">Contact</a>
@@ -34,15 +34,15 @@
       </div>
       <div class="navbar-nav logout" *ngIf="isLoggedIn()">
         <button
-          class="btn btn-outline-dark me-3"
+          class="btn btn-outline-primary me-3"
           (click)="logOut()"
           [routerLink]="['/login']"
         >
           Logout
         </button>
 
-        <button class="btn btn-outline-dark me-3" [routerLink]="['change-pwd']">
-          Change Password
+        <button class="btn btn-outline-primary me-3" [routerLink]="['home']" style="height:5vh; width:4vw;border-radius: 50%;background-image: url('http://localhost:8083/api/GetFiles/{{ userid }}/photo'); background-size: cover; background-position: center; background-repeat: no-repeat; ">
+          <!-- <img [src]="'http://localhost:8083/api/GetFiles/' + userid + '/photo'" alt="" style="height:5vh; width:4vw; border-radius: 50%;margin:0 ;padding: 0;"  > -->
         </button>
       </div>
     </div>

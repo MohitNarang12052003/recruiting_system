@@ -30,6 +30,7 @@ export class GeneralComponent {
     this.createForm.get('gender')?.setValue(e.target.value);
   }
   submit() {
+    // this.router.navigate(['Photo']);
     this.createForm
       .get('uid')
       ?.setValue(parseInt(this.cookieService.get('user_id')));

@@ -33,8 +33,9 @@ public class jobService {
 
         Map<String,String> cookieMap =getCookiesAsHashMap(cookies);
 
-        if(cookieMap.containsKey("userid")){
-            Map<String,Object> result= jobRepository.validateToken(Integer.parseInt(cookieMap.get("userid")),cookieMap.get("token"));
+        if(cookieMap.containsKey("user_id")){
+            Map<String,Object> result= jobRepository.validateToken(Integer.parseInt(cookieMap.get("user_id")),
+                    cookieMap.get("token"));
             Integer validYN=(Integer) result.get("validYN");
             return validYN == -1;
         }
@@ -412,7 +413,8 @@ public class jobService {
     }
 
 
-    public ResponseEntity<Map<String ,Object>> singleGoalData(int id,HttpServletRequest httpServletRequest){
+    public ResponseEntity<Map<String ,Object>> singleGoalData(String goalid,HttpServletRequest httpServletRequest){
+        int id=Integer.parseInt(goalid);
         boolean isValid=isValidToken(httpServletRequest);
         if(isValid){
 

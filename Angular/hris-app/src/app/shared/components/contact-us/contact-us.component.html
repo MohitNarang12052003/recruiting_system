@@ -1,1 +1,32 @@
-<p>contact-us works!</p>
+<div class="d-flex flex-column justify-content-center align-items-center " style="margin-top: 4em; margin-bottom: 1.5em;">
+    <h1><b>Connect with Us</b> </h1>
+    <p class="text-muted text-center">
+        Got a question or feedback? We'd love to hear from you!
+        <br>Drop us a message below and we'll get back to you as soon as possible.
+        <br>Your input helps us improve!
+    </p>
+</div>
+
+<div class="connect-with-us">
+   
+    
+    <div>
+        <form class="connect-form" [formGroup]="createForm">
+            <div class="form-group">
+              <label for="email"><b>Email:</b></label>
+              <br>
+              <input type="email" id="email" name="email" class="form-control ipt" style="width: 45vw; " formControlName="email">
+            </div>
+            <br>
+            <div class="form-group">
+              <label for="query"><b>Anything:</b></label>
+              <br>
+              <textarea id="query" name="query" rows="4" class="form-control ipt" formControlName="anything"></textarea>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
+          </form>
+    </div>
+    <img src="../../../../assets/Images/contact.avif" alt="">
+  </div>
+  

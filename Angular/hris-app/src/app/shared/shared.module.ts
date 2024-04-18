@@ -28,7 +28,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   exports:[
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    ContactUsComponent
   ]
 })
 export class SharedModule { }

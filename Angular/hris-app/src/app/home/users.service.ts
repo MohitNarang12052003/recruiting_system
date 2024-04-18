@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient } from '@angular/common/http';
 import { Job } from '../shared/interfaces/job.interface';
 import { APP_CONSTANTS } from '../shared/constants/app.constants';
+import { dept } from '../shared/interfaces/departments.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -40,10 +41,11 @@ export class UsersService {
     return this.http.post<any>(APP_CONSTANTS.BACKEND_URL +'login', data);
   }
 
-  uploadFile(file: any, name: string): Observable<any> {
+  uploadFile(file: any, name: string,userid:string): Observable<any> {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('name', name);
+    formData.append('userid',userid);
     return this.http.post(APP_CONSTANTS.BACKEND_URL +'uploadFile', formData);
   }
 
@@ -65,5 +67,20 @@ export class UsersService {
 
   sendMail(email:string):Observable<any>{
     return this.http.post(APP_CONSTANTS.BACKEND_URL +'sendMail',{email});
+  }
+
+  fetchDepts(): Observable<dept[]> {
+    return this.http.get<dept[]>(APP_CONSTANTS.BACKEND_URL +'depts');
+  }
+
+  sendAnything(data:any):Observable<any>{
+    return this.http.post<any>(APP_CONSTANTS.BACKEND_URL +'sendAnything', data);
+
+  }
+
+  insertDocuments(data:any):Observable<any>{
+    return this.http.post<any>(APP_CONSTANTS.BACKEND_URL+'insertDocuments',data, {
+      withCredentials: true,
+    });
   }
 }

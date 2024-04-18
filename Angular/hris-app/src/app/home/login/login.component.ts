@@ -11,6 +11,12 @@ import { APP_CONSTANTS } from 'src/app/shared/constants/app.constants';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+
+  hide = true;
+
+  toggleVisibility(): void {
+    this.hide = !this.hide;
+  }
   constructor(
     private userService: UsersService,
     private router: Router,
@@ -30,6 +36,7 @@ export class LoginComponent implements OnInit {
     this.userService.loginUser(this.createForm.value).subscribe((data) => {
       console.log('here');
       this.cookieService.set('email', data['email']);
+      // this.cookieService.set('user_id',data['user_id'])
       this.cookieService.set('token', data['token']);
       this.cookieService.set('time_to_expire', data['time_to_expire']);
       this.cookieService.set('role', data['role']);
@@ -37,8 +44,8 @@ export class LoginComponent implements OnInit {
       // this.cookieService.set('username', data['username']);
       // console.log("here"+this.cookieService.getAll());
       if (data['role'] == APP_CONSTANTS.USER_ROLE) {
-        this.cookieService.set('userid', data['user_id']);
-        this.router.navigate(['/home']);
+        this.cookieService.set('user_id', data['user_id']);
+        this.router.navigate(['/']);
       } else if (data['role'] == APP_CONSTANTS.EMP_ROLE) {
         this.cookieService.set('employee_id', data['employee_id']);
         this.router.navigate(['Employee']);

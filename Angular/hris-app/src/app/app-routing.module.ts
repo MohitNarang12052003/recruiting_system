@@ -28,6 +28,8 @@ import { OriginalDocumentsComponent } from './home/original-documents/original-d
 import { CreateNewEmployeeComponent } from './hr/create-new-employee/create-new-employee.component';
 import { ChangePwdComponent } from './shared/components/change-pwd/change-pwd.component';
 import { AddAnnouncementComponent } from './hr/add-announcement/add-announcement.component';
+import { OverviewComponent } from './home/overview/overview.component';
+import { ViewDocumentsComponent } from './hr/view-documents/view-documents.component';
 
 const routes: Routes = [
   {
@@ -134,6 +136,15 @@ const routes: Routes = [
     path: 'AddAnnouncement',
     component: AddAnnouncementComponent,
   },
+  {
+    path:'OverView',
+    component:OverviewComponent
+  },
+{
+  path:'viewDocuments/:id',
+  component:ViewDocumentsComponent
+
+},
   {
     path: '',
     component: HeroComponent,

@@ -14,6 +14,7 @@ import { SingleEmployeeComponent } from './single-employee/single-employee.compo
 import { NextRoundEmailComponent } from './next-round-email/next-round-email.component';
 import { CreateNewEmployeeComponent } from './create-new-employee/create-new-employee.component';
 import { AddAnnouncementComponent } from './add-announcement/add-announcement.component';
+import { ViewDocumentsComponent } from './view-documents/view-documents.component';
 
 
 
@@ -28,7 +29,8 @@ import { AddAnnouncementComponent } from './add-announcement/add-announcement.co
     SingleEmployeeComponent,
     NextRoundEmailComponent,
     CreateNewEmployeeComponent,
-    AddAnnouncementComponent
+    AddAnnouncementComponent,
+    ViewDocumentsComponent
   ],
   imports: [
     CommonModule,

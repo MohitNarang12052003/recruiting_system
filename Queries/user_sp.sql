@@ -132,3 +132,24 @@ EXEC hrisportal.sp_login 'jay@email.com' ,'hash'
 
 
 select * from dbo.users
+
+
+CREATE OR ALTER PROCEDURE hrisportal.sp_get_qualifications_of_user
+@user_id INT
+AS
+BEGIN
+	SELECT * 
+	FROM hrisportal.qualifications
+	WHERE user_id=@user_id
+END
+
+
+CREATE OR ALTER PROCEDURE hrisportal.sp_get_job_history_of_user
+@user_id INT
+AS
+BEGIN
+	SELECT * 
+	FROM hrisportal.jobHistory
+	WHERE user_id=@user_id
+END
+

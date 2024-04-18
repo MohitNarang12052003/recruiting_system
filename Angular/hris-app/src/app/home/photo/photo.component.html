@@ -1,4 +1,4 @@
-<div class="main-page">
+<!-- <div class="main-page">
   <div class="inside">
     <div
       class="text d-flex flex-column justify-content-center align-items-center m-4"
@@ -24,4 +24,39 @@
       </div>
     </div>
   </div>
+</div> -->
+<div class="row justify-content-between" style="width: 99.5vw; height: 70vh;">
+  <div class="col m-0 p-0" style="">
+  <img src="../../../assets/Images/pic.png" alt="" style="height: 70vh;width:100%;">
+</div>
+<div class="col-6 d-flex flex-column  align-items-center m-2">
+  <form
+        class=" text-dark w-75 "
+        
+        [formGroup]="createForm"
+      >
+        <h1 style="font-size: 50px; ">Photo</h1>
+        <!-- <div class=" d-flex flex-column justify-content-center"> -->
+          <p>
+            Upload an photo of yourself , which will help recruiters to recruit
+            you
+          </p>
+  
+          <div [innerHtml]="msg" *ngIf="msg" style="color: red"></div>
+  
+          <div  *ngIf="url"><img [src]="url" *ngIf="url" style="width: 40vw; height: 40vh;"/></div>
+          <label style="background-image: url(../../../assets/Images/upload.png); width: 40vw;height: 40vh; background-repeat: no-repeat;cursor: pointer;" for="file-upload"  *ngIf="!url">
+            <input type="file" (change)="selectFile($event)" style="display: none; " id="file-upload" />
+          </label>
+
+            
+            <div class="d-flex flex-row justify-content-center" style="margin-top: 1em;"><button  type="button" class="btn btn-primary w-25 text-center align-self-center" (click)="submitPhoto()" *ngIf="submit">Submit</button></div>
+       <!-- <br> -->
+      
+         
+       
+    
+      </form>
+</div>
+
 </div>
