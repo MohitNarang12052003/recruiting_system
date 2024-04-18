@@ -22,12 +22,16 @@ import { UnauthorizedComponent } from './shared/components/unauthorized/unauthor
 import { SingleEmployeeComponent } from './hr/single-employee/single-employee.component';
 import { HomepageComponent } from './user/homepage/homepage.component';
 import { UserGuardService } from './user/user-guard.service';
-import { ForgotPwdComponent } from './home/forgot-pwd/forgot-pwd.component';
 import { NextRoundEmailComponent } from './hr/next-round-email/next-round-email.component';
 import { OriginalDocumentsComponent } from './home/original-documents/original-documents.component';
 import { CreateNewEmployeeComponent } from './hr/create-new-employee/create-new-employee.component';
 import { ChangePwdComponent } from './shared/components/change-pwd/change-pwd.component';
 import { AddAnnouncementComponent } from './hr/add-announcement/add-announcement.component';
+import { ApplyLeavesComponent } from './employee/apply-leaves/apply-leaves.component';
+import { ForgotPwdComponent } from './shared/components/forgot-pwd/forgot-pwd.component';
+import { ResetPwdComponent } from './shared/components/reset-pwd/reset-pwd.component';
+import { AttendanceComponent } from './employee/attendance/attendance.component';
+import { CalendarComponent } from './employee/calendar/calendar.component';
 import { OverviewComponent } from './home/overview/overview.component';
 import { ViewDocumentsComponent } from './hr/view-documents/view-documents.component';
 
@@ -91,6 +95,10 @@ const routes: Routes = [
     component: ForgotPwdComponent,
   },
   {
+    path:'reset/:token',
+    component:ResetPwdComponent
+  },
+  {
     path: 'ViewEmployees',
     component: ViewEmployeesComponent,
     canActivate: [HRGuardService],
@@ -106,7 +114,7 @@ const routes: Routes = [
     canActivate: [HRGuardService],
   },
   {
-    path: 'SingleEmployeeDetails/:id',
+    path: 'SingleEmployeeDetails/:email',
     component: SingleEmployeeComponent,
     canActivate: [HRGuardService],
   },
@@ -146,9 +154,13 @@ const routes: Routes = [
 
 },
   {
+    path: 'Apply-leave',
+    component: ApplyLeavesComponent,
+  },
+  {
     path: '',
     component: HeroComponent,
-  },
+  }
 ];
 
 @NgModule({

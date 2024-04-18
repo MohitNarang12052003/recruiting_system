@@ -20,7 +20,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 @Service
@@ -348,6 +351,34 @@ public class userService {
         }
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyMap());
+    }
+
+
+    public ResponseEntity<Map<String,Object>> validateFpToken(String token){
+        Map<String,Object> result=userRepository.validateFpToken(token);
+
+        if((int)result.get("validYN")==-2){
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(Collections.emptyMap());
+        }
+
+        return ResponseEntity.ok(Collections.emptyMap());
+
+    }
+
+    public ResponseEntity<Map<String,Object>> resetPwd(Map<String,Object> form){
+        String token=(String) form.get("token");
+        String password=(String) form.get("new_pwd");
+
+        Map<String,Object> result=userRepository.validateFpToken(token);
+        int role=(int) result.get("validYN");
+
+        int insertedRows=userRepository.resetPwd(token,password,role);
+        if(insertedRows>0){
+            return ResponseEntity.ok(Collections.emptyMap());
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(Collections.emptyMap());
+
     }
 
 

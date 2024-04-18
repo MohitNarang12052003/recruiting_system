@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HrService } from '../hr.service';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -9,8 +9,11 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./next-round-email.component.css']
 })
 export class NextRoundEmailComponent {
+
   id!:any;
   applicantDetails!:any;
+  currentRound!:number;
+
 
   nextRoundForm!:FormGroup;
 
@@ -48,6 +51,18 @@ export class NextRoundEmailComponent {
       next:(data)=>{
         this.applicantDetails=data;
         console.log(data)
+        this.currentRound=1;
+        if(this.applicantDetails.round_1==='Pass'){
+          this.currentRound=2;
+        }
+        
+        if(this.applicantDetails.round_2==='Pass'){
+          this.currentRound=3;
+        }
+
+
+        console.log(this.currentRound);
+        
       },
       error:(e)=>{
         console.log("error",e)
@@ -59,8 +74,11 @@ export class NextRoundEmailComponent {
   submit(){
     this.nextRoundForm.patchValue({
       email:this.applicantDetails.email,
-      uname:this.applicantDetails.username
+      uname:this.applicantDetails.username,
+      number:this.currentRound
     })
+
+    
 
     this.hrService.sendRoundMail(this.nextRoundForm.value).subscribe({
       next:(data)=>{

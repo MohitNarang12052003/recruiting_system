@@ -10,6 +10,8 @@ import { SkillsComponent } from './skills/skills.component';
 import { GoalsComponent } from './goals/goals.component';
 import { ChartComponent } from './chart/chart.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbCarouselModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ApplyLeavesComponent } from './apply-leaves/apply-leaves.component';
 
 @NgModule({
   declarations: [
@@ -22,10 +24,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SkillsComponent,
     GoalsComponent,
     ChartComponent,
+    ApplyLeavesComponent,
      ],
   imports: [CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbCarouselModule,
+    NgbModule
 ],
 
 })

@@ -1,0 +1,16 @@
+<form class="form-group" [formGroup]="resetPwdForm" (submit)="submit()">
+   
+    <div class="form-control">
+        <label for="new_pwd">Enter New Password</label>
+        <input type="text" name="new_pwd" id="new_pwd" formControlName="new_pwd">
+    </div>
+    <div class="form-control">
+        <label for="confirm_new_pwd">Confirm New Password</label>
+        <input type="text" name="confirm_new_pwd" id="confirm_new_pwd" formControlName="confirm_new_pwd">
+    </div>
+
+    <button type="submit">Submit</button>
+</form>
+
+
+<!-- <div *ngIf="hidden">Password changed successfully</div> -->

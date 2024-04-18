@@ -12,8 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { PhotoComponent } from './photo/photo.component';
 import { JobComponent } from './job/job.component';
 import { SinglejobComponent } from './singlejob/singlejob.component';
-import { ForgotPwdComponent } from './forgot-pwd/forgot-pwd.component';
 import { OriginalDocumentsComponent } from './original-documents/original-documents.component';
+import { NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GetHiredComponent } from './get-hired/get-hired.component';
 import { CategoryComponent } from './category/category.component';
 import { WhatWeOfferComponent } from './what-we-offer/what-we-offer.component';
@@ -36,7 +36,6 @@ import { FilterComponent } from './filter/filter.component';
     PhotoComponent,
     JobComponent,
     SinglejobComponent,
-    ForgotPwdComponent,
     OriginalDocumentsComponent,
     GetHiredComponent,
     CategoryComponent,
@@ -48,6 +47,8 @@ import { FilterComponent } from './filter/filter.component';
   ],
   imports: [
     CommonModule,
+    NgbModule,
+    NgbDatepickerModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,

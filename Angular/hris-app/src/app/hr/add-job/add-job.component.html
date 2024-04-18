@@ -1,94 +1,106 @@
-<h1>Add an Job</h1>
-<form
-  class="bg-light text-dark d-flex flex-column p-4 field justify-content-between align-items-center m-4"
-  [formGroup]="createForm"
->
-  <div>
-    <label for="">Title</label>
-    <input type="text" formControlName="jobTitle" />
+<div class="row container">
+  <div class="col-4 title">
+    <h1>Add New Job Opening</h1>
   </div>
-  <div>
-    <label for="">Employment Type</label>
-    <select
-      class="form-select"
-      style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
-      #type
-      (change)="onSelected(type.value)"
+  <div class="col-8">
+    <form
+      class="bg-light text-dark  p-4  m-4"
+      [formGroup]="createForm"
     >
-      <option value="" selected></option>
-      <option value="Full-time">Full-time</option>
-      <option value="Part-time">Part-time</option>
-      <option value="Internship">Internship</option>
-      <option value="self-employed">self-employed</option>
-      <option value="Freelance">Freelance</option>
-      <option value="Trainee">Trainee</option>
-    </select>
-  </div>
-  <div>
-    <label for="">Minimum Qualifications:</label>
-    <input type="text" formControlName="minQualification" />
-  </div>
-
-  <div>
-    <label for="">Describe</label>
-    <input type="text" formControlName="jobDescription" />
-    <!-- <Textarea rows="2" cols="15" formControlName="desc"></Textarea> -->
-  </div>
-
-  <div>
-    <label for="">Key Role</label>
-    <input type="text" formControlName="keyRole" />
-    <!-- <Textarea rows="2" cols="15" formControlName="desc"></Textarea> -->
-  </div>
-
-  <div>
-    <label for="">Location</label>
-    <input type="text" formControlName="location" />
-    <!-- <Textarea rows="2" cols="15" formControlName="desc"></Textarea> -->
-  </div>
-
-  <div>
-    <label for="">Department Name</label>
-    <select
-      class="form-select"
-      style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
-      #types
-      (change)="onDeptSelected(types.value)"
-    >
-      <option value="" selected></option>
-      <option value="Technology And Innovation">Technology And Innovation</option>
-      <option value="Data Science And Analytics">Data Science And Analytics</option>
-      <option value="Risk Management">Risk Management</option>
-      <option value="Compliance And Regulatory Affairs">Compliance And Regulatory Affairs</option>
-      <option value="Financial Operations">Financial Operations</option>
-      <option value="Product Development">Product Development</option>
-      <option value="Cybersecurity">Cybersecurity</option>
-      <option value="Finance And Accounting">Finance And Accounting</option>
-      <option value="Customer Support">Customer Support</option>
-      <option value="Marketing And Sales">Marketing And Sales</option>
-    </select>
-  </div>
+      <div class="my-container row">
+          <div class="col-5">
+            <div><label for="">Title</label></div>
+            <input type="text" class="elem" formControlName="jobTitle" />
+          </div>
+          <div class="col-5">
+            <div><label for="">Employment Type</label></div>
+            <select
+              class="form-select elem"
+              style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
+              #type
+              (change)="onSelected(type.value)"
+            >
+              <option value="" selected></option>
+              <option value="Full-time">Full-time</option>
+              <option value="Part-time">Part-time</option>
+              <option value="Internship">Internship</option>
+              <option value="self-employed">self-employed</option>
+              <option value="Freelance">Freelance</option>
+              <option value="Trainee">Trainee</option>
+            </select>
+          </div>
+          <div class="col-5">
+            <div><label for="">Minimum Qualifications:</label></div>
+            <input  class="elem" type="text" formControlName="minQualification" />
+          </div>
+      
+          <div class="col-5">
+            <div><label for="">Describe</label></div>
+            <input class="elem"  type="text" formControlName="jobDescription" />
+            <!-- <Textarea rows="2" cols="15" formControlName="desc"></Textarea> -->
+          </div>
+          <div class="col-5">
+            <div><label for="">Key Role</label></div>
+            <input  class="elem" type="text" formControlName="keyRole" />
+            <!-- <Textarea rows="2" cols="15" formControlName="desc"></Textarea> -->
+          </div>
+      
+          <div class="col-5">
+            <div><label for="">Location</label></div>
+            <input  class="elem" type="text" formControlName="location" />
+            <!-- <Textarea rows="2" cols="15" formControlName="desc"></Textarea> -->
+          </div>
+      
+          <div class="col-5">
+            <div><label for="">Department Name</label></div>
+            <select
+              class="form-select elem"
+              style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
+              #types
+              (change)="onDeptSelected(types.value)"
+            >
+              <option value="" selected></option>
+              <option value="Technology And Innovation">Technology And Innovation</option>
+              <option value="Data Science And Analytics">Data Science And Analytics</option>
+              <option value="Risk Management">Risk Management</option>
+              <option value="Compliance And Regulatory Affairs">Compliance And Regulatory Affairs</option>
+              <option value="Financial Operations">Financial Operations</option>
+              <option value="Product Development">Product Development</option>
+              <option value="Cybersecurity">Cybersecurity</option>
+              <option value="Finance And Accounting">Finance And Accounting</option>
+              <option value="Customer Support">Customer Support</option>
+              <option value="Marketing And Sales">Marketing And Sales</option>
+            </select>
+          </div>
+          
+          <div class="col-5">
+            <div ><label for="">Skills</label></div>
+            <input class="elem"  type="text" formControlName="skills" placeholder="java,python,..." />
+            <!-- <Textarea rows="2" cols="15" formControlName="desc"></Textarea> -->
+          </div>
+      </div>
   
-  <div>
-    <label for="">Skills</label>
-    <input type="text" formControlName="skills" placeholder="java,python,..." />
-    <!-- <Textarea rows="2" cols="15" formControlName="desc"></Textarea> -->
-  </div>
-  <div>
-    <button
-      type="button"
-      class="btn btn-dark w-25 align-self-center me-3"
-      [routerLink]="['/HR']"
-    >
-      Back
-    </button>
+      
+      <div class="btns row">
+        <button
+          type="button"
+          class="btn col-3"
+          [routerLink]="['/HR']"
+        >
+          Back
+        </button>
 
-    <button
-      type="button"
-      class="btn btn-dark w-25 align-self-center me-3"
-      (click)="submit()"
-    >
-      Submit
-    </button>
+        <div class="col-2"></div>
+  
+        <button
+          type="button"
+          class="btn col-3"
+          (click)="submit()"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  
   </div>
-</form>
+</div>

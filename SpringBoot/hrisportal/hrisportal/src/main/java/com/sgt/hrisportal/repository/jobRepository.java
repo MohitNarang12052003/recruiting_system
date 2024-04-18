@@ -60,6 +60,11 @@ public class jobRepository {
         return jdbcTemplate.queryForMap("EXEC  hrisportal.sp_view_single_employee ?",id);
     }
 
+    public Map<String,Object> getEidFromEmail(String email){
+        return jdbcTemplate.queryForMap("EXEC  hrisportal.sp_get_eid_from_email ?",email);
+    }
+
+
     public int toggleVacancy(int id){
         return jdbcTemplate.update("EXEC hrisportal.sp_toggle_vacancy ?",id);
     }
@@ -94,6 +99,36 @@ public class jobRepository {
 
     public int updateGoal(int id,String title,String description){
         return jdbcTemplate.update("EXEC  hrisportal.sp_update_goal ?,?,?",id,title,description);
+    }
+
+
+
+    //nidhi
+
+    public List<Map<String,Object>> fetchAnnouncement(){
+        return jdbcTemplate.queryForList("EXEC  hrisportal.fetch_announcements");
+    }
+
+    public List<Map<String,Object>> fetchAllAnnouncement(){
+        return jdbcTemplate.queryForList("EXEC  hrisportal.fetch_all_announcements");
+    }
+
+    public int addAnnouncement(int hrid,String announcement){
+        System.out.println("print");
+        return jdbcTemplate.update("EXEC hrisportal.insert_announcement ?,?",hrid,announcement);
+    }
+
+
+    public Map<String,Object>  totalLeavesCount(int id){
+        return jdbcTemplate.queryForMap("EXEC hrisportal.total_count ?",id);
+    }
+
+    public List<Map<String,Object>>  CategoryWiseCount(int id){
+        return jdbcTemplate.queryForList("EXEC hrisportal.category_count ?",id);
+    }
+
+    public int applyLeave(int employee_id,String category_name,String applied_at,String taken_for){
+        return jdbcTemplate.update("EXEC hrisportal.ApplyForLeave ?,?,?,?",employee_id,category_name,applied_at,taken_for);
     }
 
 }

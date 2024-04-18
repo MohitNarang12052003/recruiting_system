@@ -31,7 +31,7 @@ export class HrhomeComponent implements OnInit{
       this.userCount=val.user_count;
       this.vacanciesCount=val.vacancies_count;
       this.applicantsCount=val.applicant_count;
-      
+
     })
 
   }

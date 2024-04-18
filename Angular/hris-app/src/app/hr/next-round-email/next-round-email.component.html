@@ -1,21 +1,29 @@
-<p>next-round-email works!</p>
-<form [formGroup]="nextRoundForm" (submit)="submit()">
-    <div class="round-number">
-        <label for="round-number">Round Number</label>
-        <input type="number" formControlName=number>
-    </div>
-    <div class="round-date">
-        <label for="round-date">Round Date</label >
-        <input type="date" formControlName=date>
-    </div>
-    <div class="round-place">
-        <label for="round-place">Round Place</label>
-        <input type="text" formControlName=place>
-    </div>
-    <div class="round-time">
-        <label for="round-time">Round time</label >
-        <input type="time" formControlName=time>
+<div class="container row">
+    <div class="left col-3 txt d-flex align-items-center ">
+        <h3>Write details of next round</h3>
     </div>
 
-    <button type="submit">Send Mail</button>
-</form>
+    <div class="right col-5">
+        <form [formGroup]="nextRoundForm" (submit)="submit()">
+            <!-- <div class="round-number">
+                <label for="round-number">Round Number</label>
+                <input type="number" formControlName=number>
+            </div> -->
+            <div class="round row ">
+                <label for="round-date" class="txt col-5" ><h5>Round Date</h5></label >
+                <input type="date" class="col-5" formControlName=date>
+            </div>
+            <div class="round row ">
+                <label for="round-place"  class="txt col-5" ><h5>Round Place</h5></label>
+                <input type="text" formControlName=place class="col-5">
+            </div>
+            <div class="round row">
+                <label for="round-time"  class="txt col-5" ><h5>Round time</h5></label >
+                <input type="time" formControlName=time class="col-5">
+            </div>
+        
+            <button type="submit" class="btn">Send Mail</button>
+        </form>
+    </div>
+    
+</div>

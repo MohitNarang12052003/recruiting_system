@@ -66,6 +66,11 @@ public class jobResource {
         return jobService.viewSingleEmployee(id,httpServletRequest);
     }
 
+    @GetMapping("/getEidFromEmail/{email}")
+    public ResponseEntity<Map<String,Object>> getEidFromEmail(@PathVariable String email,HttpServletRequest httpServletRequest){
+        return jobService.getEidFromEmail(email,httpServletRequest);
+    }
+
     @PostMapping("/toggleVacancy/{id}")
     public ResponseEntity<Map<String, Object>> toggleVacancy(@PathVariable int id,HttpServletRequest httpServletRequest){
         System.out.println(1);
@@ -126,6 +131,43 @@ public class jobResource {
     public ResponseEntity<Map<String,Object>> updateGoal(@RequestBody Map<String,Object> body, HttpServletRequest httpServletRequest){
         return  jobService.updateGoal(body,httpServletRequest);
     }
+
+
+
+    //nidhi
+    @PostMapping("/applyLeave")
+    public ResponseEntity<Map<String,Object>> applyLeave(@RequestBody Map<String,Object> body,HttpServletRequest httpServletRequest){
+        return jobService.applyLeave(body,httpServletRequest);
+    }
+
+    @GetMapping("/totalLeavesCount/{id}")
+    public ResponseEntity<Map<String, Object>> totalLeavesCount(@PathVariable int id, HttpServletRequest httpServletRequest){
+//        System.out.println("inside total leaves count");
+        return jobService.totalLeavesCount(id,httpServletRequest);
+    }
+
+    @GetMapping("/CategoryWiseCount/{id}")
+    public ResponseEntity<List<Map<String, Object>>> CategoryWiseCount(@PathVariable int id, HttpServletRequest httpServletRequest){
+        return jobService.CategoryWiseCount(id,httpServletRequest);
+    }
+
+    @PostMapping("/addAnnouncement")
+    public ResponseEntity<Map<String,Object>> addAnnouncement(@RequestBody Map<String,Object> body,HttpServletRequest httpServletRequest){
+        return jobService.addAnnouncement(body,httpServletRequest);
+    }
+
+    @GetMapping("/announcement")
+    public List<Map<String,Object>> fetchAnnouncement(){
+
+        return jobService.fetchAnnouncement();
+    }
+
+    @GetMapping("/allAnnouncement")
+    public List<Map<String,Object>> fetchAllAnnouncement(){
+
+        return jobService.fetchAllAnnouncement();
+    }
+
 
 
 }

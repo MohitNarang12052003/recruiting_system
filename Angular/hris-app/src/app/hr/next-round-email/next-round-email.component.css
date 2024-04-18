@@ -1,0 +1,37 @@
+.left{
+    background-color:rgb(61, 174, 212);
+    margin: 2%;
+}
+
+.right{
+    background-color: gray;
+    margin: auto;
+}
+
+.container{
+    background-color: gainsboro;
+}
+
+.txt{
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    color: white;
+}
+
+
+.btn{
+    margin-left: 35%;
+    margin-top: 10%;
+    background-color: aliceblue;
+    border-color: black;
+    margin-bottom: 10%;
+}
+.btn:hover{
+    background-color: blue;
+    color: white;
+}
+
+
+.round{
+    margin-top: 10%;    
+}
+

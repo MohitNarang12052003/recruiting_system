@@ -1,0 +1,109 @@
+CREATE OR ALTER     PROCEDURE [hrisportal].[sp_view_employees]
+AS
+BEGIN
+SELECT e.email,u.full_name,u.phone_number,job_title, department,salary,date_of_joining,e.active_yn
+FROM hrisportal.employee AS e
+INNER JOIN hrisportal.users AS u
+ON e.user_id=u.user_id
+ORDER BY e.active_yn DESC
+END
+
+GO
+
+
+
+CREATE OR ALTER PROCEDURE hrisportal.sp_validate_fp_token
+@fp_token VARCHAR(100)
+AS
+BEGIN
+	DECLARE @ucount INT = 0,
+	 @ecount INT = 0,
+	 @hcount INT = 0
+	 
+	 SELECT @ucount=count(*) 
+	 FROM hrisportal.users
+	 WHERE fp_token=@fp_token
+	 AND fp_time_to_expire>GETDATE()
+
+	 SELECT @ecount=count(*) 
+	 FROM hrisportal.employee
+	 WHERE fp_token=@fp_token
+	 AND fp_time_to_expire>GETDATE()
+
+	 SELECT @hcount=count(*) 
+	 FROM hrisportal.hr
+	 WHERE fp_token=@fp_token
+	 AND fp_time_to_expire>GETDATE()
+
+
+	 IF @ucount=1 AND @ecount=0 AND @hcount=0
+	 BEGIN
+		SELECT -1 AS validYN
+	END
+	ELSE IF @ucount=0 AND @ecount=1 AND @hcount=0
+	 BEGIN
+		SELECT 0 AS validYN
+	END
+
+	ELSE IF @ucount=0 AND @ecount=0 AND @hcount=1
+	 BEGIN
+		SELECT 1 AS validYN
+	END
+
+	ELSE 
+	BEGIN
+		SELECT -2 AS validYN
+	END
+
+END
+
+
+
+
+
+CREATE OR ALTER PROCEDURE hrisportal.sp_reset_pwd
+@token VARCHAR(100),
+@pwd NVARCHAR(100),
+@role INT
+AS
+BEGIN
+	DECLARE @hashed_pwd VARBINARY(MAX)
+
+	SELECT @hashed_pwd=HASHBYTES('SHA2_256',@pwd)
+	IF @role=-1
+	BEGIN
+		UPDATE hrisportal.users
+		SET password=@hashed_pwd
+		WHERE fp_token=@token
+		AND fp_time_to_expire>GETDATE()
+	END
+
+	IF @role=0
+	BEGIN
+		UPDATE hrisportal.employee
+		SET password=@hashed_pwd
+		WHERE fp_token=@token
+		AND fp_time_to_expire>GETDATE()
+	END
+
+	IF @role=1
+	BEGIN
+		UPDATE hrisportal.hr
+		SET password=@hashed_pwd
+		WHERE fp_token=@token
+		AND fp_time_to_expire>GETDATE()
+	END
+END
+
+
+
+
+
+CREATE OR ALTER PROCEDURE hrisportal.sp_get_eid_from_email
+@email VARCHAR(100)
+AS
+BEGIN
+	SELECT employee_id
+	FROM hrisportal.employee
+	WHERE email=@email
+END

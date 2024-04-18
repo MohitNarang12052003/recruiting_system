@@ -25,34 +25,15 @@ export class EmployeeService {
 
   }
 
-  // getSkills():Observable<any>{
-  //   return this.http.get<any>(`http://localhost:8081/api/getSkills`,{withCredentials:true});
-  // }
-
-  // addSkill(body:any):Observable<any>{
-  //   return this.http.post<any>(`http://localhost:8081/api/addSkill`,body,{withCredentials:true});
-  // }
-
-  // fetchGoals():Observable<any>{
-  //   return this.http.get<any>(`http://localhost:8081/api/fetchGoals`,{withCredentials:true});
-  // }
-
-  // addGoal(body:any):Observable<any>{
-  //   return this.http.post<any>(`http://localhost:8081/api/addGoal`,body,{withCredentials:true});
-  // }
-
-  // deleteGoal(id:any):Observable<any>{
-  //   return this.http.post<any>(`http://localhost:8081/api/deleteGoal`,id,{withCredentials:true});
-  // }
-
-  // singleGoalData(id:number):Observable<any>{
-  //   return  this.http.get<any>(`http://localhost:8081/api/singleGoalData/${id}`,{withCredentials:true});
-  // }
+  
+  singleGoalData(id:number):Observable<any>{
+    return  this.http.get<any>(`http://localhost:8081/api/singleGoalData/${id}`,{withCredentials:true});
+  }
 
 
-  // updateGoal(body:any):Observable<any>{
-  //   return this.http.post<any>(`http://localhost:8081/api/updateGoal`,body,{withCredentials:true});
-  // }
+  updateGoal(body:any):Observable<any>{
+    return this.http.post<any>(`http://localhost:8081/api/updateGoal`,body,{withCredentials:true});
+  }
 
   getSkills():Observable<any>{
     return this.http.get<any>(`http://localhost:8083/api/getSkills`,{withCredentials:true});
@@ -74,12 +55,27 @@ export class EmployeeService {
     return this.http.post<any>(`http://localhost:8083/api/deleteGoal`,id,{withCredentials:true});
   }
 
-  singleGoalData(id:number):Observable<any>{
-    return  this.http.get<any>(`http://localhost:8083/api/singleGoalData/${id}`,{withCredentials:true});
-  }
-
-
-  updateGoal(body:any):Observable<any>{
-    return this.http.post<any>(`http://localhost:8083/api/updateGoal`,body,{withCredentials:true});
-  }
+ApplyLeave(data: any): Observable<any> {
+  return this.http.post('http://localhost:8083/api/applyLeave',data,{withCredentials:true});
 }
+
+
+getNationalHolidays(month:number):Observable<any> {
+  return this.http.post("http://localhost:8083/api/getHolidays", { month });
+}
+ //nidhi
+
+ fetchAnnouncement():Observable<any>{
+  return this.http.get<any>(`http://localhost:8081/api/announcement`,{withCredentials:true});
+
+ }
+getTotalLeavesCount(id:any):Observable<any>{
+  return this.http.get<any>(`http://localhost:8081/api/totalLeavesCount/${id}`,{withCredentials:true});
+
+}
+getCategoryWiseCount(id:number):Observable<any>{
+  return this.http.get<any>(`http://localhost:8081/api/CategoryWiseCount/${id}`,{withCredentials:true});
+}
+}
+
+

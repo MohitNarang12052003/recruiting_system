@@ -1,0 +1,208 @@
+EXEC [hrisportal].[ApplyForLeave] 5,'Sick Leave','17-04-2024 21:17','abc'
+SELECT * FROM hrisportal.emp_leave_count
+
+EXEC hrisportal.total_count 5
+SELECT * FROM hrisportal.announcement
+EXEC hrisportal.category_count 5
+
+
+CREATE OR ALTER   PROCEDURE [hrisportal].[ApplyForLeave]
+@employee_id INT,
+@category_name NVARCHAR(MAX),
+@applied_at VARCHAR(MAX),
+@taken_for VARCHAR(MAX)
+AS
+BEGIN
+    DECLARE @leave_cat_id INT;
+
+    -- Retrieve category_id based on category_name
+    SELECT @leave_cat_id = category_id
+    FROM hrisportal.category
+    WHERE category_name = @category_name;
+
+    IF @leave_cat_id IS NOT NULL
+    BEGIN
+        -- Extract date and time components
+        DECLARE @date_part NVARCHAR(10) = LEFT(@applied_at, 10); -- Extract date part
+        DECLARE @time_part NVARCHAR(5) = RIGHT(@applied_at, 5); -- Extract time part
+
+        -- Construct datetime value
+        DECLARE @converted_datetime DATETIME = NULL;
+
+        -- Attempt to construct datetime value
+        BEGIN TRY
+            SET @converted_datetime = CONVERT(DATETIME, @date_part, 126) + CONVERT(DATETIME, @time_part, 108);
+        END TRY
+        BEGIN CATCH
+            -- Handle conversion failure
+            PRINT 'Error converting applied_at to datetime.';
+            RETURN; -- Exit the procedure
+        END CATCH;
+
+        -- Check if conversion was successful
+        IF @converted_datetime IS NOT NULL
+        BEGIN
+            -- Update emp_leave_count table
+            UPDATE hrisportal.emp_leave_count
+            SET total_leaves_taken = ISNULL(total_leaves_taken, 0) + 1
+            WHERE employee_id = @employee_id
+            AND category_id = @leave_cat_id;
+
+            -- Insert into emp_leaves table
+            INSERT INTO hrisportal.emp_leaves (employee_id, leave_cat_id, applied_at, taken_for)
+            VALUES (@employee_id, @leave_cat_id, @converted_datetime, @taken_for);
+        END
+    END
+END;
+GO
+
+
+
+
+
+CREATE OR ALTER     PROCEDURE [hrisportal].[category_count]
+@employee_id INT
+AS
+BEGIN
+    SELECT lc.category_name, COUNT(la.leave_id) AS leave_count
+    FROM hrisportal.category lc
+    LEFT JOIN hrisportal.emp_leaves la ON lc.category_id = la.leave_cat_id
+                                               AND la.employee_id = @employee_id
+    GROUP BY lc.category_name;
+END;
+GO
+
+
+
+CREATE TABLE [hrisportal].[announcement](
+	[announcement_id] [int] IDENTITY(1,1) NOT NULL,
+	[hr_id] [int] NULL,
+	[announcement] [nvarchar](max) NULL,
+	[created_at] [datetime] NULL,
+	[edited_at] [datetime] NULL,
+	[active_yn] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[announcement_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [hrisportal].[announcement] ADD  DEFAULT (getdate()) FOR [created_at]
+GO
+
+ALTER TABLE [hrisportal].[announcement] ADD  DEFAULT (getdate()) FOR [edited_at]
+GO
+
+ALTER TABLE [hrisportal].[announcement] ADD  DEFAULT ((1)) FOR [active_yn]
+GO
+
+ALTER TABLE [hrisportal].[announcement]  WITH CHECK ADD FOREIGN KEY([hr_id])
+REFERENCES [hrisportal].[hr] ([hr_id])
+GO
+
+
+
+CREATE OR ALTER   PROCEDURE [hrisportal].[fetch_all_announcements]
+AS
+BEGIN
+    SELECT announcement, created_at, edited_at
+    FROM hrisportal.announcement
+END;
+GO
+
+
+
+
+
+CREATE TABLE [hrisportal].[category](
+	[category_id] [int] IDENTITY(1,1) NOT NULL,
+	[category_name] [nvarchar](max) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[category_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+
+
+
+CREATE TABLE [hrisportal].[emp_leaves](
+	[leave_id] [int] IDENTITY(1,1) NOT NULL,
+	[employee_id] [int] NULL,
+	[leave_cat_id] [int] NULL,
+	[applied_at] [datetime] NULL,
+	[taken_for] [nvarchar](max) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[leave_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [hrisportal].[emp_leaves]  WITH CHECK ADD FOREIGN KEY([employee_id])
+REFERENCES [hrisportal].[employee] ([employee_id])
+GO
+
+ALTER TABLE [hrisportal].[emp_leaves]  WITH CHECK ADD FOREIGN KEY([leave_cat_id])
+REFERENCES [hrisportal].[category] ([category_id])
+GO
+
+
+
+
+
+CREATE OR ALTER   PROCEDURE [hrisportal].[fetch_announcements]
+AS
+BEGIN
+    SELECT announcement, edited_at
+    FROM hrisportal.announcement
+    WHERE active_yn = 1;
+END;
+GO
+
+
+
+
+CREATE OR ALTER PROCEDURE [hrisportal].[insert_announcement]
+    @hr_id INT,
+    @announcement NVARCHAR(MAX)
+AS
+BEGIN
+    INSERT INTO hrisportal.announcement (hr_id, announcement)
+    VALUES (@hr_id, @announcement);
+END;
+GO
+
+
+
+CREATE OR ALTER     PROCEDURE [hrisportal].[total_count]
+@employee_id INT
+AS
+BEGIN
+    SELECT COUNT(*) AS leave_count
+    FROM hrisportal.emp_leaves
+    WHERE employee_id = @employee_id;
+END;
+GO
+
+
+
+INSERT INTO hrisportal.category (category_name)
+VALUES 
+    ( 'Annual Leave'),
+    ( 'Sick Leave'),
+    ( 'Maternity Leave'),
+    ( 'Emergency Leave'),
+	( 'Others');
+
+
+
+
+	CREATE TABLE hrisportal.emp_leave_count (
+    employee_id INT FOREIGN KEY REFERENCES hrisportal.employee(employee_id),
+	category_id INT FOREIGN KEY REFERENCES hrisportal.category(category_id),
+    total_leaves_taken INT DEFAULT 0
+);

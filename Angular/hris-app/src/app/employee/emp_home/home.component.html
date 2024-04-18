@@ -27,10 +27,10 @@
         </div>
         <div class="col-4">
             <h5>{{employeeData.department}}</h5>
-        </div>    
+        </div>
     </div>
     <br>
-    
+
 
     <div class="row">
         <div class="col-4">
@@ -38,7 +38,7 @@
         </div>
         <div class="col-4">
             <h5>{{employeeData.date_of_joining | date:'longDate'}}</h5>
-        </div>    
+        </div>
     </div>
     <br>
 
@@ -48,7 +48,7 @@
         </div>
         <div class="col-4">
             <h5>{{employeeData.resume}}</h5>
-        </div>    
+        </div>
     </div>
     <br>
 
@@ -58,7 +58,7 @@
         </div>
         <div class="col-4">
             <h5>{{employeeData.salary}}</h5>
-        </div>    
+        </div>
     </div>
     <br>
 
@@ -68,7 +68,7 @@
         </div>
         <div class="col-4">
             <h5>{{employeeData.work_experience}}</h5>
-        </div>    
+        </div>
     </div>
     <br>
 
@@ -81,7 +81,7 @@
         </div>
         <div class="col-4">
             <h5>{{employeeData.email}}</h5>
-        </div>    
+        </div>
     </div>
     <br>
     <div class="row">
@@ -90,7 +90,7 @@
         </div>
         <div class="col-4">
             <h5>{{employeeData.gender}}</h5>
-        </div>    
+        </div>
     </div>
     <br>
     <div class="row">
@@ -99,7 +99,7 @@
         </div>
         <div class="col-4">
             <h5>{{employeeData.city}}</h5>
-        </div>    
+        </div>
     </div>
     <br>
     <div class="row">
@@ -108,7 +108,7 @@
         </div>
         <div class="col-4">
             <h5>{{employeeData.martial_status}}</h5>
-        </div>    
+        </div>
     </div>
     <br>
     <div class="row">
@@ -117,10 +117,10 @@
         </div>
         <div class="col-4">
             <h5>{{employeeData.nationality}}</h5>
-        </div>    
+        </div>
     </div>
     <br>
-    
+
     <div class="qualifications" *ngIf="degreesData">
         <h1>Qualifications-</h1>
         <br>
@@ -133,7 +133,7 @@
                 </div>
                 <div class="col-4">
                     <h5>{{degree.degree_name}}</h5>
-                </div>    
+                </div>
             </div>
 
             <br>
@@ -144,7 +144,7 @@
                 </div>
                 <div class="col-4">
                     <h5>{{degree.institute_name}}</h5>
-                </div>    
+                </div>
             </div>
 
             <br>
@@ -155,7 +155,7 @@
                 </div>
                 <div class="col-4">
                     <h5>{{degree.admission_year}}</h5>
-                </div>    
+                </div>
             </div>
 
             <br>
@@ -166,7 +166,7 @@
                 </div>
                 <div class="col-4">
                     <h5>{{degree.completion_year}}</h5>
-                </div>    
+                </div>
             </div>
 
             <br>
@@ -177,15 +177,15 @@
                 </div>
                 <div class="col-4">
                     <h5>{{degree.GPA}}</h5>
-                </div>    
+                </div>
             </div>
 
-            
+
         </div>
         <br>
-        
+
     </div>
-    
+
 
     <div class="jobHistory" *ngIf="jobHistoryData">
         <h1>Job History-</h1>
@@ -199,7 +199,7 @@
                 </div>
                 <div class="col-4">
                     <h5>{{job.company_name}}</h5>
-                </div>    
+                </div>
             </div>
 
             <br>
@@ -210,7 +210,7 @@
                 </div>
                 <div class="col-4">
                     <h5>{{job.job_title}}</h5>
-                </div>    
+                </div>
             </div>
 
             <br>
@@ -221,7 +221,7 @@
                 </div>
                 <div class="col-4">
                     <h5>{{job.from_year}}</h5>
-                </div>    
+                </div>
             </div>
 
             <br>
@@ -232,7 +232,7 @@
                 </div>
                 <div class="col-4">
                     <h5>{{job.to_year}}</h5>
-                </div>    
+                </div>
             </div>
 
             <br>
@@ -243,13 +243,13 @@
                 </div>
                 <div class="col-4">
                     <h5>{{job.description}}</h5>
-                </div>    
+                </div>
             </div>
 
-            
+
         </div>
         <br>
-        
+
     </div>
 
 
@@ -261,21 +261,22 @@
 <div class="row">
     <div class="col-5">
         <app-attendance></app-attendance>
-        <app-calendar></app-calendar>
+        <!-- <app-calendar></app-calendar> -->
         <app-holidays></app-holidays>
+        <app-chart></app-chart>
     </div>
     <div class="col-6">
         <app-announcements></app-announcements>
         <div class="row">
-            <div class="col-4">
+            <div class="col-5">
                 <app-skills></app-skills>
             </div>
-            <div class="col-4">
+            <div class="col-7">
                 <app-leaves></app-leaves>
             </div>
-            <div class="col-4">
+            <!-- <div class="col-4">
                 <app-chart></app-chart>
-            </div>
+            </div> -->
         </div>
         <app-goals></app-goals>
     </div>

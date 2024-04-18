@@ -1,33 +1,41 @@
 <!-- <p>view-employees works!</p> -->
-
-<div class="m-4">
-    <h1>Employees:</h1>
+<div class="my-container">
+  
+  <div class="m-4">
+<div class="row">
+  <h1 class="txt col-10">Employees:</h1>
+  <div class="col-2 mt-2"><button class="btn btn-primary " (click)="exportToCsv()">Export CSV</button></div>
+</div>
     <br />
     <table class="thead">
-      <tr class="row" style="width: 90vw">
-        <th class="col-1">Sr. no.</th>
-        <th class="col-1">Job title</th>
-        <th class="col-1">Salary</th>
-        <th class="col-1">Department</th>
-        <th class="col-1">Email</th>
-        <th class="col-2">Date of joining</th>
-        <th class="col-2">Date of Departure</th>
-        <th class="col-1">Active </th>
+      <tr class="row  border-bottom pt-3 pb-3 border-top pt-3 pb-3" style="width: 90vw">
+        <th class="col-1 txt">Sr. no.</th>
+        <th class="col-1 txt">Job title</th>
+        <th class="col-1 txt">Salary</th>
+        <th class="col-2 txt">Department</th>
+        <th class="col-2 txt">Email</th>
+        <th class="col-2 txt">Date of joining</th>
+        <!-- <th class="col-2">Date of Departure</th> -->
+        <th class="col-1 txt">Active </th>
       </tr>
-  
-      <tr *ngFor="let emp of employees; index as i" class="row">
+
+      <tr *ngFor="let emp of employees; index as i" class="row  border-bottom pt-3 pb-3">
         <td class="col-1">{{ i + 1 }}</td>
         <td class="col-1">{{emp.job_title }}</td>
         <td class="col-1">{{emp.salary}}</td>
-        <td class="col-1  ">{{ emp.department }}</td>
-        <td class="col-1" style="word-wrap: break-word;">{{ emp.email }}</td>
+        <td class="col-2">{{ emp.department }}</td>
+        <td class="col-2" style="word-wrap: break-word;">{{ emp.email }}</td>
         <td class="col-2">{{ emp.date_of_joining| date:"longDate" }}</td>
-        <td class="col-2">{{ emp.date_of_departure | date : "longDate" }}</td>
+        <!-- <td class="col-2">{{ emp.date_of_departure | date : "longDate" }}</td> -->
         <td class="col-1">{{ emp.active_yn }}</td>
         <td class="col-2">
-          <button type="button" [routerLink]="['/SingleEmployeeDetails/', emp.employee_id]" class="btn btn-success">View</button>
+          <button type="button" [routerLink]="['/SingleEmployeeDetails/', emp.email]" class="btn btn-primary">View</button>
         </td>
+
+        
       </tr>
     </table>
   </div>
-  
+
+
+</div>
