@@ -14,6 +14,10 @@ import { SingleEmployeeComponent } from './single-employee/single-employee.compo
 import { NextRoundEmailComponent } from './next-round-email/next-round-email.component';
 import { CreateNewEmployeeComponent } from './create-new-employee/create-new-employee.component';
 import { AddAnnouncementComponent } from './add-announcement/add-announcement.component';
+import { EmpDeptPiechartComponent } from './emp-dept-piechart/emp-dept-piechart.component';
+import { AgChartsAngular } from 'ag-charts-angular';
+import { OfferLetterDetailsComponent } from './offer-letter-details/offer-letter-details.component';
+import { HolidaysComponent } from './holidays/holidays.component';
 
 
 
@@ -28,7 +32,10 @@ import { AddAnnouncementComponent } from './add-announcement/add-announcement.co
     SingleEmployeeComponent,
     NextRoundEmailComponent,
     CreateNewEmployeeComponent,
-    AddAnnouncementComponent
+    AddAnnouncementComponent,
+    EmpDeptPiechartComponent,
+    OfferLetterDetailsComponent,
+    HolidaysComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +44,8 @@ import { AddAnnouncementComponent } from './add-announcement/add-announcement.co
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    AgChartsAngular
   ],
   exports:[
     AddJobComponent

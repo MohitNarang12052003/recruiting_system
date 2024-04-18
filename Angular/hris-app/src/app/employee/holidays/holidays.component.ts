@@ -32,7 +32,7 @@ export class HolidaysComponent implements OnInit{
     });
   }
 
-  foo(event:any):void {
+  getNationalHolidaysFn(event:any):void {
     console.log(event.next.month);
     this.holidayService.getNationalHolidays(event.next.month).subscribe((data) => {
       this.nationalHolidays = data;

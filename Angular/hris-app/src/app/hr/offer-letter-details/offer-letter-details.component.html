@@ -1,0 +1,45 @@
+<div class="container row">
+  <div class="left col-3 txt d-flex align-items-center ">
+     <img src="assets/Images/offer_letter.jpeg" alt="">
+  </div>
+
+  <div class="right col-8 p-2 m-3">
+    <form action="" class=form-control [formGroup]="offerLetterForm" (submit)="submit()">
+      <div><h2>Offer Letter </h2></div>
+  <div class=" round row ">
+      <div class="col-4 align-self-center"><label for="">Title</label></div>
+      <input type="text" class="elem col-3" formControlName="job_title" />
+  </div>
+  <div class=" round row">
+      <div class="col-4 align-self-center"><label for="">Salary (in LPA)</label></div>
+      <input type="number" class="elem col-3" formControlName="salary" />
+  </div>
+
+  <div class=" round row ">
+      <div class="col-4 align-self-center"><label for="">Employment Type</label></div>
+          <select
+            class="form-select elem col-4"
+            style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
+            #type
+            (change)="onSelected(type.value)"
+          >
+            <option value="" selected></option>
+            <option value="Full-time">Full-time</option>
+            <option value="Part-time">Part-time</option>
+            <option value="Internship">Internship</option>
+            <option value="self-employed">self-employed</option>
+            <option value="Freelance">Freelance</option>
+            <option value="Trainee">Trainee</option>
+          </select>
+      
+  </div>
+  <div class="button-group" >
+            <button
+              type="submit"
+              class="button btn-secondary col-4"
+            >
+             Send Mail
+            </button>
+          </div>
+</form>
+</div>

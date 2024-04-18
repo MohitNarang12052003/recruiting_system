@@ -258,26 +258,26 @@
 </div>
  -->
 
-<div class="row">
-    <div class="col-5">
-        <app-attendance></app-attendance>
-        <!-- <app-calendar></app-calendar> -->
-        <app-holidays></app-holidays>
-        <app-chart></app-chart>
-    </div>
-    <div class="col-6">
-        <app-announcements></app-announcements>
-        <div class="row">
-            <div class="col-5">
-                <app-skills></app-skills>
-            </div>
-            <div class="col-7">
+<div class="container">
+    <div class="row">
+        <div class="top">
+            <div class="col-5 left">
                 <app-leaves></app-leaves>
             </div>
-            <!-- <div class="col-4">
-                <app-chart></app-chart>
-            </div> -->
+            <div class="col-6 right">
+                <app-announcements></app-announcements>
+                <app-holidays></app-holidays>
+                
+            </div>
         </div>
-        <app-goals></app-goals>
+           <div class="bottom">
+                <div class="col-4 left">
+                    <app-skills></app-skills>
+                </div>
+                <div class="col-6 right">
+                    <app-goals></app-goals>
+                </div>
+           </div>
     </div>
+    
 </div>

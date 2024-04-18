@@ -1,5 +1,5 @@
 .btn {
-    padding: 0.05rem 0.5rem !important;
+    padding: 0.05rem 0.5rem ;
     }
 
    
@@ -13,8 +13,9 @@
     margin-bottom: 0.5rem;
     margin-right: 0.5rem;
     word-wrap: break-word;
-    /* align-self: center; */
+    align-self: center;
 
 
     /* width: 30%; */
 }
+

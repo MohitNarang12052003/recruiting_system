@@ -32,6 +32,7 @@ import { ForgotPwdComponent } from './shared/components/forgot-pwd/forgot-pwd.co
 import { ResetPwdComponent } from './shared/components/reset-pwd/reset-pwd.component';
 import { AttendanceComponent } from './employee/attendance/attendance.component';
 import { CalendarComponent } from './employee/calendar/calendar.component';
+import { OfferLetterDetailsComponent } from './hr/offer-letter-details/offer-letter-details.component';
 
 const routes: Routes = [
   {
@@ -128,6 +129,13 @@ const routes: Routes = [
   {
     path: 'original-documents',
     component: OriginalDocumentsComponent,
+    canActivate:[HRGuardService]
+  },
+  {
+    path:'offer-letter-details/:id',
+    component:OfferLetterDetailsComponent,
+    canActivate:[HRGuardService]
+
   },
   {
     path: 'create-new-employee/:id',

@@ -1,6 +1,6 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.2.1'
+	id 'org.springframework.boot' version '3.1.8'
 	id 'io.spring.dependency-management' version '1.1.4'
 }
 
@@ -28,6 +28,17 @@ dependencies {
 	runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-mail:3.1.9'
+
+
+
+	//pdf generation
+	implementation 'org.springframework:spring-core:6.0.16'
+
+
+	// https://mvnrepository.com/artifact/org.xhtmlrenderer/flying-saucer-pdf
+	implementation 'org.xhtmlrenderer:flying-saucer-pdf:9.7.2'
+
+	implementation 'org.apache.pdfbox:pdfbox:2.0.25'
 }
 
 tasks.named('bootBuildImage') {

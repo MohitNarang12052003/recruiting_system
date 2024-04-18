@@ -7,28 +7,28 @@
             <form action="" [formGroup]="applicantForm">
                 <div class="row">
                     <label class="col-5 text  " for=""><h5>Round-1</h5></label>        
-                    <input class="col-3" type="string" formControlName="round_1"  [(ngModel)]='this.applicantDetails.round_1' />
+                    <input class="col-3" type="string" formControlName="round_1"  />
                 </div>
                 <br>        
         
                 <div class="row" *ngIf="this.applicantDetails.round_1==='Pass'">
                     <label class="col-5 text " for=""><h5>Round-2</h5></label>
-                    <input class="col-3" type="string" formControlName="round_2" [(ngModel)]='this.applicantDetails.round_2' />
+                    <input class="col-3" type="string" formControlName="round_2" />
                 </div>
                 <br>
                 <div class="row" *ngIf="this.applicantDetails.round_2==='Pass'">
                     <label class="col-5 text " for=""><h5>Round-3</h5></label>
-                    <input class="col-3" type="string" formControlName="round_3" />
+                    <input class="col-3" type="string" formControlName="round_3"  />
                 </div>
                 <br>
                 <div class="row" *ngIf="this.applicantDetails.round_3==='Pass'">
                     <label class="col-5 text " for=""><h5>Document Verification</h5></label>
-                    <input class="col-3" type="string" formControlName="doc_verification" [(ngModel)]='this.applicantDetails.doc_verification'/>
+                    <input class="col-3" type="string" formControlName="doc_verification"/>
                 </div>
                 <br>
                 <div class="row" *ngIf="this.applicantDetails.doc_verification==='Pass'">
                     <label class="col-5  text  " for=""><h5>Offer Letter</h5></label>
-                    <input class="col-3" type="string" formControlName="offer_letter" [(ngModel)]='this.applicantDetails.offer_letter'/>
+                    <input class="col-3" type="string" formControlName="offer_letter" />
                 </div>
                 <br>
         
@@ -54,7 +54,7 @@
             
                 <div *ngIf="(this.applicantDetails.doc_verification==='Pass' && (this.applicantDetails.offer_letter!=='Pass'))">
                     <h5 class=" text-white text-center text">Email to check offer letter-</h5>
-                    <button  class="btn" >Offer letter Email</button>
+                    <button  class="btn" [routerLink]="['/offer-letter-details',id]" >Offer letter Email</button>
                 </div>
             
                 <br>

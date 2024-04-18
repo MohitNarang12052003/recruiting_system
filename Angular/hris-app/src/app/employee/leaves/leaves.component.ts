@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { CategoryLeaveCount } from 'src/app/shared/interfaces/categoryLeaveCount.interface';
 import { EmployeeService } from '../employee.service';
+import { AgChartsAngular } from "ag-charts-angular";
+import { AgChartOptions, AgCharts } from "ag-charts-community";
 
 @Component({
   selector: 'app-leaves',
@@ -14,6 +16,7 @@ export class LeavesComponent implements OnInit{
   totalLeaveCount!: number;
   categoryLeaveCount!: CategoryLeaveCount[];
   employeeId!: any;
+  options!:any;
   constructor(
     private cookieService: CookieService,
     private route:ActivatedRoute,
@@ -49,7 +52,23 @@ export class LeavesComponent implements OnInit{
     this.employeeService.getCategoryWiseCount(id).subscribe(data => {
       this.categoryLeaveCount = data;
       console.log("checking data 2",this.categoryLeaveCount);
+      this.createPieChart(data);
     });
+  }
+
+
+  createPieChart(data: CategoryLeaveCount[]): void {
+    this.options = {
+      data: data,
+      title: {
+        text: "Leaves Composition",
+      },
+      series: [{
+        type: "pie",
+        angleKey: "leave_count", // Assuming 'count' is the property containing values
+        legendItemKey: "category_name", // Assuming 'department_name' is the property containing labels
+      }],
+    };
   }
 
 

@@ -1,3 +1,56 @@
-*{
+/* *{
     background-color: aquamarine;
+} */
+
+*{
+    text-wrap: wrap;
 }
+
+h3{
+    border-style: solid;
+    border-color: #1685f4;
+    border-radius: 25px;
+    padding-left: 3%;
+}
+
+.horizontal{
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+table, th, td {
+    border:1px solid black;
+    border-collapse: collapse;
+  }
+
+  .stepper {
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .step {
+    width: 40px;
+    height: 40px;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+  }
+  
+  .step.active {
+    background-color: #1685f4;
+    color: white;
+  }
+  
+  .progress-bar {
+    height: 10px;
+    background-color: #4CAF50;
+    width: 0%;
+    transition: width 1s ease;
+    border-radius: 5px;
+  }

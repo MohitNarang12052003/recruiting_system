@@ -1,29 +1,36 @@
-<form class="applyLeaveForm" [formGroup]="createForm">
-    <div class="form-group">
-      <label for="category_name">Category Name:</label>
-      <select
-      class="form-select"
-      style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
-      #type
-      (change)="onSelected(type.value)"
-    >
-      <option value="" selected></option>
-      <option value="Annual Leave">Annual Leave</option>
-      <option value="Sick Leave">Sick Leave</option>
-      <option value="Maternity Leave">Maternity Leave</option>
-      <option value="Emergency Leave">Emergency Leave</option>
-      <option value="Others">Others</option>
-    </select>
-      <!-- <input type="text" class="form-control" formControlName="category_name" id="category_name" /> -->
-    </div>
-    <div class="form-group">
-      <label for="applied_at">Applied At:</label>
-      <input type="datetime-local" class="form-control" formControlName="applied_at" id="applied_at" />
-    </div>
-    <div class="form-group">
-      <label for="taken_for">Taken For:</label>
-      <input type="text" class="form-control" formControlName="taken_for" id="taken_for" />
-    </div>
-    <button type="button" class="btn btn-primary" (click)="submit()">Submit</button>
-  </form>
-
+<div class="container">
+  <div class="left"><img src="assets/Images/leave-absence-request.webp" alt=""></div>
+  <div class="right">
+  
+    <form class="applyLeaveForm" [formGroup]="createForm">
+      <div><h2>Take a leave</h2></div>
+      <div class="form-group">
+        <label for="category_name">Category Name:</label>
+        <select
+        class="form-select"
+        style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
+        #type
+        (change)="onSelected(type.value)"
+      >
+        <option value="" selected></option>
+        <option value="Annual Leave">Annual Leave</option>
+        <option value="Sick Leave">Sick Leave</option>
+        <option value="Maternity Leave">Maternity Leave</option>
+        <option value="Emergency Leave">Emergency Leave</option>
+        <option value="Others">Others</option>
+      </select>
+      </div>
+      <div class="form-group">
+        <label for="applied_at">Applied For:</label>
+        <input type="date" class="form-control" formControlName="applied_at" id="applied_at" />
+      </div>
+      <div class="form-group">
+        <label for="taken_for">Taken For:</label>
+        <input type="text" class="form-control" formControlName="taken_for" id="taken_for" />
+      </div>
+      <button type="button" class="btn btn-primary" (click)="submit()">Submit</button>
+    </form>
+  
+  
+  </div>
+</div>

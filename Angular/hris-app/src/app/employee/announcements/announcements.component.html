@@ -1,5 +1,5 @@
-<div class="my-container">
-    <ngb-carousel #carousel [interval]="1000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
+<div class="my-container mt-4">
+    <ngb-carousel #carousel [interval]="2500" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
         <ng-template ngFor let-announcement [ngForOf]="announcement" let-i="index">
           <ng-template ngbSlide>
             <div class="card">

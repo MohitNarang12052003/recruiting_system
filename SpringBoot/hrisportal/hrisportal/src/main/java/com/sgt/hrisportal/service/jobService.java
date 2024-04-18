@@ -8,13 +8,20 @@ import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.xhtmlrenderer.pdf.ITextRenderer;
 
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 import java.util.*;
+
+
+
 
 @Service
 public class jobService {
@@ -360,9 +367,9 @@ public class jobService {
             Map<String,String> cookieMap=getCookiesAsHashMap(httpServletRequest.getCookies());
             int id=Integer.parseInt(cookieMap.get("employee_id"));
 
-            int insertedRows = jobRepository.addSkill(skillName,id);
+            Map<String,Object> result = jobRepository.addSkill(skillName,id);
 
-            if (insertedRows > 0) {
+            if ((int) result.get("validYN") > 0) {
                 return ResponseEntity.ok(Map.of("status", "Successful"));
             }
 
@@ -517,6 +524,108 @@ public class jobService {
     }
 
 
+    public ResponseEntity<List<Map<String,Object>>> empDeptCount(HttpServletRequest httpServletRequest){
+        boolean isValid=isValidToken(httpServletRequest);
+        if(isValid){
+            return ResponseEntity.ok(jobRepository.empDeptCount());
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyList());
+    }
+
+    public static String getOfferLetterContent(String fullname,String jobtitle,String employmentType,int salary,String hrEmail){
+        String html="<div class=\"container\">\n" +
+                "        <h1>Offer Letter</h1>\n" +
+                "        <p>Dear "+fullname+",</p>\n" +
+                "        <p>We are pleased to offer you the position of "+jobtitle+", as a "+employmentType+" employee. After careful consideration of your qualifications and experience, we believe that you will be a valuable addition to our team.</p>\n" +
+                "        <p>Your starting salary will be "+salary+" lakhs per year.</p>\n" +
+                "        <p>Please review this offer carefully and let us know if you accept the terms by the end of the week. If you have any questions or need further information, feel free to contact us.</p>\n" +
+                "            <p>Sincerely,</p>\n" +
+                "            <p>"+hrEmail+" \n"+"<br></br>HR</p>\n" +
+                "</div>";
+
+        return html;
+    }
+
+
+    public ResponseEntity<Map<String,Object>> offerLetterMail(Map<String ,Object> body,HttpServletRequest httpServletRequest) throws MessagingException {
+        boolean isValid=isValidToken(httpServletRequest);
+        if(isValid){
+            Cookie[] cookies=httpServletRequest.getCookies();
+            Map<String,String> cookieMap =getCookiesAsHashMap(cookies);
+
+            String hr_email=cookieMap.get("email");
+
+            String fullname=(String) body.get("fullname");
+            String jobtitle=(String) body.get("job_title");
+            String employmentType=(String) body.get("employmentType");
+            int salary=(int) body.get("salary");
+            String email=(String) body.get("email");
+
+            String htmlContent=getOfferLetterContent(fullname,jobtitle,employmentType,salary,hr_email);
+
+            byte[] pdfBytes=generatePDF(htmlContent);
+
+            String subject="Offer Letter";
+            String text="Attached is your official Offer Letter document:";
+
+
+            sendOfferLetterMail(email,subject,text,pdfBytes,fullname);
+
+            return ResponseEntity.ok(Collections.emptyMap());
+
+
+        }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyMap());
+    }
+
+    public byte[] generatePDF(String htmlContent){
+        ITextRenderer renderer = new ITextRenderer();
+        OutputStream os = new ByteArrayOutputStream();
+        renderer.setDocumentFromString(htmlContent);
+        renderer.layout();
+        renderer.createPDF(os);
+        renderer.finishPDF();
+        byte[] pdfBytes = ((ByteArrayOutputStream) os).toByteArray();
+
+        return pdfBytes;
+    }
+
+    public void sendOfferLetterMail(String email,String subject,String text,byte[] pdfBytes,String fullname) throws MessagingException {
+        MimeMessage mimeMessage= javaMailSender.createMimeMessage();
+        MimeMessageHelper mimeMessageHelper=new MimeMessageHelper(mimeMessage,true);
+
+        try{
+            mimeMessageHelper.setSubject(subject);
+            mimeMessageHelper.setTo(email);
+            mimeMessageHelper.setText(text,true);
+            mimeMessageHelper.addAttachment(fullname+".pdf", new ByteArrayResource(pdfBytes));
+
+        }
+        catch (MessagingException e){
+            throw new RuntimeException(e);
+        }
+
+        javaMailSender.send(mimeMessage);
+
+    }
+
+
+    public ResponseEntity<Map<String, Object>> markAttendance(Map<String, Object> body) {
+        int employeeId = Integer.parseInt((String)body.get("employeeId"));
+        return ResponseEntity.ok(jobRepository.markAttendance(employeeId));
+//
+//        if(noOfRows > 0)
+//        {
+//            return ResponseEntity.ok(Map.of("status","Marked Attendance"));
+//        }
+//        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("status","Cannot Mark Attendance"));
+    }
+
+    public List<Map<String, Object>> getNationalHolidays(Map<String, Object> body) {
+        int month = (int)body.get("month");
+        return jobRepository.getNationalHolidays(month);
+    }
 
 
 }

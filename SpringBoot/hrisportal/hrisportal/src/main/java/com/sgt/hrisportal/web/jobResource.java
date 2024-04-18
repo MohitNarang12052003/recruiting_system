@@ -2,6 +2,7 @@ package com.sgt.hrisportal.web;
 
 
 import com.sgt.hrisportal.service.jobService;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+
+
+
 
 @RestController
 @RequestMapping("/api")
@@ -83,10 +87,10 @@ public class jobResource {
 
     @PostMapping("/sendDocumentMail")
     public ResponseEntity<Map<String,Object>> sendDocumentMail(@RequestBody Map<String,Object> body,HttpServletRequest httpServletRequest){
-        System.out.println("map");
-        System.out.println(body.size()+" "+body.get("email"));
+
         return jobService.sendDocumentMail(body,httpServletRequest);
     }
+
 
     @PostMapping("/sendEmployeeMail")
     public ResponseEntity<Map<String,Object>> sendEmployeeMail(@RequestBody Map<String,Object> body,HttpServletRequest httpServletRequest){
@@ -164,6 +168,31 @@ public class jobResource {
     public List<Map<String,Object>> fetchAllAnnouncement(){
 
         return jobService.fetchAllAnnouncement();
+    }
+
+
+    @GetMapping("/empDeptCount")
+    public ResponseEntity<List<Map<String ,Object>>> empDeptCount(HttpServletRequest httpServletRequest){
+        return jobService.empDeptCount(httpServletRequest);
+    }
+
+
+
+    //pdf generation+mail
+    @PostMapping("/offerLetterMail")
+    public ResponseEntity<Map<String,Object>> offerLetterMail(@RequestBody Map<String,Object> body,HttpServletRequest httpServletRequest) throws MessagingException {
+        return jobService.offerLetterMail(body,httpServletRequest);
+    }
+
+
+    @PostMapping("/attendance")
+    public ResponseEntity<Map<String,Object>> markAttendance(@RequestBody Map<String, Object> body) {
+        return jobService.markAttendance(body);
+    }
+
+    @PostMapping("/getHolidays")
+    public List<Map<String, Object>> getNationalHolidays(@RequestBody Map<String, Object> body) {
+        return jobService.getNationalHolidays(body);
     }
 
 

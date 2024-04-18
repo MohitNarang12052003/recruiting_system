@@ -1,9 +1,8 @@
 <div
-      class="col-3 d-flex flex-column justify-content-center align-items-center"
+      class="col-3"
       style="height: 50vh"
     >
-      <p>Hello,See Calendar and see Holidays!!</p>
-      <ngb-datepicker class="cal" [(ngModel)]="model" (navigate)="foo($event)" />
+      <ngb-datepicker class="cal" [(ngModel)]="model" (navigate)="getNationalHolidaysFn($event)" />
 </div>
 <table>
   <thead>

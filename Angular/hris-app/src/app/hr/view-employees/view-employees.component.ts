@@ -51,7 +51,7 @@ export class ViewEmployeesComponent {
      var blob = new Blob([csvArray], {type: 'text/csv' });
  
      // Trigger the download of the Blob as a file named "myFile.csv"
-     saveAs(blob, "myFile.csv");
+     saveAs(blob, "employees.csv");
   }
   
 
