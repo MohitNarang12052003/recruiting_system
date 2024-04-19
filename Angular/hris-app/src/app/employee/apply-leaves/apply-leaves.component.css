@@ -1,41 +1,77 @@
-.applyLeaveForm {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+
+  .container{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
   }
-  
-  .applyLeaveForm .form-group {
-    margin-bottom: 20px;
+
+
+  .left{
+    flex-basis: 30%; 
+    width : 100px;
+    display: flex;
+    justify-content: left;
+    align-items: left;
   }
-  
-  .applyLeaveForm label {
-    font-weight: bold;
-  }
-  
-  .applyLeaveForm input[type="text"],
-  .applyLeaveForm input[type="datetime-local"] {
+
+  .container img {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
+    height: 100%; 
+  }
+
+  .right {
+    flex-basis: 70%;
+    background-color: #f8f9fa;
+    height: 380px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  input {
+    margin-bottom: 1em; 
+    width: 18vw;
+    height: 5vh;
+    border-style: solid;
+    border-image-source: linear-gradient(to bottom right, blue, skyblue);
+    border-width: 2pt;
+    border-image-slice: 1;
+    outline: none;
+    justify-content: space-evenly;
+    display:flex
+  }
+
+  select{
+    margin-bottom: 1em; 
+    width: 18vw;
+    height: 7vh;
+    border-style: solid;
+    border-image-source: linear-gradient(to bottom right, blue, skyblue);
+    border-width: 2pt;
+    border-image-slice: 1;
+    outline: none;
+    justify-content: space-evenly;
+    display:flex
+  }
+
+  
+  button {
     border-radius: 5px;
+    cursor: pointer;
+    justify-content: center;
+    margin: 0.5em;
+    align-items: center; 
   }
   
-  .applyLeaveForm button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
+  .btn-primary {
     background-color: #007bff;
     color: #fff;
-    cursor: pointer;
   }
   
-  .applyLeaveForm button:hover {
+  button:hover {
+    opacity: 0.8;
+  }
+  
+  button:active {
     background-color: #0056b3;
   }
-
-

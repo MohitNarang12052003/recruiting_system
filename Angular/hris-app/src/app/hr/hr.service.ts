@@ -83,5 +83,17 @@ export class HrService {
     return this.http.get(`http://localhost:8081/api/getEidFromEmail/${email}`,{withCredentials:true})
   }
 
+  empDeptCount():Observable<any>{
+    return this.http.get(`http://localhost:8081/api/empDeptCount`,{withCredentials:true})
+  }
+
+  offerLetterMail(body:any):Observable<any>{
+    return this.http.post('http://localhost:8081/api/offerLetterMail',body,{withCredentials:true});
+  }
+
+  getNationalHolidays(month:number):Observable<any> {
+    return this.http.post("http://localhost:8081/api/getHolidays", { month });
+  }
+
 
 }

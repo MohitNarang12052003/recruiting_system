@@ -10,12 +10,17 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./add-job.component.css'],
 })
 export class AddJobComponent {
+  isDone: number = 0;
   constructor(
     private hrService: HrService,
     private cookieService: CookieService,
     private router: Router
   ) {}
 
+  add() {
+    this.isDone = 1;
+  }
+  
   selectedType = '';
   deptSelectedType='';
 

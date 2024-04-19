@@ -2,3 +2,20 @@ body{
     width: auto;
     overflow-x: hidden;
 }
+
+.left{
+    width: 50%;
+}
+
+.top{
+    display: flex;
+    align-items: flex-end;
+}
+
+
+.bottom{
+    display: flex;
+    align-items: center;
+
+
+}

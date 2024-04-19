@@ -107,3 +107,181 @@ BEGIN
 	FROM hrisportal.employee
 	WHERE email=@email
 END
+
+
+
+
+
+
+
+
+
+CREATE OR ALTER PROCEDURE hrisportal.sp_count_emp_in_dept
+AS
+BEGIN
+	SELECT count(*) AS count,department_name
+	FROM hrisportal.department AS d
+	INNER JOIN hrisportal.employee AS e
+	ON d.department_name = e.department
+	GROUP BY d.department_name
+	
+END
+
+
+CREATE OR ALTER   PROCEDURE [hrisportal].[sp_insert_new_employee_skill]
+@skill_name VARCHAR(MAX),
+@emp_id INT
+AS
+BEGIN
+	DECLARE @new_skill_id INT
+	INSERT INTO hrisportal.skill(skill_name)
+	SELECT @skill_name
+	WHERE NOT EXISTS (
+		SELECT 1
+		FROM hrisportal.skill
+		WHERE skill_name = @skill_name
+	);
+
+	SELECT @new_skill_id=SCOPE_IDENTITY();
+
+		IF @new_skill_id IS NULL
+			INSERT INTO hrisportal.employee_skill(emp_id,skill_id)
+			SELECT @emp_id,(SELECT skill_id 
+			FROM hrisportal.skill WHERE skill_name=@skill_name)
+			WHERE NOT EXISTS (
+				SELECT 1
+				FROM hrisportal.employee_skill
+				WHERE skill_id = (SELECT TOP 1 skill_id
+					FROM hrisportal.skill WHERE skill_name=@skill_name)
+				AND emp_id=@emp_id
+		)
+		ELSE
+			INSERT INTO hrisportal.employee_skill(emp_id,skill_id)
+			VALUES (@emp_id,@new_skill_id)
+
+SELECT @@ROWCOUNT AS validYN
+	
+
+END
+GO
+
+
+
+CREATE OR ALTER     PROCEDURE [hrisportal].[sp_view_applications]
+AS
+BEGIN
+	SELECT a.*,u.full_name ,j.job_title 
+	FROM hrisportal.applicants a
+	inner join hrisportal.job_vacancy j 
+	on j.j_id=a.j_id 
+	inner join hrisportal.users u
+	on a.user_id=u.user_id
+	WHERE j.active_yn='Y'
+END
+GO
+
+
+
+
+
+
+CREATE OR ALTER       PROCEDURE [hrisportal].[sp_validate_token]
+@token VARCHAR(MAX),
+@id INT 
+AS
+BEGIN
+	DECLARE @count int=0,@ecount int=0,@hcount int =0
+	select @count=count(*) from hrisportal.users where token=@token and user_id=@id and time_to_expire>GETDATE()
+	select @ecount=count(*) from hrisportal.employee where token=@token and employee_id=@id and time_to_expire>GETDATE()
+	select @hcount=count(*) from hrisportal.hr where token=@token and hr_id=@id and time_to_expire>GETDATE()
+	IF @count = 1 and @ecount=0 and @hcount=0
+	BEGIN
+		select -1 as ValidYN
+		UPDATE hrisportal.users
+		SET time_to_expire = DATEADD(minute, 30, GETDATE())
+		WHERE user_id = @id;
+
+	END
+	ELSE IF @count = 0 and @ecount=1 and @hcount=0
+	BEGIN
+		select 0 as ValidYN
+		UPDATE hrisportal.employee
+		SET time_to_expire = DATEADD(minute, 30, GETDATE())
+		WHERE employee_id = @id;
+	END
+	ELSE IF @count = 0 and @ecount=0 and @hcount=1
+	BEGIN
+		select 1 as ValidYN
+		UPDATE hrisportal.hr
+		SET time_to_expire = DATEADD(minute, 30, GETDATE())
+		WHERE hr_id = @id;
+	END
+	ELSE
+	BEGIN
+		print @count
+		print @ecount
+		print @hcount
+		SELECT -2 as ValidYN
+	END
+END
+
+GO
+
+
+
+
+CREATE OR ALTER       PROCEDURE [hrisportal].[sp_single_applicant]
+@app_id INT
+AS
+BEGIN
+SELECT a.applicant_id,
+	a.user_id,
+	a.j_id,
+	a.applied_at,
+	round_1,
+	round_2,
+	round_3,
+	doc_verification,
+	offer_letter,
+	u.*,
+	j.job_title,
+	i.*
+FROM hrisportal.applicants AS a
+INNER JOIN hrisportal.users AS u
+ON a.user_id=u.user_id
+INNER JOIN hrisportal.job_vacancy AS j
+ON j.j_id=a.j_id
+INNER JOIN hrisportal.additional_info AS i
+ON i.user_id=u.user_id
+WHERE a.applicant_id=@app_id
+END
+GO
+
+
+
+
+
+
+
+
+CREATE OR ALTER   PROCEDURE [hrisportal].[sp_update_applicant]
+@applicant_id VARCHAR(100),
+@round_1 VARCHAR(100),
+@round_2 VARCHAR(100),
+@round_3 VARCHAR(100),
+@doc_verification VARCHAR(100),
+@offer_letter VARCHAR(100)
+AS
+BEGIN
+UPDATE hrisportal.applicants
+SET round_1=@round_1,
+	round_2=@round_2,
+	round_3=@round_3,
+	doc_verification=@doc_verification,
+	offer_letter=@offer_letter
+WHERE applicant_id=@applicant_id
+END
+GO
+
+
+

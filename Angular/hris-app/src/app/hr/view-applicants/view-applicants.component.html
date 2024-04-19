@@ -1,35 +1,39 @@
-<div class="my-container m-3" >
-  <!-- <p>view-applicants works!</p> -->
-<div class="m-4" >
-  <h1 class="txt text-center">Applications:</h1>
-  <br />
-  <table class="thead">
-    <tr class="row border-bottom pt-3 pb-3 border-top pt-3 pb-3" style="width: 90vw">
-      <th class="col-1 txt ">Sr. no.</th>
-      <th class="col-2 txt ">Applicant Name</th>
-      <th class="col-2 txt ">Vacancy Name</th>
-      <th class="col-1 txt ">Round 1</th>
-      <th class="col-1 txt ">Round 2</th>
-      <th class="col-1 txt ">Round 3</th>
-      <th class="col-2 txt ">Applied at</th>
-      <th class="col-2 txt ">Profile</th>
-    </tr>
+<div class="box">
+  <h2 class="heading">Applicant Details</h2>
+  <div class="container">
+    <div class="card" *ngFor="let app of applications; index as i">
+      <div class="row component">
+        <div class="col-4">Fullname-</div>
+        <div class="col-6 detail">{{ app.full_name }}</div>
+      </div>
+      <div class="row component">
+        <div class="col-4 align-self-center">Job Title-</div>
+        <div class="col-6 detail">{{ app.job_title }}</div>
+      </div>
+      <div class="row component">
+        <div class="col-4">Round 1-</div>
+        <div class="col-6 detail">{{ app.round_1 }}</div>
+      </div>
+      <div class="row component">
+        <div class="col-4">Round 2-</div>
+        <div class="col-6 detail">{{ app.round_2 }}</div>
+      </div>
+      <div class="row component">
+        <div class="col-4">Round 3-</div>
+        <div class="col-6 detail">{{ app.round_3 }}</div>
+      </div>
 
-    <div>
-      <tr  *ngFor="let app of applications; index as i" class="row">
-        <td class="col-1 border-bottom pt-3 pb-3">{{ i + 1 }}</td>
-        <td class="col-2 border-bottom pt-3 pb-3">{{ app.full_name }}</td>
-        <td class="col-2 border-bottom pt-3 pb-3">{{ app.job_title }}</td>
-        <td class="col-1 border-bottom pt-3 pb-3">{{ app.round_1 }}</td>
-        <td class="col-1 border-bottom pt-3 pb-3">{{ app.round_2 }}</td>
-        <td class="col-1 border-bottom pt-3 pb-3">{{ app.round_3 }}</td>
-        <td class="col-2 border-bottom pt-3 pb-3">{{ app.applied_at | date : "longDate" }}</td>
-        <td class="col-2 border-bottom pt-3 pb-3">
-          <button type="button" class="btn btn-primary" [routerLink]="['/SingleApplicantDetails',app.applicant_id]">View</button>
-        </td>
-      </tr>
-    </div>
-  </table>
-</div>
+      <div class="row component">
+        <div class="col-4 align-self-center">Applied At-</div>
+        <div class="col-6 detail">{{ app.applied_at | date : "longDate" }}</div>
+      </div>
+      <div class="border-bottom component button">
+        <button type="button" class="btn btn-primary" [routerLink]="['/SingleApplicantDetails',app.applicant_id]">View</button>
+      </div>
+          
+  </div>
 
+  </div>
+
+  <br>
 </div>

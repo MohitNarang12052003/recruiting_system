@@ -38,6 +38,7 @@ export class ApplyLeavesComponent {
     console.log(this.createForm.value);
     this.employeeService.ApplyLeave(this.createForm.value).subscribe((data) => {
       alert('Successfully Posted');
+      this.router.navigate(['/Employee']);
     });
   }
 

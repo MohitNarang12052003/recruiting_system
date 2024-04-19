@@ -12,6 +12,7 @@ import { ChartComponent } from './chart/chart.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbCarouselModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ApplyLeavesComponent } from './apply-leaves/apply-leaves.component';
+import { AgChartsAngular } from 'ag-charts-angular';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ApplyLeavesComponent } from './apply-leaves/apply-leaves.component';
     FormsModule,
     ReactiveFormsModule,
     NgbCarouselModule,
-    NgbModule
+    NgbModule,
+    AgChartsAngular
 ],
 
 })

@@ -77,8 +77,8 @@ public class jobRepository {
         return jdbcTemplate.queryForList("EXEC hrisportal.sp_fetch_employee_skill ?",id);
     }
 
-    public int addSkill(String skillName,int id){
-        return jdbcTemplate.update("EXEC hrisportal.sp_insert_new_employee_skill ?,?",skillName,id);
+    public Map<String, Object> addSkill(String skillName, int id){
+        return jdbcTemplate.queryForMap("EXEC hrisportal.sp_insert_new_employee_skill ?,?",skillName,id);
     }
 
     public List<Map<String,Object>> fetchGoals(int id){
@@ -130,5 +130,19 @@ public class jobRepository {
     public int applyLeave(int employee_id,String category_name,String applied_at,String taken_for){
         return jdbcTemplate.update("EXEC hrisportal.ApplyForLeave ?,?,?,?",employee_id,category_name,applied_at,taken_for);
     }
+
+    public List<Map<String,Object>>  empDeptCount(){
+        return jdbcTemplate.queryForList("EXEC hrisportal.sp_count_emp_in_dept");
+    }
+
+
+    public Map<String, Object> markAttendance(int employeeID) {
+        return jdbcTemplate.queryForMap("EXEC hrisportal.sp_insert_datetime ?", employeeID);
+    }
+
+    public List<Map<String, Object>> getNationalHolidays(int month) {
+        return jdbcTemplate.queryForList("EXEC hrisportal.sp_fetch_nationalHolidays ?",  month);
+    }
+
 
 }

@@ -1,4 +1,4 @@
-<div class="d-flex flex-column">
+<div class="d-flex flex-column justify-content-center align-items-center">
   <div
     class="row m-4 justify-content-around text-center bg-light"
     style="height: 20vh"
@@ -40,27 +40,20 @@
       </div>
     </div>
   </div>
-  <div class="row justify-content-around m-2">
-    <div
-      class="col-3 d-flex flex-column justify-content-center align-items-center"
-      style="height: 50vh"
-    >
-      <h1 class="mb-4">Hello,Admin!!</h1>
-      <ngb-datepicker [(ngModel)]="model" (navigate)="date = $event.next" />
-    </div>
+  <div class="row justify-content-around m-2 align-items-start">
+    <div class="col-4"><app-holidays></app-holidays></div>
     <div class="col-4 bg-light rounded-4 mb-4" style="height: 50vh">
-      <div class="d-flex flex-column">
-        <p>Skills Inventory</p>
-        <p>Piechart will come here</p>
+      <div class="d-flex flex-column mt-4">
+        <app-emp-dept-piechart></app-emp-dept-piechart>
       </div>
     </div>
-    <div class="col-4 bg-light rounded-4 mb-4 m-0" style="height: 50vh">
+    <div class="col-4 bg-light rounded-4 mb-4 mt-4" style="height: 50vh">
       <div class="d-flex flex-column justify-content-center p-4">
-        <button class="btn btn-dark m-3" [routerLink]="['/PostJob']">Post an Job</button>
-        <button class="btn btn-dark m-3" [routerLink]="['/ViewApplications']">View Applications</button>
-        <button class="btn btn-dark m-3" [routerLink]="['/ViewEmployees']">View Employees</button>
-        <button class="btn btn-dark m-3" [routerLink]="['/ViewVacancies']">View Vacancies</button>
-        <button class="btn btn-dark m-3" [routerLink]="['/AddAnnouncement']">Post Announcement</button>
+        <button class="btn btn-primary m-3" [routerLink]="['/PostJob']">Post an Job</button>
+        <button class="btn btn-primary m-3" [routerLink]="['/ViewApplications']">View Applications</button>
+        <button class="btn btn-primary m-3" [routerLink]="['/ViewEmployees']">View Employees</button>
+        <button class="btn btn-primary m-3" [routerLink]="['/ViewVacancies']">View Vacancies</button>
+        <button class="btn btn-primary m-3" [routerLink]="['/AddAnnouncement']">Post Announcement</button>
       </div>
     </div>
   </div>

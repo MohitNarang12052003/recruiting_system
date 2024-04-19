@@ -30,8 +30,7 @@ import { AddAnnouncementComponent } from './hr/add-announcement/add-announcement
 import { ApplyLeavesComponent } from './employee/apply-leaves/apply-leaves.component';
 import { ForgotPwdComponent } from './shared/components/forgot-pwd/forgot-pwd.component';
 import { ResetPwdComponent } from './shared/components/reset-pwd/reset-pwd.component';
-import { AttendanceComponent } from './employee/attendance/attendance.component';
-import { CalendarComponent } from './employee/calendar/calendar.component';
+import { OfferLetterDetailsComponent } from './hr/offer-letter-details/offer-letter-details.component';
 import { OverviewComponent } from './home/overview/overview.component';
 import { ViewDocumentsComponent } from './hr/view-documents/view-documents.component';
 
@@ -130,6 +129,13 @@ const routes: Routes = [
   {
     path: 'original-documents',
     component: OriginalDocumentsComponent,
+    canActivate:[HRGuardService]
+  },
+  {
+    path:'offer-letter-details/:id',
+    component:OfferLetterDetailsComponent,
+    canActivate:[HRGuardService]
+
   },
   {
     path: 'create-new-employee/:id',

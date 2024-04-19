@@ -1,6 +1,11 @@
 /* *{
     background-color: aquamarine;
 } */
+
+*{
+    text-wrap: wrap;
+}
+
 h3{
     border-style: solid;
     border-color: #1685f4;
@@ -49,4 +54,5 @@ table, th, td {
     transition: width 1s ease;
     border-radius: 5px;
   }
+  
   

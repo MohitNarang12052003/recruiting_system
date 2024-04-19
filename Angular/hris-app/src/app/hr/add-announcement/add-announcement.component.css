@@ -1,57 +1,67 @@
-.container {
-    margin: 20px;
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+  } 
+  
+  .heading {
+    flex-basis: 30%; 
+    height : 380px;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+  } 
+  
+  .container img {
+    width: 100%;
+    height: 100%; 
   }
   
-  .announcement-form {
+  .form-container {
+    flex-basis: 70%;
     background-color: #f8f9fa;
-    color: #212529;
-    padding: 20px;
-    border-radius: 10px;
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  label {
-    font-weight: bold;
+    height: 380px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    resize: vertical; /* Allow vertical resizing */
+    margin-bottom: 1em; 
+    width: 50vw;
+    height: 35vh;
+    border-style: solid;
+    border-image-source: linear-gradient(to bottom right, blue, skyblue);
+    border-width: 3pt;
+    border-image-slice: 1;
+    outline: none;
   }
   
   .button-group {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center; 
+    /* padding-top: 0.5em;  */
   }
   
   button {
-    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    justify-content: center;
+    margin: 0.5em;
+    align-items: center; 
   }
   
-  .btn-secondary {
-    background-color: #6c757d;
-    color: #fff;
-  }
-  
+  .btn-secondary,
   .btn-primary {
     background-color: #007bff;
     color: #fff;
   }
   
- 
   button:hover {
-    opacity: 0.8; 
+    opacity: 0.8;
   }
   
- 
   button:active {
-    background-color: #0056b3; 
+    background-color: #0056b3;
   }

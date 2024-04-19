@@ -20,42 +20,14 @@ BEGIN
     FROM hrisportal.category
     WHERE category_name = @category_name;
 
-    IF @leave_cat_id IS NOT NULL
-    BEGIN
-        -- Extract date and time components
-        DECLARE @date_part NVARCHAR(10) = LEFT(@applied_at, 10); -- Extract date part
-        DECLARE @time_part NVARCHAR(5) = RIGHT(@applied_at, 5); -- Extract time part
-
-        -- Construct datetime value
-        DECLARE @converted_datetime DATETIME = NULL;
-
-        -- Attempt to construct datetime value
-        BEGIN TRY
-            SET @converted_datetime = CONVERT(DATETIME, @date_part, 126) + CONVERT(DATETIME, @time_part, 108);
-        END TRY
-        BEGIN CATCH
-            -- Handle conversion failure
-            PRINT 'Error converting applied_at to datetime.';
-            RETURN; -- Exit the procedure
-        END CATCH;
-
-        -- Check if conversion was successful
-        IF @converted_datetime IS NOT NULL
-        BEGIN
-            -- Update emp_leave_count table
-            UPDATE hrisportal.emp_leave_count
-            SET total_leaves_taken = ISNULL(total_leaves_taken, 0) + 1
-            WHERE employee_id = @employee_id
-            AND category_id = @leave_cat_id;
+	DECLARE @converted_date DATE;
+	SET @converted_date = CONVERT(DATE, @applied_at, 23);                 
 
             -- Insert into emp_leaves table
             INSERT INTO hrisportal.emp_leaves (employee_id, leave_cat_id, applied_at, taken_for)
-            VALUES (@employee_id, @leave_cat_id, @converted_datetime, @taken_for);
-        END
-    END
+            VALUES (@employee_id, @leave_cat_id, @converted_date, @taken_for);
 END;
 GO
-
 
 
 

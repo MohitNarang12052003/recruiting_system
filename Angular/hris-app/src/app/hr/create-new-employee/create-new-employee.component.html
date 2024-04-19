@@ -1,4 +1,4 @@
-<p>create-new-employee works!</p>
+<!-- <p>create-new-employee works!</p>
 
 <form class="form-group" [formGroup]="newEmployeeForm" (submit)="submit()">
     <div class="form-control">
@@ -46,4 +46,73 @@
 
     <button type="submit">Send Mail</button>
     
-</form>
+</form> -->
+
+
+
+
+<div class="container row">
+    <div class="left col-3 txt d-flex align-items-center ">
+       <img src="assets/Images/new_employee.jpeg" alt="">
+    </div>
+
+    <div class="right col-9 p-2 m-2">
+      <form class="form-group bg-light text-dark p-4 m-4" [formGroup]="newEmployeeForm" (submit)="submit()">
+        <h2 class="heading p-2 m-2">Add New Job</h2>
+        <div class="my-container row p-2 m-6">
+
+        <div class=" col-5">
+            <label for="email" class="p-2 ">Employee New Email</label>
+            <input type="email" name="email" id="email" formControlName="nemail">
+        </div>
+        <div class=" col-5">
+            <label for="password" class="p-2">Employee New password</label>
+            <input type="text" name="password" id="password" formControlName="password">
+        </div>
+        <div class=" col-5">
+            <label for="job_title" class="p-2">Employee Job Title</label>
+            <input type="text" name="job_title" id="job_title" formControlName="job_title">
+        </div>
+        <div class=" col-5">
+            <label for="salary"  class="p-2">Employee salary</label>
+            <input type="text" name="salary" id="salary" formControlName="salary">
+        </div>
+        <div class="col-5 ">
+            <label for=""  class="p-2">Department Name</label>
+            <select
+            class="form-select"
+            style="border-color: rgba(0, 0, 0, 0.503)"
+            #type
+            (change)="onDeptSelected(type.value)"
+            >
+            <option value="" selected></option>
+            <option value="Technology And Innovation">Technology And Innovation</option>
+            <option value="Data Science And Analytics">Data Science And Analytics</option>
+            <option value="Risk Management">Risk Management</option>
+            <option value="Compliance And Regulatory Affairs">Compliance And Regulatory Affairs</option>
+            <option value="Financial Operations">Financial Operations</option>
+            <option value="Product Development">Product Development</option>
+            <option value="Cybersecurity">Cybersecurity</option>
+            <option value="Finance And Accounting">Finance And Accounting</option>
+            <option value="Customer Support">Customer Support</option>
+            <option value="Marketing And Sales">Marketing And Sales</option>
+            </select>
+        </div>
+        <div class="col-5">
+            <label for="date_of_joining"  class="p-2">Employee Date Of Joining</label>
+            <input type="date" name="date_of_joining" id="date_of_joining" formControlName="date_of_joining">
+        </div>
+        <div class="button-group" >
+                <button
+                    type="submit"
+                    class="button btn-secondary col-4"
+                >
+                Send Mail
+                </button>
+        </div>
+        </div>
+    </form>
+    </div>
+
+
+</div>
