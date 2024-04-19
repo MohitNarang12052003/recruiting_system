@@ -90,3 +90,97 @@ BEGIN
 END
 
 EXEC hrisportal.fetchDepts
+
+
+USE [hrisportal]
+GO
+
+/****** Object:  StoredProcedure [hrisportal].[sp_update_applicant]    Script Date: 19-04-2024 00:17:16 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE OR ALTER   PROCEDURE [hrisportal].[sp_update_applicant]
+@applicant_id int,
+@round_1 int,
+@round_2 int,
+@round_3 int,
+@doc_verification int,
+@offer_letter int
+AS
+BEGIN
+UPDATE hrisportal.applicants
+SET round_1=@round_1,
+	round_2=@round_2,
+	round_3=@round_3,
+	doc_verification=@doc_verification,
+	offer_letter=@offer_letter
+WHERE applicant_id=@applicant_id
+END
+
+GO
+
+CREATE OR ALTER   PROCEDURE [hrisportal].[sp_update_applicant]
+@applicant_id VARCHAR(100),
+@round_1 VARCHAR(100),
+@round_2 VARCHAR(100),
+@round_3 VARCHAR(100),
+@doc_verification VARCHAR(100),
+@offer_letter VARCHAR(100)
+AS
+BEGIN
+UPDATE hrisportal.applicants
+SET round_1=@round_1,
+	round_2=@round_2,
+	round_3=@round_3,
+	doc_verification=@doc_verification,
+	offer_letter=@offer_letter
+WHERE applicant_id=@applicant_id
+END
+GO
+DROP TABLE hrisportal.applicants
+CREATE TABLE [hrisportal].[applicants](
+	[applicant_id] [int] IDENTITY(1,1) NOT NULL,
+	[user_id] [int] NULL,
+	[j_id] [int] NULL,
+	[applied_at] [datetime] NULL,
+	[round_1] [varchar](100) NULL,
+	[round_2] [varchar](100) NULL,
+	[round_3] [varchar](100) NULL,
+	[doc_verification] [varchar](100) NULL,
+	[offer_letter] [varchar](100) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[applicant_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [hrisportal].[applicants] ADD  DEFAULT (getdate()) FOR [applied_at]
+GO
+
+ALTER TABLE [hrisportal].[applicants] ADD  DEFAULT ('N/A') FOR [round_1]
+GO
+
+ALTER TABLE [hrisportal].[applicants] ADD  DEFAULT ('N/A') FOR [round_2]
+GO
+
+ALTER TABLE [hrisportal].[applicants] ADD  DEFAULT ('N/A') FOR [round_3]
+GO
+
+ALTER TABLE [hrisportal].[applicants] ADD  DEFAULT ('N/A') FOR [doc_verification]
+GO
+
+ALTER TABLE [hrisportal].[applicants] ADD  DEFAULT ('N/A') FOR [offer_letter]
+GO
+
+ALTER TABLE [hrisportal].[applicants]  WITH CHECK ADD FOREIGN KEY([user_id])
+REFERENCES [hrisportal].[users] ([user_id])
+GO
+
+ALTER TABLE [hrisportal].[applicants]  WITH CHECK ADD FOREIGN KEY([j_id])
+REFERENCES [hrisportal].[job_vacancy] ([j_id])
+GO
+

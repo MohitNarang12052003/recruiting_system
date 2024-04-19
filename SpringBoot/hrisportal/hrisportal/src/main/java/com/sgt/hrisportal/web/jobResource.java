@@ -57,7 +57,8 @@ public class jobResource {
     }
 
     @PostMapping("/updateApplication/{id}")
-    public ResponseEntity<Map<String ,Object>> updateApplication(@PathVariable int id,@RequestBody Map<String,Object> body,HttpServletRequest httpServletRequest){
+    public ResponseEntity<Map<String ,Object>> updateApplication(@PathVariable("id") int id,@RequestBody Map<String,
+            Object> body,HttpServletRequest httpServletRequest){
         return jobService.updateApplication(id,body,httpServletRequest);
     }
 
