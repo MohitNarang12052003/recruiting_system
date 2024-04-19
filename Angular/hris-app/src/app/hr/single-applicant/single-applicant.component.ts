@@ -50,18 +50,18 @@ ngOnInit(){
   
 }
 
-// patchForm(){
-//   console.log("pf")
-//   this.applicantForm.patchValue({
-//     round_1:this.applicantDetails.round_1,
-//     round_2:this.applicantDetails.round_2,
-//     round_3:this.applicantDetails.round_3,
-//     doc_verification:this.applicantDetails.doc_verification,
-//     offer_letter:this.applicantDetails.offer_letter,
+patchForm(){
+  console.log("pf")
+  this.applicantForm.patchValue({
+    round_1:this.applicantDetails.round_1,
+    round_2:this.applicantDetails.round_2,
+    round_3:this.applicantDetails.round_3,
+    doc_verification:this.applicantDetails.doc_verification,
+    offer_letter:this.applicantDetails.offer_letter,
 
-//   })
-//   console.log("values patched",this.applicantForm.get("round_1")?.value,this.applicantDetails.round_1)
-// }
+  })
+  console.log("values patched",this.applicantForm.get("round_1")?.value,this.applicantDetails.round_1)
+}
 
 getId(){
   this.route.paramMap.subscribe((params:ParamMap | null)=>{
@@ -85,7 +85,7 @@ getSingleApplicant(){
   this.hrService.getSingleApplicant(this.id).subscribe((val)=>{
     console.log(val);
     this.applicantDetails=val;
-    // this.patchForm();
+    this.patchForm();
     this.getAllQualificationsOfApplicant();
     this.getJobHistoryOfApplicant();
   })
@@ -125,7 +125,7 @@ submit(){
 
   this.hrService.updateApplication(this.id,this.applicantForm.value).subscribe((val)=>{
     console.log(val);
-    this.router.navigate([`/ViewApplications`]);
+    this.router.navigate(['/ViewApplications']);
 
   })
 }
@@ -139,6 +139,7 @@ sendDocumentMail():void{
 
   this.hrService.sendDocumentMail(myMap).subscribe({
     next:(data)=>{
+      console.log("ahuja")
       console.log(data);
     },
     error:(e)=>{
@@ -182,14 +183,4 @@ getJobHistoryOfApplicant(){
     }
   })
 }
-
-
-
-
-
-
-
-
-
-
 }

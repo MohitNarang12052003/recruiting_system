@@ -126,23 +126,23 @@ view(num:number){
   //   }
   // }
 
-  viewStatus(num:number,round1:number,round2:number,round3:number){
+  viewStatus(num:number,round1:string,round2:string,round3:string){
     console.log(round1);
     this.profile=3;
-    if(round1!=-1 && round1==1) {
+    if(round1!="N/A" && round1=="Pass") {
       this.currentStep++;
       this.msg="Wuhu! You have cleared round 1..Congratulationsss"
       this.progressValue1=100;
       this.progressValue2=50;
     }
 
-    if(round2!=-1 && round2==1) {
+    if(round2!="N/A" && round2=="Pass") {
       this.currentStep++;
       this.progressValue2=100;
       this.progressValue3=50;
       this.msg="Congratulations!! You have cleared Round 2 as well"
     }
-    if(round3!=-1 && round3==1){
+    if(round3!="N/A" && round3=="Pass"){
       this.currentStep++;
       this.progressValue3=100
       this.msg="Congratulations!! You have cleared All Rounds"
