@@ -11,6 +11,11 @@ import { dept } from '../shared/interfaces/departments.interface';
 export class UsersService {
   constructor(private http: HttpClient) {}
 
+
+  alreadyExists(username:string,email:string):Observable<any>{
+    return this.http.get<any>(APP_CONSTANTS.BACKEND_URL + `alreadyExists/${username}/${email}`);
+  }
+
   insertUser(data: any): Observable<string> {
     return this.http.post<string>(APP_CONSTANTS.BACKEND_URL + 'user', data);
   }

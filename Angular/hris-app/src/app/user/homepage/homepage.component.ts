@@ -102,15 +102,15 @@ view(num:number){
 
   public goToNextStep(): void {
     // if (this.validateStep(this.currentStep)) {
-      this.currentStep++;
+      this.currentStep+=1;
     // }
   }
 
-  public goToPreviousStep(): void {
-    if (this.currentStep > 1) {
-      this.currentStep--;
-    }
-  }
+  // public goToPreviousStep(): void {
+  //   if (this.currentStep > 1) {
+  //     this.currentStep--;
+  //   }
+  // }
 
   // public validateStep(step: number): boolean {
   //   // Implement your validation logic for each step here
@@ -126,24 +126,28 @@ view(num:number){
   //   }
   // }
 
-  viewStatus(num:number,round1:number,round2:number,round3:number){
+  viewStatus(num:number,round1:string,round2:string,round3:string){
     console.log(round1);
     this.profile=3;
-    if(round1!=-1 && round1==1) {
-      this.currentStep++;
+    if(round1=="Pass" && round2!=="Pass") {
+      this.currentStep=1;
       this.msg="Wuhu! You have cleared round 1..Congratulationsss"
       this.progressValue1=100;
       this.progressValue2=50;
+      this.progressValue3=0;
     }
 
-    if(round2!=-1 && round2==1) {
-      this.currentStep++;
+    if(round3!=="Pass" && round2=="Pass") {
+      this.currentStep=2;
+      this.progressValue1=100;
       this.progressValue2=100;
       this.progressValue3=50;
       this.msg="Congratulations!! You have cleared Round 2 as well"
     }
-    if(round3!=-1 && round3==1){
-      this.currentStep++;
+    if(round3==="Pass"){
+      this.currentStep=3;
+      this.progressValue1=100;
+      this.progressValue2=100;
       this.progressValue3=100
       this.msg="Congratulations!! You have cleared All Rounds"
     }

@@ -149,6 +149,7 @@ const routes: Routes = [
   {
     path: 'AddAnnouncement',
     component: AddAnnouncementComponent,
+    canActivate:[HRGuardService]
   },
   {
     path:'OverView',
@@ -156,12 +157,14 @@ const routes: Routes = [
   },
 {
   path:'viewDocuments/:id',
-  component:ViewDocumentsComponent
+  component:ViewDocumentsComponent,
+  canActivate:[HRGuardService]
 
 },
   {
     path: 'Apply-leave',
     component: ApplyLeavesComponent,
+    canActivate:[EmployeeGuardService]
   },
   {
     path: '',

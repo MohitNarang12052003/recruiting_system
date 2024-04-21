@@ -46,9 +46,10 @@ export class RegisterComponent {
   //   pwd: new FormControl(),
   // });
 
-  add() {
-    this.isDone = 1;
-  }
+  // add() {
+  //   this.alreadyExistsFn();
+    
+  // }
 
   submit(): void {
     console.log(this.createForm.value);
@@ -103,5 +104,25 @@ export class RegisterComponent {
     this.createForm.patchValue({
       resume: event.target.files[0].name,
     });
+  }
+
+  alreadyExistsFn(){
+    console.log("clicked")
+    this.userService.alreadyExists(this.createForm.get("username")?.value,this.createForm.get("email")?.value).subscribe((data)=>{
+      console.log(data)
+      if(data["already_exists"]==1){
+        alert("username already exists");
+      }
+      if(data["already_exists"]==2){
+        alert("email already exists");
+      }
+      if(data["already_exists"]==3){
+        alert("username and email already exist");
+      }
+      if(data["already_exists"]==0){
+        this.isDone = 1;
+      }
+      
+    })
   }
 }

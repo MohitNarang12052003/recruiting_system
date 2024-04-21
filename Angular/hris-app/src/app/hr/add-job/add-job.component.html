@@ -4,7 +4,7 @@
   </div>
   <div class="inside bg-light text-dark col-8">
    
-    <form
+    <form ngNativeValidate (submit)="submit()"
       class="bg-light text-dark p-4 m-4"
       [formGroup]="createForm"
     >
@@ -13,11 +13,11 @@
       <div class="my-container row p-2 m-6" *ngIf="!isDone; else nextSection">
         <div class="col-5">
           <div><label for="">Title</label></div>
-          <input type="text" class="elem" formControlName="jobTitle" />
+          <input required type="text" class="elem" formControlName="jobTitle" />
         </div>
         <div class="col-5">
           <div><label for="">Employment Type</label></div>
-          <select
+          <select  required 
             class="form-select elem"
             style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
             #type
@@ -35,13 +35,13 @@
         
         <div class="col-5">
           <div><label for="">Location</label></div>
-          <input  class="elem" type="text" formControlName="location" />
+          <input  required  class="elem" type="text" formControlName="location" />
           <!-- <Textarea rows="2" cols="15" formControlName="desc"></Textarea> -->
         </div>
 
         <div class="col-5">
           <div><label for="">Department Name</label></div>
-          <select
+          <select  required 
             class="form-select elem"
             style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
             #types
@@ -62,11 +62,13 @@
         </div>
         <!-- Add other fields -->
       </div>
+      
+
       <div class="button-group" *ngIf="!isDone">
         <button
           type="button"
           class="btn btn-secondary col-3"
-          (click)="add()"
+          (click)="add()" 
         >
           Next
         </button>
@@ -77,23 +79,23 @@
         <div class="my-container row">
           <div class="col-5">
             <div><label for="">Minimum Qualifications:</label></div>
-            <input  class="elem" type="text" formControlName="minQualification" />
+            <input  required   class="elem" type="text" formControlName="minQualification" />
           </div>
 
           <div class="col-5">
             <div><label for="">Describe</label></div>
-            <input class="elem"  type="text" formControlName="jobDescription" />
+            <input required  class="elem"  type="text" formControlName="jobDescription" />
             <!-- <Textarea rows="2" cols="15" formControlName="desc"></Textarea> -->
           </div>
           <div class="col-5">
             <div><label for="">Key Role</label></div>
-            <input  class="elem" type="text" formControlName="keyRole" />
+            <input required   class="elem" type="text" formControlName="keyRole" />
             <!-- <Textarea rows="2" cols="15" formControlName="desc"></Textarea> -->
           </div>
 
           <div class="col-5">
             <div ><label for="">Skills</label></div>
-            <input class="elem"  type="text" formControlName="skills" placeholder="java,python,..." />
+            <input required  class="elem"  type="text" formControlName="skills" placeholder="java,python,..." />
             <!-- <Textarea rows="2" cols="15" formControlName="desc"></Textarea> -->
           </div>
 
@@ -101,12 +103,19 @@
         </div>
         <div class="button-group" *ngIf="isDone">
           <button
-            type="button"
+            type="submit"
             class="btn btn-secondary col-3"
-            (click)="submit()"
           >
             Submit
           </button>
+
+          <button
+            type="button" (click)="backFn()"
+            class="btn btn-secondary col-3"
+          >
+            Back
+          </button>
+
         </div>
       </ng-template>
       

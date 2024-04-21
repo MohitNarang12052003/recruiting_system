@@ -12,6 +12,11 @@ public class userRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+
+    public Map<String,Object> alreadyExists(String  username, String email){
+        return jdbcTemplate.queryForMap("EXEC  hrisportal.sp_already_exists ?,?",username,email);
+    }
+
     public int insertUser(String fullname, String username, String email, String password, String dob, String phone,int workexp,String resume,int exp_ctc,int curr_ctc){
         return jdbcTemplate.update("EXEC  hrisportal.sp_insert_user ?,?,?,?,?,?,?,?,?,?",username,email,password,fullname,dob,phone,workexp,resume,exp_ctc,curr_ctc);
     }

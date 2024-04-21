@@ -2,23 +2,31 @@ import { Component, OnInit } from '@angular/core';
 import { HrService } from '../hr.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-job',
   templateUrl: './add-job.component.html',
   styleUrls: ['./add-job.component.css'],
 })
-export class AddJobComponent {
+export class AddJobComponent implements OnInit {
   isDone: number = 0;
+  isFilled: number = 0;
   constructor(
     private hrService: HrService,
     private cookieService: CookieService,
     private router: Router
   ) {}
 
+  ngOnInit(): void {
+    
+  }
+
   add() {
-    this.isDone = 1;
+   
+      this.isDone = 1; 
+    
+           
   }
   
   selectedType = '';
@@ -33,7 +41,7 @@ export class AddJobComponent {
   }
 
   createForm = new FormGroup({
-    jobTitle: new FormControl(),
+    jobTitle: new FormControl('',Validators.required),
     jobDescription: new FormControl(),
     minQualification: new FormControl(),
     keyRole: new FormControl(),
@@ -58,5 +66,10 @@ export class AddJobComponent {
       );
       this.router.navigate(['HR']);
     });
+  }
+
+
+  backFn(){
+    this.isDone=0;
   }
 }

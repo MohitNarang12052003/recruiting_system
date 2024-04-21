@@ -2,11 +2,11 @@
   <div class="left"><img src="assets/Images/leave-absence-request.webp" alt=""></div>
   <div class="right">
   
-    <form class="applyLeaveForm" [formGroup]="createForm">
+    <form class="applyLeaveForm" ngNativeValidate [formGroup]="createForm" (submit)="submit()">
       <div><h2>Take a leave</h2></div>
       <div class="form-group">
         <label for="category_name">Category Name:</label>
-        <select
+        <select required
         class="form-select"
         style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
         #type
@@ -22,13 +22,13 @@
       </div>
       <div class="form-group">
         <label for="applied_at">Applied For:</label>
-        <input type="date" class="form-control" formControlName="applied_at" id="applied_at" />
+        <input required type="date" class="form-control" formControlName="applied_at" id="applied_at" />
       </div>
       <div class="form-group">
         <label for="taken_for">Taken For:</label>
-        <input type="text" class="form-control" formControlName="taken_for" id="taken_for" />
+        <input required type="text" class="form-control" formControlName="taken_for" id="taken_for" />
       </div>
-      <button type="button" class="btn btn-primary" (click)="submit()">Submit</button>
+      <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   
   

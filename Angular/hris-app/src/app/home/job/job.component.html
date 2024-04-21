@@ -5,8 +5,8 @@
     Discover the fresh job openings from our firm in which you might want to apply <br> and take a chance to get hired by our fortune company
   </p>
   
-  <div class="row justify-content-center">
-    <div class="col-3 d-flex justify-content-center" *ngFor="let job of jobs.slice(0, 8)">
+  <div class="row justify-content-center" *ngIf="jobs">
+    <div class="col-3 d-flex justify-content-center"  *ngFor="let job of jobs.slice(0, 8)">
       <button class="btn"
       [routerLink]="['/jobDetail']"
       [queryParams]="{

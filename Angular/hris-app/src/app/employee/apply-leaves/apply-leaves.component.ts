@@ -32,9 +32,7 @@ export class ApplyLeavesComponent {
   submit():void {
     this.createForm.get('category_name')?.setValue(this.selectedType);
     const employeeId = parseInt(this.cookieService.get('employee_id'));
-    if (!isNaN(employeeId)) {
-      this.createForm.get('employee_id')?.setValue(employeeId);
-    } 
+    this.createForm.get('employee_id')?.setValue(employeeId);
     console.log(this.createForm.value);
     this.employeeService.ApplyLeave(this.createForm.value).subscribe((data) => {
       alert('Successfully Posted');

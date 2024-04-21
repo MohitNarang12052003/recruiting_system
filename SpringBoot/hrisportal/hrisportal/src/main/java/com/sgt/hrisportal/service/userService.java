@@ -77,6 +77,11 @@ public class userService {
     }
 
 
+    public Map<String,Object> alreadyExists(String username,String password){
+
+        return userRepository.alreadyExists(username,password);
+
+    }
 
     public ResponseEntity<Map<String, Object>> insertUser(Map<String, Object> body) {
         String fullname = (String) body.get("full_name");
@@ -410,7 +415,7 @@ public class userService {
 
     public String getExtension(int userid,String folder){
         Map<String,Object> body=userRepository.getExtension(userid,folder);
-        System.out.println(body);
+        System.out.println("1002"+body);
         String fileName=(String)body.get("document");
         String[] extension=fileName.split(Pattern.quote("."));
         return extension[1];
@@ -440,4 +445,6 @@ public class userService {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyMap());
 
     }
+
+
 }

@@ -90,12 +90,12 @@
 <div class="col-8 ">
   
   <form
-        class=" text-dark w-75  "
+        class=" text-dark w-75"
         
         [formGroup]="createForm"
       >
       <h1 >Get's Started</h1>
-      <p class="text-muted">Already have an Account? <span style="color: #1685f4;">Login</span></p>
+      <p class="text-muted">Already have an Account? <span [routerLink]="['/login']" class="arrow-cursor" style="color: #1685f4;">Login</span></p>
       <div class="row">
         <div class="col-6" *ngIf="!isDone">
          
@@ -162,7 +162,7 @@
         <button
       type="button"
       class="btn btn-primary w-25 text-center align-self-center"
-      (click)="add()"
+      (click)="alreadyExistsFn()"
     >
       Next
     </button>

@@ -3,6 +3,7 @@ import com.sgt.hrisportal.service.userService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -112,9 +113,10 @@ public class userResource {
         userService.sendAnything(body);
     }
 
-    @GetMapping("/GetFiles/{userid}/{folder}")
-    public byte[] getFiles(@PathVariable("userid") String userid,@PathVariable("folder") String folder) throws IOException{
+    @GetMapping(value = "/GetFiles/{userid}/{folder}",produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public byte[] getFiles(@PathVariable String userid,@PathVariable String folder) throws IOException{
         int user_id=Integer.parseInt(userid);
+        System.out.println("100"+folder+userid);
         String extension=userService.getExtension(user_id,folder);
         String fileName=userid+"."+extension;
 
@@ -124,19 +126,25 @@ public class userResource {
     @PostMapping("/insertDocuments")
     public ResponseEntity<Map<String, Object>> insertDocuments(@RequestBody Map<String,Object> body){
         return userService.insertDocuments(body);
-    }    @PostMapping("validateFpToken")
+    }
+
+    @PostMapping("/validateFpToken")
     public ResponseEntity<Map<String,Object>> validateFpToken(@RequestBody String token){
         return userService.validateFpToken(token);
     }
 
 
-    @PostMapping("resetPwd")
+    @PostMapping("/resetPwd")
     public ResponseEntity<Map<String,Object>> resetPwd(@RequestBody Map<String,Object> form){
         return userService.resetPwd(form);
     }
 
 
 
+    @GetMapping("/alreadyExists/{username}/{email}")
+    public Map<String,Object> alreadyExists(@PathVariable String username, @PathVariable String email){
+        return userService.alreadyExists(username,email);
+    }
 
 
 }

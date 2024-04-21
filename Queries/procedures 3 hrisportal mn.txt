@@ -262,6 +262,53 @@ GO
 
 
 
+CREATE TABLE [hrisportal].[applicants](
+	[applicant_id] [int] IDENTITY(1,1) NOT NULL,
+	[user_id] [int] NULL,
+	[j_id] [int] NULL,
+	[applied_at] [datetime] NULL,
+	[round_1] [varchar](100) NULL,
+	[round_2] [varchar](100) NULL,
+	[round_3] [varchar](100) NULL,
+	[doc_verification] [varchar](100) NULL,
+	[offer_letter] [varchar](100) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[applicant_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [hrisportal].[applicants] ADD  DEFAULT (getdate()) FOR [applied_at]
+GO
+
+ALTER TABLE [hrisportal].[applicants] ADD  DEFAULT ('N/A') FOR [round_1]
+GO
+
+ALTER TABLE [hrisportal].[applicants] ADD  DEFAULT ('N/A') FOR [round_2]
+GO
+
+ALTER TABLE [hrisportal].[applicants] ADD  DEFAULT ('N/A') FOR [round_3]
+GO
+
+ALTER TABLE [hrisportal].[applicants] ADD  DEFAULT ('N/A') FOR [doc_verification]
+GO
+
+ALTER TABLE [hrisportal].[applicants] ADD  DEFAULT ('N/A') FOR [offer_letter]
+GO
+
+ALTER TABLE [hrisportal].[applicants]  WITH CHECK ADD FOREIGN KEY([user_id])
+REFERENCES [hrisportal].[users] ([user_id])
+GO
+
+ALTER TABLE [hrisportal].[applicants]  WITH CHECK ADD FOREIGN KEY([j_id])
+REFERENCES [hrisportal].[job_vacancy] ([j_id])
+GO
+
+
+
+
+
 
 
 CREATE OR ALTER   PROCEDURE [hrisportal].[sp_update_applicant]
@@ -284,4 +331,61 @@ END
 GO
 
 
+
+
+CREATE OR ALTER   PROCEDURE [hrisportal].[sp_get_fileName]
+@userid INT,
+@folder VARCHAR(MAX)
+AS
+BEGIN
+	IF @folder = 'photo'
+	BEGIN
+		select up.photo AS document from hrisportal.userPhoto up where up.user_id=@userid
+	END
+	IF @folder = 'resume'
+	BEGIN
+		select u.resume AS document from hrisportal.users u where u.user_id=@userid
+	END
+	IF @folder = 'aadhar' OR @folder = 'voter' OR @folder = 'pan'
+	BEGIN
+		SELECT CASE 
+				WHEN @folder = 'aadhar'  THEN d.aadhar
+				WHEN @folder = 'voter'  THEN d.voter
+				WHEN @folder = 'pan' THEN d.pan
+			END AS document
+			FROM hrisportal.documents d WHERE d.user_id = @userid;
+	END
+
+END
+GO
+
+
+
+
+
+
+
+
+
+
+CREATE OR ALTER PROCEDURE  hrisportal.sp_already_exists
+    @username VARCHAR(100),
+    @email VARCHAR(100)
+AS 
+BEGIN
+    DECLARE @already_exists INT;
+
+    SET @already_exists = 
+        CASE
+            WHEN EXISTS (SELECT 1 FROM hrisportal.users WHERE username = @username AND email != @email)
+                THEN 1
+            WHEN EXISTS (SELECT 1 FROM hrisportal.users WHERE username != @username AND email = @email)
+                THEN 2
+            WHEN EXISTS (SELECT 1 FROM hrisportal.users WHERE username = @username AND email = @email)
+                THEN 3
+            ELSE 0
+        END;
+
+    SELECT @already_exists AS already_exists;
+END;
 
