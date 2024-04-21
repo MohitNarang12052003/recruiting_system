@@ -30,7 +30,7 @@ view(num:number){
   ngOnInit(): void {  
     // this.getUserId();
     this.getDetails();
-    console.log(this.usersApplicationDetails)
+    // console.log(this.usersApplicationDetails)
     this.getAllQualificationsOfUser();
     this.getJobHistoryOfUser();
     this.getUserApplicationDetails();
@@ -43,7 +43,7 @@ view(num:number){
   getDetails():void{
     this.userService.getDetails().subscribe({
       next:(data)=>{
-        console.log(data);
+        console.log("user details",data);
         this.userDetails=data
      
       },

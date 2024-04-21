@@ -4,7 +4,9 @@
     <div class="col-2 text-light p-3" style="height: 150vh;background-color: #1685f4;">
    <h3> Holaaa,Again!!</h3>
     
-    <h1>{{userDetails.username}}</h1>
+    <div *ngIf="userDetails">
+        <h1>{{userDetails.username}}</h1>
+    </div>
     <br>
     <button class="btn btn-outline-primary text-light me-3" type="button" style="width:15vw ; font-size: 18px; " (click)="view(0)">View Profile</button>
     <hr style="width: 15vw; height: 1vh; background-color: #ffffff">
@@ -15,7 +17,7 @@
     <button class="btn btn-outline-primary text-light me-3" style="width:15vw ; font-size: 18px; " type="button" (click)="view(2)">Edit Profile</button>
     </div>
     <div class="col">
-<div class="row" *ngIf="profile===0" >
+<div class="row" *ngIf="profile===0 && userDetails" >
     <div class="col-3 m-3" style="border-style:solid; border-radius: 25px; background-color: rgba(135, 207, 235, 0.325);">
         <div class="" style="display: flex; flex-direction: column;justify-content: center; ">
             <div style="height: 200px;

@@ -4,7 +4,7 @@ label{
 input,textarea{
     margin-bottom: 2em;
     width: 20vw;
-    height: 5vh;
+    height: 6vh;
     border-style: solid;
   border-image-source: linear-gradient(to bottom right, blue, skyblue);
   border-width: 3pt;

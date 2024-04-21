@@ -170,3 +170,42 @@ EXEC hrisportal.sp_user_applications_detail 54
 
 
 UPDATE hrisportal.applicants SET round_3=1 where user_id=54
+
+USE [hrisportal]
+GO
+
+/****** Object:  StoredProcedure [hrisportal].[sp_single_applicant]    Script Date: 18-04-2024 23:54:04 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE OR ALTER   PROCEDURE [hrisportal].[sp_single_applicant]
+@app_id INT
+AS
+BEGIN
+SELECT applicant_id,
+	a.user_id,
+	a.j_id,
+	applied_at,
+	round_1,
+	round_2,
+	round_3,
+	doc_verification,
+	offer_letter,
+	u.username,
+	j.job_title,
+	u.email
+FROM hrisportal.applicants AS a
+INNER JOIN hrisportal.users AS u
+ON a.user_id=u.user_id
+INNER JOIN hrisportal.job_vacancy AS j
+ON j.j_id=a.j_id
+WHERE a.applicant_id=@app_id
+END
+
+
+
+GO
+

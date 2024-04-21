@@ -129,7 +129,7 @@ const routes: Routes = [
   {
     path: 'original-documents',
     component: OriginalDocumentsComponent,
-    canActivate:[HRGuardService]
+    canActivate:[UserGuardService]
   },
   {
     path:'offer-letter-details/:id',

@@ -125,7 +125,7 @@ submit(){
 
   this.hrService.updateApplication(this.id,this.applicantForm.value).subscribe((val)=>{
     console.log(val);
-    this.router.navigate([`/ViewApplications`]);
+    this.router.navigate(['/ViewApplications']);
 
   })
 }
@@ -139,6 +139,7 @@ sendDocumentMail():void{
 
   this.hrService.sendDocumentMail(myMap).subscribe({
     next:(data)=>{
+      console.log("ahuja")
       console.log(data);
     },
     error:(e)=>{
@@ -182,14 +183,4 @@ getJobHistoryOfApplicant(){
     }
   })
 }
-
-
-
-
-
-
-
-
-
-
 }

@@ -49,6 +49,7 @@ export class NextRoundEmailComponent {
   getApplicantDetails():void{
     this.hrService.getSingleApplicant(this.id).subscribe({
       next:(data)=>{
+        console.log("kinjala")
         this.applicantDetails=data;
         console.log(data)
         this.currentRound=1;
@@ -72,6 +73,7 @@ export class NextRoundEmailComponent {
 
 
   submit(){
+    console.log(this.applicantDetails.email)
     this.nextRoundForm.patchValue({
       email:this.applicantDetails.email,
       uname:this.applicantDetails.username,

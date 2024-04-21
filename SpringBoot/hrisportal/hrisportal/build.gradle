@@ -29,13 +29,6 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-mail:3.1.9'
 
-
-
-	//pdf generation
-	implementation 'org.springframework:spring-core:6.0.16'
-
-
-	// https://mvnrepository.com/artifact/org.xhtmlrenderer/flying-saucer-pdf
 	implementation 'org.xhtmlrenderer:flying-saucer-pdf:9.7.2'
 
 	implementation 'org.apache.pdfbox:pdfbox:2.0.25'
