@@ -144,5 +144,10 @@ public class jobRepository {
         return jdbcTemplate.queryForList("EXEC hrisportal.sp_fetch_nationalHolidays ?",  month);
     }
 
+    public Map<String,Object> checkDocuments(int user_id){
+//        System.out.println(jdbcTemplate.update("EXEC hrisportal.sp_check_documents ?",user_id));
+        return jdbcTemplate.queryForMap("EXEC hrisportal.sp_check_documents ?",user_id);
+    }
+
 
 }

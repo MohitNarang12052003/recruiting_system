@@ -21,6 +21,7 @@ export class SinglejobComponent implements OnInit {
   location!: any;
   date_posted!: any;
   skills!: any;
+  skill!:string[];
   constructor(
     private cookieService: CookieService,
     private router: ActivatedRoute,
@@ -40,6 +41,7 @@ export class SinglejobComponent implements OnInit {
       this.employment_type = params['employment_type'];
       this.location = params['location'];
       this.skills = params['skills'];
+      this.skill=this.skills.split(',');
     });
   }
 

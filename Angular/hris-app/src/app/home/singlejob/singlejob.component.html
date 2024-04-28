@@ -1,4 +1,4 @@
-<div class="f">
+<!-- <div class="f">
   <h1>{{ title }}</h1>
   <p>Posted at:{{date_posted  | date : "longDate"}}</p>
   <p><b>Description:</b>{{ description }}</p>
@@ -12,4 +12,34 @@
   <button type="button" class="btn btn-dark m-4 w-25" (click)="submit()">
     Apply
   </button>
+</div> -->
+
+
+<div class="p-2">
+  <h1>{{title}}</h1>
+  <div class="row justify-content-between" style="width: 99vw;">
+    <div class="col quality">
+      <div class="q">{{department_name}}</div>
+      <div class="q">{{employment_type}}</div>
+      <div class="q">{{location}}</div>
+    </div>
+    <button type="button" class="btn btn-primary col-1" (click)="submit()">
+      Apply
+    </button>
+  </div>
+  <hr>
+  <h3 >Job Description</h3>
+  <p class="text-primary">{{ description }}</p>
+  <hr>
+  <h3>Minimum Qualifications:</h3>
+  <p class="text-primary">{{ minimum_qualifications }}</p>
+  <hr>
+  <h3>Key Role:</h3>
+  <p class="text-primary">{{ key_role }}</p>
+  <hr>
+  <h3>Skills:</h3>
+  <div class="quality" style="margin-bottom: 1em;">
+    <div class="q" *ngFor="let s of skill">{{s}}</div>
+  </div>
+
 </div>

@@ -71,28 +71,32 @@ export class HrService {
 
 
   AddAnnouncement(data: any): Observable<any> {
-    return this.http.post('http://localhost:8081/api/addAnnouncement',data,{withCredentials:true});
+    return this.http.post(APP_CONSTANTS.BACKEND_URL+'addAnnouncement',data,{withCredentials:true});
   }
 
   fetchAllAnnouncement():Observable<any>{
-    return this.http.get<any>(`http://localhost:8081/api/allAnnouncement`,{withCredentials:true});
+    return this.http.get<any>(APP_CONSTANTS.BACKEND_URL+`allAnnouncement`,{withCredentials:true});
 
   }
 
   getEidFromEmail(email:string):Observable<any>{
-    return this.http.get(`http://localhost:8081/api/getEidFromEmail/${email}`,{withCredentials:true})
+    return this.http.get(APP_CONSTANTS.BACKEND_URL+`getEidFromEmail/${email}`,{withCredentials:true})
   }
 
   empDeptCount():Observable<any>{
-    return this.http.get(`http://localhost:8081/api/empDeptCount`,{withCredentials:true})
+    return this.http.get(APP_CONSTANTS.BACKEND_URL+`empDeptCount`,{withCredentials:true})
   }
 
   offerLetterMail(body:any):Observable<any>{
-    return this.http.post('http://localhost:8081/api/offerLetterMail',body,{withCredentials:true});
+    return this.http.post(APP_CONSTANTS.BACKEND_URL+'offerLetterMail',body,{withCredentials:true});
   }
 
   getNationalHolidays(month:number):Observable<any> {
-    return this.http.post("http://localhost:8081/api/getHolidays", { month });
+    return this.http.post(APP_CONSTANTS.BACKEND_URL+"getHolidays", { month });
+  }
+
+  checkDocuments(id:any):Observable<any>{
+    return this.http.get(APP_CONSTANTS.BACKEND_URL+`checkDocument/${id}`);
   }
 
 

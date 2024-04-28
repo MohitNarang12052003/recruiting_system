@@ -42,7 +42,7 @@ public class userService {
         }
 
         Map<String,String> cookieMap =getCookiesAsHashMap(cookies);
-
+        System.out.println(cookieMap);
         if(cookieMap.containsKey("user_id")){
             Map<String,Object> result=userRepository.validateToken(Integer.parseInt(cookieMap.get("user_id")),
                     cookieMap.get("token"));

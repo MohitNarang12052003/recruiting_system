@@ -1,4 +1,4 @@
-<p>change-pwd works!</p>
+<!-- <p>change-pwd works!</p>
 
 <form class="form-group" [formGroup]="changePwdForm" (submit)="submit()">
     <div class="form-control">
@@ -14,8 +14,39 @@
         <input type="text" name="confirm_new_pwd" id="confirm_new_pwd" formControlName="confirm_new_pwd">
     </div>
 
-    <button type="submit">Submit</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
 
-<div *ngIf="hidden">Password changed successfully</div>
+<div *ngIf="hidden">Password changed successfully</div> -->
+
+<div class="row justify-content-between" style="width: 99.5vw; height: 70vh;">
+    <div class="col m-0 p-0" style="">
+    <img src="../../../assets/Images/change.avif" alt="" style="height: 70vh;width:100%;">
+  </div>
+  <div class="col-6 d-flex flex-column   m-2">
+    <h1 style="font-size: 50px; ">Change Password</h1>
+    <p class="text-muted">Keep your account more secure</p>
+<form class="form-group text-dark w-75 " [formGroup]="changePwdForm" (submit)="submit()">
+    <div class="">
+        <label for="old_pwd">Enter Current Password</label>
+        <input type="text" name="old_pwd" id="old_pwd" formControlName="old_pwd"  class="form-control   align-self-center">
+    </div>
+    <div class="">
+        <label for="new_pwd">Enter New Password</label>
+        <input type="text" name="new_pwd" id="new_pwd" formControlName="new_pwd"  class="form-control   align-self-center">
+    </div>
+    <div class="">
+        <label for="confirm_new_pwd">Confirm New Password</label>
+        <input type="text" name="confirm_new_pwd" id="confirm_new_pwd" formControlName="confirm_new_pwd"  class="form-control   align-self-center">
+    </div>
+
+    <!-- <div class="d-flex flex-column "> -->
+        <button type="submit" class="btn btn-primary  w-25  ">Submit</button>
+    <!-- </div> -->
+</form>
+ 
+        <div *ngIf="hidden">Password changed successfully</div>
+  </div>
+  
+  </div>

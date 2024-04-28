@@ -118,6 +118,7 @@ active_yn VARCHAR(1)
 
 ALTER TABLE hrisportal.hr ADD created_at DATETIME  
 ALTER TABLE hrisportal.hr ADD CONSTRAINT df_create DEFAULT GETDATE() FOR created_at
+
 CREATE TABLE hrisportal.department(
 department_id INT PRIMARY KEY IDENTITY(1,1),
 department_name VARCHAR(MAX) NOT NULL

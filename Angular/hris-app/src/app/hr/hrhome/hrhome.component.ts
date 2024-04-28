@@ -21,6 +21,7 @@ export class HrhomeComponent implements OnInit{
 
   constructor(private hrService:HrService){}
   ngOnInit(){
+
     this.getCounts()
   }
 

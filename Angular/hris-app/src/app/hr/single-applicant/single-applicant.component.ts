@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { HrService } from '../hr.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-single-applicant',
@@ -18,6 +19,7 @@ export class SingleApplicantComponent implements OnInit{
   jobHistoryData!:any;
   jobHistoryDataBool!:boolean;
   degreesDataBool!:boolean;
+  doc:number=0;
 
 
 
@@ -41,7 +43,7 @@ export class SingleApplicantComponent implements OnInit{
 
 
 
-constructor(private hrService:HrService,private route:ActivatedRoute,private router:Router){}
+constructor(private hrService:HrService,private route:ActivatedRoute,private router:Router,private cookieService:CookieService){}
 
 ngOnInit(){
 
@@ -66,9 +68,10 @@ patchForm(){
 getId(){
   this.route.paramMap.subscribe((params:ParamMap | null)=>{
      if(params){
+      console.log(params);
       const idString = params.get('id');
       this.id = idString ? parseInt(idString, 10) : null;
-
+      this.cookieService.set('app_id',params.get('id')!);
       this.getSingleApplicant();
       
 
@@ -85,9 +88,22 @@ getSingleApplicant(){
   this.hrService.getSingleApplicant(this.id).subscribe((val)=>{
     console.log(val);
     this.applicantDetails=val;
+    this.userId=val['user_id'];
+    console.log(this.userId);
     this.patchForm();
     this.getAllQualificationsOfApplicant();
     this.getJobHistoryOfApplicant();
+    this.checkDocuments();
+  })
+}
+
+
+checkDocuments(){
+  console.log("userid"+" "+this.userId);
+  this.hrService.checkDocuments(this.userId).subscribe((val)=>{
+    console.log("value"+val);
+    this.doc=val;
+    console.log(this.doc);
   })
 }
 // round1Val:any;
@@ -130,7 +146,9 @@ submit(){
   })
 }
 
-
+onSelected(value: string,round:string): void {
+  this.applicantForm.get(round)?.setValue(value);
+}
 sendDocumentMail():void{
 
   let myMap: { [key: string]: any }={};

@@ -9,7 +9,7 @@ EXEC hrisportal.category_count 5
 CREATE OR ALTER   PROCEDURE [hrisportal].[ApplyForLeave]
 @employee_id INT,
 @category_name NVARCHAR(MAX),
-@applied_at VARCHAR(MAX),
+@applied_at NVARCHAR(MAX),
 @taken_for VARCHAR(MAX)
 AS
 BEGIN

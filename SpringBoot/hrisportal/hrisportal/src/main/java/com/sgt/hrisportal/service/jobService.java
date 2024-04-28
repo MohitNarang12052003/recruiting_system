@@ -39,26 +39,28 @@ public class jobService {
         if(cookies==null)   return false;
 
         Map<String,String> cookieMap =getCookiesAsHashMap(cookies);
-
-        if(cookieMap.containsKey("user_id")){
-            Map<String,Object> result= jobRepository.validateToken(Integer.parseInt(cookieMap.get("user_id")),
-                    cookieMap.get("token"));
-            Integer validYN=(Integer) result.get("validYN");
-            return validYN == -1;
-        }
-
-        if(cookieMap.containsKey("employee_id")){
-            Map<String,Object> result= jobRepository.validateToken(Integer.parseInt(cookieMap.get("employee_id")),cookieMap.get("token"));
-            Integer validYN=(Integer) result.get("validYN");
-            return validYN == 0;
-        }
-
         if(cookieMap.containsKey("hr_id")){
             Map<String,Object> result= jobRepository.validateToken(Integer.parseInt(cookieMap.get("hr_id")),cookieMap.get("token"));
             Integer validYN=(Integer) result.get("validYN");
             System.out.println("checking validYN "+validYN);
             return validYN == 1;
         }
+
+        else if(cookieMap.containsKey("employee_id")){
+            System.out.println("Kinjala");
+            Map<String,Object> result= jobRepository.validateToken(Integer.parseInt(cookieMap.get("employee_id")),cookieMap.get("token"));
+            Integer validYN=(Integer) result.get("validYN");
+            return validYN == 0;
+        }
+        else if(cookieMap.containsKey("user_id")){
+            Map<String,Object> result= jobRepository.validateToken(Integer.parseInt(cookieMap.get("user_id")),
+                    cookieMap.get("token"));
+            Integer validYN=(Integer) result.get("validYN");
+            return validYN == -1;
+        }
+
+
+
 
 
         return false;
@@ -627,6 +629,11 @@ public class jobService {
     public List<Map<String, Object>> getNationalHolidays(Map<String, Object> body) {
         int month = (int)body.get("month");
         return jobRepository.getNationalHolidays(month);
+    }
+
+    public int checkDocuments(int user_id){
+        Map<String,Object> ans=jobRepository.checkDocuments(user_id);
+        return (int)ans.get("result");
     }
 
 

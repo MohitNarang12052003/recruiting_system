@@ -8,6 +8,8 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class NavbarComponent implements OnInit{
   userid!:any;
+  empid!:any;
+  hr!:any;
   constructor(private cookieService:CookieService){}
 
   ngOnInit(){
@@ -20,10 +22,19 @@ export class NavbarComponent implements OnInit{
 
   isLoggedIn():boolean{
     this.userid= this.cookieService.get('user_id');
-    const employee_id=!!this.cookieService.get('employee_id');
-    const hr_id=!!this.cookieService.get('hr_id');
-    
-    const loggedIn= (this.userid || employee_id || hr_id);
+    this.empid=!!this.cookieService.get('employee_id');
+    this.hr=!!this.cookieService.get('hr_id');
+    // this.userid=user_id;
+    const loggedIn= (this.userid || this.empid || this.hr);
+    // if(user_id){
+    //   this.userid=user_id;
+    // }
+    // else if(employee_id){
+    //   this.userid=employee_id;
+    // }
+    // else if(hr_id){
+    //   this.userid=hr_id;
+    // }
     // console.log(this.userid)
     return loggedIn;
   }
