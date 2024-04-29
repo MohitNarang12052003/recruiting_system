@@ -11,20 +11,20 @@
    
     
     <div>
-        <form class="connect-form" [formGroup]="createForm">
+        <form class="connect-form" [formGroup]="createForm" (submit)="submit()">
             <div class="form-group">
               <label for="email"><b>Email:</b></label>
               <br>
-              <input type="email" id="email" name="email" class="form-control ipt" style="width: 45vw; " formControlName="email">
+              <input required type="email" id="email" name="email" class="form-control ipt" style="width: 45vw; " formControlName="email">
             </div>
             <br>
             <div class="form-group">
               <label for="query"><b>Anything:</b></label>
               <br>
-              <textarea id="query" name="query" rows="4" class="form-control ipt" formControlName="anything"></textarea>
+              <textarea required id="query" name="query" rows="4" class="form-control ipt" formControlName="anything"></textarea>
             </div>
             <br>
-            <button type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
           </form>
     </div>
     <img src="../../../../assets/Images/contact.avif" alt="">

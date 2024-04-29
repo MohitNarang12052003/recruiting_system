@@ -33,6 +33,7 @@ import { ResetPwdComponent } from './shared/components/reset-pwd/reset-pwd.compo
 import { OfferLetterDetailsComponent } from './hr/offer-letter-details/offer-letter-details.component';
 import { OverviewComponent } from './home/overview/overview.component';
 import { ViewDocumentsComponent } from './hr/view-documents/view-documents.component';
+import { RegisterDashboardComponent } from './home/register-dashboard/register-dashboard.component';
 
 const routes: Routes = [
   {
@@ -41,7 +42,7 @@ const routes: Routes = [
   },
   {
     path: 'register',
-    component: RegisterComponent,
+    component: RegisterDashboardComponent,
   },
   {
     path: 'Qualification',

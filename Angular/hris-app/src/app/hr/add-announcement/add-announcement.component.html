@@ -2,16 +2,16 @@
     <div class="heading">
      <img src="assets/Images/announcement.jpeg" alt="">
     </div>
-    <div class="form-container">
-        <form class="announcement-form" [formGroup]="createForm">
+    <div class="form-container" >
+        <form class="announcement-form" ngNativeValidate [formGroup]="createForm" (submit)="submit()">
             <div class="form-group">
                 <h2>Announcement</h2>
-                <textarea id="announcement" formControlName="announcement" ></textarea>
+                <textarea required id="announcement" formControlName="announcement" ></textarea>
             </div>
             <div class="button-group row" >
               <div class="col-2">
                 <button type="button" class="btn btn-secondary"  [routerLink]="['/HR']">Back</button></div>
-                <div class="col-2"> <button type="button" class="btn btn-primary" (click)="submit()">Submit</button>
+                <div class="col-2"> <button type="button" class="btn btn-primary">Submit</button>
               </div>
           </div>
           

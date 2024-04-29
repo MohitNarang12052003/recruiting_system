@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class ViewVacanciesComponent {
   vacancies!:any[];
-
+  active = 1;
   constructor(private hrService:HrService,private router:Router){
 
   }

@@ -30,7 +30,10 @@ export class OriginalDocumentsComponent implements OnInit{
   })
   url!:any;
   submit(){
-    if(this.part1==true)  this.part1=false;
+    if(this.part1==true){
+      this.part1=false;
+      
+    }
     else{
       this.createForm.get("user_id")?.setValue(parseInt(this.cookieService.get("user_id")));
       this.userService.insertDocuments(this.createForm.value).subscribe((data)=>{

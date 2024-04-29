@@ -31,18 +31,18 @@
 
     <div class="right col-8 p-2 m-3">
         <div class="round"><h2>Enter Next Round Details</h2></div>
-        <form [formGroup]="nextRoundForm" (submit)="submit()">
+        <form [formGroup]="nextRoundForm" ngNativeValidate (submit)="submit()">
             <div class="round row ">
                 <label for="round-date" class="txt col-3" ><h5>Round Date</h5></label >
-                <input type="date" class="col-3" formControlName=date>
+                <input required type="date" class="col-3" formControlName=date>
             </div>
             <div class="round row ">
                 <label for="round-place"  class="txt col-3" ><h5>Round Place</h5></label>
-                <input type="text" formControlName=place class="col-3">
+                <input required type="text" formControlName=place class="col-3">
             </div>
             <div class="round row">
                 <label for="round-time"  class="txt col-3" ><h5>Round Time</h5></label >
-                <input type="time" formControlName=time class="col-3">
+                <input required type="time" formControlName=time class="col-3">
             </div>
             <div class="round" >
               <button

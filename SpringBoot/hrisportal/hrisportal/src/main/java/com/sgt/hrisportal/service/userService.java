@@ -117,7 +117,7 @@ public class userService {
         String institute = (String) body.get("institute");
         int admission_yr = (int) body.get("admission_yr");
         int completion_yr = (int) body.get("completion_yr");
-        double gpa = Double.parseDouble((String) body.get("gpa"));
+        double gpa = ((double) body.get("gpa"));
 
         int insertedRows = userRepository.insertQualification(uid, deg, institute, admission_yr, completion_yr, gpa);
 
@@ -397,13 +397,13 @@ public class userService {
         String email=(String)body.get("email");
         String text=(String)body.get("anything");
 //        String sender=(String)body.get("emailSender");
-        String sender="kinjala.ahuja199@gmail.com";
+        String sender="mohitnarang2003.mn@gmail.com";
 
         try {
             mimeMessageHelper.setSubject("Contact Us Queries - HRIS");
             mimeMessageHelper.setTo(sender);
             mimeMessageHelper.setText(text);
-//            mimeMessageHelper.setFrom(sender); // Set the from address
+//            mimeMessageHelper.setFrom(email); // Set the from address
             mimeMessageHelper.setReplyTo(email);
         } catch (MessagingException e) {
             throw new RuntimeException(e);

@@ -11,6 +11,7 @@ import { Job } from 'src/app/shared/interfaces/job.interface';
 })
 export class JobComponent implements OnInit {
   jobs!: Job[];
+  showAll!:boolean;
   constructor(
     private cookieService: CookieService,
     private router: Router,
@@ -22,5 +23,10 @@ export class JobComponent implements OnInit {
       this.jobs = data;
       console.log(data);
     });
+  }
+
+  showAllFn():void{
+    if(this.showAll)  this.showAll=false;
+    else  this.showAll=true;
   }
 }

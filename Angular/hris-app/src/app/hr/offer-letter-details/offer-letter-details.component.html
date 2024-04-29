@@ -4,20 +4,20 @@
   </div>
 
   <div class="right col-8 p-2 m-3">
-    <form action="" class=form-control [formGroup]="offerLetterForm" (submit)="submit()">
+    <form action="" class=form-control [formGroup]="offerLetterForm" ngNativeValidate (submit)="submit()">
       <div><h2>Offer Letter </h2></div>
   <div class=" round row ">
       <div class="col-4 align-self-center"><label for="">Title</label></div>
-      <input type="text" class="elem col-3" formControlName="job_title" />
+      <input required type="text" class="elem col-3" formControlName="job_title" />
   </div>
   <div class=" round row">
       <div class="col-4 align-self-center"><label for="">Salary (in LPA)</label></div>
-      <input type="number" class="elem col-3" formControlName="salary" />
+      <input required type="number" class="elem col-3" formControlName="salary" />
   </div>
 
   <div class=" round row ">
       <div class="col-4 align-self-center"><label for="">Employment Type</label></div>
-          <select
+          <select required
             class="form-select elem col-4"
             style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
             #type

@@ -66,12 +66,18 @@
 
       <div class="button-group" *ngIf="!isDone">
         <button
+            type="submit"
+            class="btn btn-secondary col-3"
+          >
+            Next
+          </button>
+        <!-- <button
           type="button"
           class="btn btn-secondary col-3"
           (click)="add()" 
         >
           Next
-        </button>
+        </button> -->
       </div>
       
       <!-- Second section of the form -->
@@ -102,6 +108,7 @@
           
         </div>
         <div class="button-group" *ngIf="isDone">
+
           <button
             type="submit"
             class="btn btn-secondary col-3"

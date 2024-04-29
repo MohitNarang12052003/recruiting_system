@@ -3,6 +3,7 @@ import { UsersService } from '../users.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
+import { RegisterDashboardComponent } from '../register-dashboard/register-dashboard.component';
 
 @Component({
   selector: 'app-register',
@@ -13,6 +14,7 @@ export class RegisterComponent {
   isDone: number = 0;
   imageUrl: any;
   submitBtn=false;
+  disabled!:true;
 
   hide = true;
   hide1=true;
@@ -28,6 +30,8 @@ export class RegisterComponent {
     private router: Router,
     private cookieService: CookieService
   ) {}
+
+  
   createForm = new FormGroup({
     full_name: new FormControl(),
     username: new FormControl(),
@@ -50,6 +54,22 @@ export class RegisterComponent {
   //   this.alreadyExistsFn();
     
   // }
+
+
+  callOnSubmit(){
+    if(!this.isDone){
+      this.alreadyExistsFn();
+    }
+    else if(this.submitBtn){
+      this.submit()
+    }
+  }
+
+  onChange(e: any) {
+    console.log(e.target.value);
+    this.createForm.get('work_exp')?.setValue(e.target.value);
+  }
+
 
   submit(): void {
     console.log(this.createForm.value);
@@ -81,7 +101,10 @@ export class RegisterComponent {
           console.log(data);
           this.cookieService.set('user_id',data.user_id.toString());
           this.userService.uploadFile(this.imageUrl, 'resume',this.cookieService.get("user_id")).subscribe((data) =>{
-            this.router.navigate(['Qualification']);
+            // this.router.navigate(['Qualification']);
+            this.userService.setActive();
+            this.disabled=true;
+
           });
         });
 
@@ -124,5 +147,12 @@ export class RegisterComponent {
       }
       
     })
+  }
+
+
+  checkButton(){
+    if(this.userService.active>1) return true;
+
+    return false;
   }
 }

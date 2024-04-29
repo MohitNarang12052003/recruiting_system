@@ -389,3 +389,25 @@ BEGIN
     SELECT @already_exists AS already_exists;
 END;
 
+
+
+
+
+
+
+CREATE OR ALTER   PROCEDURE [hrisportal].[fetchDepts]
+AS
+BEGIN
+	SELECT d.department_name as dept_name, COUNT(1) as count
+	FROM hrisportal.job_vacancy j
+	INNER JOIN hrisportal.department d ON d.department_id = j.department_id 
+	WHERE j.active_yn = 'Y'
+	GROUP BY d.department_name;
+
+
+END
+
+EXEC hrisportal.fetchDepts
+GO
+
+

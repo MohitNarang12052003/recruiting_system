@@ -1,8 +1,8 @@
 
-<form action="" [formGroup]="ForgotPwdForm" (submit)="submit()">
+<form action="" [formGroup]="ForgotPwdForm" ngNativeValidate (submit)="submit()">
     <div class="form-control">
         <label for="email">Email</label>
-        <input type="email" name="email" id="email" formControlName="email">
+        <input required type="email" name="email" id="email" formControlName="email">
     </div>
 
     <div class="submit">

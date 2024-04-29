@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../users.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -9,14 +9,23 @@ import { CookieService } from 'ngx-cookie-service';
   templateUrl: './qualification.component.html',
   styleUrls: ['./qualification.component.css'],
 })
-export class QualificationComponent {
+export class QualificationComponent implements OnInit {
   isDone: number = 0;
+  disabled!: boolean;
 
   constructor(
     private userService: UsersService,
     private router: Router,
     private cookieService: CookieService
   ) {}
+  ngOnInit(): void {
+    this.checkButton();
+  }
+  checkButton(){
+    if(this.userService.active>2) return true;
+    return false;
+  }
+
   createForm = new FormGroup({
     uid: new FormControl(),
     deg: new FormControl(),
@@ -47,7 +56,10 @@ export class QualificationComponent {
     this.userService
       .insertQualification(this.createForm.value)
       .subscribe((data) => {
-        if (done == 1) this.router.navigate(['Experience']);
+        // if (done == 1) this.router.navigate(['Experience']);
+        if (done == 1){
+          this.userService.setActive();
+        }
         this.createForm.reset();
       });
   }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { UsersService } from '../users.service';
 import { Router } from '@angular/router';
@@ -9,12 +9,17 @@ import { FormControl, FormGroup } from '@angular/forms';
   templateUrl: './general.component.html',
   styleUrls: ['./general.component.css'],
 })
-export class GeneralComponent {
+export class GeneralComponent implements OnInit {
+  disabled!:boolean;
   constructor(
     private router: Router,
     private cookieService: CookieService,
     private userService: UsersService
   ) {}
+
+  ngOnInit(): void {
+    this.checkButton();
+  }
   createForm = new FormGroup({
     uid: new FormControl(),
     gender: new FormControl(),
@@ -25,9 +30,14 @@ export class GeneralComponent {
     pincode: new FormControl(),
     marital_status: new FormControl(),
   });
-  onChange(e: any) {
+  onGenderChange(e: any) {
     console.log(e.target.value);
     this.createForm.get('gender')?.setValue(e.target.value);
+  }
+
+  onMaritalChange(e: any) {
+    console.log(e.target.value);
+    this.createForm.get('marital_status')?.setValue(e.target.value);
   }
   submit() {
     // this.router.navigate(['Photo']);
@@ -37,7 +47,13 @@ export class GeneralComponent {
     this.userService
       .insertadditionalInfo(this.createForm.value)
       .subscribe((data) => {
-        this.router.navigate(['Photo']);
+        // this.router.navigate(['Photo']);
+        this.userService.setActive();
       });
+  }
+
+  checkButton(){
+    if(this.userService.active>4) return true;
+    return false;
   }
 }

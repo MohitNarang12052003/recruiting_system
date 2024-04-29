@@ -3,41 +3,96 @@
 <div class=" ms-4 my-container">
   <h1 class="txt">Vacancies:</h1>
   <br />
-  <table class="thead">
-    <tr class="row border-bottom pt-3 pb-3 border-top pt-3 pb-3" >
-      <th class="col-1 txt " style="word-wrap: break-word;">Sr. no.</th>
-      <th class="col-1 txt" style="word-wrap: break-word;">Job Title</th>
-      <th class="col-1 txt" style="word-wrap: break-word;">Job Description</th>
-      <th class="col-1 txt" style="word-wrap: break-word;">Minimum Qualifications</th>
-      <th class="col-1 txt" style="word-wrap: break-word;">EmpType</th>
-      <th class="col-1 txt" style="word-wrap: break-word;">Key Role</th>
-      <th class="col-1 txt" style="word-wrap: break-word;">Location</th>
-      <th class="col-1 txt" style="word-wrap: break-word;">Department</th>
-      <th class="col-1 txt" style="word-wrap: break-word;"> Date Posted</th>
-      <th class="col-1 txt" style="word-wrap: break-word;">Active</th>
-      <th class="col-1 txt">HR</th>
-
-    </tr>
-
-    <tr *ngFor="let vac of vacancies; index as i" class="row border-bottom pt-3 pb-3">
-      <td class="col-1 text-center" style="word-wrap: break-word;">{{ i + 1 }}</td>
-      <td class="col-1" style="word-wrap: break-word;">{{ vac.job_title }}</td>
-      <td class="col-1" style="word-wrap: break-word;">{{ vac.job_description }}</td>
-      <td class="col-1" style="word-wrap: break-word;">{{ vac.minimum_qualifications }}</td>
-      <td class="col-1" style="word-wrap: break-word;">{{ vac.employment_type }}</td>
-      <td class="col-1" style="word-wrap: break-word;">{{ vac.key_role }}</td>
-      <td class="col-1" style="word-wrap: break-word;">{{ vac.location }}</td>
-      <td class="col-1" style="word-wrap: break-word;">{{ vac.department_name }}</td>
-      <td class="col-1" style="word-wrap: break-word;">{{ vac.date_posted | date : "longDate" }}</td>
-      <td class="col-1 text-center" style="word-wrap: break-word;">{{ vac.active_yn }}</td>
-      <td class="col-1" style="word-wrap: break-word;">{{ vac.full_name  }}</td>
-      <td class="col-1" style="word-wrap: break-word;">
-        <button type="button" *ngIf="vac.active_yn=='Y'" (click)="toggleVacancy(vac.j_id)" class="btn btn-primary">Remove</button>
-        <button type="button" *ngIf="vac.active_yn=='N'" (click)="toggleVacancy(vac.j_id)" class="btn btn-primary">Add</button>
-      </td>
-    </tr>
-    
-  </table>
+  <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+    <li [ngbNavItem]="1">
+      <button ngbNavLink>Jobs Listed</button>
+      <ng-template ngbNavContent>
+        <table class="thead">
+          <tr class="row border-bottom pt-3 pb-3 border-top pt-3 pb-3" >
+            <th class="col-1 txt " style="word-wrap: break-word;">Sr. no.</th>
+            <th class="col-1 txt" style="word-wrap: break-word;">Job Title</th>
+            <th class="col-1 txt" style="word-wrap: break-word;">Job Description</th>
+            <th class="col-1 txt" style="word-wrap: break-word;">Minimum Qualifications</th>
+            <th class="col-1 txt" style="word-wrap: break-word;">EmpType</th>
+            <th class="col-1 txt" style="word-wrap: break-word;">Key Role</th>
+            <th class="col-1 txt" style="word-wrap: break-word;">Location</th>
+            <th class="col-1 txt" style="word-wrap: break-word;">Department</th>
+            <th class="col-1 txt" style="word-wrap: break-word;"> Date Posted</th>
+            <th class="col-1 txt" style="word-wrap: break-word;">Active</th>
+            <th class="col-1 txt">HR</th>
+      
+          </tr>
+      
+          <tr *ngFor="let vac of vacancies; index as i" >
+            <div *ngIf="vac.active_yn=='Y'" class="row border-bottom pt-3 pb-3">
+              <td class="col-1 text-center" style="word-wrap: break-word;">{{ i + 1 }}</td>
+              <td class="col-1" style="word-wrap: break-word;">{{ vac.job_title }}</td>
+              <td class="col-1" style="word-wrap: break-word;">{{ vac.job_description }}</td>
+              <td class="col-1" style="word-wrap: break-word;">{{ vac.minimum_qualifications }}</td>
+              <td class="col-1" style="word-wrap: break-word;">{{ vac.employment_type }}</td>
+              <td class="col-1" style="word-wrap: break-word;">{{ vac.key_role }}</td>
+              <td class="col-1" style="word-wrap: break-word;">{{ vac.location }}</td>
+              <td class="col-1" style="word-wrap: break-word;">{{ vac.department_name }}</td>
+              <td class="col-1" style="word-wrap: break-word;">{{ vac.date_posted | date : "longDate" }}</td>
+              <td class="col-1 text-center" style="word-wrap: break-word;">{{ vac.active_yn }}</td>
+              <td class="col-1" style="word-wrap: break-word;">{{ vac.full_name  }}</td>
+              <td class="col-1" style="word-wrap: break-word;">
+                <button type="button" *ngIf="vac.active_yn=='Y'" (click)="toggleVacancy(vac.j_id)" class="btn btn-primary">Remove</button>
+                <!-- <button type="button" *ngIf="vac.active_yn=='N'" (click)="toggleVacancy(vac.j_id)" class="btn btn-primary">Add</button> -->
+              </td>
+            </div>
+          </tr>
+          
+        </table>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2">
+      <button ngbNavLink>Jobs Not Listed</button>
+      <ng-template ngbNavContent>
+        <table class="thead">
+          <tr class="row border-bottom pt-3 pb-3 border-top pt-3 pb-3" >
+            <th class="col-1 txt " style="word-wrap: break-word;">Sr. no.</th>
+            <th class="col-1 txt" style="word-wrap: break-word;">Job Title</th>
+            <th class="col-1 txt" style="word-wrap: break-word;">Job Description</th>
+            <th class="col-1 txt" style="word-wrap: break-word;">Minimum Qualifications</th>
+            <th class="col-1 txt" style="word-wrap: break-word;">EmpType</th>
+            <th class="col-1 txt" style="word-wrap: break-word;">Key Role</th>
+            <th class="col-1 txt" style="word-wrap: break-word;">Location</th>
+            <th class="col-1 txt" style="word-wrap: break-word;">Department</th>
+            <th class="col-1 txt" style="word-wrap: break-word;"> Date Posted</th>
+            <th class="col-1 txt" style="word-wrap: break-word;">Active</th>
+            <th class="col-1 txt">HR</th>
+      
+          </tr>
+      
+          <tr *ngFor="let vac of vacancies; index as i">
+            <div *ngIf="vac.active_yn=='N'" class="row border-bottom pt-3 pb-3" >
+              <td class="col-1 text-center" style="word-wrap: break-word;">{{ i + 1 }}</td>
+              <td class="col-1" style="word-wrap: break-word;">{{ vac.job_title }}</td>
+              <td class="col-1" style="word-wrap: break-word;">{{ vac.job_description }}</td>
+              <td class="col-1" style="word-wrap: break-word;">{{ vac.minimum_qualifications }}</td>
+              <td class="col-1" style="word-wrap: break-word;">{{ vac.employment_type }}</td>
+              <td class="col-1" style="word-wrap: break-word;">{{ vac.key_role }}</td>
+              <td class="col-1" style="word-wrap: break-word;">{{ vac.location }}</td>
+              <td class="col-1" style="word-wrap: break-word;">{{ vac.department_name }}</td>
+              <td class="col-1" style="word-wrap: break-word;">{{ vac.date_posted | date : "longDate" }}</td>
+              <td class="col-1 text-center" style="word-wrap: break-word;">{{ vac.active_yn }}</td>
+              <td class="col-1" style="word-wrap: break-word;">{{ vac.full_name  }}</td>
+              <td class="col-1" style="word-wrap: break-word;">
+                <!-- <button type="button" *ngIf="vac.active_yn=='Y'" (click)="toggleVacancy(vac.j_id)" class="btn btn-primary">Remove</button> -->
+                <button type="button" *ngIf="vac.active_yn=='N'" (click)="toggleVacancy(vac.j_id)" class="btn btn-primary">Add</button>
+              </td>
+            </div>
+          </tr>
+          
+        </table>
+      </ng-template>
+    </li>
+  </ul>
+  
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+  
+  
 
 </div>
 <br>

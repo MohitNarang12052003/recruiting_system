@@ -22,6 +22,7 @@ import { SharedModule } from '../shared/shared.module';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { OverviewComponent } from './overview/overview.component';
 import { FilterComponent } from './filter/filter.component';
+import { RegisterDashboardComponent } from './register-dashboard/register-dashboard.component';
 
 
 
@@ -43,6 +44,7 @@ import { FilterComponent } from './filter/filter.component';
     TestimonialsComponent,
     OverviewComponent,
     FilterComponent,
+    RegisterDashboardComponent,
     
   ],
   imports: [

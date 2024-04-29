@@ -57,29 +57,29 @@
     </div>
 
     <div class="right col-9 p-2 m-2">
-      <form class="form-group bg-light text-dark p-4 m-4" [formGroup]="newEmployeeForm" (submit)="submit()">
+      <form class="form-group bg-light text-dark p-4 m-4" ngNativeValidate [formGroup]="newEmployeeForm" (submit)="submit()">
         <h2 class="heading p-2 m-2">Add New Job</h2>
         <div class="my-container row p-2 m-6">
 
         <div class=" col-5">
             <label for="email" class="p-2 ">Employee New Email</label>
-            <input type="email" name="email" id="email" formControlName="nemail">
+            <input required type="email" name="email" id="email" formControlName="nemail">
         </div>
         <div class=" col-5">
             <label for="password" class="p-2">Employee New password</label>
-            <input type="text" name="password" id="password" formControlName="password">
+            <input required type="text" name="password" id="password" formControlName="password">
         </div>
         <div class=" col-5">
             <label for="job_title" class="p-2">Employee Job Title</label>
-            <input type="text" name="job_title" id="job_title" formControlName="job_title">
+            <input required type="text" name="job_title" id="job_title" formControlName="job_title">
         </div>
         <div class=" col-5">
             <label for="salary"  class="p-2">Employee salary</label>
-            <input type="text" name="salary" id="salary" formControlName="salary">
+            <input required type="text" name="salary" id="salary" formControlName="salary">
         </div>
         <div class="col-5 ">
             <label for=""  class="p-2">Department Name</label>
-            <select
+            <select  required 
             class="form-select"
             style="border-color: rgba(0, 0, 0, 0.503)"
             #type
@@ -100,7 +100,7 @@
         </div>
         <div class="col-5">
             <label for="date_of_joining"  class="p-2">Employee Date Of Joining</label>
-            <input type="date" name="date_of_joining" id="date_of_joining" formControlName="date_of_joining">
+            <input required type="date" name="date_of_joining" id="date_of_joining" formControlName="date_of_joining">
         </div>
         <div class="button-group" >
                 <button

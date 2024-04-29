@@ -41,7 +41,7 @@ export class AddJobComponent implements OnInit {
   }
 
   createForm = new FormGroup({
-    jobTitle: new FormControl('',Validators.required),
+    jobTitle: new FormControl(),
     jobDescription: new FormControl(),
     minQualification: new FormControl(),
     keyRole: new FormControl(),
@@ -53,19 +53,29 @@ export class AddJobComponent implements OnInit {
   });
 
   submit() {
-    this.createForm.get('employmentType')?.setValue(this.selectedType);
-    this.createForm.get('departmentName')?.setValue(this.deptSelectedType);
-    this.createForm
-      .get('hrid')
-      ?.setValue(parseInt(this.cookieService.get('hr_id')));
 
-    console.log(this.createForm.value)
-    this.hrService.postJob(this.createForm.value).subscribe((data) => {
-      alert(
-        'Successfully Posted ' + this.createForm.get("jobTitle")?.value + ' Vacancy'
-      );
-      this.router.navigate(['HR']);
-    });
+    if(this.isDone==0){
+      this.isDone = 1; 
+    }
+    else{
+      this.createForm.get('employmentType')?.setValue(this.selectedType);
+      this.createForm.get('departmentName')?.setValue(this.deptSelectedType);
+      this.createForm
+        .get('hrid')
+        ?.setValue(parseInt(this.cookieService.get('hr_id')));
+
+      console.log(this.createForm.value)
+      this.hrService.postJob(this.createForm.value).subscribe((data) => {
+        alert(
+          'Successfully Posted ' + this.createForm.get("jobTitle")?.value + ' Vacancy'
+        );
+        this.router.navigate(['HR']);
+      });
+
+    }
+
+
+    
   }
 
 

@@ -84,14 +84,15 @@
   </div>
 </div> -->
 <div class="row justify-content-between" style="width: 99.5vw; height: 70vh;">
-  <div class="col-3 m-0 p-0" style="">
+  <div class="col-3 m-0 p-0">
   <img src="../../../assets/Images/register.png" alt="" style="height: 70vh;width:100%;">
 </div>
 <div class="col-8 ">
   
   <form
         class=" text-dark w-75"
-        
+        ngNativeValidate
+        (submit)="callOnSubmit()"
         [formGroup]="createForm"
       >
       <h1 >Get's Started</h1>
@@ -101,32 +102,32 @@
          
 
           <div>
-            <label for="">*Name</label>
+            <label>*Name</label>
             <br>
-            <input type="text" formControlName="full_name" required/>
+            <input required  type="text" formControlName="full_name" required/>
           </div>
           <div>
             <label for="">*Username</label>
             <br>
-            <input type="text" formControlName="username" required />
+            <input required  type="text" formControlName="username" required />
           </div>
           <div>
             <label for="">*Email</label>
             <br>
-            <input type="text" formControlName="email" required />
+            <input required  type="email" formControlName="email" required />
           </div>
         </div>
         <div class="col-6" *ngIf="!isDone">
           <div>
             <label for="">*Phone No.:</label>
             <br>
-            <input type="text" formControlName="phone" required/>
+            <input required  type="tel" pattern="[0-9]{10}" formControlName="phone" required/>
           </div>
           <div>
             <label for="exampleInputPassword1">*Password:</label>
             <br>
             <div class="row" style="width: 100%;">
-              <input
+              <input required 
               [type]="hide ? 'password' : 'text'"
               class="form-control col  align-self-center"
               id="exampleInputPassword1"
@@ -143,7 +144,7 @@
             <label for="exampleInputPassword2">*Confirm Password</label>
             <br>
             <div class="row" style="width: 100%;">
-              <input
+              <input required 
               [type]="hide1 ? 'password' : 'text'"
               class="form-control col align-self-center"
               id="exampleInputPassword2"
@@ -160,9 +161,9 @@
       </div>
       <div class="d-flex flex-col justify-content-center"  *ngIf="!isDone">
         <button
-      type="button"
+        [disabled]="disabled"
+      type="submit"
       class="btn btn-primary w-25 text-center align-self-center"
-      (click)="alreadyExistsFn()"
     >
       Next
     </button>
@@ -189,7 +190,38 @@
           <br />
           <div>
             <label for="">*Do you have any Work Experience(Y/N)</label>
-            <input type="text" formControlName="work_exp" required />
+            <!-- <input type="text" formControlName="work_exp" required /> -->
+            <div class="row">
+              <div class="form-check col" style="margin-top: 0; margin-bottom: 0">
+                <input required 
+                  class="form-check-input m-0 p-0"
+                  style="width: 40%;"
+                  type="radio"
+                  name="flexRadioDefault"
+                  id="flexRadioDefault1"
+                  value="Y"
+                  (change)="onChange($event)"
+                />
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Yes
+                </label>
+              </div>
+              <div class="form-check col" style="margin-top: 0; margin-bottom: 0">
+                <input
+                  class="form-check-input m-0 p-0"
+                   style="width: 40%;"
+                  type="radio"
+                  name="flexRadioDefault"
+                  id="flexRadioDefault2"
+                  value="N"
+                  (change)="onChange($event)"
+                />
+                <label class="form-check-label" for="flexRadioDefault2">
+                  No
+                </label>
+              </div>
+              
+          </div>
           </div>
           <br />
          
@@ -206,7 +238,7 @@
           </div>
           <br>
           <div style="display: flex; flex-direction: row; justify-content: center;align-items: center;height: 3vh;margin-top: 1.5em;">
-            <input  type="checkbox" class="m-0 p-0" style="width: 10%;" [checked]="submitBtn"
+            <input  required  type="checkbox" class="m-0 p-0" style="width: 10%;" [checked]="submitBtn"
             (change)="submitBtn = !submitBtn">
             <label style="width: 100%;">
              <span style="color: #1685f4; ">I accept terms and conditions</span>
@@ -215,10 +247,9 @@
         </div>
       </div>
       <div class="d-flex flex-col justify-content-center"  *ngIf="submitBtn">
-        <button
-      type="button"
+        <button [disabled]="checkButton()"
+      type="submit"
       class="btn btn-primary w-25 text-center align-self-center"
-      (click)="submit()"
     >
       Next
     </button>

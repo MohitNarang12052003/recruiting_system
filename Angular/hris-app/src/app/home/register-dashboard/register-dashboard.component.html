@@ -1,0 +1,36 @@
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+	<li [ngbNavItem]="1">
+		<button ngbNavLink>One</button>
+		<ng-template ngbNavContent>
+			<app-register></app-register>
+		</ng-template>
+	</li>
+	<li [ngbNavItem]="2" [disabled]="sharedService.active <= 1">
+		<button ngbNavLink>Two</button>
+		<ng-template ngbNavContent>
+		<app-qualification></app-qualification>
+		</ng-template>
+	</li>
+	<li [ngbNavItem]="3" [disabled]="sharedService.active <= 2">
+		<button ngbNavLink >Three</button>
+		<ng-template ngbNavContent>
+		<app-experience></app-experience>
+		</ng-template>
+	</li>
+    <li [ngbNavItem]="4" [disabled]="sharedService.active <= 3">
+		<button ngbNavLink>Four</button>
+		<ng-template ngbNavContent>
+		<app-general></app-general>
+		</ng-template>
+	</li>
+    <li [ngbNavItem]="5" [disabled]="sharedService.active <= 4">
+		<button ngbNavLink>Five</button>
+		<ng-template ngbNavContent>
+            <app-photo></app-photo>
+            </ng-template>
+	</li>
+</ul>
+
+<div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+<pre>Active: {{ sharedService.active }}</pre>

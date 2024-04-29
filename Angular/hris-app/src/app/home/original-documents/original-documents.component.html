@@ -7,7 +7,8 @@
     
     <form
           class=" text-dark w-75  "
-          
+          ngNativeValidate
+          (submit)="submit()"
           [formGroup]="createForm"
         >
         <h1 >Essential Documents</h1>
@@ -22,7 +23,8 @@
                 <label for="">Aadhar Card:</label>
                 <br>
                 <input type="file" accept="file/pdf"
-                (change)="read($event,'aadhar')" >
+                (change)="read($event,'aadhar')" 
+                required>
                 <!-- <textarea name="" id="" cols="30" rows="20" formControlName="institute" style="height: 10vh;" ></textarea> -->
                 <!-- <input type="text" formControlName="institute" /> -->
               </div>
@@ -30,7 +32,9 @@
                 <label for="">VoterCard:</label>
                 <br>
                 <input type="file" accept="file/pdf"
-                (change)="read($event,'voter')">
+                (change)="read($event,'voter')"
+                required
+                >
                 <!-- <textarea name="" id="" cols="30" rows="20" formControlName="deg" style="height: 10vh;" ></textarea> -->
                 <!-- <input type="text" formControlName="deg" /> -->
               </div>
@@ -40,7 +44,9 @@
                     <label for="">Pan Card:</label>
                     <br>
                     <input type="file" accept="file/pdf"
-                    (change)="read($event,'pan')">
+                    (change)="read($event,'pan')"
+                    required
+                    >
                     <!-- <input type="number" formControlName="admission_yr" /> -->
                   </div>
               
@@ -49,7 +55,9 @@
                   <br>
                   <!-- <input type="text" formControlName="gpa" /> -->
                   <input type="file" accept="file/pdf"
-                  (change)="read($event,'esign')">
+                  (change)="read($event,'esign')"
+                  required
+                  >
                 </div>
              </div>
            </div>
@@ -60,25 +68,25 @@
             <div >
                 <label for="" >IFSC Code:</label>
                 <br>
-                <input type="text" formControlName="ifsc_code" />
+                <input type="text" required formControlName="ifsc_code" />
               </div>
            
               <div>
                 <label for="">Account No.:</label>
                 <br>
-                <input type="text" formControlName="account_no"  />
+                <input type="text" required formControlName="account_no"  />
               </div>
           </div>
             <div class="col-4">
                 <div>
                     <label for="">Name of Account Holder:</label>
                     <br>
-                    <input type="text" formControlName="name_of_acc_holder" />
+                    <input type="text" required formControlName="name_of_acc_holder" />
                   </div>
                   <div>
                       <label for="">Passport Number:</label>
                       <br>
-                      <input type="text" formControlName="passport_no" />
+                      <input required type="text" formControlName="passport_no" />
                     </div>
             </div>
               
@@ -86,12 +94,17 @@
         
         <div class="d-flex flex-row justify-content-center" style="margin-top: 2em;">
                 
-          <button
-            type="button"
+          <button *ngIf="part1"
+            type="submit"
             class="btn btn-primary w-25 text-center align-self-center"
-            (click)="submit()"
           >
             Next
+          </button>
+          <button *ngIf="!part1"
+            type="submit"
+            class="btn btn-primary w-25 text-center align-self-center"
+          >
+            Submit
           </button>
         </div>
   <!-- </div> -->

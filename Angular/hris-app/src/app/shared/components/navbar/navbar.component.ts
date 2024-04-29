@@ -19,11 +19,10 @@ export class NavbarComponent implements OnInit{
   }
 
   isLoggedIn():boolean{
+    const role=!!this.cookieService.get('role');
     this.userid= this.cookieService.get('user_id');
-    const employee_id=!!this.cookieService.get('employee_id');
-    const hr_id=!!this.cookieService.get('hr_id');
-    
-    const loggedIn= (this.userid || employee_id || hr_id);
+
+    const loggedIn= (role);
     // console.log(this.userid)
     return loggedIn;
   }

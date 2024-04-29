@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './emp_home/home.component';
-import { AttendanceComponent } from './attendance/attendance.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { HolidaysComponent } from './holidays/holidays.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
@@ -17,7 +16,6 @@ import { AgChartsAngular } from 'ag-charts-angular';
 @NgModule({
   declarations: [
     HomeComponent,
-    AttendanceComponent,
     CalendarComponent,
     HolidaysComponent,
     AnnouncementsComponent,
