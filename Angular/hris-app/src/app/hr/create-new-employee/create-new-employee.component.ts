@@ -14,6 +14,20 @@ export class CreateNewEmployeeComponent implements OnInit{
   newEmployeeForm!:FormGroup;
   deptSelectedType='';
 
+  show:boolean = false;
+  display!:any;
+
+  openToast(){
+    this.show=true;
+    console.log(this.display)
+  }
+
+	closeToast() {
+		this.show = false;
+    this.display=0;
+	}
+
+
   constructor(private route:ActivatedRoute,private hrService:HrService){}
   ngOnInit(): void {
     this.getId();
@@ -87,6 +101,8 @@ export class CreateNewEmployeeComponent implements OnInit{
     this.hrService.sendEmployeeMail(this.newEmployeeForm.value).subscribe({
       next:(data)=>{
         console.log(data);
+        this.openToast();
+        this.display=1;
       },
       error:(e)=>{
         console.log("error ",e);

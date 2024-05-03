@@ -12,13 +12,17 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 export class ViewDocumentsComponent implements OnInit {
 specify:string[]=["aadhar","pan","voter"]
 userid!:any;
+appid!:any;
 constructor(private cookieService:CookieService,private http: HttpClient,private router: ActivatedRoute,private sanitizer: DomSanitizer ){
   // this.userid=this.cookieService.get("user_id");
   
 
 }
   ngOnInit(): void {
+    this.appid=this.cookieService.get("app_id")
+    console.log(this.cookieService.get("app_id"))
     this.router.paramMap.subscribe((params:ParamMap | null) => {
+      console.log(params);
       this.userid = params?.get('id');
     console.log(this.userid);
     });

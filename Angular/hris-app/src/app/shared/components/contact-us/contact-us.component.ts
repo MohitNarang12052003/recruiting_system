@@ -11,6 +11,19 @@ import { APP_CONSTANTS } from '../../constants/app.constants';
   styleUrls: ['./contact-us.component.css']
 })
 export class ContactUsComponent implements OnInit {
+
+  show:boolean = false;
+  display!:any;
+  openToast(){
+    this.show=true;
+    console.log(this.display)
+  }
+
+	closeToast() {
+		this.show = false;
+    this.display=0;
+	}
+
   constructor(
     private userService: UsersService,
     private router: Router,
@@ -31,9 +44,11 @@ export class ContactUsComponent implements OnInit {
   submit() {
     this.userService.sendAnything(this.createForm.value).subscribe((data) => {
       console.log('here');
-      alert(
-        "Your Request has been sent,Thankyouuu!!!"
-      );
+      // alert(
+      //   "Your Request has been sent,Thankyouuu!!!"
+      // );
+      this.openToast();
+      this.display=1;
       this.createForm.reset();
       
     });

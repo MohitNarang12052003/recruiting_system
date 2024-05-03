@@ -1,3 +1,12 @@
+<ng-container *ngIf="show">
+    <ngb-toast header="Skills" [autohide]="false" (hidden)="closeToast()">
+      <p *ngIf="display==1">An assessment will be scheduled soon for your new acquired skill. We highly appreciate your interest towards upskilling yourself.</p>
+      <p *ngIf="display==2">Skill could not get added.</p>  
+      <p *ngIf="display==3">No new Skill Added.</p>  
+    </ngb-toast>
+  </ng-container>
+  
+
 <div class="container">
     <div class="header row" >
         <div class="heading col-6 fw-bold">

@@ -11,6 +11,20 @@ import { UsersService } from '../users.service';
 })
 export class OriginalDocumentsComponent implements OnInit{
   part1=true
+
+  show:boolean = false;
+  display!:any;
+
+  openToast(){
+    this.show=true;
+    console.log(this.display)
+  }
+
+	closeToast() {
+		this.show = false;
+    this.display=0;
+	}
+  
   constructor(private cookieService:CookieService,private router:Router,private userService:UsersService){ }
   ngOnInit(){
     if(this.cookieService.get("role")!=="-1"){
@@ -38,7 +52,9 @@ export class OriginalDocumentsComponent implements OnInit{
       this.createForm.get("user_id")?.setValue(parseInt(this.cookieService.get("user_id")));
       this.userService.insertDocuments(this.createForm.value).subscribe((data)=>{
         console.log(data);
-        alert("All documents Uploaded!! Thankyou will get back to you");
+        // alert("All documents Uploaded!! Thankyou will get back to you");
+        this.openToast();
+        this.display=1;
       })
       
     }

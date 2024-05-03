@@ -5,11 +5,11 @@ AS
 BEGIN
 	IF @folder = 'photo'
 	BEGIN
-		select up.photo from hrisportal.userPhoto up where up.user_id=@userid
+		select up.photo as document from hrisportal.userPhoto up where up.user_id=@userid
 	END
 	IF @folder = 'resume'
 	BEGIN
-		select u.resume from hrisportal.users u where u.user_id=@userid
+		select u.resume as document from hrisportal.users u where u.user_id=@userid
 	END
 	IF @folder = 'aadhar' OR @folder = 'voter' OR @folder = 'pan'
 	BEGIN
@@ -52,3 +52,25 @@ BEGIN
 	INSERT INTO hrisportal.documents(user_id,aadhar,pan,voter,account_no,ifsc_code,passport_no,name_of_acc_holder, esign) values (@user_id,@aadhar,@pan,@voter,@account_no,@ifsc_code,@passport_no,@name_of_acc_holder,@esign)
 END
 
+
+CREATE OR ALTER PROCEDURE hrisportal.sp_check_documents
+@user_id int
+AS
+BEGIN
+	DECLARE @count int = 0;
+	SELECT @count=count(1) from hrisportal.documents d WHERE d.user_id=@user_id;
+	PRINT @count
+END
+
+EXEC hrisportal.sp_check_documents 50
+
+CREATE OR ALTER PROCEDURE hrisportal.sp_count_emp_in_dept
+AS
+BEGIN
+	SELECT count(*) AS count,department_name
+	FROM hrisportal.department AS d
+	INNER JOIN hrisportal.employee AS e
+	ON d.department_name = e.department
+	GROUP BY d.department_name
+	
+END

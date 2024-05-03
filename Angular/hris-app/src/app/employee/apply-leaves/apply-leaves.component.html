@@ -1,4 +1,12 @@
+<ng-container *ngIf="show">
+  <ngb-toast header="Leave Application Submitted" [autohide]="false" (hidden)="close()">
+    Your request for a leave has been applied. We will review and confirm the leave status shortly.
+  </ngb-toast>
+</ng-container>
+
+
 <div class="container">
+
   <div class="left"><img src="assets/Images/leave-absence-request.webp" alt=""></div>
   <div class="right">
   

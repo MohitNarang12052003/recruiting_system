@@ -9,6 +9,7 @@ import { ChangePwdComponent } from './components/change-pwd/change-pwd.component
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ForgotPwdComponent } from './components/forgot-pwd/forgot-pwd.component';
 import { ResetPwdComponent } from './components/reset-pwd/reset-pwd.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -25,6 +26,7 @@ import { ResetPwdComponent } from './components/reset-pwd/reset-pwd.component';
     
   ],
   imports: [
+    NgbModule,
     CommonModule,
     AppRoutingModule,
     FormsModule,

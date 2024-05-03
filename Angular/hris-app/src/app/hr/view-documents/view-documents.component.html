@@ -1,7 +1,8 @@
-<p>view-documents works!</p>
-
-<div class="row">
-    <div class="col-4">
+<!-- <p>view-documents works!</p> -->
+<h1 class="text-primary m-2"><button class="btn" [routerLink]="['/SingleApplicantDetails',appid]" ><i class="fa-solid fa-arrow-left fa-2x" style="color: #1493f5;"></i></button>Documents</h1>
+<br>
+<div class="row m-0">
+    <div class="col-6" style="width: 40vw;">
         <table>
             <tr>
                 <th>Sr no.</th>
@@ -11,12 +12,14 @@
             <tr *ngFor="let spec of specify;let i=index">
                 <td>{{i+1}}</td>
                 <td>{{spec}}</td>
-                <td><button class="btn btn-primary" type="button" (click)="fetchPdf(spec)">View</button></td>
+                <td><button class="btn btn-primary m-2" type="button" (click)="fetchPdf(spec)">View</button></td>
+            
             </tr>
         </table>
+        
     </div>
-    <div class="col-4">
-        <iframe [src]="safePdfSrc" frameborder="0"></iframe>
+    <div class="col" style="width: 50vw;height: 100vh;" >
+        <iframe *ngIf="safePdfSrc" [src]="safePdfSrc" frameborder="0" style="width: 50vw;height: 100vh;"></iframe>
     </div>
 
 </div>

@@ -11,6 +11,17 @@ export class ChangePwdComponent implements OnInit {
 
   changePwdForm!:FormGroup;
   hidden!:boolean;
+  show:boolean = false;
+  display!:any;
+  openToast(){
+    this.show=true;
+    console.log(this.display)
+  }
+
+	closeToast() {
+		this.show = false;
+    this.display=0;
+	}
 
 
 constructor(private sharedService:SharedService){}
@@ -40,7 +51,9 @@ submit():void{
     })
   }
   else{
-    alert("invalid credentials");
+    // alert("invalid credentials");
+    this.openToast();
+    this.display=1;
 
   }
 }

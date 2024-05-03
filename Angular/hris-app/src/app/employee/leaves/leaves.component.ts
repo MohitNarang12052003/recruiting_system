@@ -40,7 +40,7 @@ export class LeavesComponent implements OnInit{
   getTotalLeavesCount(id:number): void {
     this.employeeService.getTotalLeavesCount(id).subscribe((data) => {
       this.totalLeaveCount = data.leave_count;
-      if(this.totalLeaveCount>12){
+      if(this.totalLeaveCount>=22){
         this.moreLeaves=true
       }
     

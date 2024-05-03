@@ -21,7 +21,7 @@ select * from hrisportal.job_skill
 select * from hrisportal.jobHistory
 
 select * from hrisportal.qualifications
-
+select * from hrisportal.emp_leaves
 select * from hrisportal.users
 
 select * from hrisportal.userPhoto
@@ -209,3 +209,26 @@ END
 
 GO
 
+
+CREATE OR ALTER   PROCEDURE [hrisportal].[ApplyForLeave]
+@employee_id INT,
+@category_name NVARCHAR(MAX),
+@applied_at NVARCHAR(MAX),
+@taken_for VARCHAR(MAX)
+AS
+BEGIN
+    DECLARE @leave_cat_id INT;
+
+    -- Retrieve category_id based on category_name
+    SELECT @leave_cat_id = category_id
+    FROM hrisportal.category
+    WHERE category_name = @category_name;
+
+	DECLARE @converted_date DATE;
+	SET @converted_date = CONVERT(DATE, @applied_at, 23);                 
+
+            -- Insert into emp_leaves table
+            INSERT INTO hrisportal.emp_leaves (employee_id, leave_cat_id, applied_at, taken_for)
+            VALUES (@employee_id, @leave_cat_id, @converted_date, @taken_for);
+END;
+GO

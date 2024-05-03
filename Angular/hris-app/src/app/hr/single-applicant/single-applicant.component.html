@@ -6,29 +6,104 @@
         <div class="frm ">
             <form action="" [formGroup]="applicantForm">
                 <div class="row">
-                    <label class="col-5 text  " for=""><h5>Round-1</h5></label>        
-                    <input class="col-3" type="string" formControlName="round_1"  />
-                </div>
+                    <!-- <label class="col-5 text  " for=""></label>         -->
+                    <!-- <input class="col-3" type="string" formControlName="round_1"  /> -->
+                    
+                        <label for=""  class="col-5 text"><h5>Round-1</h5></label>
+          <select
+          formControlName="round_1"
+            class="form-select elem col-3"
+            style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
+            #type
+            (change)="onSelected(type.value,'round_1')"
+            *ngIf="this.applicantDetails.round_1==='N/A'"
+          >
+            <option value="" selected>N/A</option>
+            <option value="Pass">Pass</option>
+            <option value="Fail">Fail</option>
+            
+            
+          </select>
+          <label class="col-3 text " type="string" *ngIf="this.applicantDetails.round_1!=='N/A'" ><h5>{{this.applicantDetails.round_1}}</h5></label>
+                
+            </div>
                 <br>        
         
                 <div class="row" *ngIf="this.applicantDetails.round_1==='Pass'">
-                    <label class="col-5 text " for=""><h5>Round-2</h5></label>
-                    <input class="col-3" type="string" formControlName="round_2" />
+                    <label for=""  class="col-5 text"><h5>Round-2</h5></label>
+                    <select
+                      class="form-select elem col-3"
+                      style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
+                      #type2
+                      (change)="onSelected(type2.value,'round_2')"
+                      *ngIf="this.applicantDetails.round_2==='N/A'"
+                    >
+                      <option value="" selected>N/A</option>
+                      <option value="Pass">Pass</option>
+                      <option value="Fail">Fail</option>
+                      
+                      
+                    </select>
+                    <label class="col-3 text " type="string" *ngIf="this.applicantDetails.round_2!=='N/A'" ><h5>{{this.applicantDetails.round_2}}</h5></label>
+                
                 </div>
                 <br>
                 <div class="row" *ngIf="this.applicantDetails.round_2==='Pass'">
-                    <label class="col-5 text " for=""><h5>Round-3</h5></label>
-                    <input class="col-3" type="string" formControlName="round_3"  />
+                    <label for=""  class="col-5 text"><h5>Round-3</h5></label>
+          <select
+            class="form-select elem col-3"
+            style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
+            #type3
+            (change)="onSelected(type3.value,'round_3')"
+            *ngIf="this.applicantDetails.round_3==='N/A'"
+          >
+            <option value="" selected>N/A</option>
+            <option value="Pass">Pass</option>
+            <option value="Fail">Fail</option>
+            
+            
+          </select>
+          <label class="col-3 text " type="string" *ngIf="this.applicantDetails.round_3!=='N/A'" ><h5>{{this.applicantDetails.round_3}}</h5></label>
+                
+          
                 </div>
                 <br>
                 <div class="row" *ngIf="this.applicantDetails.round_3==='Pass'">
-                    <label class="col-5 text " for=""><h5>Document Verification</h5></label>
-                    <input class="col-3" type="string" formControlName="doc_verification"/>
+                    <label for=""  class="col-5 text"><h5>Document Verification</h5></label>
+                    <select
+                      class="form-select elem col-3"
+                      style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
+                      #type4
+                      (change)="onSelected(type4.value,'doc_verification')"
+                      *ngIf="this.applicantDetails.doc_verification==='N/A'"
+                    >
+                      <option value="" selected>N/A</option>
+                      <option value="Pass">Pass</option>
+                      <option value="Fail">Fail</option>
+                      
+                      
+                    </select>
+                    <label class="col-3 text " type="string" *ngIf="this.applicantDetails.doc_verification!=='N/A'" ><h5>{{this.applicantDetails.doc_verification}}</h5></label>
+                
                 </div>
                 <br>
                 <div class="row" *ngIf="this.applicantDetails.doc_verification==='Pass'">
-                    <label class="col-5  text  " for=""><h5>Offer Letter</h5></label>
-                    <input class="col-3" type="string" formControlName="offer_letter" />
+                    <label for=""  class="col-5 text"><h5>Offer Letter</h5></label>
+                    <select
+                      class="form-select elem col-3"
+                      style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
+                      #type5
+                      (change)="onSelected(type5.value,'offer_letter')"
+                      *ngIf="this.applicantDetails.offer_letter==='N/A'"
+                    >
+                      <option value="" >N/A</option>
+                      <option value="Pass">Pass</option>
+                      <option value="Fail">Fail</option>
+                      
+                      
+                    </select>
+                    <label class="col-3 text " type="string" *ngIf="this.applicantDetails.offer_letter!=='N/A'" ><h5>{{this.applicantDetails.offer_letter}}</h5></label>
+                
                 </div>
                 <br>
         
@@ -46,11 +121,16 @@
             
                 <br>
                 
-                <div *ngIf="(this.applicantDetails.round_3==='Pass') && (this.applicantDetails.doc_verification!=='Pass')">
+                <div *ngIf="(this.applicantDetails.round_3==='Pass') && (this.applicantDetails.doc_verification!=='Pass') && (doc===0)">
                     <div class=" text-white text-center text"><h5>Email to request original document upload-</h5></div>
                     <button class="btn title" (click)="sendDocumentMail()" >Document Email</button>
                 </div>
             
+                <br>
+                <div *ngIf="(this.applicantDetails.round_3==='Pass') && doc==1">
+                    <div class=" text-white text-center text"><h5>Verify the Uploaded Documents by candidate</h5></div>
+                    <button class="btn title" [routerLink]="['/viewDocuments',userId]" >View Documents</button>
+                </div>
                 <br>
             
                 <div *ngIf="(this.applicantDetails.doc_verification==='Pass' && (this.applicantDetails.offer_letter!=='Pass'))">
@@ -65,6 +145,8 @@
                     <button  class="btn" [routerLink]="['/create-new-employee',id]" >Details -> </button>
                 </div>
                 <br>  
+
+
             </div>
         </div>
     

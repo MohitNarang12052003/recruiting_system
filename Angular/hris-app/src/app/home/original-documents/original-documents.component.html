@@ -1,3 +1,9 @@
+<ng-container *ngIf="show">
+  <ngb-toast header="Documents" [autohide]="false" (hidden)="closeToast()">
+    <p *ngIf="display==1">All documents Uploaded!! Thankyou will get back to you.</p>
+  </ngb-toast>
+</ng-container>
+
 <!-- <p>original-documents works!</p> -->
 <div class="row justify-content-between" style="width: 99.5vw; height: 70vh;">
     <div class="col-4 m-0 p-0">

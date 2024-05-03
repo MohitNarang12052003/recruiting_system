@@ -13,9 +13,20 @@ export class NextRoundEmailComponent {
   id!:any;
   applicantDetails!:any;
   currentRound!:number;
-
-
   nextRoundForm!:FormGroup;
+
+  show:boolean = false;
+  display!:any;
+
+  openToast(){
+    this.show=true;
+    console.log(this.display)
+  }
+
+	closeToast() {
+		this.show = false;
+    this.display=0;
+	}
 
   constructor(private route:ActivatedRoute,private hrService:HrService){}
   ngOnInit(){
@@ -85,6 +96,9 @@ export class NextRoundEmailComponent {
     this.hrService.sendRoundMail(this.nextRoundForm.value).subscribe({
       next:(data)=>{
         console.log(data);
+        this.openToast();
+        this.display=1;
+
 
       },
       error:(e)=>{

@@ -49,6 +49,12 @@
 </form> -->
 
 
+<ng-container *ngIf="show">
+    <ngb-toast header="Email" [autohide]="false" (hidden)="closeToast()">
+      <p *ngIf="display==1">Email sent successfully.</p>
+    </ngb-toast>
+  </ng-container>
+  
 
 
 <div class="container row">

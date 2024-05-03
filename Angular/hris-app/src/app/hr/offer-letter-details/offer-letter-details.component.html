@@ -1,3 +1,10 @@
+<ng-container *ngIf="show">
+  <ngb-toast header="Email" [autohide]="false" (hidden)="closeToast()">
+    <p *ngIf="display==1">Email sent successfully.</p>
+  </ngb-toast>
+</ng-container>
+
+
 <div class="container row">
   <div class="left col-3 txt d-flex align-items-center ">
      <img src="assets/Images/offer_letter.jpeg" alt="">

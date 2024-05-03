@@ -16,15 +16,15 @@ export class SharedService {
   }
 
   sendMail(email:string):Observable<any>{
-    return this.http.post(`http://localhost:8081/api/sendMail`,email);
+    return this.http.post(APP_CONSTANTS.BACKEND_URL +'sendMail',email);
   }
 
   validateFpToken(token:any):Observable<any>{
-    return this.http.post(`http://localhost:8081/api/validateFpToken`,token);
+    return this.http.post(APP_CONSTANTS.BACKEND_URL +`validateFpToken`,token);
   }
 
   resetPwd(form:any):Observable<any>{
-    return this.http.post(`http://localhost:8081/api/resetPwd`,form);
+    return this.http.post(APP_CONSTANTS.BACKEND_URL +`resetPwd`,form);
   }
 
 }

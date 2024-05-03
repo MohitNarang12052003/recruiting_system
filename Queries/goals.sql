@@ -178,5 +178,6 @@ BEGIN
 
  
 END
-
+select * from hrisportal.users
 EXEC hrisportal.sp_create_employee 4,'Software Engineer','50000','Product Development','employee4@fintechcompany.com','123','2024-05-15'
+EXEC hrisportal.sp_create_employee 18,'Software Engineer','50000','Product Development','employee8@fintechcompany.com','123','2024-05-15'

@@ -81,3 +81,11 @@ button:hover {
 button:active {
   background-color:#0056b3;
 }
+
+
+ngb-toast {
+  position: absolute;
+  left: 50%; 
+  transform: translate(-50%, 50%); 
+  background-color: lightblue;
+}

@@ -198,6 +198,12 @@ public class jobResource {
         return jobService.getNationalHolidays(body);
     }
 
+    @GetMapping("/checkDocument/{id}")
+    public int checkDocuments(@PathVariable("id") int id){
+        System.out.println(id);
+        return jobService.checkDocuments(id);
+    }
+
 
 
 }

@@ -45,6 +45,13 @@
 </div> -->
 
 
+<ng-container *ngIf="show">
+  <ngb-toast header="Login" [autohide]="false" (hidden)="closeToast()">
+    <p *ngIf="display==1">Invalid Credentials.</p>
+  </ngb-toast>
+</ng-container>
+
+
 <div class="row justify-content-between" style="width: 99.5vw; height: 70vh;">
   <div class="col m-0 p-0">
   <img src="../../../assets/Images/login.png" alt="" style="height: 70vh;width:100%;">

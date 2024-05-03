@@ -14,6 +14,9 @@
     <button class="btn btn-outline-primary text-light me-3" type="button" style="width:15vw ; font-size: 18px; " (click)="view(1)">View Applications</button>
     <br>
     <hr style="width: 15vw; height: 1vh; background-color: #ffffff">
+    <button class="btn btn-outline-primary text-light me-3" style="width:15vw ; font-size: 18px; " type="button" [routerLink]="['/change-pwd']">Change Password</button>
+    <br>
+    <hr style="width: 15vw; height: 1vh; background-color: #ffffff">
     <button class="btn btn-outline-primary text-light me-3" style="width:15vw ; font-size: 18px; " type="button" (click)="view(2)">Edit Profile</button>
     </div>
     <div class="col">
@@ -23,7 +26,7 @@
             <div style="height: 200px;
             width: 200px;
             border: 2px solid #1685f4; border-radius: 50%;">
-            <img [src]="'http://localhost:8081/api/GetFiles/' + userDetails.user_id + '/photo'" alt="profile"
+            <img [src]="'http://localhost:8083/api/GetFiles/' + userDetails.user_id + '/photo'" alt="profile"
             style="border-radius: 50%;align-self: center;   object-fit: cover;
             object-position: center center;
             width: 100%;

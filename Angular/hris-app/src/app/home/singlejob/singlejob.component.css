@@ -1,3 +1,35 @@
-.f p {
+/* .f p {
   font-size: 25px;
+} */
+
+.quality{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  
+}
+
+p{
+  font-size: 30px;
+  text-indent: 2.5%;
+}
+
+.q{
+  border-style: solid;
+  border-color: rgba(135, 207, 235, 0.782);
+  background-color: rgba(135, 207, 235, 0.782);
+  color:#0d6efd;
+  margin-right: 1em;
+  border-radius: 25px;
+  padding: 0.5em;
+  font-weight: bold;
+}
+
+
+
+ngb-toast {
+  position: absolute;
+  left: 50%; 
+  transform: translate(-50%, 50%); 
+  background-color: lightblue;
 }

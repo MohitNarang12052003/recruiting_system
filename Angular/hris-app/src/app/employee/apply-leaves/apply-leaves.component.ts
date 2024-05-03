@@ -10,6 +10,18 @@ import { EmployeeService } from '../employee.service';
   styleUrls: ['./apply-leaves.component.css']
 })
 export class ApplyLeavesComponent {
+  show:boolean = false;
+
+  open(){
+    this.show=true
+  }
+
+	close() {
+		this.show = false;
+    this.router.navigate(['/Employee']);
+	}
+
+
   constructor(
     private employeeService: EmployeeService,
     private cookieService: CookieService,
@@ -21,7 +33,6 @@ export class ApplyLeavesComponent {
   onSelected(value: string): void {
     this.selectedType = value;
   }
-
 
   createForm = new FormGroup({
     employee_id:new FormControl(),
@@ -35,8 +46,7 @@ export class ApplyLeavesComponent {
     this.createForm.get('employee_id')?.setValue(employeeId);
     console.log(this.createForm.value);
     this.employeeService.ApplyLeave(this.createForm.value).subscribe((data) => {
-      alert('Successfully Posted');
-      this.router.navigate(['/Employee']);
+      this.open();
     });
   }
 

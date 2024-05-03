@@ -172,12 +172,12 @@
       <button
         type="submit"
         class="btn btn-primary  text-center align-self-center"
-        [disabled]="checkButton()"
+        *ngIf="!checkButton()"
       >
         Next
       </button>
       <button
-      [disabled]="disabled"
+      *ngIf="!checkButton()"
         type="button"
         class="btn btn-danger  align-self-center me-3"
         (click)="setActive()"

@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EmployeeService } from '../employee.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-goals',
@@ -10,11 +11,25 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./goals.component.css']
 })
 export class GoalsComponent implements OnInit{
+ 
   goalForm!:FormGroup;
   goalsData!:any;
   singleGoalData!:any;
 
   constructor(private employeeService:EmployeeService,private cookieService:CookieService){}
+  show:boolean = false;
+  display!:any;
+
+  openToast(){
+    this.show=true;
+    console.log(this.display)
+  }
+
+	closeToast() {
+		this.show = false;
+    this.display=0;
+	}
+
   ngOnInit(){
     this.fetchGoalsFn();
   }
@@ -49,7 +64,6 @@ export class GoalsComponent implements OnInit{
       },
       error:(e)=>{
         console.log("error",e);
-        alert("Goal couldnot be added")
       }
     })
   }
@@ -124,9 +138,18 @@ export class GoalsComponent implements OnInit{
           console.log("result",result)
         },
         (reason) => {
-          alert("No Edits Made.")
+          
+          
+          console.log("D",this.display)
+          // alert("No Edits Made.")
+          this.openToast();
+          this.display=2;
+          
         },
       );
+
+
+      console.log("D",this.display)
 
     }
 
@@ -142,7 +165,9 @@ export class GoalsComponent implements OnInit{
           console.log("result",result)
         },
         (reason) => {
-          alert("No new Goal Added")
+          // alert("No new Goal Added")
+          this.openToast();
+          this.display=1
         },
       );
      }

@@ -10,6 +10,21 @@ import { HrService } from '../hr.service';
   styleUrls: ['./add-announcement.component.css']
 })
 export class AddAnnouncementComponent {
+
+  show:boolean = false;
+  display!:any;
+
+  openToast(){
+    this.show=true;
+    console.log(this.display)
+  }
+
+	closeToast() {
+		this.show = false;
+    this.display=0;
+	}
+
+
   constructor(
     private hrService: HrService,
     private cookieService: CookieService,
@@ -25,7 +40,9 @@ export class AddAnnouncementComponent {
     this.createForm.get('hrid')?.setValue(parseInt(this.cookieService.get('hr_id')));
     console.log(this.createForm.value)
     this.hrService.AddAnnouncement(this.createForm.value).subscribe((data) => {
-      alert('Successfully Posted ' );
+      this.display=1;
+      this.openToast();
+      // alert('Successfully Posted ' );
       this.router.navigate(['HR']);
     });
   }

@@ -12,6 +12,20 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class AddJobComponent implements OnInit {
   isDone: number = 0;
   isFilled: number = 0;
+  show:boolean = false;
+  display!:any;
+  jobTitle!:any;
+  openToast(){
+    this.show=true;
+    console.log(this.display)
+  }
+
+	closeToast() {
+		this.show = false;
+    this.display=0;
+    this.router.navigate(['HR']);
+	}
+
   constructor(
     private hrService: HrService,
     private cookieService: CookieService,
@@ -66,10 +80,13 @@ export class AddJobComponent implements OnInit {
 
       console.log(this.createForm.value)
       this.hrService.postJob(this.createForm.value).subscribe((data) => {
-        alert(
-          'Successfully Posted ' + this.createForm.get("jobTitle")?.value + ' Vacancy'
-        );
-        this.router.navigate(['HR']);
+        this.openToast();
+        this.display=1;
+        this.jobTitle=this.createForm.get("jobTitle")?.value;
+        // alert(
+        //   'Successfully Posted ' + this.createForm.get("jobTitle")?.value + ' Vacancy'
+        // );
+        
       });
 
     }

@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit{
   constructor(private cookieService:CookieService,private employeeService:EmployeeService){}
   ngOnInit(){
     this.employeeId=this.cookieService.get("employee_id")    
-    this.getDetails();
+    // this.getDetails();
   }
 
   getDetails(){

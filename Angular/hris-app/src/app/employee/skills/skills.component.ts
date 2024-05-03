@@ -13,6 +13,17 @@ export class SkillsComponent implements OnInit {
 
   skillsData!:any;
   skillForm!:FormGroup;
+  display!:any;
+  show!:boolean
+  openToast(){
+    this.show=true;
+    console.log(this.display)
+  }
+
+	closeToast() {
+		this.show = false;
+    this.display=0;
+	}
 
 
   constructor(private employeeService:EmployeeService,private cookieService:CookieService){}
@@ -52,7 +63,9 @@ export class SkillsComponent implements OnInit {
           console.log("result",result)
         },
         (reason) => {
-          alert("No new Skill Added")
+          this.openToast();
+              this.display=3;
+          // alert("No new Skill Added")
         },
       );
     }
@@ -63,11 +76,15 @@ export class SkillsComponent implements OnInit {
           this.employeeService.addSkill(newSkill).subscribe({
             next:(data)=>{
               this.fetchSkillsData();
-              alert("An assessment will be scheduled soon for your new acquired skill. We highly appreciate your interest towards upskilling yourself");
+              this.openToast();
+              this.display=1;
+              // alert("An assessment will be scheduled soon for your new acquired skill. We highly appreciate your interest towards upskilling yourself");
               console.log(data)
             },
             error:(error)=>{
-              alert("Skill could not get added")
+              this.openToast();
+              this.display=2;
+              // alert("Skill could not get added")
               console.log("error",error)
             }
           })

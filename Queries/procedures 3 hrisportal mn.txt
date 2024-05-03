@@ -411,3 +411,31 @@ EXEC hrisportal.fetchDepts
 GO
 
 
+
+USE [hrisportal]
+GO
+
+/****** Object:  StoredProcedure [hrisportal].[sp_view_applications]    Script Date: 29-04-2024 14:03:36 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE OR ALTER       PROCEDURE [hrisportal].[sp_view_applications]
+AS
+BEGIN
+	SELECT a.*,u.full_name ,j.job_title 
+	FROM hrisportal.applicants a
+	inner join hrisportal.job_vacancy j 
+	on j.j_id=a.j_id 
+	inner join hrisportal.users u
+	on a.user_id=u.user_id
+	WHERE j.active_yn='Y'
+	ORDER BY a.applied_at DESC
+END
+GO
+
+
+
+

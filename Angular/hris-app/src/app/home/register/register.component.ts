@@ -19,6 +19,19 @@ export class RegisterComponent {
   hide = true;
   hide1=true;
 
+  display!:any;
+  show!:boolean
+  openToast(){
+    this.show=true;
+    console.log(this.display)
+  }
+
+	closeToast() {
+		this.show = false;
+    this.display=0;
+	}
+
+
   toggleVisibility(): void {
     this.hide = !this.hide;
   }
@@ -134,13 +147,19 @@ export class RegisterComponent {
     this.userService.alreadyExists(this.createForm.get("username")?.value,this.createForm.get("email")?.value).subscribe((data)=>{
       console.log(data)
       if(data["already_exists"]==1){
-        alert("username already exists");
+        // alert("username already exists");
+        this.openToast();
+        this.display=1;
       }
       if(data["already_exists"]==2){
-        alert("email already exists");
+        this.openToast();
+        this.display=2;
+        // alert("email already exists");
       }
       if(data["already_exists"]==3){
-        alert("username and email already exist");
+        this.openToast();
+        this.display=3;
+        // alert("username and email already exist");
       }
       if(data["already_exists"]==0){
         this.isDone = 1;

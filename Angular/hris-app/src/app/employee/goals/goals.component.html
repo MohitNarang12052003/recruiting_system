@@ -1,3 +1,11 @@
+<ng-container *ngIf="show">
+    <ngb-toast header="Goals" [autohide]="false" (hidden)="closeToast()">
+      <p *ngIf="display==1">No new Goal Added.</p>
+      <p *ngIf="display==2">No Edits Made.</p>  
+    </ngb-toast>
+  </ng-container>
+  
+
 <div class="container">
     <div class="header row" >
         <div class="heading col-8 fw-bold">
