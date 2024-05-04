@@ -21,7 +21,6 @@ export class ViewEmployeesComponent {
 
   getEmployeeDetails():void{
     this.hrService.viewEmployees().subscribe((data)=>{
-      console.log(data);
       this.employees=data;
     })
   }

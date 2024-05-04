@@ -6,99 +6,94 @@ import { HrService } from '../hr.service';
 @Component({
   selector: 'app-offer-letter-details',
   templateUrl: './offer-letter-details.component.html',
-  styleUrls: ['./offer-letter-details.component.css']
+  styleUrls: ['./offer-letter-details.component.css'],
 })
-export class OfferLetterDetailsComponent implements OnInit{
-offerLetterForm!:FormGroup;
-applicantDetails!:any;
-id!:any;
+export class OfferLetterDetailsComponent implements OnInit {
+  offerLetterForm!: FormGroup;
+  applicantDetails!: any;
+  id!: any;
+  selectedType = '';
+  show: boolean = false;
+  display!: any;
 
-show:boolean = false;
-display!:any;
+  constructor(
+    private route: ActivatedRoute,
+    private hrService: HrService,
+    private router: Router
+  ) {}
 
-openToast(){
-  this.show=true;
-  console.log(this.display)
-}
+  ngOnInit() {
+    this.getId();
+    this.formFn();
+  }
 
-closeToast() {
-  this.show = false;
-  this.display=0;
-}
+  openToast() {
+    this.show = true;
+  }
 
+  closeToast() {
+    this.show = false;
+    this.display = 0;
+  }
 
-constructor(private route:ActivatedRoute,private hrService:HrService,private router:Router){}
+  onSelected(value: string): void {
+    this.selectedType = value;
+  }
 
-ngOnInit(){
-  this.getId();
-  this.formFn();
-}
-selectedType = '';
-onSelected(value: string): void {
-  this.selectedType = value;
-}
+  formFn(): void {
+    this.offerLetterForm = new FormGroup({
+      fullname: new FormControl(),
+      job_title: new FormControl(),
+      employmentType: new FormControl(),
+      salary: new FormControl(),
+      email: new FormControl(),
+    });
+  }
 
-formFn():void{
-  this.offerLetterForm=new FormGroup({
-    fullname:new FormControl(),
-    job_title:new FormControl(),
-    employmentType:new FormControl(),
-    salary:new FormControl(),
-    email:new FormControl()
-  })
-}
+  getId(): void {
+    this.route.paramMap.subscribe((params) => {
+      const id = params.get('id');
+      this.id = id;
 
+      this.getApplicantDetails();
+    });
+  }
 
-getId():void{
-  this.route.paramMap.subscribe(params=>{
-    const id=params.get("id");
-    this.id= id;
-    console.log(id,typeof(id));
+  getApplicantDetails(): void {
+    this.hrService.getSingleApplicant(this.id).subscribe({
+      next: (data) => {
+        this.applicantDetails = data;
 
-    this.getApplicantDetails();
-  })
-}
+        this.patchValues();
+      },
+      error: (e) => {
+        this.router.navigate(['/unauthorized']);
+      },
+    });
+  }
 
-getApplicantDetails():void{
-  this.hrService.getSingleApplicant(this.id).subscribe({
-    next:(data)=>{
-      console.log(data)
-      this.applicantDetails=data;
+  patchValues(): void {
+    this.offerLetterForm.patchValue({
+      fullname: this.applicantDetails.full_name,
+      email: this.applicantDetails.email,
+    });
+  }
 
-      this.patchValues();
-    },
-    error:(e)=>{
-      console.log(e)
-    }
-  })
-}
+  offerLetterMail(): void {
+    this.hrService.offerLetterMail(this.offerLetterForm.value).subscribe({
+      next: (data) => {
+        this.openToast();
+        this.display = 1;
+      },
+      error: (e) => {
+        this.router.navigate(['/unauthorized']);
+      },
+    });
+  }
 
-patchValues():void{
-  this.offerLetterForm.patchValue({
-    fullname:this.applicantDetails.full_name,
-    email:this.applicantDetails.email
-  })
-}
+  submit(): void {
+    this.offerLetterForm.get('employmentType')?.setValue(this.selectedType);
 
-
-
-submit():void{
-  this.offerLetterForm.get('employmentType')?.setValue(this.selectedType);
-
-  this.hrService.offerLetterMail(this.offerLetterForm.value).subscribe({
-    next:(data)=>{
-      console.log(data)
-      this.openToast();
-      this.display=1;
-    },
-    error:(e)=>{
-      console.log("e",e)
-      this.router.navigate(['/unauthorized'])
-    }
-  })
-
-}
-
-
-
+    this.offerLetterMail();
+  }
 }

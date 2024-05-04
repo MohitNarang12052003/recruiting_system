@@ -1,20 +1,21 @@
 <ng-container *ngIf="show">
   <ngb-toast header="Add Job" [autohide]="false" (hidden)="closeToast()">
-    <p *ngIf="display==1">Successfully Posted {{jobTitle}} Vacancy.</p>
+    <p *ngIf="display == 1">Successfully Posted {{ jobTitle }} Vacancy.</p>
   </ngb-toast>
 </ng-container>
 
 <div class="row container">
   <div class="col-4 title">
-    <img src="assets/Images/add_jobs.jpeg" alt="">
+    <img src="assets/Images/add_jobs.jpeg" alt="" />
   </div>
   <div class="inside bg-light text-dark col-8">
-   
-    <form ngNativeValidate (submit)="submit()"
+    <form
+      ngNativeValidate
+      (submit)="submit()"
       class="bg-light text-dark p-4 m-4"
       [formGroup]="createForm"
     >
-    <h2 class="heading p-2 m-2">Add New Job</h2>
+      <h2 class="heading p-2 m-2">Add New Job</h2>
       <!-- First section of the form -->
       <div class="my-container row p-2 m-6" *ngIf="!isDone; else nextSection">
         <div class="col-5">
@@ -23,7 +24,8 @@
         </div>
         <div class="col-5">
           <div><label for="">Employment Type</label></div>
-          <select  required 
+          <select
+            required
             class="form-select elem"
             style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
             #type
@@ -38,103 +40,103 @@
             <option value="Trainee">Trainee</option>
           </select>
         </div>
-        
+
         <div class="col-5">
           <div><label for="">Location</label></div>
-          <input  required  class="elem" type="text" formControlName="location" />
-          <!-- <Textarea rows="2" cols="15" formControlName="desc"></Textarea> -->
+          <input required class="elem" type="text" formControlName="location" />
         </div>
 
         <div class="col-5">
           <div><label for="">Department Name</label></div>
-          <select  required 
+          <select
+            required
             class="form-select elem"
             style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
             #types
             (change)="onDeptSelected(types.value)"
           >
             <option value="" selected></option>
-            <option value="Technology And Innovation">Technology And Innovation</option>
-            <option value="Data Science And Analytics">Data Science And Analytics</option>
+            <option value="Technology And Innovation">
+              Technology And Innovation
+            </option>
+            <option value="Data Science And Analytics">
+              Data Science And Analytics
+            </option>
             <option value="Risk Management">Risk Management</option>
-            <option value="Compliance And Regulatory Affairs">Compliance And Regulatory Affairs</option>
+            <option value="Compliance And Regulatory Affairs">
+              Compliance And Regulatory Affairs
+            </option>
             <option value="Financial Operations">Financial Operations</option>
             <option value="Product Development">Product Development</option>
             <option value="Cybersecurity">Cybersecurity</option>
-            <option value="Finance And Accounting">Finance And Accounting</option>
+            <option value="Finance And Accounting">
+              Finance And Accounting
+            </option>
             <option value="Customer Support">Customer Support</option>
             <option value="Marketing And Sales">Marketing And Sales</option>
           </select>
         </div>
-        <!-- Add other fields -->
       </div>
-      
 
       <div class="button-group" *ngIf="!isDone">
-        <button
-            type="submit"
-            class="btn btn-secondary col-3"
-          >
-            Next
-          </button>
-        <!-- <button
-          type="button"
-          class="btn btn-secondary col-3"
-          (click)="add()" 
-        >
-          Next
-        </button> -->
+        <button type="submit" class="btn btn-secondary col-3">Next</button>
       </div>
-      
+
       <!-- Second section of the form -->
       <ng-template #nextSection>
         <div class="my-container row">
           <div class="col-5">
             <div><label for="">Minimum Qualifications:</label></div>
-            <input  required   class="elem" type="text" formControlName="minQualification" />
+            <input
+              required
+              class="elem"
+              type="text"
+              formControlName="minQualification"
+            />
           </div>
 
           <div class="col-5">
             <div><label for="">Describe</label></div>
-            <input required  class="elem"  type="text" formControlName="jobDescription" />
-            <!-- <Textarea rows="2" cols="15" formControlName="desc"></Textarea> -->
+            <input
+              required
+              class="elem"
+              type="text"
+              formControlName="jobDescription"
+            />
           </div>
           <div class="col-5">
             <div><label for="">Key Role</label></div>
-            <input required   class="elem" type="text" formControlName="keyRole" />
-            <!-- <Textarea rows="2" cols="15" formControlName="desc"></Textarea> -->
+            <input
+              required
+              class="elem"
+              type="text"
+              formControlName="keyRole"
+            />
           </div>
 
           <div class="col-5">
-            <div ><label for="">Skills</label></div>
-            <input required  class="elem"  type="text" formControlName="skills" placeholder="java,python,..." />
-            <!-- <Textarea rows="2" cols="15" formControlName="desc"></Textarea> -->
+            <div><label for="">Skills</label></div>
+            <input
+              required
+              class="elem"
+              type="text"
+              formControlName="skills"
+              placeholder="java,python,..."
+            />
           </div>
-
-          
         </div>
         <div class="button-group" *ngIf="isDone">
+          <button type="submit" class="btn btn-secondary col-3">Submit</button>
 
           <button
-            type="submit"
-            class="btn btn-secondary col-3"
-          >
-            Submit
-          </button>
-
-          <button
-            type="button" (click)="backFn()"
+            type="button"
+            (click)="backFn()"
             class="btn btn-secondary col-3"
           >
             Back
           </button>
-
         </div>
       </ng-template>
-      
-      
-      <!-- Submit button -->
-      
     </form>
   </div>
 </div>

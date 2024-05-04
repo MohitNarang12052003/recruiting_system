@@ -31,3 +31,12 @@
     background-color: blue;
     color: white;
 }
+
+
+
+ngb-toast {
+    position: fixed;
+    left: 50%; 
+    transform: translate(-50%, 0%); 
+    background-color: lightblue;
+  }

@@ -1,68 +1,45 @@
-<!-- <div class="container row">
-    <div class="left col-3 txt d-flex align-items-center ">
-        <h3>Write details of next round</h3>
-    </div>
-
-    <div class="right col-5">
-        <form [formGroup]="nextRoundForm" (submit)="submit()">
-            <div class="round row ">
-                <label for="round-date" class="txt col-5" ><h5>Round Date</h5></label >
-                <input type="date" class="col-5" formControlName=date>
-            </div>
-            <div class="round row ">
-                <label for="round-place"  class="txt col-5" ><h5>Round Place</h5></label>
-                <input type="text" formControlName=place class="col-5">
-            </div>
-            <div class="round row">
-                <label for="round-time"  class="txt col-5" ><h5>Round time</h5></label >
-                <input type="time" formControlName=time class="col-5">
-            </div>
-        
-            <button type="submit" class="btn">Send Mail</button>
-        </form>
-    </div>
-    
-</div> -->
-
 <ng-container *ngIf="show">
-    <ngb-toast header="Email" [autohide]="false" (hidden)="closeToast()">
-      <p *ngIf="display==1">Email sent successfully.</p>
-    </ngb-toast>
-  </ng-container>
-  
+  <ngb-toast header="Email" [autohide]="false" (hidden)="closeToast()">
+    <p *ngIf="display == 1">Email sent successfully.</p>
+  </ngb-toast>
+</ng-container>
 
-<div class="container row ">
-    <div class="left col-3 txt d-flex align-items-center ">
-       <img src="assets/Images/mail.jpg" alt="Mail">
-    </div>
+<div class="container row">
+  <div class="left col-3 txt d-flex align-items-center">
+    <img src="assets/Images/mail.jpg" alt="Mail" />
+  </div>
 
-    <div class="right col-8 p-2 m-3">
-        <div class="round"><h2>Enter Next Round Details</h2></div>
-        <form [formGroup]="nextRoundForm" ngNativeValidate (submit)="submit()">
-            <div class="round row ">
-                <label for="round-date" class="txt col-3" ><h5>Round Date</h5></label >
-                <input required type="date" class="col-3" formControlName=date>
-            </div>
-            <div class="round row ">
-                <label for="round-place"  class="txt col-3" ><h5>Round Place</h5></label>
-                <input required type="text" formControlName=place class="col-3">
-            </div>
-            <div class="round row">
-                <label for="round-time"  class="txt col-3" ><h5>Round Time</h5></label >
-                <input required type="time" formControlName=time class="col-3">
-            </div>
-            <div class="round" >
-              <button
-                type="submit"
-                class="button btn-secondary col-4"
-              
-              >
-               Send Mail
-              </button>
-            </div>
-    
-            <!-- <button type="submit" class="button">Send Mail</button> -->
-        </form>
-    </div>
-    
+  <div class="right col-8 p-2 m-3">
+    <div class="round"><h2>Enter Next Round Details</h2></div>
+    <form [formGroup]="nextRoundForm" ngNativeValidate (submit)="submit()">
+      <div class="round row">
+        
+        <input required type="date" class="col-3" formControlName="date" />
+        <!-- <div class="d-flex justify-content-center align-items-center ">
+            <label for="round-date" class="txt me-4"><h5>Round Date</h5></label>
+          <ngb-datepicker
+            id="datepicker"
+            class="cal"
+            
+            [minDate]="minDate"
+            (navigate)="onDateSelect($event)"
+          ></ngb-datepicker>
+        </div> -->
+      </div>
+      <div class="round row ">
+        <label for="round-place" class="txt col-3"><h5>Round Place</h5></label>
+        <input required type="text" formControlName="place" class="col-3" />
+      </div>
+      <div class="round row">
+        <label for="round-time" class="txt col-3"><h5>Round Time</h5></label>
+        <input required type="time" formControlName="time" class="col-3" />
+      </div>
+      <div class="round">
+        <button type="submit" class="button btn-secondary col-4">
+          Send Mail
+        </button>
+      </div>
+    </form>
+  </div>
+      
 </div>
