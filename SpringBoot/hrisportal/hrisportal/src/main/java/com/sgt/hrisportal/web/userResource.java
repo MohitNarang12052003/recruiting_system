@@ -116,7 +116,6 @@ public class userResource {
     @GetMapping(value = "/GetFiles/{userid}/{folder}",produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public byte[] getFiles(@PathVariable String userid,@PathVariable String folder) throws IOException{
         int user_id=Integer.parseInt(userid);
-        System.out.println("100"+folder+userid);
         String extension=userService.getExtension(user_id,folder);
         String fileName=userid+"."+extension;
 
