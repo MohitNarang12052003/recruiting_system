@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/']);
       } else if (data['role'] == APP_CONSTANTS.EMP_ROLE) {
         this.cookieService.set('employee_id', data['employee_id']);
-        this.cookieService.set('user_id', data['user_id']);
+        // this.cookieService.set('user_id', data['user_id']);
         this.router.navigate(['Employee']);
       } else if (data['role'] == APP_CONSTANTS.HR_ROLE) {
         this.cookieService.set('hr_id', data['hr_id']);

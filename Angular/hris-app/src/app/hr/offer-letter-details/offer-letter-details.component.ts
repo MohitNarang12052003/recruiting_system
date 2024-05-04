@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HrService } from '../hr.service';
 
 @Component({
@@ -27,7 +27,7 @@ closeToast() {
 }
 
 
-constructor(private route:ActivatedRoute,private hrService:HrService){}
+constructor(private route:ActivatedRoute,private hrService:HrService,private router:Router){}
 
 ngOnInit(){
   this.getId();
@@ -93,6 +93,7 @@ submit():void{
     },
     error:(e)=>{
       console.log("e",e)
+      this.router.navigate(['/unauthorized'])
     }
   })
 

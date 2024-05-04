@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { SharedService } from '../../shared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-pwd',
@@ -12,7 +13,7 @@ export class ForgotPwdComponent implements OnInit {
   email!:string;
   sent!:boolean;
 
-  constructor(private sharedService:SharedService){}
+  constructor(private sharedService:SharedService,private router:Router){}
   ngOnInit(){
     this.forgotPwdForm()
   }
@@ -34,6 +35,7 @@ export class ForgotPwdComponent implements OnInit {
       },
       error:(e:any)=>{
         console.log("error",e);
+        this.router.navigate(['/unauthorized'])
       }
     })
   }

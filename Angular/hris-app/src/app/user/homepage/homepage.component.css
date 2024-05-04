@@ -11,6 +11,9 @@ h3{
     border-color: #1685f4;
     border-radius: 25px;
     padding-left: 3%;
+    word-wrap: break-word; 
+  max-width: 100%;
+  box-sizing: border-box; 
 }
 
 .horizontal{

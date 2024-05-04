@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ForgotPwdComponent } from './components/forgot-pwd/forgot-pwd.component';
 import { ResetPwdComponent } from './components/reset-pwd/reset-pwd.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterLink } from '@angular/router';
 
 
 
@@ -31,6 +32,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    
   ],
   exports:[
     NavbarComponent,

@@ -170,6 +170,10 @@ const routes: Routes = [
   {
     path: '',
     component: HeroComponent,
+  },
+  {
+    path: '**', 
+    component: UnauthorizedComponent 
   }
 ];
 

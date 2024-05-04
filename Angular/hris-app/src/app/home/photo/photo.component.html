@@ -25,7 +25,7 @@
     </div>
   </div>
 </div> -->
-<div class="row justify-content-between" style="width: 99.5vw; height: 70vh;">
+<div class="row justify-content-between" style="width: 99.5vw;">
   <div class="col m-0 p-0">
   <img src="../../../assets/Images/pic.png" alt="" style="height: 70vh;width:100%;">
 </div>
@@ -45,7 +45,7 @@
   
           <div [innerHtml]="msg" *ngIf="msg" style="color: red"></div>
   
-          <div  *ngIf="url"><img [src]="url" *ngIf="url" style="width: 40vw; height: 40vh;"/></div>
+          <div  *ngIf="url"><img [src]="url" *ngIf="url" style=" height: 40vh;"/></div>
           <label style="background-image: url(../../../assets/Images/upload.png); width: 40vw;height: 40vh; background-repeat: no-repeat;cursor: pointer;" for="file-upload"  *ngIf="!url">
             <input required type="file" (change)="selectFile($event)" style="display: none; " id="file-upload" />
           </label>

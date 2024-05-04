@@ -23,10 +23,12 @@
 <ng-container *ngIf="show">
     <ngb-toast header="Password" [autohide]="false" (hidden)="closeToast()">
       <p *ngIf="display==1">invalid credentials</p>
+      <p *ngIf="display==2">Password changed successfully</p>
+    
     </ngb-toast>
   </ng-container>
 
-<div class="row justify-content-between" style="width: 99.5vw; height: 70vh;">
+<div class="row justify-content-between" style="width: 99.5vw;">
     <div class="col m-0 p-0" style="">
     <img src="../../../assets/Images/change.avif" alt="" style="height: 70vh;width:100%;">
   </div>
@@ -40,11 +42,36 @@
     </div>
     <div class="">
         <label for="new_pwd">Enter New Password</label>
-        <input type="text" name="new_pwd" id="new_pwd" formControlName="new_pwd"  class="form-control   align-self-center">
+        <!-- <input type="text" name="new_pwd" id="new_pwd" formControlName="new_pwd"  class="form-control   align-self-center"> -->
+        <div class="row">
+            <input required 
+            [type]="hide ? 'password' : 'text'"
+            class="form-control align-self-center"
+            id="new_pwd"
+            formControlName="new_pwd"
+            
+            style="margin-left: 0.75em; height: 5.5vh;"
+          />
+          <button type="button" (click)="toggleVisibility()" class="col-1 ms-2 mt-3 btn btn-primary">
+            <i class="fa" [ngClass]="{'fa-eye': hide, 'fa-eye-slash': !hide}"></i>
+          </button>
+          </div>
     </div>
-    <div class="">
+    <div class="col" >
         <label for="confirm_new_pwd">Confirm New Password</label>
-        <input type="text" name="confirm_new_pwd" id="confirm_new_pwd" formControlName="confirm_new_pwd"  class="form-control   align-self-center">
+        <!-- <input type="text" name="confirm_new_pwd" id="confirm_new_pwd" formControlName="confirm_new_pwd"  class="form-control   align-self-center"> -->
+        <div class="row">
+            <input required 
+            [type]="hide1 ? 'password' : 'text'"
+            class="form-control align-self-center"
+            id="confirm_new_pwd"
+            formControlName="confirm_new_pwd"    
+            style="margin-left: 0.75em; height: 5.5vh;"        
+          />
+          <button type="button" (click)="toggleVisibility1()" class="col-1 ms-2 mt-3  btn btn-primary">
+            <i class="fa" [ngClass]="{'fa-eye': hide1, 'fa-eye-slash': !hide1}"></i>
+          </button>
+          </div>
     </div>
 
     <!-- <div class="d-flex flex-column "> -->
@@ -52,7 +79,7 @@
     <!-- </div> -->
 </form>
  
-        <div *ngIf="hidden">Password changed successfully</div>
+        <!-- <div *ngIf="hidden">Password changed successfully</div> -->
   </div>
   
   </div>

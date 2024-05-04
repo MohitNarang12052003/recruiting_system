@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HrService } from '../hr.service';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -28,7 +28,7 @@ export class CreateNewEmployeeComponent implements OnInit{
 	}
 
 
-  constructor(private route:ActivatedRoute,private hrService:HrService){}
+  constructor(private route:ActivatedRoute,private hrService:HrService,private router: Router){}
   ngOnInit(): void {
     this.getId();
     this.newEmployeeFormFn();
@@ -106,6 +106,8 @@ export class CreateNewEmployeeComponent implements OnInit{
       },
       error:(e)=>{
         console.log("error ",e);
+        this.router.navigate(['/unauthorized'])
+        
       }
     })
   }

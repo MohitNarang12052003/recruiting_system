@@ -199,6 +199,7 @@ getJobHistoryOfApplicant(){
     },
     error:(e)=>{
       console.log("error ",e);
+      this.router.navigate(['/unauthorized'])
     }
   })
 }

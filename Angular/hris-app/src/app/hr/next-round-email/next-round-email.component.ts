@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HrService } from '../hr.service';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -28,7 +28,7 @@ export class NextRoundEmailComponent {
     this.display=0;
 	}
 
-  constructor(private route:ActivatedRoute,private hrService:HrService){}
+  constructor(private route:ActivatedRoute,private hrService:HrService,private router:Router){}
   ngOnInit(){
     this.getId();
     this.nextRoundDetails();
@@ -103,6 +103,7 @@ export class NextRoundEmailComponent {
       },
       error:(e)=>{
         console.log("error",e);
+        this.router.navigate(['/unauthorized'])
       }
     })
 

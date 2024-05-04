@@ -22,7 +22,7 @@
     <div class="col">
 <div class="row" *ngIf="profile===0 && userDetails" >
     <div class="col-3 m-3" style="border-style:solid; border-radius: 25px; background-color: rgba(135, 207, 235, 0.325);">
-        <div class="" style="display: flex; flex-direction: column;justify-content: center; ">
+        <div class="" style="display: flex; flex-direction: column;justify-content: center;">
             <div style="height: 200px;
             width: 200px;
             border: 2px solid #1685f4; border-radius: 50%;">
@@ -104,7 +104,7 @@
 <div *ngIf="profile===1"  >
 <h1>You have applied for following roles:</h1>
 
-<table style="width: 80%;">
+<table style="width: 80%;" class="">
     <tr><th style="width:10%">Sr no.</th>
         <th style="width:70%">Job Title</th>
         <th style="width:20%">Status</th></tr>
@@ -112,7 +112,7 @@
 
             <td>{{i+1}}</td>
             <td>{{jobs.job_title}}</td>
-            <td><button type="button" class="btn btn-primary" (click)="viewStatus(3,jobs.round_1,jobs.round_2,jobs.round_3)">
+            <td style="text-align: center; padding: 2px;"><button type="button" class="btn btn-primary" (click)="viewStatus(3,jobs.round_1,jobs.round_2,jobs.round_3)">
                 View
             </button></td>
         </tr>

@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
@@ -74,8 +76,10 @@ public class userRepository {
     }
 
     public int changePwd(String email,String old_pwd,String new_pwd){
-        return jdbcTemplate.update("EXEC hrisportal.sp_change_pwd ?,?,?",email,old_pwd,new_pwd);
+        String my_email= URLDecoder.decode(email, StandardCharsets.UTF_8);
+        return jdbcTemplate.update("EXEC hrisportal.sp_change_pwd ?,?,?",my_email,old_pwd,new_pwd);
     }
+
 
     public Map<String ,Object> validateFpToken(String token){
         return jdbcTemplate.queryForMap("EXEC hrisportal.sp_validate_fp_token ?",token);

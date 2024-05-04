@@ -1,7 +1,7 @@
 label{
     font-size: 15px;
 }
-input,textarea{
+input,textarea,select{
     margin-bottom: 2em;
     width: 20vw;
     height: 5vh;
@@ -11,7 +11,12 @@ input,textarea{
   border-image-slice: 1;
   outline: none;
 }
-
+select,textarea{
+    height: 7vh;
+}
+select{
+    width: 10vw;
+}
 button{
     margin-bottom: 2em;
     width: 10vw;

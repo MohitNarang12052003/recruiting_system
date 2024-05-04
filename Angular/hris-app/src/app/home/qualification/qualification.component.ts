@@ -12,15 +12,21 @@ import { CookieService } from 'ngx-cookie-service';
 export class QualificationComponent implements OnInit {
   isDone: number = 0;
   disabled!: boolean;
+  years: any[] = [''];
+  grade:any[]=[''];
 
   constructor(
     private userService: UsersService,
     private router: Router,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    
   ) {}
   ngOnInit(): void {
     this.checkButton();
+    this.populateYears();
+    this.populateGrade();
   }
+
   checkButton(){
     if(this.userService.active>2) return true;
     return false;
@@ -39,6 +45,37 @@ export class QualificationComponent implements OnInit {
     this.submit(0);
     
   }
+  populateYears() {
+    const currentYear = new Date().getFullYear();
+
+    for (let year = currentYear; year >= 1950; year--) {
+      this.years.push(year);
+    }
+  }
+
+  populateGrade() {
+    const grade =10.0;
+
+    for (let gpa = grade; gpa >= 0.0; gpa-=0.1) {
+      const roundedGPA = Math.round(gpa * 10) / 10;
+      this.grade.push(roundedGPA);
+    }
+  }
+
+  selectedAdmissionType = '';
+  selectedCompletionType= '';
+  selectedGradeType='';
+
+  onAdmissionSelected(value: string): void {
+    this.selectedAdmissionType = value;
+  }
+  onCompletionSelected(value: string): void {
+    this.selectedCompletionType = value;
+  }
+  onGradeSelected(value: string): void {
+    this.selectedGradeType = value;
+  }
+
 
   // loginForm = new FormGroup({
   //   email: new FormControl(this.cookieService.get('email')),
@@ -53,6 +90,10 @@ export class QualificationComponent implements OnInit {
     this.createForm
       .get('uid')
       ?.setValue(parseInt(this.cookieService.get('user_id')));
+
+    this.createForm.get('admission_yr')?.setValue( parseInt(this.selectedAdmissionType));
+    this.createForm.get('completion_yr')?.setValue( parseInt(this.selectedCompletionType));
+    this.createForm.get('gpa')?.setValue( parseInt(this.selectedGradeType))
     this.userService
       .insertQualification(this.createForm.value)
       .subscribe((data) => {

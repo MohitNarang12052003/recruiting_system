@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EmployeeService } from '../employee.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Form, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-skills',
@@ -26,7 +27,7 @@ export class SkillsComponent implements OnInit {
 	}
 
 
-  constructor(private employeeService:EmployeeService,private cookieService:CookieService){}
+  constructor(private employeeService:EmployeeService,private cookieService:CookieService,private router:Router){}
   ngOnInit(){
     this.fetchSkillsData();
   }
@@ -39,6 +40,7 @@ export class SkillsComponent implements OnInit {
       },
       error:(error)=>{
         console.log("error",error);
+        this.router.navigate(['/unauthorized']);
       }
     })
   }

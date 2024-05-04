@@ -12,6 +12,9 @@ import { CookieService } from 'ngx-cookie-service';
 export class ExperienceComponent implements OnInit{
   selectedType = '';
   disabled!:boolean;
+  years: any[] = [''];
+  selectedAdmissionType = '';
+  selectedCompletionType= '';
   onSelected(value: string): void {
     this.selectedType = value;
   }
@@ -23,6 +26,7 @@ export class ExperienceComponent implements OnInit{
   ) {}
   ngOnInit(): void {
     this.checkButton();
+    this.populateYears();
   }
   createForm = new FormGroup({
     uid: new FormControl(),
@@ -32,6 +36,21 @@ export class ExperienceComponent implements OnInit{
     tyear: new FormControl(),
     desc: new FormControl(),
   });
+
+  populateYears() {
+    const currentYear = new Date().getFullYear();
+
+    for (let year = currentYear; year >= 1950; year--) {
+      this.years.push(year);
+    }
+  }
+
+  onAdmissionSelected(value: string): void {
+    this.selectedAdmissionType = value;
+  }
+  onCompletionSelected(value: string): void {
+    this.selectedCompletionType = value;
+  }
 
   checkButton(){
     if(this.userService.active>3) return true;
@@ -47,6 +66,8 @@ export class ExperienceComponent implements OnInit{
     this.createForm
       .get('uid')
       ?.setValue(parseInt(this.cookieService.get('user_id')));
+      this.createForm.get('fyear')?.setValue( parseInt(this.selectedAdmissionType));
+      this.createForm.get('tyear')?.setValue( parseInt(this.selectedCompletionType));
     this.userService
       .insertJobHistory(this.createForm.value)
       .subscribe((data) => {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HrService } from '../hr.service';
 import { saveAs } from 'file-saver';
 
@@ -19,7 +19,7 @@ export class SingleEmployeeComponent implements OnInit{
   jobHistoryDataBool!:boolean;
   
 
-  constructor(private route:ActivatedRoute,private hrService:HrService){}
+  constructor(private route:ActivatedRoute,private hrService:HrService,private router:Router){}
   ngOnInit(){
     this.getEmployeeId();
     
@@ -64,6 +64,7 @@ export class SingleEmployeeComponent implements OnInit{
       },
       error:(error)=>{
         console.log(error)
+        this.router.navigate(['/unauthorized'])
       }
     })
 
@@ -85,6 +86,7 @@ export class SingleEmployeeComponent implements OnInit{
       },
       error:(e)=>{
         console.log("error ",e);
+        this.router.navigate(['/unauthorized'])
       }
     })
   }
@@ -103,6 +105,7 @@ export class SingleEmployeeComponent implements OnInit{
       },
       error:(e)=>{
         console.log("error ",e);
+        this.router.navigate(['/unauthorized'])
       }
     })
   }
