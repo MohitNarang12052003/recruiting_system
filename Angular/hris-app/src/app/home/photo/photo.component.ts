@@ -22,10 +22,9 @@ export class PhotoComponent {
   createForm = new FormGroup({
     uid: new FormControl(),
     photo: new FormControl(),
-    username:new FormControl()
+    username: new FormControl(),
   });
   selectFile(event: any) {
-    //Angular 11, for stricter type
     if (!event.target.files[0] || event.target.files[0].length == 0) {
       this.msg = 'You must select an image';
       return;
@@ -46,30 +45,33 @@ export class PhotoComponent {
       this.url = reader.result;
       this.submit = 1;
     };
-    console.log(event.target.files[0]);
 
     this.imageUrl = event.target.files[0];
-    console.log(event.target.files);
-    this.createForm.patchValue({  
+    this.createForm.patchValue({
       photo: event.target.files[0].name,
     });
   }
 
-  submitPhoto() {
-    this.createForm
-      .get('uid')
-      ?.setValue(this.cookieService.get('user_id'));
+  insertPhoto(): void {
+    this.userService.insertPhoto(this.createForm.value).subscribe((data) => {
+      this.router.navigate(['login']);
+    });
+  }
 
-      this.createForm
+  uploadFile(): void {
+    this.userService
+      .uploadFile(this.imageUrl, 'photo', this.createForm.get('uid')?.value)
+      .subscribe((data) => {
+        this.insertPhoto();
+      });
+  }
+
+  submitPhoto() {
+    this.createForm.get('uid')?.setValue(this.cookieService.get('user_id'));
+    this.createForm
       .get('username')
       ?.setValue(this.cookieService.get('username'));
-      console.log(this.createForm.get('username')?.value);
-    this.userService.uploadFile(this.imageUrl, 'photo',this.createForm.get('uid')?.value).subscribe((data) => {
-      console.log(data + ' inside photo');
-      this.userService.insertPhoto(this.createForm.value).subscribe((data) => {
-        console.log('inside login');
-        this.router.navigate(['login']);
-      });
-    });
+
+    this.uploadFile();
   }
 }

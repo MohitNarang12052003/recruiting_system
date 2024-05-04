@@ -8,7 +8,7 @@ import { UsersService } from '../users.service';
   styleUrls: ['./register-dashboard.component.css']
 })
 export class RegisterDashboardComponent {
-  active=1;
+  active:number=1;
   constructor(public sharedService: UsersService) {
   }
 

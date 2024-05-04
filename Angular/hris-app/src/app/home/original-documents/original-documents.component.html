@@ -1,128 +1,126 @@
 <ng-container *ngIf="show">
   <ngb-toast header="Documents" [autohide]="false" (hidden)="closeToast()">
-    <p *ngIf="display==1">All documents Uploaded!! Thankyou will get back to you.</p>
+    <p *ngIf="display == 1">
+      All documents Uploaded!! Thankyou will get back to you.
+    </p>
   </ngb-toast>
 </ng-container>
 
-<!-- <p>original-documents works!</p> -->
-<div class="row justify-content-between" style="width: 99.5vw; height: 70vh;">
-    <div class="col-4 m-0 p-0">
-    <img src="../../../assets/Images/doc.avif" alt="" style="height: 70vh;width:100%;">
+<div class="row justify-content-between" style="width: 99.5vw; height: 70vh">
+  <div class="col-4 m-0 p-0">
+    <img
+      src="../../../assets/Images/doc.avif"
+      alt=""
+      style="height: 70vh; width: 100%"
+    />
   </div>
-  <div class="col-8 ">
-    
+  <div class="col-8">
     <form
-          class=" text-dark w-75  "
-          ngNativeValidate
-          (submit)="submit()"
-          [formGroup]="createForm"
-        >
-        <h1 >Essential Documents</h1>
-        <p class="text-muted" style="margin-bottom: 3em;">We are excited to have you on board!!</p>
-        <!-- <div class="row">
-          <div class="col-6"> -->
-           
-  
-           <div *ngIf="part1" class="row justify-content-around ">
-           <div class="col-4 ">
-            <div>
-                <label for="">Aadhar Card:</label>
-                <br>
-                <input type="file" accept="file/pdf"
-                (change)="read($event,'aadhar')" 
-                required>
-                <!-- <textarea name="" id="" cols="30" rows="20" formControlName="institute" style="height: 10vh;" ></textarea> -->
-                <!-- <input type="text" formControlName="institute" /> -->
-              </div>
-              <div>
-                <label for="">VoterCard:</label>
-                <br>
-                <input type="file" accept="file/pdf"
-                (change)="read($event,'voter')"
-                required
-                >
-                <!-- <textarea name="" id="" cols="30" rows="20" formControlName="deg" style="height: 10vh;" ></textarea> -->
-                <!-- <input type="text" formControlName="deg" /> -->
-              </div>
-           </div>
-             <div class="col-4">
-                <div>
-                    <label for="">Pan Card:</label>
-                    <br>
-                    <input type="file" accept="file/pdf"
-                    (change)="read($event,'pan')"
-                    required
-                    >
-                    <!-- <input type="number" formControlName="admission_yr" /> -->
-                  </div>
-              
-                <div>
-                  <label for="" >Esign:</label>
-                  <br>
-                  <!-- <input type="text" formControlName="gpa" /> -->
-                  <input type="file" accept="file/pdf"
-                  (change)="read($event,'esign')"
-                  required
-                  >
-                </div>
-             </div>
-           </div>
-            
-          <!-- </div> -->
-          <div *ngIf="!part1" class="row justify-content-around">
-          <div class="col-4">
-            <div >
-                <label for="" >IFSC Code:</label>
-                <br>
-                <input type="text" required formControlName="ifsc_code" />
-              </div>
-           
-              <div>
-                <label for="">Account No.:</label>
-                <br>
-                <input type="text" required formControlName="account_no"  />
-              </div>
-          </div>
-            <div class="col-4">
-                <div>
-                    <label for="">Name of Account Holder:</label>
-                    <br>
-                    <input type="text" required formControlName="name_of_acc_holder" />
-                  </div>
-                  <div>
-                      <label for="">Passport Number:</label>
-                      <br>
-                      <input required type="text" formControlName="passport_no" />
-                    </div>
-            </div>
-              
-        </div>
-        
-        <div class="d-flex flex-row justify-content-center" style="margin-top: 2em;">
-                
-          <button *ngIf="part1"
-            type="submit"
-            class="btn btn-primary w-25 text-center align-self-center"
-          >
-            Next
-          </button>
-          <button *ngIf="!part1"
-            type="submit"
-            class="btn btn-primary w-25 text-center align-self-center"
-          >
-            Submit
-          </button>
-        </div>
-  <!-- </div> -->
-  </form>
-       
-        
-          <!-- <div class=" d-flex flex-column justify-content-center"> -->
-            
-       
-  </div>
-  
-  </div>
-  
-  
+      class="text-dark w-75"
+      ngNativeValidate
+      (submit)="submit()"
+      [formGroup]="createForm"
+    >
+      <h1>Essential Documents</h1>
+      <p class="text-muted" style="margin-bottom: 3em">
+        We are excited to have you on board!!
+      </p>
 
+      <div *ngIf="part1" class="row justify-content-around">
+        <div class="col-4">
+          <div>
+            <label for="">Aadhar Card:</label>
+            <br />
+            <input
+              type="file"
+              accept="file/pdf"
+              (change)="read($event, 'aadhar')"
+              required
+            />
+          </div>
+          <div>
+            <label for="">VoterCard:</label>
+            <br />
+            <input
+              type="file"
+              accept="file/pdf"
+              (change)="read($event, 'voter')"
+              required
+            />
+          </div>
+        </div>
+        <div class="col-4">
+          <div>
+            <label for="">Pan Card:</label>
+            <br />
+            <input
+              type="file"
+              accept="file/pdf"
+              (change)="read($event, 'pan')"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="">Esign:</label>
+            <br />
+            <input
+              type="file"
+              accept="file/pdf"
+              (change)="read($event, 'esign')"
+              required
+            />
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!part1" class="row justify-content-around">
+        <div class="col-4">
+          <div>
+            <label for="">IFSC Code:</label>
+            <br />
+            <input type="text" required formControlName="ifsc_code" />
+          </div>
+
+          <div>
+            <label for="">Account No.:</label>
+            <br />
+            <input type="text" required formControlName="account_no" />
+          </div>
+        </div>
+        <div class="col-4">
+          <div>
+            <label for="">Name of Account Holder:</label>
+            <br />
+            <input type="text" required formControlName="name_of_acc_holder" />
+          </div>
+          <div>
+            <label for="">Passport Number:</label>
+            <br />
+            <input required type="text" formControlName="passport_no" />
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="d-flex flex-row justify-content-center"
+        style="margin-top: 2em"
+      >
+        <button
+          *ngIf="part1"
+          type="submit"
+          class="btn btn-primary w-25 text-center align-self-center"
+        >
+          Next
+        </button>
+        <button
+          *ngIf="!part1"
+          type="submit"
+          class="btn btn-primary w-25 text-center align-self-center"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

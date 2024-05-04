@@ -42,11 +42,7 @@
         </button>
 
         <button class="btn btn-outline-primary me-3" [routerLink]="['/home']" style="height:5vh; width:4vw;border-radius: 50%;background-image: url('http://localhost:8083/api/GetFiles/{{ userid }}/photo'); background-size: cover; background-position: center; background-repeat: no-repeat;" *ngIf="userid && !empid">
-           <!-- <img [src]="'http://localhost:8083/api/GetFiles/' + userid + '/photo'" alt="" style="border-radius: 50%;align-self: center;   object-fit: cover;
-          object-position: center center;
-          width: 4vw;
-          height: 6vh;
-          "> --> 
+          
           </button>
           <button class="btn btn-outline-primary me-3" type="button" [routerLink]="['/change-pwd']" *ngIf="empid || hr">Change Password</button>
       </div>

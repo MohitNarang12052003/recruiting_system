@@ -1,12 +1,32 @@
-  <div class="container">
-    <div class="card">
-        <h5 class="mt-4">Total Leaves Distribution</h5>
-      <h2>{{totalLeaveCount}}/22</h2>
+<div class="container">
+  <div class="card">
+    <h5 class="mt-4">Total Leaves Distribution</h5>
+    <h2>{{ totalLeaveCount }}/22</h2>
 
-      <div class="chart-container"><ag-charts-angular style="height: 100%;" *ngIf="options" [options]="options"></ag-charts-angular></div>
-      <br>
-      <div *ngIf="!moreLeaves"><button (click)="applyLeave()" id="btn" class="btn btn-primary">Apply New Leave</button></div>
-      <div><button *ngIf="moreLeaves" (click)="applyLeave()" disabled id="btn" class="btn btn-primary">Apply New Leave</button></div>
-      <br>
+    <div class="chart-container">
+      <ag-charts-angular
+        style="height: 100%"
+        *ngIf="options"
+        [options]="options"
+      ></ag-charts-angular>
     </div>
+    <br />
+    <div *ngIf="!moreLeaves">
+      <button (click)="applyLeave()" id="btn" class="btn btn-primary">
+        Apply New Leave
+      </button>
+    </div>
+    <div>
+      <button
+        *ngIf="moreLeaves"
+        (click)="applyLeave()"
+        disabled
+        id="btn"
+        class="btn btn-primary"
+      >
+        Apply New Leave
+      </button>
+    </div>
+    <br />
   </div>
+</div>

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
@@ -6,11 +7,11 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class UserGuardService {
 
-  constructor(private cookieService:CookieService) { }
+  constructor(private cookieService:CookieService,private router:Router) { }
   canActivate():boolean{
     const role=this.cookieService.get("role")
     if(role!=="-1"){
-      //navigate to unauthorized page
+      this.router.navigate(['/unauthorized'])
       
       return false;
     }

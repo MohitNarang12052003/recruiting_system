@@ -11,22 +11,24 @@ import { Job } from 'src/app/shared/interfaces/job.interface';
 })
 export class JobComponent implements OnInit {
   jobs!: Job[];
-  showAll!:boolean;
+  showAll!: boolean;
   constructor(
     private cookieService: CookieService,
     private router: Router,
     private userService: UsersService
   ) {}
   ngOnInit(): void {
-    console.log(this.cookieService.getAll());
+    this.fetchJobsFn();
+  }
+
+  fetchJobsFn(): void {
     this.userService.fetchJobs().subscribe((data) => {
       this.jobs = data;
-      console.log(data);
     });
   }
 
-  showAllFn():void{
-    if(this.showAll)  this.showAll=false;
-    else  this.showAll=true;
+  showAllFn(): void {
+    if (this.showAll) this.showAll = false;
+    else this.showAll = true;
   }
 }

@@ -1,432 +1,249 @@
-<!-- <p>homepage works!</p> -->
+<div class="row" style="width: 99vw">
+  <div
+    class="col-2 text-light p-3"
+    style="height: 150vh; background-color: #1685f4"
+  >
+    <h3>Holaaa,Again!!</h3>
 
-<div class="row" style="width: 99vw;">
-    <div class="col-2 text-light p-3" style="height: 150vh;background-color: #1685f4;">
-   <h3> Holaaa,Again!!</h3>
-    
     <div *ngIf="userDetails">
-        <h1>{{userDetails.username}}</h1>
+      <h1>{{ userDetails.username }}</h1>
     </div>
-    <br>
-    <button class="btn btn-outline-primary text-light me-3" type="button" style="width:15vw ; font-size: 18px; " (click)="view(0)">View Profile</button>
-    <hr style="width: 15vw; height: 1vh; background-color: #ffffff">
- 
-    <button class="btn btn-outline-primary text-light me-3" type="button" style="width:15vw ; font-size: 18px; " (click)="view(1)">View Applications</button>
-    <br>
-    <hr style="width: 15vw; height: 1vh; background-color: #ffffff">
-    <button class="btn btn-outline-primary text-light me-3" style="width:15vw ; font-size: 18px; " type="button" [routerLink]="['/change-pwd']">Change Password</button>
-    <br>
-    <hr style="width: 15vw; height: 1vh; background-color: #ffffff">
-    <button class="btn btn-outline-primary text-light me-3" style="width:15vw ; font-size: 18px; " type="button" (click)="view(2)">Edit Profile</button>
-    </div>
-    <div class="col">
-<div class="row" *ngIf="profile===0 && userDetails" >
-    <div class="col-3 m-3" style="border-style:solid; border-radius: 25px; background-color: rgba(135, 207, 235, 0.325);">
-        <div class="" style="display: flex; flex-direction: column;justify-content: center;">
-            <div style="height: 200px;
-            width: 200px;
-            border: 2px solid #1685f4; border-radius: 50%;">
-            <img [src]="'http://localhost:8083/api/GetFiles/' + userDetails.user_id + '/photo'" alt="profile"
-            style="border-radius: 50%;align-self: center;   object-fit: cover;
-            object-position: center center;
-            width: 100%;
-            height: 100%;"></div>
-            
-        <h3>{{userDetails.username}}</h3>
-        <p class="text-muted">{{userDetails.full_name}}</p>
-        <label for="">Email:</label>
-        <h3>{{userDetails.email}}</h3>
-        <label for="">Phone no.</label>
-        <h3>{{userDetails.phone_number}}</h3>
-        <label for="">Date of Birth</label>
-        <h3>{{userDetails.date_of_birth | date:'longDate'}}</h3>
-        <label for="">Nationality</label>
-        <h3>{{userDetails.nationality}}</h3>
-        <label for="">Gender</label>
-        <h3>{{userDetails.gender}}</h3>
-        <label for="">Address</label>
-        <h3>{{userDetails.address}}</h3>
-        <label for="">State</label>
-        <h3>{{userDetails.state}}</h3>
-        <label for="">City</label>
-        <h3>{{userDetails.city}}</h3>
-        <label for="">Pincode</label>
-        <h3>{{userDetails.pincode}}</h3>
-        </div>
-
-    </div>
-    <div class="col">
-        <div style="display: flex; flex-direction: column;">
-            <div style="border-style:solid; border-radius: 25px; background-color: rgba(135, 207, 235, 0.325);" class="p-3 m-3">
-                <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                    <h1 style="color: #1685f4;">Qualifications</h1>
-                    <button class="btn btn-primary" type="button">Add</button>
-                </div>
-                <div class="horizontal">
-                     <div class="card" style="width: 18rem;" *ngFor="let degree of degreesData;let i=index" >
-                    <div class="card-body">
-                      <h4 class="card-title">{{degree.degree_name}}</h4>
-                      <h4 class="card-subtitle mb-2 text-muted">{{degree.institute_name}}</h4>
-                      <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                     <h5>Duration : {{degree.admission_year}}-{{degree.completion_year}}</h5>
-                     <h5>Percentage/GPA : {{degree.GPA}} </h5>
-
-                    </div>
-                  </div>
-                </div>
-               
-            </div>
-            <div style="border-style:solid; border-radius: 25px; background-color: rgba(135, 207, 235, 0.325);" class="p-3 m-3">
-                <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                    <h1 style="color: #1685f4;">Job History</h1>
-                    <button class="btn btn-primary" type="button">Add</button>
-                </div>
-                <div class="horizontal">
-                  
-                     <div class="card" style="width: 18rem;" *ngFor="let job of jobHistoryData;let i=index" >
-                    <div class="card-body">
-                      <h4 class="card-title">{{job.job_title}}</h4>
-                      <h4 class="card-subtitle mb-2 text-muted">{{job.company_name}}</h4>
-                      <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                     <h5>Duration : {{job.from_year}}-{{job.to_year}}</h5>
-                     <h5>About : {{job.description}} </h5>
-
-                    </div>
-                  </div>
-                
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-<div *ngIf="profile===1"  >
-<h1>You have applied for following roles:</h1>
-
-<table style="width: 80%;" class="">
-    <tr><th style="width:10%">Sr no.</th>
-        <th style="width:70%">Job Title</th>
-        <th style="width:20%">Status</th></tr>
-        <tr *ngFor="let jobs of usersApplicationDetails;let i=index">
-
-            <td>{{i+1}}</td>
-            <td>{{jobs.job_title}}</td>
-            <td style="text-align: center; padding: 2px;"><button type="button" class="btn btn-primary" (click)="viewStatus(3,jobs.round_1,jobs.round_2,jobs.round_3)">
-                View
-            </button></td>
-        </tr>
-</table>
-</div>
-
-<div *ngIf="profile===2">
-
-</div>
-
-<div *ngIf="profile===3">
-    <div class="stepper">
-        <progress id="file" [value]="progressValue1" max="100"> {{ progressValue1 }}% </progress>
-        <div class="step m-0 p-0" [class.active]="currentStep >= 1"></div>
-        <!-- <div class="progress-bar m-0 p-0" [style.width.%]="(currentStep -1) * 33.33"></div> -->
-        <progress id="file" [value]="progressValue2" max="100"> {{ progressValue2 }}% </progress>
-        <div class="step m-0 p-0" [class.active]="currentStep >= 2"></div>
-        <progress id="file" [value]="progressValue3" max="100"> {{ progressValue3 }}% </progress>
-        <div class="step " [class.active]="currentStep >= 3"></div>
-        
-      </div>
-      <div><h1>{{msg}}</h1></div>
-      <div *ngIf="currentStep===3">
-        <button type="button" class="btn btn-primary" [routerLink]="['/original-documents']">Upload Documents</button>
-      </div>
-      
-</div>
-
-    </div>
-
-</div>
-
-
-<!-- <div class="container" *ngIf="userDetails" >
-    <div class="h1">User Details</div>
     <br />
+    <button
+      class="btn btn-outline-primary text-light me-3"
+      type="button"
+      style="width: 15vw; font-size: 18px"
+      (click)="view(0)"
+    >
+      View Profile
+    </button>
+    <hr style="width: 15vw; height: 1vh; background-color: #ffffff" />
 
-    <div class="row">
-        <div class="col-4">
-            <h5>User Name:</h5>
-        </div>
-        <div class="col-4">
-            <h5>{{userDetails.username}}</h5>
-        </div>
-    </div>
+    <button
+      class="btn btn-outline-primary text-light me-3"
+      type="button"
+      style="width: 15vw; font-size: 18px"
+      (click)="view(1)"
+    >
+      View Applications
+    </button>
+    <br />
+    <hr style="width: 15vw; height: 1vh; background-color: #ffffff" />
+    <button
+      class="btn btn-outline-primary text-light me-3"
+      style="width: 15vw; font-size: 18px"
+      type="button"
+      [routerLink]="['/change-pwd']"
+    >
+      Change Password
+    </button>
+    <br />
+    <hr style="width: 15vw; height: 1vh; background-color: #ffffff" />
+    <button
+      class="btn btn-outline-primary text-light me-3"
+      style="width: 15vw; font-size: 18px"
+      type="button"
+      (click)="view(2)"
+    >
+      Edit Profile
+    </button>
+  </div>
+  <div class="col">
+    <div class="row" *ngIf="profile === 0 && userDetails">
+      <div
+        class="col-3 m-3"
+        style="
+          border-style: solid;
+          border-radius: 25px;
+          background-color: rgba(135, 207, 235, 0.325);
+        "
+      >
+        <div
+          class=""
+          style="display: flex; flex-direction: column; justify-content: center"
+        >
+          <div
+            style="
+              height: 200px;
+              width: 200px;
+              border: 2px solid #1685f4;
+              border-radius: 50%;
+            "
+          >
+            <img
+              [src]="
+                'http://localhost:8083/api/GetFiles/' +
+                userDetails.user_id +
+                '/photo'
+              "
+              alt="profile"
+              style="
+                border-radius: 50%;
+                align-self: center;
+                object-fit: cover;
+                object-position: center center;
+                width: 100%;
+                height: 100%;
+              "
+            />
+          </div>
 
-
-    <div class="row">
-        <div class="col-4">
-            <h5>Email</h5>
+          <h3>{{ userDetails.username }}</h3>
+          <p class="text-muted">{{ userDetails.full_name }}</p>
+          <label for="">Email:</label>
+          <h3>{{ userDetails.email }}</h3>
+          <label for="">Phone no.</label>
+          <h3>{{ userDetails.phone_number }}</h3>
+          <label for="">Date of Birth</label>
+          <h3>{{ userDetails.date_of_birth | date : "longDate" }}</h3>
+          <label for="">Nationality</label>
+          <h3>{{ userDetails.nationality }}</h3>
+          <label for="">Gender</label>
+          <h3>{{ userDetails.gender }}</h3>
+          <label for="">Address</label>
+          <h3>{{ userDetails.address }}</h3>
+          <label for="">State</label>
+          <h3>{{ userDetails.state }}</h3>
+          <label for="">City</label>
+          <h3>{{ userDetails.city }}</h3>
+          <label for="">Pincode</label>
+          <h3>{{ userDetails.pincode }}</h3>
         </div>
-        <div class="col-4">
-            <h5>{{userDetails.email}}</h5>
-        </div>    
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-4">
-            <h5>Gender:</h5>
-        </div>
-        <div class="col-4">
-            <h5>{{userDetails.gender}}</h5>
-        </div>    
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-4">
-            <h5>City:</h5>
-        </div>
-        <div class="col-4">
-            <h5>{{userDetails.city}}</h5>
-        </div>    
-    </div>
-    <br>
-
-    <div class="row">
-        <div class="col-4">
-            <h5>Resume:</h5>
-        </div>
-        <div class="col-4">
-            <h5>{{userDetails.resume}}</h5>
-        </div>    
-    </div>
-    <br>
-
-
-    <div class="row">
-        <div class="col-4">
-            <h5>Current CTC:</h5>
-        </div>
-        <div class="col-4">
-            <h5>{{userDetails.current_ctc}}</h5>
-        </div>    
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-4">
-            <h5>Expected CTC:</h5>
-        </div>
-        <div class="col-4">
-            <h5>{{userDetails.expected_ctc}}</h5>
-        </div>    
-    </div>
-    <br>
-
-    <div class="row">
-        <div class="col-4">
-            <h5>Work Experience:</h5>
-        </div>
-        <div class="col-4">
-            <h5>{{userDetails.work_experience}}</h5>
-        </div>
-    </div>
-    <br>
-    
-
-
-    <div *ngIf="usersApplicationDetails">
-        <h1>Applications</h1>
-        <div *ngFor="let appDetails of usersApplicationDetails">
-            <div class="row">
-                <div class="col-4">
-                    <h5>Job Title:</h5>
-                </div>
-                <div class="col-4">
-                    <h5>{{appDetails.job_title}}</h5>
-                </div>    
+      </div>
+      <div class="col">
+        <div style="display: flex; flex-direction: column">
+          <div
+            style="
+              border-style: solid;
+              border-radius: 25px;
+              background-color: rgba(135, 207, 235, 0.325);
+            "
+            class="p-3 m-3"
+          >
+            <div
+              style="
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+              "
+            >
+              <h1 style="color: #1685f4">Qualifications</h1>
+              <button class="btn btn-primary" type="button">Add</button>
             </div>
-            <br>
-            
-        
-            <div class="row">
-                <div class="col-4">
-                    <h5>Applied At:</h5>
+            <div class="horizontal">
+              <div
+                class="card"
+                style="width: 18rem"
+                *ngFor="let degree of degreesData; let i = index"
+              >
+                <div class="card-body">
+                  <h4 class="card-title">{{ degree.degree_name }}</h4>
+                  <h4 class="card-subtitle mb-2 text-muted">
+                    {{ degree.institute_name }}
+                  </h4>
+                  <h5>
+                    Duration : {{ degree.admission_year }}-{{
+                      degree.completion_year
+                    }}
+                  </h5>
+                  <h5>Percentage/GPA : {{ degree.GPA }}</h5>
                 </div>
-                <div class="col-4">
-                    <h5>{{appDetails.applied_at | date:'longDate'}}</h5>
-                </div>    
+              </div>
             </div>
-            <br>
-
-            
-          
-        
-                <div class="row">
-                   <h5 class="col-3">Round-1</h5>
-                    <h5 class="col-3" type="number">{{appDetails.round_1}}</h5>
+          </div>
+          <div
+            style="
+              border-style: solid;
+              border-radius: 25px;
+              background-color: rgba(135, 207, 235, 0.325);
+            "
+            class="p-3 m-3"
+          >
+            <div
+              style="
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+              "
+            >
+              <h1 style="color: #1685f4">Job History</h1>
+              <button class="btn btn-primary" type="button">Add</button>
+            </div>
+            <div class="horizontal">
+              <div
+                class="card"
+                style="width: 18rem"
+                *ngFor="let job of jobHistoryData; let i = index"
+              >
+                <div class="card-body">
+                  <h4 class="card-title">{{ job.job_title }}</h4>
+                  <h4 class="card-subtitle mb-2 text-muted">
+                    {{ job.company_name }}
+                  </h4>
+                  <h5>Duration : {{ job.from_year }}-{{ job.to_year }}</h5>
+                  <h5>About : {{ job.description }}</h5>
                 </div>
-                <br>
-                <div class="row">
-                    <h5 class="col-3">Round-2</h5>
-                     <h5 class="col-3" type="number">{{appDetails.round_2}}</h5>
-                 </div>
-                 <br>
-                 <div class="row">
-                    <h5 class="col-3">Round-3</h5>
-                     <h5 class="col-3" type="number">{{appDetails.round_3}}</h5>
-                 </div>
-                 <br>
-                 <div class="row">
-                    <h5 class="col-3">Document Verification</h5>
-                     <h5 class="col-3" type="number">{{appDetails.doc_verification}}</h5>
-                 </div>
-                 <br>
-                 <div class="row">
-                    <h5 class="col-3">Offer Letter</h5>
-                     <h5 class="col-3" type="number">{{appDetails.offer_letter}}</h5>
-                 </div>
-                 <br>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-   
-    
 
-        <br>
+    <div *ngIf="profile === 1">
+      <h1>You have applied for following roles:</h1>
 
-        <div class="qualifications" *ngIf="degreesData">
-            <h1>Qualifications-</h1>
-            <br>
-    
-            <div class="loop" *ngFor="let degree of degreesData;let i=index">
-                <div><h5>{{i+1}} :-</h5></div>
-                <div class="row">
-                    <div class="col-4">
-                        <h5>Degree Name:</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5>{{degree.degree_name}}</h5>
-                    </div>    
-                </div>
-    
-                <br>
-    
-                <div class="row">
-                    <div class="col-4">
-                        <h5>Institute institute name:</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5>{{degree.institute_name}}</h5>
-                    </div>    
-                </div>
-    
-                <br>
-    
-                <div class="row">
-                    <div class="col-4">
-                        <h5>Degree admission year:</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5>{{degree.admission_year}}</h5>
-                    </div>    
-                </div>
-    
-                <br>
-    
-                <div class="row">
-                    <div class="col-4">
-                        <h5>Degree completion year:</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5>{{degree.completion_year}}</h5>
-                    </div>    
-                </div>
-    
-                <br>
-    
-                <div class="row">
-                    <div class="col-4">
-                        <h5>Degree GPA:</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5>{{degree.GPA}}</h5>
-                    </div>    
-                </div>
-    
-                
-            </div>
-            <br>
-            
-        </div>
-        
-    
-        <div class="jobHistory" *ngIf="jobHistoryData">
-            <h1>Job History-</h1>
-            <br>
-    
-            <div class="loop" *ngFor="let job of jobHistoryData;let i=index">
-                <div><h5>{{i+1}} :-</h5></div>
-                <div class="row">
-                    <div class="col-4">
-                        <h5>Job company name:</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5>{{job.company_name}}</h5>
-                    </div>    
-                </div>
-    
-                <br>
-    
-                <div class="row">
-                    <div class="col-4">
-                        <h5>Job Title:</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5>{{job.job_title}}</h5>
-                    </div>    
-                </div>
-    
-                <br>
-    
-                <div class="row">
-                    <div class="col-4">
-                        <h5>Job Start year:</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5>{{job.from_year}}</h5>
-                    </div>    
-                </div>
-    
-                <br>
-    
-                <div class="row">
-                    <div class="col-4">
-                        <h5>Job completion year:</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5>{{job.to_year}}</h5>
-                    </div>    
-                </div>
-    
-                <br>
-    
-                <div class="row">
-                    <div class="col-4">
-                        <h5>Job description:</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5>{{job.description}}</h5>
-                    </div>    
-                </div>
-    
-                
-            </div>
-            <br>
-            
-        </div>
-    
-    
-    
+      <table style="width: 80%" class="">
+        <tr>
+          <th style="width: 10%">Sr no.</th>
+          <th style="width: 70%">Job Title</th>
+          <th style="width: 20%">Status</th>
+        </tr>
+        <tr *ngFor="let jobs of usersApplicationDetails; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ jobs.job_title }}</td>
+          <td style="text-align: center; padding: 2px">
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="viewStatus(3, jobs.round_1, jobs.round_2, jobs.round_3)"
+            >
+              View
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
 
+    <div *ngIf="profile === 2"></div>
 
+    <div *ngIf="profile === 3">
+      <div class="stepper">
+        <progress id="file" [value]="progressValue1" max="100">
+          {{ progressValue1 }}%
+        </progress>
+        <div class="step m-0 p-0" [class.active]="currentStep >= 1"></div>
+        <progress id="file" [value]="progressValue2" max="100">
+          {{ progressValue2 }}%
+        </progress>
+        <div class="step m-0 p-0" [class.active]="currentStep >= 2"></div>
+        <progress id="file" [value]="progressValue3" max="100">
+          {{ progressValue3 }}%
+        </progress>
+        <div class="step" [class.active]="currentStep >= 3"></div>
+      </div>
+      <div>
+        <h1>{{ msg }}</h1>
+      </div>
+      <div *ngIf="currentStep === 3">
+        <button
+          type="button"
+          class="btn btn-primary"
+          [routerLink]="['/original-documents']"
+        >
+          Upload Documents
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
-
-    
-
-<button type="button" [routerLink]="['/']">View Applications</button>
-<br> -->

@@ -9,15 +9,12 @@ import { CookieService } from 'ngx-cookie-service';
   templateUrl: './experience.component.html',
   styleUrls: ['./experience.component.css'],
 })
-export class ExperienceComponent implements OnInit{
+export class ExperienceComponent implements OnInit {
   selectedType = '';
-  disabled!:boolean;
+  disabled!: boolean;
   years: any[] = [''];
   selectedAdmissionType = '';
-  selectedCompletionType= '';
-  onSelected(value: string): void {
-    this.selectedType = value;
-  }
+  selectedCompletionType = '';
 
   constructor(
     private router: Router,
@@ -28,6 +25,7 @@ export class ExperienceComponent implements OnInit{
     this.checkButton();
     this.populateYears();
   }
+
   createForm = new FormGroup({
     uid: new FormControl(),
     jtitle: new FormControl(),
@@ -36,6 +34,10 @@ export class ExperienceComponent implements OnInit{
     tyear: new FormControl(),
     desc: new FormControl(),
   });
+
+  onSelected(value: string): void {
+    this.selectedType = value;
+  }
 
   populateYears() {
     const currentYear = new Date().getFullYear();
@@ -52,8 +54,8 @@ export class ExperienceComponent implements OnInit{
     this.selectedCompletionType = value;
   }
 
-  checkButton(){
-    if(this.userService.active>3) return true;
+  checkButton() {
+    if (this.userService.active > 3) return true;
     return false;
   }
 
@@ -62,26 +64,32 @@ export class ExperienceComponent implements OnInit{
     this.createForm.reset();
   }
 
-  submit(done: number) {
-    this.createForm
-      .get('uid')
-      ?.setValue(parseInt(this.cookieService.get('user_id')));
-      this.createForm.get('fyear')?.setValue( parseInt(this.selectedAdmissionType));
-      this.createForm.get('tyear')?.setValue( parseInt(this.selectedCompletionType));
+  insertJobHistory(done: number) {
     this.userService
       .insertJobHistory(this.createForm.value)
       .subscribe((data) => {
         if (done == 1) {
-          // this.router.navigate(['General']);
           this.userService.setActive();
-          this.disabled=true;
+          this.disabled = true;
         }
       });
   }
 
+  submit(done: number) {
+    this.createForm
+      .get('uid')
+      ?.setValue(parseInt(this.cookieService.get('user_id')));
+    this.createForm
+      .get('fyear')
+      ?.setValue(parseInt(this.selectedAdmissionType));
+    this.createForm
+      .get('tyear')
+      ?.setValue(parseInt(this.selectedCompletionType));
+    this.insertJobHistory(done);
+  }
 
-  setActive(){
+  setActive() {
     this.userService.setActive();
-    this.disabled=true;
+    this.disabled = true;
   }
 }

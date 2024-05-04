@@ -1,92 +1,77 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { SharedService } from '../../shared.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-reset-pwd',
   templateUrl: './reset-pwd.component.html',
-  styleUrls: ['./reset-pwd.component.css']
+  styleUrls: ['./reset-pwd.component.css'],
 })
 export class ResetPwdComponent {
-  resetPwdForm!:FormGroup;
-  hidden!:boolean;
-  fpToken!:any;
+  resetPwdForm!: FormGroup;
+  hidden!: boolean;
+  fpToken!: any;
 
+  constructor(
+    private sharedService: SharedService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
-constructor(private sharedService:SharedService,private route:ActivatedRoute){}
+  ngOnInit() {
+    //valid fp token and tte
+    this.getToken();
 
+    this.resetPwdFormFn();
+  }
 
-ngOnInit(){
-  //valid fp token and tte
-  this.getToken();
+  getToken() {
+    this.route.paramMap.subscribe((value) => {
+      this.fpToken = value.get('token');
 
-  this.resetPwdFormFn();
-}
+      this.validateFpToken();
+    });
+  }
 
-getToken(){
-  this.route.paramMap.subscribe((value)=>{
-    this.fpToken=value.get("token")
-    console.log(this.fpToken)
-
-    this.validateFpToken();
-  })
-}
-
-validateFpToken():void{
-  console.log(1)
+  validateFpToken(): void {
     this.sharedService.validateFpToken(this.fpToken).subscribe({
-      next:(value)=>{
-        console.log("success ",value);
-        console.log(2)
-        
+      next: (value) => {},
+      error: (e) => {
+        this.router.navigate(['/unauthorized']);
       },
-      error:(e)=>{
-        console.log("error",e)
-      }
-    })
-}
+    });
+  }
 
-resetPwdFormFn():void{
-  this.resetPwdForm=new FormGroup({
-    new_pwd:new FormControl(),
-    confirm_new_pwd:new FormControl(),
-    token:new FormControl()
-  })
-}
+  resetPwdFormFn(): void {
+    this.resetPwdForm = new FormGroup({
+      new_pwd: new FormControl(),
+      confirm_new_pwd: new FormControl(),
+      token: new FormControl(),
+    });
+  }
 
-  submit():void{
+  submit(): void {
     this.sharedService.validateFpToken(this.fpToken).subscribe({
-      next:(value)=>{
-        console.log("success ",value);
-        console.log(3)
+      next: (value) => {
         this.resetPwnFn();
-        
       },
-      error:(e)=>{
-        console.log("error",e)
-      }
-    })
+      error: (e) => {
+        this.router.navigate(['/unauthorized']);
+      },
+    });
   }
 
-
-  resetPwnFn(){
+  resetPwnFn() {
     this.resetPwdForm.patchValue({
-      token:this.fpToken
-    })
+      token: this.fpToken,
+    });
 
-    console.log(this.resetPwdForm.get("token")?.value)
     this.sharedService.resetPwd(this.resetPwdForm.value).subscribe({
-      next:(data)=>{
-        console.log(data)
-        console.log(4)
+      next: (data) => {},
+      error: (e) => {
+        this.router.navigate(['/unauthorized']);
       },
-      error:(e)=>{
-        console.log("e ",e)
-      }
-    })
+    });
   }
-
-  
-
 }

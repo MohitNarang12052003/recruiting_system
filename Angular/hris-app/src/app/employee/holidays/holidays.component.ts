@@ -20,7 +20,6 @@ export class HolidaysComponent implements OnInit{
   }
 
   ngOnInit() {
-    console.log(this.today);
     // Retrieve national holidays based on the selected month
     this.getMonth();
   }
@@ -28,15 +27,12 @@ export class HolidaysComponent implements OnInit{
   getMonth():void {
     this.holidayService.getNationalHolidays(this.date.month).subscribe((data) => {
       this.nationalHolidays = data;
-      console.log("!@#",this.nationalHolidays);
     });
   }
 
   getNationalHolidaysFn(event:any):void {
-    console.log(event.next.month);
     this.holidayService.getNationalHolidays(event.next.month).subscribe((data) => {
       this.nationalHolidays = data;
-      // console.log(this.nationalHolidays);
     });
   }
 

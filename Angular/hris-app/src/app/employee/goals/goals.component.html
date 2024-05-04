@@ -1,83 +1,89 @@
 <ng-container *ngIf="show">
-    <ngb-toast header="Goals" [autohide]="false" (hidden)="closeToast()">
-      <p *ngIf="display==1">No new Goal Added.</p>
-      <p *ngIf="display==2">No Edits Made.</p>  
-    </ngb-toast>
-  </ng-container>
-  
+  <ngb-toast header="Goals" [autohide]="false" (hidden)="closeToast()">
+    <p *ngIf="display == 1">No new Goal Added.</p>
+    <p *ngIf="display == 2">No Edits Made.</p>
+  </ngb-toast>
+</ng-container>
 
 <div class="container">
-    <div class="header row" >
-        <div class="heading col-8 fw-bold">
-            GOALS:
+  <div class="header row">
+    <div class="heading col-8 fw-bold">GOALS:</div>
+    <div class="add-skill col-4">
+      <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+          <button
+            type="button"
+            class="btn-close"
+            (click)="modal.dismiss('Cross click')"
+          ></button>
         </div>
-        <div class="add-skill col-4">
-            <ng-template #content let-modal>
-                <div class="modal-header">
-                    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
-                    <button type="button" class="btn-close"(click)="modal.dismiss('Cross click')"></button>
-                </div>
-                <div class="modal-body">
-                    <form [formGroup]="goalForm">
-                        <div class="m-3">
-                            <label for="input-group">Goal Title</label>
-                            <div class="input-group">
-                                <input type="text" formControlName="goal_title">
+        <div class="modal-body">
+          <form [formGroup]="goalForm">
+            <div class="m-3">
+              <label for="input-group">Goal Title</label>
+              <div class="input-group">
+                <input type="text" formControlName="goal_title" />
+              </div>
 
-                            </div>
-
-                            <label for="input-group">Goal Description</label>
-                            <div class="input-group">
-                                <textarea formControlName="goal_description"></textarea>
-
-                            </div>
-
-                            
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-outline-dark" (click)="modal.close()">Save</button>
-                </div>
-            </ng-template>
-            
-            <button class="btn  btn-outline-primary" (click)="open(content)">+</button>
-            
-            <hr />
-            
+              <label for="input-group">Goal Description</label>
+              <div class="input-group">
+                <textarea formControlName="goal_description"></textarea>
+              </div>
+            </div>
+          </form>
         </div>
+        <div class="modal-footer">
+          <button
+            type="submit"
+            class="btn btn-outline-dark"
+            (click)="modal.close()"
+          >
+            Save
+          </button>
+        </div>
+      </ng-template>
+
+      <button class="btn btn-outline-primary" (click)="open(content)">+</button>
+
+      <hr />
     </div>
+  </div>
 
-                <div class="row">
-                    <div class="col-6 goal"  *ngFor="let goal of goalsData">
-                        <div class="inner-container">
-                            <div class="row">
-                                <div class="col-9">
-                                    <div class="fw-bold title">
-                                        {{goal.title}}
-                                    </div>
-            
-                                </div>
-                                    <div class="col-2">
-                                        <button (click)="deleteGoalFn(goal.goal_id)" class="  btn btn-outline-primary"><i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </div>
-                                
-                               </div>
-                                <div class="desc">
-                                    {{goal.description}}
-                                </div>
+  <div class="row">
+    <div class="col-6 goal" *ngFor="let goal of goalsData">
+      <div class="inner-container">
+        <div class="row">
+          <div class="col-9">
+            <div class="fw-bold title">
+              {{ goal.title }}
+            </div>
+          </div>
+          <div class="col-2">
+            <button
+              (click)="deleteGoalFn(goal.goal_id)"
+              class="btn btn-outline-primary"
+            >
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        </div>
+        <div class="desc">
+          {{ goal.description }}
+        </div>
 
-
-                                
-            
-                               <div class="row ftr">
-                                <button class="col-4 edit btn btn-outline-primary" (click)="open(content,goal.goal_id)">Edit</button>
-                                <div class="col-8 edited-at fw-light ">
-                                    {{goal.edited_at | date: 'longDate'}}
-                                </div>
-                               </div>
-                        </div>
-                     </div>
-                </div>
+        <div class="row ftr">
+          <button
+            class="col-4 edit btn btn-outline-primary"
+            (click)="open(content, goal.goal_id)"
+          >
+            Edit
+          </button>
+          <div class="col-8 edited-at fw-light">
+            {{ goal.edited_at | date : "longDate" }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
