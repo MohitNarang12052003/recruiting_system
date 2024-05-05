@@ -6,21 +6,18 @@ import { UsersService } from '../users.service';
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css']
+  styleUrls: ['./category.component.css'],
 })
-export class CategoryComponent implements OnInit{
+export class CategoryComponent implements OnInit {
   departments!: dept[];
-  constructor(
-    
-    private router: Router,
-    private userService: UsersService
-  
-  ) {}
+  constructor(private router: Router, private userService: UsersService) {}
   ngOnInit(): void {
+    this.fetchDepartments();
+  }
 
+  fetchDepartments(): void {
     this.userService.fetchDepts().subscribe((data) => {
       this.departments = data;
-      console.log(data);
     });
   }
 }

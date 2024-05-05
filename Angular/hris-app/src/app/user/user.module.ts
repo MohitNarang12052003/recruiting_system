@@ -4,19 +4,8 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-
-
-
 @NgModule({
-  declarations: [
-    HomepageComponent,
-   
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-
-    NgbModule
-  ]
+  declarations: [HomepageComponent],
+  imports: [CommonModule, RouterModule, NgbModule],
 })
-export class UserModule { }
+export class UserModule {}

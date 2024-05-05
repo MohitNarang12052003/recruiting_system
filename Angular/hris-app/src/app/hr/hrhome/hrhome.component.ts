@@ -13,34 +13,28 @@ import { HrService } from '../hr.service';
 
   styleUrls: ['./hrhome.component.css'],
 })
-export class HrhomeComponent implements OnInit{
-  empCount!:number;
-  userCount!:number;
-  applicantsCount!:number;
-  vacanciesCount!:number;
+export class HrhomeComponent implements OnInit {
+  empCount!: number;
+  userCount!: number;
+  applicantsCount!: number;
+  vacanciesCount!: number;
 
-  constructor(private hrService:HrService){}
-  ngOnInit(){
-
-    this.getCounts()
+  constructor(private hrService: HrService) {}
+  ngOnInit() {
+    this.getCounts();
   }
 
-  getCounts():void{
-    this.hrService.getCount().subscribe((val)=>{
-      console.log(val);
-      this.empCount=val.emp_count;
-      this.userCount=val.user_count;
-      this.vacanciesCount=val.vacancies_count;
-      this.applicantsCount=val.applicant_count;
-
-    })
-
+  getCounts(): void {
+    this.hrService.getCount().subscribe((val) => {
+      this.empCount = val.emp_count;
+      this.userCount = val.user_count;
+      this.vacanciesCount = val.vacancies_count;
+      this.applicantsCount = val.applicant_count;
+    });
   }
 
   today = inject(NgbCalendar).getToday();
 
-  model: NgbDateStruct | undefined=this.today;
+  model: NgbDateStruct | undefined = this.today;
   date: { year: number; month: number } | undefined;
-
-
 }

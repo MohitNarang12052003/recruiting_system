@@ -3,13 +3,13 @@
     class="row m-4 justify-content-around text-center bg-light"
     style="height: 20vh"
   >
-    <div class="col-2 d-flex flex-column p-2 ">
+    <div class="col-2 d-flex flex-column p-2">
       <div
         class="text-light rounded-4 d-flex justify-content-center"
         style="height: 16vh; width: 18vw; background-color: #008cff"
       >
         <p class="m-0 p-0">Users:</p>
-        <p class="m-0 p-0" style="font-size: 4rem">{{userCount}}</p>
+        <p class="m-0 p-0" style="font-size: 4rem">{{ userCount }}</p>
       </div>
     </div>
     <div class="col-2 d-flex flex-column p-2">
@@ -18,7 +18,7 @@
         style="height: 16vh; width: 18vw; background-color: #ff9d00"
       >
         <p class="m-0 p-0">Employees:</p>
-        <p class="m-0 p-0" style="font-size: 4rem">{{empCount}}</p>
+        <p class="m-0 p-0" style="font-size: 4rem">{{ empCount }}</p>
       </div>
     </div>
     <div class="col-2 d-flex flex-column p-2">
@@ -27,7 +27,7 @@
         style="height: 16vh; width: 18vw; background-color: #37ff00"
       >
         <p class="m-0 p-0">Applications:</p>
-        <p class="m-0 p-0" style="font-size: 4rem">{{applicantsCount}}</p>
+        <p class="m-0 p-0" style="font-size: 4rem">{{ applicantsCount }}</p>
       </div>
     </div>
     <div class="col-2 d-flex flex-column p-2">
@@ -36,7 +36,7 @@
         style="height: 16vh; width: 18vw; background-color: #ff0d00"
       >
         <p class="m-0 p-0">Vacancies:</p>
-        <p class="m-0 p-0" style="font-size: 4rem">{{vacanciesCount}}</p>
+        <p class="m-0 p-0" style="font-size: 4rem">{{ vacanciesCount }}</p>
       </div>
     </div>
   </div>
@@ -49,11 +49,24 @@
     </div>
     <div class="col-4 bg-light rounded-4 mb-4 mt-4" style="height: 50vh">
       <div class="d-flex flex-column justify-content-center p-4">
-        <button class="btn btn-primary m-3" [routerLink]="['/PostJob']">Post an Job</button>
-        <button class="btn btn-primary m-3" [routerLink]="['/ViewApplications']">View Applications</button>
-        <button class="btn btn-primary m-3" [routerLink]="['/ViewEmployees']">View Employees</button>
-        <button class="btn btn-primary m-3" [routerLink]="['/ViewVacancies']">View Vacancies</button>
-        <button class="btn btn-primary m-3" [routerLink]="['/AddAnnouncement']">Post Announcement</button>
+        <button class="btn btn-primary m-3" [routerLink]="['/PostJob']">
+          Post an Job
+        </button>
+        <button
+          class="btn btn-primary m-3"
+          [routerLink]="['/ViewApplications']"
+        >
+          View Applications
+        </button>
+        <button class="btn btn-primary m-3" [routerLink]="['/ViewEmployees']">
+          View Employees
+        </button>
+        <button class="btn btn-primary m-3" [routerLink]="['/ViewVacancies']">
+          View Vacancies
+        </button>
+        <button class="btn btn-primary m-3" [routerLink]="['/AddAnnouncement']">
+          Post Announcement
+        </button>
       </div>
     </div>
   </div>

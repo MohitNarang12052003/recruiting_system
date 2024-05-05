@@ -7,23 +7,11 @@ import { HrService } from '../hr.service';
 @Component({
   selector: 'app-add-announcement',
   templateUrl: './add-announcement.component.html',
-  styleUrls: ['./add-announcement.component.css']
+  styleUrls: ['./add-announcement.component.css'],
 })
 export class AddAnnouncementComponent {
-
-  show:boolean = false;
-  display!:any;
-
-  openToast(){
-    this.show=true;
-    console.log(this.display)
-  }
-
-	closeToast() {
-		this.show = false;
-    this.display=0;
-	}
-
+  show: boolean = false;
+  display!: any;
 
   constructor(
     private hrService: HrService,
@@ -32,18 +20,31 @@ export class AddAnnouncementComponent {
   ) {}
 
   createForm = new FormGroup({
-    announcement:new FormControl(),
+    announcement: new FormControl(),
     hrid: new FormControl(),
   });
 
-  submit() {
-    this.createForm.get('hrid')?.setValue(parseInt(this.cookieService.get('hr_id')));
-    console.log(this.createForm.value)
+  openToast() {
+    this.show = true;
+  }
+
+  closeToast() {
+    this.show = false;
+    this.display = 0;
+  }
+
+  addAnnouncements(): void {
     this.hrService.AddAnnouncement(this.createForm.value).subscribe((data) => {
-      this.display=1;
+      this.display = 1;
       this.openToast();
-      // alert('Successfully Posted ' );
       this.router.navigate(['HR']);
     });
+  }
+
+  submit() {
+    this.createForm
+      .get('hrid')
+      ?.setValue(parseInt(this.cookieService.get('hr_id')));
+    this.addAnnouncements();
   }
 }

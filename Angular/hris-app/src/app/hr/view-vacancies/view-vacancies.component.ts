@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 export class ViewVacanciesComponent {
   vacancies!:any[];
   active = 1;
+
+
   constructor(private hrService:HrService,private router:Router){
 
   }
@@ -24,20 +26,15 @@ export class ViewVacanciesComponent {
     
     this.hrService.toggleVacancy(j_id).subscribe({
       next:(data)=>{
-        console.log(data)
         this.getData();
-      },
-      error:(error)=>{
-        console.log("error ",error)
       }
+      
     })
   }
 
 
   getData():void{
-    this.hrService.viewVacancies().subscribe((data)=>{
-      console.log(data)
-      
+    this.hrService.viewVacancies().subscribe((data)=>{      
       this.vacancies=data;
     })
   }

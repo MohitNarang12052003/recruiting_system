@@ -1,44 +1,64 @@
 <ng-container *ngIf="show">
-  <ngb-toast header="Leave Application Submitted" [autohide]="false" (hidden)="close()">
-    Your request for a leave has been applied. We will review and confirm the leave status shortly.
+  <ngb-toast
+    header="Leave Application Submitted"
+    [autohide]="false"
+    (hidden)="close()"
+  >
+    Your request for a leave has been applied. We will review and confirm the
+    leave status shortly.
   </ngb-toast>
 </ng-container>
 
-
 <div class="container">
-
-  <div class="left"><img src="assets/Images/leave-absence-request.webp" alt=""></div>
+  <div class="left">
+    <img src="assets/Images/leave-absence-request.webp" alt="" />
+  </div>
   <div class="right">
-  
-    <form class="applyLeaveForm" ngNativeValidate [formGroup]="createForm" (submit)="submit()">
+    <form
+      class="applyLeaveForm"
+      ngNativeValidate
+      [formGroup]="createForm"
+      (submit)="submit()"
+    >
       <div><h2>Take a leave</h2></div>
       <div class="form-group">
         <label for="category_name">Category Name:</label>
-        <select required 
-        class="form-select"
-        style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
-        #type
-        (change)="onSelected(type.value)"
-      >
-        <option value="" selected></option>
-        <option value="Annual Leave">Annual Leave</option>
-        <option value="Sick Leave">Sick Leave</option>
-        <option value="Maternity Leave">Maternity Leave</option>
-        <option value="Emergency Leave">Emergency Leave</option>
-        <option value="Others">Others</option>
-      </select>
+        <select
+          required
+          class="form-select"
+          style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
+          #type
+          (change)="onSelected(type.value)"
+        >
+          <option value="" selected></option>
+          <option value="Annual Leave">Annual Leave</option>
+          <option value="Sick Leave">Sick Leave</option>
+          <option value="Maternity Leave">Maternity Leave</option>
+          <option value="Emergency Leave">Emergency Leave</option>
+          <option value="Others">Others</option>
+        </select>
       </div>
       <div class="form-group">
         <label for="applied_at">Applied For:</label>
-        <input required type="date" class="form-control" formControlName="applied_at" id="applied_at" />
+        <input
+          required
+          type="date"
+          class="form-control"
+          formControlName="applied_at"
+          id="applied_at"
+        />
       </div>
       <div class="form-group">
         <label for="taken_for">Taken For:</label>
-        <input required type="text" class="form-control" formControlName="taken_for" id="taken_for" />
+        <input
+          required
+          type="text"
+          class="form-control"
+          formControlName="taken_for"
+          id="taken_for"
+        />
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-  
-  
   </div>
 </div>

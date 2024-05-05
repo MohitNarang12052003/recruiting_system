@@ -8,90 +8,77 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-skills',
   templateUrl: './skills.component.html',
-  styleUrls: ['./skills.component.css']
+  styleUrls: ['./skills.component.css'],
 })
 export class SkillsComponent implements OnInit {
+  skillsData!: any;
+  skillForm!: FormGroup;
+  display!: any;
+  show!: boolean;
 
-  skillsData!:any;
-  skillForm!:FormGroup;
-  display!:any;
-  show!:boolean
-  openToast(){
-    this.show=true;
-    console.log(this.display)
-  }
-
-	closeToast() {
-		this.show = false;
-    this.display=0;
-	}
-
-
-  constructor(private employeeService:EmployeeService,private cookieService:CookieService,private router:Router){}
-  ngOnInit(){
+  constructor(
+    private employeeService: EmployeeService,
+    private cookieService: CookieService,
+    private router: Router
+  ) {}
+  ngOnInit() {
     this.fetchSkillsData();
   }
 
-  fetchSkillsData(){
+  openToast() {
+    this.show = true;
+  }
+
+  closeToast() {
+    this.show = false;
+    this.display = 0;
+  }
+
+  fetchSkillsData() {
     this.employeeService.getSkills().subscribe({
-      next:(data)=>{
-        this.skillsData=data;
-        console.log(data)
+      next: (data) => {
+        this.skillsData = data;
       },
-      error:(error)=>{
-        console.log("error",error);
+      error: (error) => {
         this.router.navigate(['/unauthorized']);
+      },
+    });
+  }
+
+  skillFormFn() {
+    this.skillForm = new FormGroup({
+      skill: new FormControl(),
+    });
+  }
+
+  private modalService = inject(NgbModal);
+
+  open(content: TemplateRef<any>) {
+    this.skillFormFn();
+
+    this.modalService.open(content).result.then(
+      (result) => {
+        this.addSkillFn();
+      },
+      (reason) => {
+        this.openToast();
+        this.display = 3;
       }
-    })
+    );
   }
 
-  skillFormFn(){
-    this.skillForm=new FormGroup({
-      skill:new FormControl()
-    })
-
+  addSkillFn(): void {
+    const newSkill = this.skillForm.get('skill')?.value;
+    this.employeeService.addSkill(newSkill).subscribe({
+      next: (data) => {
+        this.fetchSkillsData();
+        this.openToast();
+        this.display = 1;
+      },
+      error: (error) => {
+        this.openToast();
+        this.display = 2;
+      },
+    });
   }
-
-    private modalService = inject(NgbModal);
-
-    open(content: TemplateRef<any>) {
-      this.skillFormFn();
-
-      this.modalService.open(content).result.then(
-        (result) => {
-          this.addSkillFn();
-
-          
-          console.log("result",result)
-        },
-        (reason) => {
-          this.openToast();
-              this.display=3;
-          // alert("No new Skill Added")
-        },
-      );
-    }
-
-
-    addSkillFn():void{
-      const newSkill=this.skillForm.get("skill")?.value;
-          this.employeeService.addSkill(newSkill).subscribe({
-            next:(data)=>{
-              this.fetchSkillsData();
-              this.openToast();
-              this.display=1;
-              // alert("An assessment will be scheduled soon for your new acquired skill. We highly appreciate your interest towards upskilling yourself");
-              console.log(data)
-            },
-            error:(error)=>{
-              this.openToast();
-              this.display=2;
-              // alert("Skill could not get added")
-              console.log("error",error)
-            }
-          })
-
-    }
-
-   
 }

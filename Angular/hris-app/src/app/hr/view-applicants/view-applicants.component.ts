@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-// import { UserService } from 'src/app/home/users.service';
 import { HrService } from '../hr.service';
 
 @Component({
@@ -15,9 +14,10 @@ export class ViewApplicantsComponent implements OnInit {
   constructor(private hrService: HrService, private router: Router) {}
 
   ngOnInit(): void {
+    this.viewApplications();
+  }
+  viewApplications(): void {
     this.hrService.viewApplications().subscribe((data) => {
-      console.log(data);
-
       this.applications = data;
     });
   }

@@ -1,4 +1,13 @@
-<!-- <p>single-applicant works!</p> -->
+<ng-container *ngIf="show">
+    <ngb-toast
+      header="Email"
+      [autohide]="false"
+      (hidden)="close()"
+    >
+      Email sent Successfully
+    </ngb-toast>
+  </ng-container>
+
 
 <div class="container" *ngIf="applicantDetails" (submit)="submit()">
 
@@ -6,8 +15,7 @@
         <div class="frm ">
             <form action="" [formGroup]="applicantForm">
                 <div class="row">
-                    <!-- <label class="col-5 text  " for=""></label>         -->
-                    <!-- <input class="col-3" type="string" formControlName="round_1"  /> -->
+                    
                     
                         <label for=""  class="col-5 text"><h5>Round-1</h5></label>
           <select

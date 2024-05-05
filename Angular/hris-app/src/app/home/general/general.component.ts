@@ -10,7 +10,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./general.component.css'],
 })
 export class GeneralComponent implements OnInit {
-  disabled!:boolean;
+  disabled!: boolean;
   constructor(
     private router: Router,
     private cookieService: CookieService,
@@ -31,29 +31,28 @@ export class GeneralComponent implements OnInit {
     marital_status: new FormControl(),
   });
   onGenderChange(e: any) {
-    console.log(e.target.value);
     this.createForm.get('gender')?.setValue(e.target.value);
   }
 
   onMaritalChange(e: any) {
-    console.log(e.target.value);
     this.createForm.get('marital_status')?.setValue(e.target.value);
   }
-  submit() {
-    // this.router.navigate(['Photo']);
-    this.createForm
-      .get('uid')
-      ?.setValue(parseInt(this.cookieService.get('user_id')));
+  checkButton() {
+    if (this.userService.active > 4) return true;
+    return false;
+  }
+
+  insertAdditionalInfoFn(): void {
     this.userService
       .insertadditionalInfo(this.createForm.value)
       .subscribe((data) => {
-        // this.router.navigate(['Photo']);
         this.userService.setActive();
       });
   }
-
-  checkButton(){
-    if(this.userService.active>4) return true;
-    return false;
+  submit() {
+    this.createForm
+      .get('uid')
+      ?.setValue(parseInt(this.cookieService.get('user_id')));
+    this.insertAdditionalInfoFn();
   }
 }

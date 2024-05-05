@@ -6,113 +6,96 @@ import { FormControl, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-create-new-employee',
   templateUrl: './create-new-employee.component.html',
-  styleUrls: ['./create-new-employee.component.css']
+  styleUrls: ['./create-new-employee.component.css'],
 })
-export class CreateNewEmployeeComponent implements OnInit{
-  applicantDetails!:any;
-  id!:string | null;
-  newEmployeeForm!:FormGroup;
-  deptSelectedType='';
+export class CreateNewEmployeeComponent implements OnInit {
+  applicantDetails!: any;
+  id!: string | null;
+  newEmployeeForm!: FormGroup;
+  deptSelectedType = '';
+  show: boolean = false;
+  display!: any;
 
-  show:boolean = false;
-  display!:any;
-
-  openToast(){
-    this.show=true;
-    console.log(this.display)
-  }
-
-	closeToast() {
-		this.show = false;
-    this.display=0;
-	}
-
-
-  constructor(private route:ActivatedRoute,private hrService:HrService,private router: Router){}
+  constructor(
+    private route: ActivatedRoute,
+    private hrService: HrService,
+    private router: Router
+  ) {}
   ngOnInit(): void {
     this.getId();
     this.newEmployeeFormFn();
   }
 
-  getId():void{
-    this.route.paramMap.subscribe(params=>{
-      const id=params.get("id");
+  openToast() {
+    this.show = true;
+  }
 
-      this.id=id;
+  closeToast() {
+    this.show = false;
+    this.display = 0;
+  }
 
+  getId(): void {
+    this.route.paramMap.subscribe((params) => {
+      const id = params.get('id');
 
-      
-    })
+      this.id = id;
+    });
 
     this.getApplicantDetails();
   }
 
-  getApplicantDetails():void{
+  getApplicantDetails(): void {
     this.hrService.getSingleApplicant(this.id).subscribe({
-      next:(data)=>{
-        this.applicantDetails=data;
-        console.log(data)
+      next: (data) => {
+        this.applicantDetails = data;
         this.prefill();
       },
-      error:(e)=>{
-        console.log("error",e)
-      }
-    })
-
-    
-  }
-
-
-  newEmployeeFormFn():void{
-    this.newEmployeeForm=new FormGroup({
-      userid:new FormControl(),
-      job_title:new FormControl(),
-      salary:new FormControl(),
-      department:new FormControl(),
-      nemail:new FormControl(),
-      oemail:new FormControl(),
-      password:new FormControl(),
-      date_of_joining:new FormControl(),
-
-    })
-
-
-
-  }
-
-  prefill():void{
-    this.newEmployeeForm.patchValue({
-      userid:this.applicantDetails.user_id,
-      job_title:this.applicantDetails.job_title,
-      oemail:this.applicantDetails.email
-
+      error: (e) => {
+        this.router.navigate(['/unauthorized']);
+      },
     });
-
   }
 
+  newEmployeeFormFn(): void {
+    this.newEmployeeForm = new FormGroup({
+      userid: new FormControl(),
+      job_title: new FormControl(),
+      salary: new FormControl(),
+      department: new FormControl(),
+      nemail: new FormControl(),
+      oemail: new FormControl(),
+      password: new FormControl(),
+      date_of_joining: new FormControl(),
+    });
+  }
+
+  prefill(): void {
+    this.newEmployeeForm.patchValue({
+      userid: this.applicantDetails.user_id,
+      job_title: this.applicantDetails.job_title,
+      oemail: this.applicantDetails.email,
+    });
+  }
 
   onDeptSelected(value: string): void {
     this.deptSelectedType = value;
   }
 
-
-  submit(){
-    this.newEmployeeForm.get("department")?.setValue(this.deptSelectedType);
+  sendEmployeeMail(): void {
     this.hrService.sendEmployeeMail(this.newEmployeeForm.value).subscribe({
-      next:(data)=>{
-        console.log(data);
+      next: (data) => {
         this.openToast();
-        this.display=1;
+        this.display = 1;
       },
-      error:(e)=>{
-        console.log("error ",e);
-        this.router.navigate(['/unauthorized'])
-        
-      }
-    })
+      error: (e) => {
+        this.router.navigate(['/unauthorized']);
+      },
+    });
   }
 
-
-
-
-} 
+  submit() {
+    this.newEmployeeForm.get('department')?.setValue(this.deptSelectedType);
+    this.sendEmployeeMail();
+  }
+}

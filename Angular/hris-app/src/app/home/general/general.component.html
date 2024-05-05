@@ -1,261 +1,156 @@
-<!-- <div class="main-page">
-  <div class="inside">
-    <div class="text">
-      <form
-        class="bg-light text-dark d-flex flex-column p-4 field justify-content-between align-items-center"
-        style="height: 80vh; width: 35vw"
-        [formGroup]="createForm"
-      >
-        <h1>Register</h1> -->
-        <!-- <div >
-              <label for="" style=" margin-right: 10%;">Resume</label>
-              <input class="form-control form-control-sm " type="file" style="border-color: black;">
-           </div> -->
-        <!-- <div>
-          <label for="">Gender</label>
-          <div class="form-check" style="margin-top: 0; margin-bottom: 0">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault1"
-              value="male"
-              (change)="onChange($event)"
-            />
-            <label class="form-check-label" for="flexRadioDefault1">
-              Male
-            </label>
-          </div>
-          <div class="form-check" style="margin-top: 0; margin-bottom: 0">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault2"
-              value="female"
-              (change)="onChange($event)"
-            />
-            <label class="form-check-label" for="flexRadioDefault2">
-              Female
-            </label>
-          </div>
-          <div class="form-check" style="margin-top: 0; margin-bottom: 0">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault1"
-              value="other"
-              (change)="onChange($event)"
-            />
-            <label class="form-check-label" for="flexRadioDefault1">
-              Other
-            </label>
-          </div>
-        </div>
-        <div>
-          <label for="">Nationality</label>
-          <input type="text" formControlName="nationality" />
-        </div>
-        <div>
-          <label for="">Address:</label>
-          <textarea
-            name=""
-            id=""
-            cols="22"
-            rows="2"
-            formControlName="address"
-          ></textarea>
-        </div>
-        <div class="m-1">
-          <div class="form-floating m-0 p-1">
-            <input
-              type="text"
-              class="form-control"
-              id="floatingInput"
-              placeholder="421003"
-              formControlName="pincode"
-            />
-            <label for="floatingInput">Pincode</label>
-          </div>
-          <div class="form-floating m-0 p-1">
-            <input
-              type="text"
-              class="form-control"
-              id="floatingInput"
-              placeholder="Maharashtra"
-              formControlName="state"
-            />
-            <label for="floatingInput">State</label>
-          </div>
-
-          <div class="form-floating m-0 p-1">
-            <input
-              type="text"
-              class="form-control"
-              id="floatingInput"
-              placeholder="Ulhasnagar"
-              formControlName="city"
-            />
-            <label for="floatingInput">City</label>
-          </div>
-        </div>
-        <div>
-          <label for="">Marital Status</label>
-          <input type="text" formControlName="marital_status" />
-        </div>
-        <div>
-          <button type="button" class="btn btn-dark w-25 align-self-center" [routerLink]="['/Experience']">
-            Back
-          </button>
-          <button type="button" class="btn btn-dark w-25 align-self-center" (click)="submit()">
-            Next
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div> -->
-
-
-<div class="row justify-content-between" style="width: 99.5vw; ">
+<div class="row justify-content-between" style="width: 99.5vw">
   <div class="col-3 m-0 p-0">
-  <img src="../../../assets/Images/register.png" alt="" style="height: 70vh;width:100%;">
-</div>
-<div class="col-8 ">
-  
-  <form
-        class=" text-dark w-75  "
-        ngNativeValidate
-        (submit)="submit()"
-        [formGroup]="createForm"
-      >
-      <h1 style="margin-bottom: 1em;">Knowing You</h1>
-      <!-- <p class="text-muted">Already have an Account? <span style="color: #1685f4;">Login</span></p> -->
-      
-       <div class="row">
-        <div class="col-6">
-         
-          <div>
-          <label for="">Gender</label>
-          <div class="row">
-            <div class="form-check col" style="margin-top: 0; margin-bottom: 0">
-              <input required 
-                class="form-check-input m-0 p-0"
-                style="width: 40%;"
-                type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault1"
-                value="male"
-                (change)="onGenderChange($event)"
-              />
-              <label class="form-check-label" for="flexRadioDefault1">
-                Male
-              </label>
-            </div>
-            <div class="form-check col" style="margin-top: 0; margin-bottom: 0">
-              <input
-                class="form-check-input m-0 p-0"
-                 style="width: 40%;"
-                type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault2"
-                value="female"
-                (change)="onGenderChange($event)"
-              />
-              <label class="form-check-label" for="flexRadioDefault2">
-                Female
-              </label>
-            </div>
-            <div class="form-check col" style="margin-top: 0; margin-bottom: 0">
-       
-            <input
-              class="form-check-input m-0 p-0"
-              style="width: 40%;"
-              type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault1"
-              value="other"
-              (change)="onGenderChange($event)"
-            />
-            <label class="form-check-label" for="flexRadioDefault1">
-              Other
-            </label>
-          </div>
-        </div>
-        <br>
-        <div>
-          <label for="">Nationality</label>
-          <input required  type="text" formControlName="nationality" />
-        </div>
-        
-        <div>
-          <label for="">Marital Status</label>
-          <!-- <input required  type="text" formControlName="marital_status" /> -->
-          <div class="row">
-            <div class="form-check col" style="margin-top: 0; margin-bottom: 0">
-              <input required 
-                class="form-check-input m-0 p-0"
-                style="width: 30%;"
-                type="radio"
-                name="flexRadioDefault1"
-                id="flexRadioDefault1"
-                value="Married"
-                (change)="onMaritalChange($event)"
-              />
-              <label class="form-check-label" for="flexRadioDefault1">
-                Married
-              </label>
-            </div>
-            <div class="form-check col" style="margin-top: 0; margin-bottom: 0">
-              <input
-                class="form-check-input m-0 p-0"
-                 style="width: 30%;"
-                type="radio"
-                name="flexRadioDefault1"
-                id="flexRadioDefault2"
-                value="Unmarried"
-                (change)="onMaritalChange($event)"
-              />
-              <label class="form-check-label" for="flexRadioDefault2">
-                Unmarried
-              </label>
-            </div>
-            
-        </div>
+    <img
+      src="../../../assets/Images/register.png"
+      alt=""
+      style="height: 70vh; width: 100%"
+    />
+  </div>
+  <div class="col-8">
+    <form
+      class="text-dark w-75"
+      ngNativeValidate
+      (submit)="submit()"
+      [formGroup]="createForm"
+    >
+      <h1 style="margin-bottom: 1em">Knowing You</h1>
 
-        </div>
-        
+      <div class="row">
+        <div class="col-6">
+          <div>
+            <label for="">Gender</label>
+            <div class="row">
+              <div
+                class="form-check col"
+                style="margin-top: 0; margin-bottom: 0"
+              >
+                <input
+                  required
+                  class="form-check-input m-0 p-0"
+                  style="width: 40%"
+                  type="radio"
+                  name="flexRadioDefault"
+                  id="flexRadioDefault1"
+                  value="male"
+                  (change)="onGenderChange($event)"
+                />
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Male
+                </label>
+              </div>
+              <div
+                class="form-check col"
+                style="margin-top: 0; margin-bottom: 0"
+              >
+                <input
+                  class="form-check-input m-0 p-0"
+                  style="width: 40%"
+                  type="radio"
+                  name="flexRadioDefault"
+                  id="flexRadioDefault2"
+                  value="female"
+                  (change)="onGenderChange($event)"
+                />
+                <label class="form-check-label" for="flexRadioDefault2">
+                  Female
+                </label>
+              </div>
+              <div
+                class="form-check col"
+                style="margin-top: 0; margin-bottom: 0"
+              >
+                <input
+                  class="form-check-input m-0 p-0"
+                  style="width: 40%"
+                  type="radio"
+                  name="flexRadioDefault"
+                  id="flexRadioDefault1"
+                  value="other"
+                  (change)="onGenderChange($event)"
+                />
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Other
+                </label>
+              </div>
             </div>
+            <br />
+            <div>
+              <label for="">Nationality</label>
+              <input required type="text" formControlName="nationality" />
+            </div>
+
+            <div>
+              <label for="">Marital Status</label>
+              <div class="row">
+                <div
+                  class="form-check col"
+                  style="margin-top: 0; margin-bottom: 0"
+                >
+                  <input
+                    required
+                    class="form-check-input m-0 p-0"
+                    style="width: 30%"
+                    type="radio"
+                    name="flexRadioDefault1"
+                    id="flexRadioDefault1"
+                    value="Married"
+                    (change)="onMaritalChange($event)"
+                  />
+                  <label class="form-check-label" for="flexRadioDefault1">
+                    Married
+                  </label>
+                </div>
+                <div
+                  class="form-check col"
+                  style="margin-top: 0; margin-bottom: 0"
+                >
+                  <input
+                    class="form-check-input m-0 p-0"
+                    style="width: 30%"
+                    type="radio"
+                    name="flexRadioDefault1"
+                    id="flexRadioDefault2"
+                    value="Unmarried"
+                    (change)="onMaritalChange($event)"
+                  />
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    Unmarried
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="col-6">
           <div>
             <label for="">Address:</label>
-            <textarea required 
+            <textarea
+              required
               name=""
               id=""
               cols="22"
               rows="2"
               formControlName="address"
-              style="height: 10vh;"
+              style="height: 10vh"
             ></textarea>
           </div>
           <label for="">Some more specifications:</label>
-          <br>
+          <br />
           <div class="m-1 address">
-            <div class=" form-floating m-0 p-1 ">
-              <input required 
+            <div class="form-floating m-0 p-1">
+              <input
+                required
                 type="text"
                 class="form-control"
                 id="floatingInput"
                 placeholder="421003"
                 formControlName="pincode"
-
               />
               <label for="floatingInput">Pincode</label>
             </div>
-            <div class=" form-floating m-0 p-1">
-              <input required 
+            <div class="form-floating m-0 p-1">
+              <input
+                required
                 type="text"
                 class="form-control"
                 id="floatingInput"
@@ -264,9 +159,10 @@
               />
               <label for="floatingInput">State</label>
             </div>
-  
-            <div class=" form-floating m-0 p-1">
-              <input required 
+
+            <div class="form-floating m-0 p-1">
+              <input
+                required
                 type="text"
                 class="form-control"
                 id="floatingInput"
@@ -277,30 +173,20 @@
             </div>
           </div>
         </div>
-       </div>
-      
-      
-      <div class="d-flex flex-row justify-content-center" style="margin-top: 1em;">
-        <!-- <button
-          type="button"
-          class="btn btn-primary  text-center align-self-center"
-          [routerLink]="['/Experience']"
+      </div>
+
+      <div
+        class="d-flex flex-row justify-content-center"
+        style="margin-top: 1em"
+      >
+        <button
+          type="submit"
+          class="btn btn-primary w-25 text-center align-self-center"
+          *ngIf="!checkButton()"
         >
-          Back
-        </button> -->
-        <button type="submit" class="btn btn-primary w-25 text-center align-self-center" *ngIf="!checkButton()">
           Next
         </button>
       </div>
     </form>
+  </div>
 </div>
-
-     
-      
-        <!-- <div class=" d-flex flex-column justify-content-center"> -->
-          
-     
-
-
-</div>
-

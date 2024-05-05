@@ -32,5 +32,4 @@ export class HeroComponent implements OnInit {
       this.i = this.i + 1;
     }, 1000);
   }
-  search() {}
 }

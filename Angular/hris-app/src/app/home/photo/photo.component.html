@@ -1,63 +1,59 @@
-<!-- <div class="main-page">
-  <div class="inside">
-    <div
-      class="text d-flex flex-column justify-content-center align-items-center m-4"
-      style="width: 90vw"
-    >
-      <div
-        class="bg-light text-dark d-flex flex-column p-4 field justify-content-between align-items-center"
-        style="width: 35vw"
-      >
-        <h1>Photo</h1>
-        <p>
-          Upload an photo of yourself , which will help recruiters to recruit
-          you
-        </p>
-
-        <div [innerHtml]="msg" *ngIf="msg" style="color: red"></div>
-
-        <div><img [src]="url" *ngIf="url" /></div>
-        <p>
-          <input type="file" (change)="selectFile($event)" />
-        </p>
-        <button  type="button" class="btn btn-dark" (click)="submitPhoto()" *ngIf="submit">Submit</button>
-      </div>
-    </div>
-  </div>
-</div> -->
-<div class="row justify-content-between" style="width: 99.5vw;">
+<div class="row justify-content-between" style="width: 99.5vw">
   <div class="col m-0 p-0">
-  <img src="../../../assets/Images/pic.png" alt="" style="height: 70vh;width:100%;">
-</div>
-<div class="col-6 d-flex flex-column  align-items-center m-2">
-  <form
-        class=" text-dark w-75"    
-        [formGroup]="createForm"
-        (submit)="submitPhoto()"
-        ngNativeValidate
+    <img
+      src="../../../assets/Images/pic.png"
+      alt=""
+      style="height: 70vh; width: 100%"
+    />
+  </div>
+  <div class="col-6 d-flex flex-column align-items-center m-2">
+    <form
+      class="text-dark w-75"
+      [formGroup]="createForm"
+      (submit)="submitPhoto()"
+      ngNativeValidate
+    >
+      <h1 style="font-size: 50px">Photo</h1>
+      <p>
+        Upload an photo of yourself , which will help recruiters to recruit you
+      </p>
+
+      <div [innerHtml]="msg" *ngIf="msg" style="color: red"></div>
+
+      <div *ngIf="url">
+        <img [src]="url" *ngIf="url" style="height: 40vh" />
+      </div>
+      <label
+        style="
+          background-image: url(../../../assets/Images/upload.png);
+          width: 40vw;
+          height: 40vh;
+          background-repeat: no-repeat;
+          cursor: pointer;
+        "
+        for="file-upload"
+        *ngIf="!url"
       >
-        <h1 style="font-size: 50px; ">Photo</h1>
-        <!-- <div class=" d-flex flex-column justify-content-center"> -->
-          <p>
-            Upload an photo of yourself , which will help recruiters to recruit
-            you
-          </p>
-  
-          <div [innerHtml]="msg" *ngIf="msg" style="color: red"></div>
-  
-          <div  *ngIf="url"><img [src]="url" *ngIf="url" style=" height: 40vh;"/></div>
-          <label style="background-image: url(../../../assets/Images/upload.png); width: 40vw;height: 40vh; background-repeat: no-repeat;cursor: pointer;" for="file-upload"  *ngIf="!url">
-            <input required type="file" (change)="selectFile($event)" style="display: none; " id="file-upload" />
-          </label>
+        <input
+          required
+          type="file"
+          (change)="selectFile($event)"
+          style="display: none"
+          id="file-upload"
+        />
+      </label>
 
-            
-            <div class="d-flex flex-row justify-content-center" style="margin-top: 1em;"><button  type="submit" class="btn btn-primary w-25 text-center align-self-center" >Submit</button></div>
-       <!-- <br> -->
-      
-         
-       
-    
-      </form>
-</div>
-
+      <div
+        class="d-flex flex-row justify-content-center"
+        style="margin-top: 1em"
+      >
+        <button
+          type="submit"
+          class="btn btn-primary w-25 text-center align-self-center"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

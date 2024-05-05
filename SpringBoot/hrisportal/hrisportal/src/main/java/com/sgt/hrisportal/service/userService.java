@@ -35,14 +35,11 @@ public class userService {
     userRepository userRepository;
 
     public boolean isValidToken(HttpServletRequest httpServletRequest){
-        System.out.println("Here");
         Cookie[] cookies=httpServletRequest.getCookies();
-        for(Cookie c:cookies){
-            System.out.println(c.getName());
-        }
+
+        if(cookies==null)   return false;
 
         Map<String,String> cookieMap =getCookiesAsHashMap(cookies);
-        System.out.println(cookieMap);
         if(cookieMap.containsKey("user_id")){
             Map<String,Object> result=userRepository.validateToken(Integer.parseInt(cookieMap.get("user_id")),
                     cookieMap.get("token"));
@@ -192,22 +189,17 @@ public class userService {
     }
 
     public void uploadFile(MultipartFile data,String name,int id) {
-        System.out.println(name);
         Path path = Paths.get(name);
         try {
             if (!Files.exists(path)) {
                 Files.createDirectory(path);
             }
             String fileName = StringUtils.cleanPath(data.getOriginalFilename());
-            System.out.println(fileName);
             String[] extension=fileName.split(Pattern.quote("."));
-            for(int i=0;i<extension.length;i++){
-                System.out.println(extension[i]);
-            }
+
             Path finalPath = path.resolve(id+"."+extension[1]);
 
             InputStream inputStream = data.getInputStream();
-            System.out.println(inputStream);
             Files.copy(inputStream, finalPath, StandardCopyOption.REPLACE_EXISTING);
 
         } catch (Exception e) {
@@ -396,14 +388,12 @@ public class userService {
         MimeMessageHelper mimeMessageHelper=new MimeMessageHelper(mimeMessage);
         String email=(String)body.get("email");
         String text=(String)body.get("anything");
-//        String sender=(String)body.get("emailSender");
         String sender="mohitnarang2003.mn@gmail.com";
 
         try {
             mimeMessageHelper.setSubject("Contact Us Queries - HRIS");
             mimeMessageHelper.setTo(sender);
             mimeMessageHelper.setText(text);
-//            mimeMessageHelper.setFrom(email); // Set the from address
             mimeMessageHelper.setReplyTo(email);
         } catch (MessagingException e) {
             throw new RuntimeException(e);
@@ -415,7 +405,6 @@ public class userService {
 
     public String getExtension(int userid,String folder){
         Map<String,Object> body=userRepository.getExtension(userid,folder);
-        System.out.println("1002"+body);
         String fileName=(String)body.get("document");
         String[] extension=fileName.split(Pattern.quote("."));
         return extension[1];

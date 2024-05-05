@@ -21,22 +21,9 @@ export class SinglejobComponent implements OnInit {
   location!: any;
   date_posted!: any;
   skills!: any;
-  skill!:string[];
-
-  show:boolean = false;
-  display!:any;
-
-  openToast(){
-    this.show=true;
-    console.log(this.display)
-  }
-
-	closeToast() {
-		this.show = false;
-    this.display=0;
-    this.erouter.navigate(['/']);
-	}
-
+  skill!: string[];
+  show: boolean = false;
+  display!: any;
 
   constructor(
     private cookieService: CookieService,
@@ -57,7 +44,7 @@ export class SinglejobComponent implements OnInit {
       this.employment_type = params['employment_type'];
       this.location = params['location'];
       this.skills = params['skills'];
-      this.skill=this.skills.split(',');
+      this.skill = this.skills.split(',');
     });
   }
 
@@ -66,9 +53,27 @@ export class SinglejobComponent implements OnInit {
     j_id: new FormControl(),
   });
 
+  openToast() {
+    this.show = true;
+  }
+
+  closeToast() {
+    this.show = false;
+    this.display = 0;
+    this.erouter.navigate(['/']);
+  }
+
+  insertApplication(): void {
+    this.userService
+      .insertApplication(this.createForm.value)
+      .subscribe((data) => {
+        this.display = 1;
+        this.openToast();
+      });
+  }
+
   submit() {
     const usid = this.cookieService.get('user_id');
-    console.log(usid);
     if (usid == '') {
       this.erouter.navigate(['/login']);
     } else {
@@ -78,15 +83,7 @@ export class SinglejobComponent implements OnInit {
 
       this.createForm.get('j_id')?.setValue(parseInt(this.id));
 
-      console.log(this.createForm.value);
-      this.userService
-        .insertApplication(this.createForm.value)
-        .subscribe((data) => {
-          // alert('Successfully applied for ' + this.title);
-          this.display=1;
-        this.openToast();
-          
-        });
+      this.insertApplication();
     }
   }
 }

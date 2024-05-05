@@ -12,19 +12,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class AddJobComponent implements OnInit {
   isDone: number = 0;
   isFilled: number = 0;
-  show:boolean = false;
-  display!:any;
-  jobTitle!:any;
-  openToast(){
-    this.show=true;
-    console.log(this.display)
-  }
-
-	closeToast() {
-		this.show = false;
-    this.display=0;
-    this.router.navigate(['HR']);
-	}
+  show: boolean = false;
+  display!: any;
+  jobTitle!: any;
+  selectedType = '';
+  deptSelectedType = '';
 
   constructor(
     private hrService: HrService,
@@ -32,27 +24,7 @@ export class AddJobComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {
-    
-  }
-
-  add() {
-   
-      this.isDone = 1; 
-    
-           
-  }
-  
-  selectedType = '';
-  deptSelectedType='';
-
-  onSelected(value: string): void {
-    this.selectedType = value;
-  }
-
-  onDeptSelected(value: string): void {
-    this.deptSelectedType = value;
-  }
+  ngOnInit(): void {}
 
   createForm = new FormGroup({
     jobTitle: new FormControl(),
@@ -66,37 +38,51 @@ export class AddJobComponent implements OnInit {
     hrid: new FormControl(),
   });
 
-  submit() {
+  openToast() {
+    this.show = true;
+  }
 
-    if(this.isDone==0){
-      this.isDone = 1; 
-    }
-    else{
+  closeToast() {
+    this.show = false;
+    this.display = 0;
+    this.router.navigate(['HR']);
+  }
+
+  add() {
+    this.isDone = 1;
+  }
+
+  onSelected(value: string): void {
+    this.selectedType = value;
+  }
+
+  onDeptSelected(value: string): void {
+    this.deptSelectedType = value;
+  }
+
+  backFn() {
+    this.isDone = 0;
+  }
+
+  postJob(): void {
+    this.hrService.postJob(this.createForm.value).subscribe((data) => {
+      this.openToast();
+      this.display = 1;
+      this.jobTitle = this.createForm.get('jobTitle')?.value;
+    });
+  }
+
+  submit() {
+    if (this.isDone == 0) {
+      this.isDone = 1;
+    } else {
       this.createForm.get('employmentType')?.setValue(this.selectedType);
       this.createForm.get('departmentName')?.setValue(this.deptSelectedType);
       this.createForm
         .get('hrid')
         ?.setValue(parseInt(this.cookieService.get('hr_id')));
 
-      console.log(this.createForm.value)
-      this.hrService.postJob(this.createForm.value).subscribe((data) => {
-        this.openToast();
-        this.display=1;
-        this.jobTitle=this.createForm.get("jobTitle")?.value;
-        // alert(
-        //   'Successfully Posted ' + this.createForm.get("jobTitle")?.value + ' Vacancy'
-        // );
-        
-      });
-
+      this.postJob();
     }
-
-
-    
-  }
-
-
-  backFn(){
-    this.isDone=0;
   }
 }

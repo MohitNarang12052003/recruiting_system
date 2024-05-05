@@ -7,7 +7,7 @@ import { EmployeeService } from '../employee.service';
 @Component({
   selector: 'app-announcements',
   templateUrl: './announcements.component.html',
-  styleUrls: ['./announcements.component.css']
+  styleUrls: ['./announcements.component.css'],
 })
 export class AnnouncementsComponent implements OnInit {
   announcement!: Announcement[];
@@ -24,15 +24,14 @@ export class AnnouncementsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.cookieService.getAll());
+    this.fetchAnnouncements();
+  }
+
+  fetchAnnouncements(): void {
     this.employeeService.fetchAnnouncement().subscribe((data) => {
       this.announcement = data;
       console.log(data);
     });
-  }
-
-  onSlide(event: any) {
-    // Define the behavior of the onSlide method
   }
 
   togglePaused() {

@@ -6,71 +6,67 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-change-pwd',
   templateUrl: './change-pwd.component.html',
-  styleUrls: ['./change-pwd.component.css']
+  styleUrls: ['./change-pwd.component.css'],
 })
 export class ChangePwdComponent implements OnInit {
+  changePwdForm!: FormGroup;
+  show: boolean = false;
+  display!: any;
+  hide = true;
+  hide1 = true;
 
-  changePwdForm!:FormGroup;
-  // hidden!:boolean;
-  show:boolean = false;
-  display!:any;
-  hide=true;
-  hide1=true;
-  openToast(){
-    this.show=true;
-    console.log(this.display)
+  constructor(private sharedService: SharedService, private router: Router) {}
+
+  ngOnInit() {
+    this.changePwdFormFn();
   }
 
-	closeToast() {
-		this.show = false;
-    this.display=0;
-	}
+  openToast() {
+    this.show = true;
+  }
 
+  closeToast() {
+    this.show = false;
+    this.display = 0;
+  }
 
-constructor(private sharedService:SharedService,private router:Router){}
+  toggleVisibility(): void {
+    this.hide = !this.hide;
+  }
 
-ngOnInit(){
-  this.changePwdFormFn();
-}
-toggleVisibility(): void {
-  this.hide = !this.hide;
-}
+  toggleVisibility1(): void {
+    this.hide1 = !this.hide1;
+  }
 
-toggleVisibility1(): void {
-  this.hide1 = !this.hide1;
-}
+  changePwdFormFn(): void {
+    this.changePwdForm = new FormGroup({
+      old_pwd: new FormControl(),
+      new_pwd: new FormControl(),
+      confirm_new_pwd: new FormControl(),
+    });
+  }
 
-changePwdFormFn():void{
-  this.changePwdForm=new FormGroup({
-    old_pwd:new FormControl(),
-    new_pwd:new FormControl(),
-    confirm_new_pwd:new FormControl()
-  })
-}
-
-submit():void{
-  if(this.changePwdForm.get("new_pwd")?.value==this.changePwdForm.get("confirm_new_pwd")?.value){
-
+  changePwdFn(): void {
     this.sharedService.changePwd(this.changePwdForm.value).subscribe({
-      next:(data)=>{
-        console.log(data);
+      next: (data) => {
         this.openToast();
-        this.display=2;
-
+        this.display = 2;
       },
-      error:(e)=>{
-        console.log("error ",e);
-        this.router.navigate(['/unauthorized'])
-      }
-    })
+      error: (e) => {
+        this.router.navigate(['/unauthorized']);
+      },
+    });
   }
-  else{
-    // alert("invalid credentials");
-    this.openToast();
-    this.display=1;
 
+  submit(): void {
+    if (
+      this.changePwdForm.get('new_pwd')?.value ==
+      this.changePwdForm.get('confirm_new_pwd')?.value
+    ) {
+      this.changePwdFn();
+    } else {
+      this.openToast();
+      this.display = 1;
+    }
   }
-}
-
-
 }

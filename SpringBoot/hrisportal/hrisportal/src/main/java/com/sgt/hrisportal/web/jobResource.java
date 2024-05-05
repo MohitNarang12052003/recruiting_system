@@ -148,7 +148,6 @@ public class jobResource {
 
     @GetMapping("/totalLeavesCount/{id}")
     public ResponseEntity<Map<String, Object>> totalLeavesCount(@PathVariable int id, HttpServletRequest httpServletRequest){
-//        System.out.println("inside total leaves count");
         return jobService.totalLeavesCount(id,httpServletRequest);
     }
 
@@ -201,7 +200,6 @@ public class jobResource {
 
     @GetMapping("/checkDocument/{id}")
     public int checkDocuments(@PathVariable("id") int id){
-        System.out.println(id);
         return jobService.checkDocuments(id);
     }
 

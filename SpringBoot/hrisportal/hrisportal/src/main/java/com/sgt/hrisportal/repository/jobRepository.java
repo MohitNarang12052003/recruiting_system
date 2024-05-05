@@ -22,7 +22,6 @@ public class jobRepository {
                                      String employmentType,
                          String keyRole,
                          String location,String departmentName,String skills,int hrid){
-        System.out.println("print");
         return jdbcTemplate.queryForMap("EXEC hrisportal.sp_insert_jobs ?,?,?,?,?,?,?,?,?",jobTitle,jobDescription,
                 minQualification,employmentType,keyRole,
                 location,departmentName,skills,hrid);
@@ -102,9 +101,6 @@ public class jobRepository {
     }
 
 
-
-    //nidhi
-
     public List<Map<String,Object>> fetchAnnouncement(){
         return jdbcTemplate.queryForList("EXEC  hrisportal.fetch_announcements");
     }
@@ -114,7 +110,6 @@ public class jobRepository {
     }
 
     public int addAnnouncement(int hrid,String announcement){
-        System.out.println("print");
         return jdbcTemplate.update("EXEC hrisportal.insert_announcement ?,?",hrid,announcement);
     }
 
@@ -145,7 +140,6 @@ public class jobRepository {
     }
 
     public Map<String,Object> checkDocuments(int user_id){
-//        System.out.println(jdbcTemplate.update("EXEC hrisportal.sp_check_documents ?",user_id));
         return jdbcTemplate.queryForMap("EXEC hrisportal.sp_check_documents ?",user_id);
     }
 

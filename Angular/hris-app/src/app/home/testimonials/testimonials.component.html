@@ -1,47 +1,72 @@
-<div class="d-flex flex-column justify-content-center align-items-center " style="margin-top: 4em; margin-bottom: 1.5em;">
-    <h1><b>Testimonials</b> </h1>
-    <p class="text-muted text-center">
-      Now let's know what our company holders have to say about our evolving community and career finding services
-    </p>
+<div
+  class="d-flex flex-column justify-content-center align-items-center"
+  style="margin-top: 4em; margin-bottom: 1.5em"
+>
+  <h1><b>Testimonials</b></h1>
+  <p class="text-muted text-center">
+    Now let's know what our company holders have to say about our evolving
+    community and career finding services
+  </p>
 </div>
 
-<div style="margin-bottom: 3em;">
+<div style="margin-bottom: 3em">
   <ngb-carousel
-  #carousel
-  [interval]="1750"
-  [pauseOnHover]="pauseOnHover"
-  [pauseOnFocus]="pauseOnFocus"
-  (slide)="onSlide($event)"
->
-  <ng-template *ngFor="let img of images; let i = index" ngbSlide>
-    <!-- <div class="carousel-caption">
-      <h3>My slide {{ i + 1 }} title</h3>
-    </div>
-    <a href="https://www.google.fr/?q=Number+{{ i + 1 }}" target="_blank" rel="nofollow noopener noreferrer">
-      <div class="picsum-img-wrapper">
-        <img [src]="img" alt="My image {{ i + 1 }} description" />
-      </div>
-    </a> -->
-    <div class="p-2"  style="background-image: conic-gradient(darkblue, skyblue, darkblue); height: 40vh; width:80vw;margin-left:10em ; color: white; border-radius: 25px;border-style: solid; border-color: black;">
-      <div class="d-flex flex-row" style="background-color: hsla(0, 0%, 100%, 0.434);border-radius: 25px;">
-        <img src={{img.image}} alt="" style="height:100px;width: 100px ;border-radius: 50%; border-style: solid; border-color: black;">
-        <div style="margin-left: 1.5em; color: black;">
-          <h1>{{img.name}}</h1>
-      <h3>{{img.position}}</h3>
+    #carousel
+    [interval]="1750"
+    [pauseOnHover]="pauseOnHover"
+    [pauseOnFocus]="pauseOnFocus"
+    (slide)="onSlide($event)"
+  >
+    <ng-template *ngFor="let img of images; let i = index" ngbSlide>
+      <div
+        class="p-2"
+        style="
+          background-image: conic-gradient(darkblue, skyblue, darkblue);
+          height: 40vh;
+          width: 80vw;
+          margin-left: 10em;
+          color: white;
+          border-radius: 25px;
+          border-style: solid;
+          border-color: black;
+        "
+      >
+        <div
+          class="d-flex flex-row"
+          style="
+            background-color: hsla(0, 0%, 100%, 0.434);
+            border-radius: 25px;
+          "
+        >
+          <img
+            src="{{ img.image }}"
+            alt=""
+            style="
+              height: 100px;
+              width: 100px;
+              border-radius: 50%;
+              border-style: solid;
+              border-color: black;
+            "
+          />
+          <div style="margin-left: 1.5em; color: black">
+            <h1>{{ img.name }}</h1>
+            <h3>{{ img.position }}</h3>
+          </div>
         </div>
+        <hr />
+        <p
+          style="
+            padding-left: 2%;
+            border-radius: 25px;
+            color: black;
+            font-weight: 700;
+            font-size: larger;
+          "
+        >
+          <i>"{{ img.description }}"</i>
+        </p>
       </div>
-      <hr>
-      <p style="padding-left: 2%;border-radius: 25px;color: black;font-weight: 700; font-size: larger;"><i>"{{img.description}}"</i></p>
-    </div>
-    <!-- <div class="">
-      <img [src]="img" alt="My image {{ i + 1 }} description" />
-    </div> -->
-    <!-- <a href="https://www.google.fr/?q=Number+{{ i + 1 }}" target="_blank" rel="nofollow noopener noreferrer">
-      <div class="picsum-img-wrapper">
-        <img [src]="img" alt="My image {{ i + 1 }} description" />
-      </div>
-    </a> -->
-
-  </ng-template>
-</ngb-carousel>
+    </ng-template>
+  </ngb-carousel>
 </div>

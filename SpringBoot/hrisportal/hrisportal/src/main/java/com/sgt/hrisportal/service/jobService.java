@@ -33,7 +33,6 @@ public class jobService {
     jobRepository jobRepository;
 
     public boolean isValidToken(HttpServletRequest httpServletRequest){
-        System.out.println("Here");
         Cookie[] cookies=httpServletRequest.getCookies();
 
         if(cookies==null)   return false;
@@ -42,12 +41,10 @@ public class jobService {
         if(cookieMap.containsKey("hr_id")){
             Map<String,Object> result= jobRepository.validateToken(Integer.parseInt(cookieMap.get("hr_id")),cookieMap.get("token"));
             Integer validYN=(Integer) result.get("validYN");
-            System.out.println("checking validYN "+validYN);
             return validYN == 1;
         }
 
         else if(cookieMap.containsKey("employee_id")){
-            System.out.println("Kinjala");
             Map<String,Object> result= jobRepository.validateToken(Integer.parseInt(cookieMap.get("employee_id")),cookieMap.get("token"));
             Integer validYN=(Integer) result.get("validYN");
             return validYN == 0;
@@ -98,14 +95,12 @@ public class jobService {
                     employmentType,keyRole,
                     location,departmentName,skills,hr_id);
 
-            System.out.println(insertedRows);
             if ((int)insertedRows.get("valid") == 1) {
                 return ResponseEntity.ok(Map.of("status", "Successful"));
             }
         }
 
 
-        System.out.println("Kya hua Sir");
         return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(Map.of("status", "failed"));
     }
 
@@ -208,11 +203,8 @@ public class jobService {
 
     public ResponseEntity<Map<String ,Object>> toggleVacancy(int id, HttpServletRequest httpServletRequest){
         boolean isValid=isValidToken(httpServletRequest);
-        System.out.println(2);
         if(isValid){
-            System.out.println(3);
             int insertedRows = jobRepository.toggleVacancy(id);
-            System.out.println(insertedRows+" 4");
 
             if (insertedRows > 0) {
                 return ResponseEntity.ok(Map.of("status", "Successful"));
@@ -251,7 +243,6 @@ public class jobService {
 
             }
             catch (MessagingException e){
-                System.out.println("error"+e);
                 throw new RuntimeException(e);
             }
 
@@ -289,7 +280,6 @@ public class jobService {
 
             }
             catch (MessagingException e){
-                System.out.println("error"+e);
                 throw new RuntimeException(e);
             }
 
@@ -332,7 +322,6 @@ public class jobService {
 
             }
             catch (MessagingException e){
-                System.out.println("error"+e);
                 throw new RuntimeException(e);
             }
 
@@ -471,7 +460,6 @@ public class jobService {
             String category_name = (String) body.get("category_name");
             String applied_at = (String) body.get("applied_at");
             String taken_for = (String) body.get("taken_for");
-            System.out.println("time- "+    applied_at);
             int insertedRows = jobRepository.applyLeave(employee_id, category_name, applied_at, taken_for);
 
             if (insertedRows > 0) {
@@ -518,12 +506,10 @@ public class jobService {
             String announcement =(String)body.get("announcement");
             int insertedRows = jobRepository.addAnnouncement(hr_id,announcement);
 
-            System.out.println(insertedRows);
             if (insertedRows>= 1) {
                 return ResponseEntity.ok(Map.of("status", "Successful"));
             }
         }
-        System.out.println("Kya hua Sir");
         return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(Map.of("status", "failed"));
     }
 
