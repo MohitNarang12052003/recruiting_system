@@ -57,12 +57,12 @@ CREATE OR ALTER PROCEDURE hrisportal.sp_check_documents
 @user_id int
 AS
 BEGIN
-	DECLARE @count int = 0;
-	SELECT @count=count(1) from hrisportal.documents d WHERE d.user_id=@user_id;
-	PRINT @count
+	
+	SELECT count(1) as result from hrisportal.documents d WHERE d.user_id=@user_id;
+
 END
 
-EXEC hrisportal.sp_check_documents 50
+EXEC hrisportal.sp_check_documents 54
 
 CREATE OR ALTER PROCEDURE hrisportal.sp_count_emp_in_dept
 AS

@@ -1,5 +1,16 @@
 
-
+CREATE OR ALTER   PROCEDURE [hrisportal].[sp_toggle_vacancy]
+@id INT
+AS
+BEGIN 
+UPDATE hrisportal.job_vacancy
+SET active_yn= CASE 
+				WHEN active_yn='Y' THEN 'N'
+				ELSE 'Y'
+			END
+WHERE j_id=@id
+END;
+GO
 
 CREATE OR ALTER PROCEDURE hrisportal.sp_insert_user
 @username NVARCHAR(50),
