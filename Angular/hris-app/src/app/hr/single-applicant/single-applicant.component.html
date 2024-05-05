@@ -127,7 +127,7 @@
                 </div>
             
                 <br>
-                <div *ngIf="(this.applicantDetails.round_3==='Pass') && doc==1">
+                <div *ngIf="(this.applicantDetails.round_3==='Pass') && doc==1 && (this.applicantDetails.doc_verification!=='Pass')">
                     <div class=" text-white text-center text"><h5>Verify the Uploaded Documents by candidate</h5></div>
                     <button class="btn title" [routerLink]="['/viewDocuments',userId]" >View Documents</button>
                 </div>
