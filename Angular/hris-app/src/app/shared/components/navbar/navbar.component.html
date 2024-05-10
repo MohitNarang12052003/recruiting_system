@@ -21,7 +21,9 @@
       id="navbarNavAltMarkup"
     >
       <div class="navbar-nav">
-        <a class="nav-link active" href="" >Home</a>
+        <a class="nav-link active" [routerLink]="['']" *ngIf="!(empid || hr)">Home</a>
+        <a class="nav-link active" [routerLink]="['/Employee']" *ngIf="empid">Home</a>
+        <a class="nav-link active" [routerLink]="['/HR']" *ngIf="hr">Home</a>
         <a class="nav-link" href="">Jobs</a>
         <a class="nav-link" href="">About</a>
         <a class="nav-link" href="">Contact</a>
