@@ -113,6 +113,49 @@ END
 
 
 
+USE [hrisportal]
+GO
+
+/****** Object:  StoredProcedure [hrisportal].[sp_change_pwd]    Script Date: 04-05-2024 15:57:20 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE OR ALTER   PROCEDURE [hrisportal].[sp_change_pwd]
+@email NVARCHAR(MAX),
+@old_pwd NVARCHAR(100),
+@new_pwd NVARCHAR(100)
+AS
+BEGIN
+	DECLARE @old VARBINARY(MAX),
+			@new VARBINARY(MAX)
+	SELECT @old=HASHBYTES('SHA2_256',@old_pwd)
+	SELECT @new=HASHBYTES('SHA2_256',@new_pwd)
+
+	IF EXISTS (SELECT 1 FROM hrisportal.users WHERE email = @email)
+	BEGIN
+	UPDATE hrisportal.users
+	SET password=@new
+	WHERE email=@email AND password=@old
+	END
+	IF EXISTS (SELECT 1 FROM hrisportal.employee WHERE email = @email)
+	BEGIN
+	UPDATE hrisportal.employee
+	SET password=@new
+	WHERE email=@email AND password=@old
+	END
+	IF EXISTS (SELECT 1 FROM hrisportal.hr WHERE email = @email)
+	BEGIN
+	UPDATE hrisportal.hr
+	SET password=@new
+	WHERE email=@email AND password=@old
+	END
+
+END
+GO
+
 
 
 

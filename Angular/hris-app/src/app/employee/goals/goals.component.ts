@@ -59,7 +59,6 @@ export class GoalsComponent implements OnInit {
   addGoalFn() {
     this.employeeService.addGoal(this.goalForm.value).subscribe({
       next: (data) => {
-        console.log(data);
         this.fetchGoalsFn();
       },
       error: (e) => {

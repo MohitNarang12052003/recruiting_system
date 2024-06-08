@@ -38,7 +38,6 @@ export class HrService {
   }
 
   getSingleApplicant(id: any): Observable<any> {
-    console.log('here ' + typeof id);
     return this.http.get<any>(
       APP_CONSTANTS.BACKEND_URL + `viewSingleApplicant/${id}`,
       { withCredentials: true }
@@ -46,7 +45,6 @@ export class HrService {
   }
 
   getSingleEmployee(id: any): Observable<any> {
-    console.log('here ' + typeof id);
     return this.http.get<any>(
       APP_CONSTANTS.BACKEND_URL + `viewSingleEmployee/${id}`,
       { withCredentials: true }
@@ -70,7 +68,6 @@ export class HrService {
   }
 
   sendRoundMail(body: any): Observable<any> {
-    console.log('called');
     return this.http.post<any>(
       APP_CONSTANTS.BACKEND_URL + `sendRoundMail`,
       body,
@@ -79,7 +76,6 @@ export class HrService {
   }
 
   sendDocumentMail(body: any): Observable<any> {
-    console.log('val ', body['email']);
     return this.http.post<any>(
       APP_CONSTANTS.BACKEND_URL + `sendDocumentMail`,
       body,

@@ -11,11 +11,14 @@ export class NavbarComponent implements OnInit {
   empid!: any;
   hr!: any;
   role!: boolean;
+  loggedIn!:boolean
   constructor(private cookieService: CookieService) {}
 
   ngOnInit() {
     this.isLoggedIn();
-  }
+   }
+
+ 
 
   isLoggedIn(): boolean {
     const role = !!this.cookieService.get('role');
@@ -24,6 +27,7 @@ export class NavbarComponent implements OnInit {
     this.hr = !!this.cookieService.get('hr_id');
     this.role = !!this.cookieService.get('role');
     const loggedIn = (this.userid || this.empid || this.hr) && role;
+    
     return loggedIn;
   }
 

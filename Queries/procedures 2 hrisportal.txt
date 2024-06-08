@@ -1,3 +1,5 @@
+
+
 CREATE OR ALTER PROCEDURE hrisportal.sp_get_count
 AS
 BEGIN

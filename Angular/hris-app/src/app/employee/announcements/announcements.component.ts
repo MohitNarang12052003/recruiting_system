@@ -30,7 +30,6 @@ export class AnnouncementsComponent implements OnInit {
   fetchAnnouncements(): void {
     this.employeeService.fetchAnnouncement().subscribe((data) => {
       this.announcement = data;
-      console.log(data);
     });
   }
 
