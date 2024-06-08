@@ -26,7 +26,6 @@ export class QualificationComponent implements OnInit {
   ngOnInit(): void {
     this.checkButton();
     this.populateYears();
-    this.populateGrade();
   }
 
   createForm = new FormGroup({
@@ -43,9 +42,7 @@ export class QualificationComponent implements OnInit {
     return false;
   }
 
-  add(): void {
-    this.submit(0);
-  }
+  
   populateYears(): void {
     const currentYear = new Date().getFullYear();
 
@@ -54,13 +51,27 @@ export class QualificationComponent implements OnInit {
     }
   }
 
-  populateGrade(): void {
+  populateCGPA(): void {
     const grade = 10.0;
 
     for (let gpa = grade; gpa >= 0.0; gpa -= 0.1) {
       const roundedGPA = Math.round(gpa * 10) / 10;
       this.grade.push(roundedGPA);
     }
+  }
+
+  populatePercentage(): void {
+    const grade = 100;
+
+    for (let gpa = grade; gpa >= 0; gpa -= 1) {
+      this.grade.push(gpa);
+    }
+  }
+  onGradeChange(e: any) {
+    this.grade= [''];
+    const gradeFormat=e.target.value;
+    if(gradeFormat==="percentage")  this.populatePercentage();
+    else  this.populateCGPA()
   }
 
   onAdmissionSelected(value: string): void {
@@ -73,15 +84,19 @@ export class QualificationComponent implements OnInit {
     this.selectedGradeType = value;
   }
 
-  insertQualification(done:number):void{
+  insertQualification(done: number): void {
     this.userService
-    .insertQualification(this.createForm.value)
-    .subscribe((data) => {
-      if (done == 1) {
-        this.userService.setActive();
-      }
-      this.createForm.reset();
-    });
+      .insertQualification(this.createForm.value)
+      .subscribe((data) => {
+        if (done == 1) {
+          this.userService.setActive();
+        }
+        this.createForm.reset();
+      });
+  }
+
+  add(): void {
+    this.submit(0);
   }
 
   submit(done: number): void {
@@ -91,12 +106,13 @@ export class QualificationComponent implements OnInit {
 
     this.createForm
       .get('admission_yr')
-      ?.setValue(parseInt(this.selectedAdmissionType));
+      ?.setValue(this.selectedAdmissionType);
     this.createForm
       .get('completion_yr')
-      ?.setValue(parseInt(this.selectedCompletionType));
-    this.createForm.get('gpa')?.setValue(parseInt(this.selectedGradeType));
-    
+      ?.setValue(this.selectedCompletionType);
+
+    this.createForm.get('gpa')?.setValue(parseFloat(this.selectedGradeType));
+
     this.insertQualification(done);
   }
 }

@@ -89,6 +89,47 @@
             <textarea required name="" id="" cols="30" rows="20" formControlName="deg"></textarea>
             <!-- <input type="text" formControlName="deg" /> -->
           </div>
+
+          <div>
+            <label for="">Choose Grade Format-</label>
+            <div class="row">
+              <div
+                class="form-check col"
+                style="margin-top: 0; margin-bottom: 0"
+              >
+                <input
+                  required
+                  class="form-check-input m-0 p-0"
+                  style="width: 30%"
+                  type="radio"
+                  name="flexRadioDefault1"
+                  id="flexRadioDefault1"
+                  value="percentage"
+                  (change)="onGradeChange($event)"
+                />
+                <label class="form-check-label" for="flexRadioDefault1">
+                  0-100
+                </label>
+              </div>
+              <div
+                class="form-check col"
+                style="margin-top: 0; margin-bottom: 0"
+              >
+                <input
+                  class="form-check-input m-0 p-0"
+                  style="width: 30%"
+                  type="radio"
+                  name="flexRadioDefault1"
+                  id="flexRadioDefault2"
+                  value="CGPA"
+                  (change)="onGradeChange($event)"
+                />
+                <label class="form-check-label" for="flexRadioDefault2">
+                  0-10
+                </label>
+              </div>
+            </div>
+          </div>
           
         </div>
         <div class="col-6">
@@ -108,11 +149,11 @@
             <label for="">End Year:</label>
             <select  required 
             class="form-select elem"
-            #type
+            #type1
             formControlName="completion_yr"
-            (change)="onCompletionSelected(type.value)"
+            (change)="onCompletionSelected(type1.value)"
           >
-          <option required *ngFor="let year of years" [value]="year">{{ year }}</option>
+          <option required *ngFor="let year1 of years" [value]="year1">{{ year1 }}</option>
             
           </select>
           </div>
@@ -122,8 +163,8 @@
             <select  required 
             class="form-select elem"
             formControlName="gpa"
-            #type
-            (change)="onGradeSelected(type.value)"
+            #type2
+            (change)="onGradeSelected(type2.value)"
           >
           <option required *ngFor="let gpa of grade" [value]="gpa">{{ gpa }}</option>
             

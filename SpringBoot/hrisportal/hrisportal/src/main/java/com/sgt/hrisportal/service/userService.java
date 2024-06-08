@@ -112,10 +112,17 @@ public class userService {
         int uid = (int) body.get("uid");
         String deg = (String) body.get("deg");
         String institute = (String) body.get("institute");
-        int admission_yr = (int) body.get("admission_yr");
-        int completion_yr = (int) body.get("completion_yr");
-        double gpa = ((double) body.get("gpa"));
+        int admission_yr = Integer.parseInt((String) body.get("admission_yr"));
+        int completion_yr = Integer.parseInt((String) body.get("completion_yr"));
+        Object gpaValue = body.get("gpa");
 
+        double gpa = 0.0d;
+
+        if (gpaValue instanceof Integer) {
+            gpa = (double) ((int) gpaValue);
+        } else {
+            gpa = ((double) gpaValue);
+        }
         int insertedRows = userRepository.insertQualification(uid, deg, institute, admission_yr, completion_yr, gpa);
 
         if (insertedRows > 0) {
