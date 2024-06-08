@@ -76,7 +76,7 @@ SELECT applicant_id,
 	doc_verification,
 	offer_letter,
 	u.username,
-	j.job_title
+	j.j_id,
 FROM hrisportal.applicants AS a
 INNER JOIN hrisportal.users AS u
 ON a.user_id=u.user_id

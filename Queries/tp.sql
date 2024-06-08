@@ -204,9 +204,6 @@ INNER JOIN hrisportal.job_vacancy AS j
 ON j.j_id=a.j_id
 WHERE a.applicant_id=@app_id
 END
-
-
-
 GO
 
 

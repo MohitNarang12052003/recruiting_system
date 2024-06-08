@@ -3,6 +3,8 @@ import { HrService } from '../hr.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
+import { UserService } from 'src/app/user/user.service';
+import {  faUserCheck } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-single-applicant',
@@ -10,17 +12,23 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./single-applicant.component.css'],
 })
 export class SingleApplicantComponent implements OnInit {
+  iconVariable = faUserCheck;
+
   id!: number | null;
   applicantDetails: any;
   applicantForm!: FormGroup;
   degreesData!: any;
   userId!: any;
+  jobId!:any;
+  job!:any;
   jobHistoryData!: any;
   jobHistoryDataBool!: boolean;
   degreesDataBool!: boolean;
   doc: number = 0;
   show:boolean=false;
-
+  profile=1;
+  userDetails!:any;
+  skill!:any;
   generateForm() {
     this.applicantForm = new FormGroup({
       round_1: new FormControl(),
@@ -37,11 +45,16 @@ export class SingleApplicantComponent implements OnInit {
     private hrService: HrService,
     private route: ActivatedRoute,
     private router: Router,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private userService: UserService,
   ) {}
 
   ngOnInit() {
     this.generateForm();
+  }
+
+  view(num: number) {
+    this.profile = num;
   }
 
   patchForm() {
@@ -68,14 +81,27 @@ export class SingleApplicantComponent implements OnInit {
   getSingleApplicant() {
     this.hrService.getSingleApplicant(this.id).subscribe((val) => {
       this.applicantDetails = val;
+      this.jobId=val['j_id']
       this.userId = val['user_id'];
       this.patchForm();
+      this.jobDetails();
+      this.getUserDetails();
       this.getAllQualificationsOfApplicant();
       this.getJobHistoryOfApplicant();
       this.checkDocuments();
     });
   }
 
+  jobDetails(){
+    this.userService.getSingleJob(this.jobId).subscribe((data)=>{
+
+      this.job=data;
+      console.log(this.job);
+      this.skill=this.job.skills.split(",");
+    });
+
+    
+  }
   checkDocuments() {
     this.hrService.checkDocuments(this.userId).subscribe((val) => {
       this.doc = val;
@@ -118,6 +144,18 @@ export class SingleApplicantComponent implements OnInit {
         this.router.navigate(['/unauthorized'])
       },
     });
+  }
+
+  getUserDetails():void{
+      this.userService.getDetails(this.userId).subscribe({
+        next: (data) => {
+          this.userDetails = data;
+        },
+        error: (error) => {
+          this.router.navigate(['/unauthorized']);
+        },
+      });
+    
   }
 
   getAllQualificationsOfApplicant() {

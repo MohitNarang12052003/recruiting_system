@@ -88,16 +88,10 @@ CREATE OR ALTER PROCEDURE hrisportal.sp_login
 AS
 BEGIN
  DECLARE @hashedpwd VARBINARY(MAX) = HASHBYTES('SHA2_256',@pwd)
-	PRINT @pwd
-	PRINT @email
-	PRINT @hashedpwd
 	DECLARE @count int=0,@ecount int=0,@hcount int =0
 	select @count=count(*) from hrisportal.users where email=@email and password=@hashedpwd
 	select @ecount=count(*) from hrisportal.employee where email=@email and password=@hashedpwd
 	select @hcount=count(*) from hrisportal.hr where email=@email and password=@hashedpwd
-	PRINT @count
-	PRINT @ecount
-	PRINT @hcount
 	IF @count=1 and @ecount=0 and @hcount=0
 	BEGIN
 		select * ,-1 as role 

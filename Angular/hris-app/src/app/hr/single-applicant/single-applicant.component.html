@@ -1,4 +1,4 @@
-<ng-container *ngIf="show">
+<!-- <ng-container *ngIf="show">
     <ngb-toast
       header="Email"
       [autohide]="false"
@@ -395,7 +395,383 @@
             
         </div>
     </div>
+</div> -->
 
+<ng-container *ngIf="show">
+    <ngb-toast
+      header="Email"
+      [autohide]="false"
+      (hidden)="close()"
+    >
+      Email sent Successfully
+    </ngb-toast>
+  </ng-container>
 
+  <div class="row" style="width: 99vw">
+    <div
+      class="col-2 text-light "
+      style="height: 150vh; background-color: #1685f4"
+    >
+     <div class="sidebar">
+      <fa-icon [icon]="iconVariable" class=" ms-3 fa-5x "></fa-icon>
     
-</div>
+  
+     
+      <br />
+      <button
+        class="btn btn-outline-primary text-light me-3"
+        type="button"
+        style="font-size: 18px"
+        (click)="view(0)"
+      >
+        Update Status
+      </button>
+      <hr style="width: 15vw; height: 1vh; background-color: #ffffff" />
+  
+      <button
+        class="btn btn-outline-primary text-light me-3"
+        type="button"
+        style="font-size: 18px"
+        (click)="view(1)"
+      >
+        View Profile
+      </button>
+     </div>
+     
+    </div>
+    <div class="col">
+      <div class="row" *ngIf="profile === 1 && userDetails ">
+        <div
+          class="col-3 m-3"
+          style="
+            border-style: solid;
+            border-radius: 25px;
+            background-color: rgba(135, 207, 235, 0.325);
+          "
+        >
+          <div
+            class=""
+            style="display: flex; flex-direction: column; justify-content: center;align-items: center;"
+          >
+            <div
+              style="
+                height: 200px;
+                width: 200px;
+                border: 2px solid #1685f4;
+                border-radius: 50%;
+              "
+            >
+              <img
+                [src]="
+                  'http://localhost:8083/api/GetFiles/' +
+                  userId+
+                  '/photo'
+                "
+                alt="profile"
+                style="
+                  border-radius: 50%;
+                  align-self: center;
+                  object-fit: cover;
+                  object-position: center center;
+                  width: 100%;
+                  height: 100%;
+                "
+              />
+            </div>
+  
+            <h3>{{ userDetails.username }}</h3>
+            <p class="text-muted">{{ userDetails.full_name }}</p>
+            <label for="">Email:</label>
+            <h3>{{ userDetails.email }}</h3>
+            <label for="">Phone no.</label>
+            <h3>{{ userDetails.phone_number }}</h3>
+            <label for="">Date of Birth</label>
+            <h3>{{ userDetails.date_of_birth | date : "longDate" }}</h3>
+            <label for="">Nationality</label>
+            <h3>{{ userDetails.nationality }}</h3>
+            <label for="">Gender</label>
+            <h3>{{ userDetails.gender }}</h3>
+            <label for="">Address</label>
+            <h3>{{ userDetails.address }}</h3>
+            <label for="">State</label>
+            <h3>{{ userDetails.state }}</h3>
+            <label for="">City</label>
+            <h3>{{ userDetails.city }}</h3>
+            <label for="">Pincode</label>
+            <h3>{{ userDetails.pincode }}</h3>
+          </div>
+        </div>
+        <div class="col">
+          <div style="display: flex; flex-direction: column">
+            <div
+              style="
+                border-style: solid;
+                border-radius: 25px;
+                background-color: rgba(135, 207, 235, 0.325);
+              "
+              class="p-3 m-3"
+            >
+              <div
+                style="
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: space-between;
+                "
+              >
+                <h1 style="color: #1685f4">Qualifications</h1>
+                <!-- <button class="btn btn-primary" type="button">Add</button> -->
+              </div>
+              <div class="horizontal">
+                <div
+                  class="card"
+                  style="width: 18rem"
+                  *ngFor="let degree of degreesData; let i = index"
+                >
+                  <div class="card-body">
+                    <h4 class="card-title">{{ degree.degree_name }}</h4>
+                    <h4 class="card-subtitle mb-2 text-muted">
+                      {{ degree.institute_name }}
+                    </h4>
+                    <h5>
+                      Duration : {{ degree.admission_year }}-{{
+                        degree.completion_year
+                      }}
+                    </h5>
+                    <h5>Percentage/GPA : {{ degree.GPA }}</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="
+                border-style: solid;
+                border-radius: 25px;
+                background-color: rgba(135, 207, 235, 0.325);
+              "
+              class="p-3 m-3"
+            >
+              <div
+                style="
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: space-between;
+                "
+              >
+                <h1 style="color: #1685f4">Job History</h1>
+                <!-- <button class="btn btn-primary" type="button">Add</button> -->
+              </div>
+              <div class="horizontal">
+                <div
+                  class="card"
+                  style="width: 18rem"
+                  *ngFor="let job of jobHistoryData; let i = index"
+                >
+                  <div class="card-body">
+                    <h4 class="card-title">{{ job.job_title }}</h4>
+                    <h4 class="card-subtitle mb-2 text-muted">
+                      {{ job.company_name }}
+                    </h4>
+                    <h5>Duration : {{ job.from_year }}-{{ job.to_year }}</h5>
+                    <h5>About : {{ job.description }}</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- <div> -->
+        <div class="row"  *ngIf="profile === 0">
+            <div class="col-4 left">
+                <div class="p-2">
+                    <h1>Applied For:</h1>
+                    <h1>{{job.job_title}}</h1>
+                    <div class="row justify-content-between" style="">
+                      <div class="col quality">
+                        <div class="q">{{job.department_name}}</div>
+                        <div class="q">{{job.employment_type}}</div>
+                        <div class="q">{{job.location}}</div>
+                      </div>
+                      
+                    </div>
+                    <hr>
+                    <h3 >Job Description</h3>
+                    <p class="text-primary">{{ job.job_description }}</p>
+                    <hr>
+                    <h3>Minimum Qualifications:</h3>
+                    <p class="text-primary">{{ job.minimum_qualifications }}</p>
+                    <hr>
+                    <h3>Key Role:</h3>
+                    <p class="text-primary">{{ job.key_role }}</p>
+                    <hr>
+                    <h3>Skills:</h3>
+                    <div class="quality" style="margin-bottom: 1em;">
+                      <div class="q" *ngFor="let s of skill">{{s}}</div>
+                    </div>
+                  
+                  </div>
+            </div>
+            <div class="col right">
+                <div class="container" *ngIf="applicantDetails" (submit)="submit()">
+
+                    <div>
+                        <div class="frm">
+                            <form action="" [formGroup]="applicantForm">
+                                <div class="row">
+                                    
+                                    
+                                        <label for=""  class="col-5 text"><h5>Round-1</h5></label>
+                          <select
+                          formControlName="round_1"
+                            class="form-select elem col-3"
+                            style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
+                            #type
+                            (change)="onSelected(type.value,'round_1')"
+                            *ngIf="this.applicantDetails.round_1==='N/A'"
+                          >
+                            <option value="" selected>N/A</option>
+                            <option value="Pass">Pass</option>
+                            <option value="Fail">Fail</option>
+                            
+                            
+                          </select>
+                          <label class="col-3 text " type="string" *ngIf="this.applicantDetails.round_1!=='N/A'" ><h5>{{this.applicantDetails.round_1}}</h5></label>
+                                
+                            </div>
+                                <br>        
+                        
+                                <div class="row" *ngIf="this.applicantDetails.round_1==='Pass'">
+                                    <label for=""  class="col-5 text"><h5>Round-2</h5></label>
+                                    <select
+                                      class="form-select elem col-3"
+                                      style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
+                                      #type2
+                                      (change)="onSelected(type2.value,'round_2')"
+                                      *ngIf="this.applicantDetails.round_2==='N/A'"
+                                    >
+                                      <option value="" selected>N/A</option>
+                                      <option value="Pass">Pass</option>
+                                      <option value="Fail">Fail</option>
+                                      
+                                      
+                                    </select>
+                                    <label class="col-3 text " type="string" *ngIf="this.applicantDetails.round_2!=='N/A'" ><h5>{{this.applicantDetails.round_2}}</h5></label>
+                                
+                                </div>
+                                <br>
+                                <div class="row" *ngIf="this.applicantDetails.round_2==='Pass'">
+                                    <label for=""  class="col-5 text"><h5>Round-3</h5></label>
+                          <select
+                            class="form-select elem col-3"
+                            style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
+                            #type3
+                            (change)="onSelected(type3.value,'round_3')"
+                            *ngIf="this.applicantDetails.round_3==='N/A'"
+                          >
+                            <option value="" selected>N/A</option>
+                            <option value="Pass">Pass</option>
+                            <option value="Fail">Fail</option>
+                            
+                            
+                          </select>
+                          <label class="col-3 text " type="string" *ngIf="this.applicantDetails.round_3!=='N/A'" ><h5>{{this.applicantDetails.round_3}}</h5></label>
+                                
+                          
+                                </div>
+                                <br>
+                                <div class="row" *ngIf="this.applicantDetails.round_3==='Pass'">
+                                    <label for=""  class="col-5 text"><h5>Document Verification</h5></label>
+                                    <select
+                                      class="form-select elem col-3"
+                                      style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
+                                      #type4
+                                      (change)="onSelected(type4.value,'doc_verification')"
+                                      *ngIf="this.applicantDetails.doc_verification==='N/A'"
+                                    >
+                                      <option value="" selected>N/A</option>
+                                      <option value="Pass">Pass</option>
+                                      <option value="Fail">Fail</option>
+                                      
+                                      
+                                    </select>
+                                    <label class="col-3 text " type="string" *ngIf="this.applicantDetails.doc_verification!=='N/A'" ><h5>{{this.applicantDetails.doc_verification}}</h5></label>
+                                
+                                </div>
+                                <br>
+                                <div class="row" *ngIf="this.applicantDetails.doc_verification==='Pass'">
+                                    <label for=""  class="col-5 text"><h5>Offer Letter</h5></label>
+                                    <select
+                                      class="form-select elem col-3"
+                                      style="width: 12vw; border-color: rgba(0, 0, 0, 0.503)"
+                                      #type5
+                                      (change)="onSelected(type5.value,'offer_letter')"
+                                      *ngIf="this.applicantDetails.offer_letter==='N/A'"
+                                    >
+                                      <option value="" >N/A</option>
+                                      <option value="Pass">Pass</option>
+                                      <option value="Fail">Fail</option>
+                                      
+                                      
+                                    </select>
+                                    <label class="col-3 text " type="string" *ngIf="this.applicantDetails.offer_letter!=='N/A'" ><h5>{{this.applicantDetails.offer_letter}}</h5></label>
+                                
+                                </div>
+                                <br>
+                        
+                                <button  class="btn" type="submit">Update</button>
+                                <br>
+                                
+                                
+                            </form>
+                
+                            <div class="mail-container">
+                                <div *ngIf="this.applicantDetails.round_3!=='Pass'">
+                                    <h5 class=" text-white text-center text">Details for next round date, place and time-</h5>
+                                    <button class="btn" [routerLink]="['/next-round-email',id]">Next Round -></button>
+                                </div>
+                            
+                                <br>
+                                
+                                <div *ngIf="(this.applicantDetails.round_3==='Pass') && (this.applicantDetails.doc_verification!=='Pass') && (doc===0)">
+                                    <div class=" text-white text-center text"><h5>Email to request original document upload-</h5></div>
+                                    <button class="btn title" (click)="sendDocumentMail()" >Document Email</button>
+                                </div>
+                            
+                                <br>
+                                <div *ngIf="(this.applicantDetails.round_3==='Pass') && doc==1 && (this.applicantDetails.doc_verification!=='Pass')">
+                                    <div class=" text-white text-center text"><h5>Verify the Uploaded Documents by candidate</h5></div>
+                                    <button class="btn title" [routerLink]="['/viewDocuments',userId]" >View Documents</button>
+                                </div>
+                                <br>
+                            
+                                <div *ngIf="(this.applicantDetails.doc_verification==='Pass' && (this.applicantDetails.offer_letter!=='Pass'))">
+                                    <h5 class=" text-white text-center text">Email to check offer letter-</h5>
+                                    <button  class="btn" [routerLink]="['/offer-letter-details',id]" >Offer letter Email</button>
+                                </div>
+                            
+                                <br>
+                            
+                                <div *ngIf="(this.applicantDetails.offer_letter==='Pass')">
+                                    <h5 class="text-center  text-white  text ">Write details of new Employee</h5>
+                                    <button  class="btn" [routerLink]="['/create-new-employee',id]" >Details -> </button>
+                                </div>
+                                <br>  
+                
+                
+                            </div>
+                        </div>
+                    
+                        </div>
+                    
+            </div>
+        </div>
+      </div>
+  
+    
+  
+      
+    </div>
+  </div>
+  
+

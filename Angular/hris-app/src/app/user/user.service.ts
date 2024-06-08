@@ -9,9 +9,13 @@ import { APP_CONSTANTS } from '../shared/constants/app.constants';
 })
 export class UserService {
   constructor(private http: HttpClient) {}
-
-  getDetails(): Observable<any> {
-    return this.http.get(APP_CONSTANTS.BACKEND_URL + `singleUserDetails`, {
+  getSingleJob(id:any):Observable<any>{
+    return this.http.get(APP_CONSTANTS.BACKEND_URL + `SingleJob/${id}`, {
+      withCredentials: true,
+    });
+  }
+  getDetails(id:any): Observable<any> {
+    return this.http.get(APP_CONSTANTS.BACKEND_URL + `singleUserDetails/${id}`, {
       withCredentials: true,
     });
   }

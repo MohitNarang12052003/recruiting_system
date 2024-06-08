@@ -184,3 +184,26 @@ ALTER TABLE [hrisportal].[applicants]  WITH CHECK ADD FOREIGN KEY([j_id])
 REFERENCES [hrisportal].[job_vacancy] ([j_id])
 GO
 
+CREATE OR ALTER PROCEDURE hrisportal.sp_single_applicant
+@app_id INT
+AS
+BEGIN
+SELECT applicant_id,
+	a.user_id,
+	a.j_id,
+	applied_at,
+	round_1,
+	round_2,
+	round_3,
+	doc_verification,
+	offer_letter,
+	u.username,
+	j.j_id
+FROM hrisportal.applicants AS a
+INNER JOIN hrisportal.users AS u
+ON a.user_id=u.user_id
+INNER JOIN hrisportal.job_vacancy AS j
+ON j.j_id=a.j_id
+WHERE a.applicant_id=@app_id
+END
+

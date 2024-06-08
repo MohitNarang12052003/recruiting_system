@@ -203,6 +203,12 @@ public class jobResource {
         return jobService.checkDocuments(id);
     }
 
+    @GetMapping("/SingleJob/{id}")
+    public ResponseEntity<Map<String, Object>> getSingleJob(@PathVariable int id,
+                                                            HttpServletRequest httpServletRequest){
+        return jobService.getSingleJob(id,httpServletRequest);
+    }
+
 
 
 }
