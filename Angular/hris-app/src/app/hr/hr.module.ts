@@ -19,6 +19,7 @@ import { AgChartsAngular } from 'ag-charts-angular';
 import { OfferLetterDetailsComponent } from './offer-letter-details/offer-letter-details.component';
 import { HolidaysComponent } from './holidays/holidays.component';
 import { ViewDocumentsComponent } from './view-documents/view-documents.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -47,7 +48,8 @@ import { ViewDocumentsComponent } from './view-documents/view-documents.componen
     ReactiveFormsModule,
     RouterModule,
     HttpClientModule,
-    AgChartsAngular
+    AgChartsAngular,
+    FontAwesomeModule,
   ],
   exports:[
     AddJobComponent

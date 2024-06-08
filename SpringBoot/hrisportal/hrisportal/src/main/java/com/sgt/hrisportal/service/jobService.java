@@ -487,6 +487,14 @@ public class jobService {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyList());
     }
 
+    public ResponseEntity<Map<String,Object>> getSingleJob(int id,HttpServletRequest httpServletRequest){
+        boolean isValid=isValidToken(httpServletRequest);
+        if(isValid){
+            return ResponseEntity.ok(jobRepository.getSingleJob(id));
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyMap());
+    }
+
 
     public List<Map<String,Object>> fetchAnnouncement(){
         return jobRepository.fetchAnnouncement();

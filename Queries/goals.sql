@@ -151,7 +151,7 @@ BEGIN
 	@hashed_pwd VARBINARY(MAX)
 	SELECT @hashed_pwd =HASHBYTES('SHA2_256',@pwd)
 
-	INSERT INTO hrisportal.employee(user_id,job_title,salary,department,email,password,date_of_joining)
+	INSERT INTO hrisportal.employee(user_id,job_title,salary,department,email,password,date_of_joining,)
 	VALUES(@user_id,@job_title,@salary,@deparment,@email,@hashed_pwd,@date_of_joining)
 
 	

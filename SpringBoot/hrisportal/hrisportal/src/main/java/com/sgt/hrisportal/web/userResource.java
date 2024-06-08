@@ -69,9 +69,9 @@ public class userResource {
         return userService.getCount(httpServletRequest);
     }
 
-    @GetMapping("/singleUserDetails")
-    public ResponseEntity<Map<String,Object>> getUserDetails(HttpServletRequest httpServletRequest){
-        return userService.getUserDetails(httpServletRequest);
+    @GetMapping("/singleUserDetails/{id}")
+    public ResponseEntity<Map<String,Object>> getUserDetails(@PathVariable("id") int id,HttpServletRequest httpServletRequest){
+        return userService.getUserDetails(id,httpServletRequest);
     }
 
     @GetMapping("/userApplicationDetails")

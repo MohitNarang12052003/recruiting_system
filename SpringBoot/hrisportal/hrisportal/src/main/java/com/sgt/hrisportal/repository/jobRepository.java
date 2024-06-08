@@ -122,6 +122,10 @@ public class jobRepository {
         return jdbcTemplate.queryForList("EXEC hrisportal.category_count ?",id);
     }
 
+    public Map<String,Object>  getSingleJob(int id){
+        return jdbcTemplate.queryForMap("EXEC hrisportal.sp_fetch_single_job ?",id);
+    }
+
     public int applyLeave(int employee_id,String category_name,String applied_at,String taken_for){
         return jdbcTemplate.update("EXEC hrisportal.ApplyForLeave ?,?,?,?",employee_id,category_name,applied_at,taken_for);
     }

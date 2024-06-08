@@ -32,7 +32,7 @@ END
 CREATE OR ALTER PROCEDURE hrisportal.sp_view_vacancies
 AS
 BEGIN
-SELECT j.job_title,
+SELECT j.j_id,j.job_title,
 	j.job_description,
 	j.minimum_qualifications,
 	j.employment_type,

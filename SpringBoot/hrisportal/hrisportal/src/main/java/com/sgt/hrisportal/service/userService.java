@@ -234,14 +234,14 @@ public class userService {
     }
 
 
-    public ResponseEntity<Map<String,Object>> getUserDetails(HttpServletRequest httpServletRequest){
+    public ResponseEntity<Map<String,Object>> getUserDetails(int id,HttpServletRequest httpServletRequest){
         boolean isValid=isValidToken(httpServletRequest);
         if(isValid){
-            Cookie[] cookies=httpServletRequest.getCookies();
-            Map<String,String> map=getCookiesAsHashMap(cookies);
+//            Cookie[] cookies=httpServletRequest.getCookies();
+//            Map<String,String> map=getCookiesAsHashMap(cookies);
 
 
-            return ResponseEntity.ok(userRepository.getUserDetails(Integer.parseInt(map.get("user_id"))));
+            return ResponseEntity.ok(userRepository.getUserDetails(id));
         }
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyMap());

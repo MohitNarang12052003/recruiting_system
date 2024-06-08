@@ -57,12 +57,12 @@ CREATE OR ALTER PROCEDURE hrisportal.sp_check_documents
 @user_id int
 AS
 BEGIN
-	DECLARE @count int = 0;
-	SELECT @count=count(1) from hrisportal.documents d WHERE d.user_id=@user_id;
-	PRINT @count
+	
+	SELECT count(1) as result from hrisportal.documents d WHERE d.user_id=@user_id;
+
 END
 
-EXEC hrisportal.sp_check_documents 50
+EXEC hrisportal.sp_check_documents 54
 
 CREATE OR ALTER PROCEDURE hrisportal.sp_count_emp_in_dept
 AS
@@ -74,3 +74,30 @@ BEGIN
 	GROUP BY d.department_name
 	
 END
+
+CREATE OR ALTER PROCEDURE hrisportal.sp_fetch_single_job
+@j_id int
+AS
+BEGIN
+DROP TABLE IF EXISTS #temptable
+
+	SELECT j.j_id,STRING_AGG(s.skill_name,',') as skills
+	INTO #temptable
+	FROM hrisportal.job_skill j
+	INNER JOIN hrisportal.skill s
+	ON j.skill_id=s.skill_id
+	GROUP BY j.j_id
+	
+ SELECT j.j_id,j.job_title,
+	j.job_description,
+	j.minimum_qualifications,
+	j.employment_type,
+	j.key_role,
+	j.location,
+	j.date_posted,
+	d.department_name,
+	t.skills,
+	j.active_yn from hrisportal.job_vacancy j INNER JOIN hrisportal.department d ON j.department_id=d.department_id INNER JOIN #temptable t ON j.j_id=t.j_id WHERE j.j_id=@j_id;
+END
+
+EXEC hrisportal.sp_fetch_single_job 5

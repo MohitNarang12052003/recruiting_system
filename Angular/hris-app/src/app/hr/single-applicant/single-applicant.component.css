@@ -1,3 +1,5 @@
+@import "~@fortawesome/fontawesome-free/css/all.css";
+
 .ctr{
     background-color:rgb(61, 174, 212);
     margin: 2%;
@@ -22,7 +24,7 @@
     background-color: rgb(98, 160, 160);
 }
 
-.btn{
+/* .btn{
     margin-left: 35%;
     background-color: aliceblue;
     border-color: black;
@@ -30,8 +32,15 @@
 .btn:hover{
     background-color: blue;
     color: white;
-}
+} */
 
+
+h3,p,label{
+    width: 18vw;
+    /* border:5px solid red ; */
+    text-wrap: wrap;
+    word-break: break-all;
+}
 
 
 ngb-toast {
@@ -39,4 +48,11 @@ ngb-toast {
     left: 50%; 
     transform: translate(-50%, 0%); 
     background-color: lightblue;
+  }
+
+  .sidebar{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }

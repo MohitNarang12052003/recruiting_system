@@ -77,7 +77,9 @@ public class jobResource {
     }
 
     @PostMapping("/toggleVacancy/{id}")
-    public ResponseEntity<Map<String, Object>> toggleVacancy(@PathVariable int id,HttpServletRequest httpServletRequest){
+    public ResponseEntity<Map<String, Object>> toggleVacancy(@PathVariable("id") int id,
+            HttpServletRequest httpServletRequest){
+        System.out.println(1);
         return jobService.toggleVacancy(id,httpServletRequest);
     }
 
@@ -199,6 +201,12 @@ public class jobResource {
     @GetMapping("/checkDocument/{id}")
     public int checkDocuments(@PathVariable("id") int id){
         return jobService.checkDocuments(id);
+    }
+
+    @GetMapping("/SingleJob/{id}")
+    public ResponseEntity<Map<String, Object>> getSingleJob(@PathVariable int id,
+                                                            HttpServletRequest httpServletRequest){
+        return jobService.getSingleJob(id,httpServletRequest);
     }
 
 

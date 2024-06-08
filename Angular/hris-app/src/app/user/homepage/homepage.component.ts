@@ -26,7 +26,9 @@ export class HomepageComponent implements OnInit {
     private router: Router
   ) {}
   ngOnInit(): void {
-    this.getDetails();
+    this.userId = this.cookieService.get('user_id');
+
+    this.getDetails(this.userId);
     this.getAllQualificationsOfUser();
     this.getJobHistoryOfUser();
     this.getUserApplicationDetails();
@@ -36,8 +38,8 @@ export class HomepageComponent implements OnInit {
     this.profile = num;
   }
   
-  getDetails(): void {
-    this.userService.getDetails().subscribe({
+  getDetails(id:any): void {
+    this.userService.getDetails(id).subscribe({
       next: (data) => {
         this.userDetails = data;
       },
@@ -59,8 +61,7 @@ export class HomepageComponent implements OnInit {
   }
 
   getAllQualificationsOfUser() {
-    this.userId = this.cookieService.get('user_id');
-
+   
     this.userService.getQualificationsOfUser(this.userId).subscribe({
       next: (data) => {
         this.degreesData = data;
